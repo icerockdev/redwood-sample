@@ -1,0 +1,10 @@
+
+pre_install do
+  `cd .. && ./gradlew generateDummyFramework`
+end
+
+target 'iosApp' do
+  use_frameworks!
+  platform :ios, '14.1'
+  pod 'shared_ios', :path => '../shared-ios'
+end

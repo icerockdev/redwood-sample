@@ -1,0 +1,16 @@
+PODS:
+  - shared_ios (0.1.0)
+
+DEPENDENCIES:
+  - shared_ios (from `../shared-ios`)
+
+EXTERNAL SOURCES:
+  shared_ios:
+    :path: "../shared-ios"
+
+SPEC CHECKSUMS:
+  shared_ios: afeca706ebdff786adc19fab52a51c8d6fa3f61f
+
+PODFILE CHECKSUM: 781b9b0f72a0db3708da8d02a6b473a5a4b8da5f
+
+COCOAPODS: 1.11.3

@@ -20,6 +20,7 @@ fun HelloWorld() {
 
         TextInput(
             state = text,
+            hint = "super text",
             onChange = { text = it },
             layoutModifier = LayoutModifier.horizontalAlignment(CrossAxisAlignment.Center)
         )

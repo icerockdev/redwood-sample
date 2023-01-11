@@ -26,7 +26,7 @@ fun HelloWorld() {
         )
 
         Row {
-            Text(text = "left $text")
+            Text(text = "left $text", color = 0xFFBB86FC, textSize = 22)
             Text(text = "right $text")
         }
     }

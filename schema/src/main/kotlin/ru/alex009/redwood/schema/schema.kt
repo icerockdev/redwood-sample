@@ -8,7 +8,7 @@ import app.cash.redwood.schema.Property
 import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
-import java.time.format.TextStyle
+import dev.icerock.moko.resources.ColorResource
 
 @Schema(
     members = [
@@ -34,15 +34,17 @@ data class TextInput(
     @Property(3)
     @Default("null")
     val onChange: (String) -> Unit,
+    @Default("null")
     @Property(4) val textStyle: TextStyle,
 )
 
 @Widget(2)
 data class Text(
     @Property(1) val text: String,
-    @Property(2) val isSingleLine: Boolean,
-    //todo change to awer TextStyle
-    @Property(3) val textStyle: TextStyle
+    @Property(2)
+    @Default("false") val isSingleLine: Boolean,
+    @Property(3)
+    @Default("null") val textStyle: TextStyle
 )
 
 @Widget(3)
@@ -53,21 +55,31 @@ data class Image(
 @Widget(3)
 data class ImageButton(
     @Property(1) val text: String,
-    @Property(2) val icon: String?,
+    @Property(2)
+    @Default("null")  val icon: String?,
     @Property(3)
     @Default("null")
     val iconPadding: Int?,
-    @Property(4) val textStyle: TextStyle
+    @Property(4)
+    @Default("null")
+    val textStyle: TextStyle
 )
 
 @Widget(3)
 data class Button(
     @Property(1) val text: String,
-    @Property(2) val background: String?,
+    @Property(2)
+    @Default("null")
+    val background: ColorResource?,
     @Property(3)
     @Default("null")
+    val borderColor: ColorResource?,
+    @Property(4)
+    @Default("null")
     val cornerRadius: Int?,
-    @Property(4) val textStyle: TextStyle
+    @Property(5)
+    @Default("null")
+    val textStyle: TextStyle
 )
 
 @Widget(5)

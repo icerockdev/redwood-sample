@@ -10,6 +10,26 @@ plugins {
     id("org.jetbrains.compose").version("1.2.2").apply(false)
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath ("dev.icerock.moko:resources-generator:0.20.1")
+    }
+}
+
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

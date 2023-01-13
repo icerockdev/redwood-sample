@@ -16,6 +16,9 @@ import dev.icerock.moko.resources.ColorResource
         Text::class,
         Image::class,
         Stack::class,
+        ImageButton::class,
+        Button::class,
+        Card::class,
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -35,7 +38,7 @@ data class TextInput(
     @Default("null")
     val onChange: (String) -> Unit,
     @Default("null")
-    @Property(4) val textStyle: TextStyle,
+    @Property(4) val textStyle: TextStyle?,
 )
 
 @Widget(2)
@@ -44,7 +47,7 @@ data class Text(
     @Property(2)
     @Default("false") val isSingleLine: Boolean,
     @Property(3)
-    @Default("null") val textStyle: TextStyle
+    @Default("null") val textStyle: TextStyle?
 )
 
 @Widget(3)
@@ -52,7 +55,7 @@ data class Image(
     @Property(1) val url: String,
 )
 
-@Widget(3)
+@Widget(4)
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
@@ -62,10 +65,12 @@ data class ImageButton(
     val iconPadding: Int?,
     @Property(4)
     @Default("null")
-    val textStyle: TextStyle
+    val textStyle: TextStyle?,
+    @Property(5)
+    val onClick: () -> Unit,
 )
 
-@Widget(3)
+@Widget(5)
 data class Button(
     @Property(1) val text: String,
     @Property(2)
@@ -79,20 +84,22 @@ data class Button(
     val cornerRadius: Int?,
     @Property(5)
     @Default("null")
-    val textStyle: TextStyle
+    val textStyle: TextStyle?,
+    @Property(6)
+    val onClick: () -> Unit,
 )
 
-@Widget(5)
+@Widget(6)
 data class Card(
-    @Property(1) val background: String?,
+    @Property(1) val background: ColorResource?,
     @Property(2)
     @Default("null")
     val cornerRadius: Int?,
-    @Children(1) val child: () -> Unit,
+    @Children(1) val child: @Composable () -> Unit,
 )
 
 //todo fix to normal list
-@Widget(6)
+@Widget(7)
 data class Stack(
     @Children(1) val child1: @Composable () -> Unit,
     @Children(2) val child2: @Composable () -> Unit,

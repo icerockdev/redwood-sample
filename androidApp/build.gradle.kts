@@ -41,4 +41,5 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.3.1")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("app.cash.redwood:redwood-widget-compose-jvm:0.1.0")
 }

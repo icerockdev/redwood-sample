@@ -26,8 +26,10 @@ fun HelloWorld() {
         )
 
         Row {
-            Text(text = "left $text", color = 0xFFBB86FC, textSize = 22)
+            Text(text = "left $text")
             Text(text = "right $text")
         }
+
+        LocalColors.current.background
     }
 }

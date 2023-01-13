@@ -3,8 +3,6 @@ plugins {
     id("app.cash.redwood.generator.widget")
 }
 
-//archivesBaseName = "schema-widget"
-
 kotlin {
     iosArm64()
     iosX64()

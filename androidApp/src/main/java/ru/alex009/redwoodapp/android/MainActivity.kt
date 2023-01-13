@@ -10,15 +10,16 @@ import androidx.compose.ui.platform.ComposeView
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
 import ru.alex009.redwoodapp.HelloWorld
+import ru.alex009.redwoodapp.android.widgets.ComposeWidgetFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val factories = SchemaWidgetFactories(
-            RedwoodAppSchema = ComposeUiWidgetFactory,
+            RedwoodAppSchema = ComposeWidgetFactory,
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
-        ColorRe
+
         val view = ComposeView(this)
         view.setContent {
             MyApplicationTheme {

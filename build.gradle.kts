@@ -8,33 +8,7 @@ plugins {
     kotlin("multiplatform").version(kotlinGradlePluginVersion).apply(false)
     id("app.cash.redwood").version("0.1.0").apply(false)
     id("org.jetbrains.compose").version("1.2.2").apply(false)
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath(libs.mokoResourcesGeneratorGradle)
-        classpath(libs.mokoNetworkGeneratorGradle)
-        classpath(libs.mokoUnitsGeneratorGradle)
-        classpath(libs.kotlinSerializationGradle)
-        classpath(libs.hiltGradle)
-        classpath(libs.firebaseCrashlyticsGradle)
-        classpath(libs.googleServicesGradle)
-        classpath(libs.navigationPlugin)
-        classpath(":build-logic")
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-    }
+    id("dev.icerock.mobile.multiplatform-resources").version("0.20.1").apply(false)
 }
 
 tasks.register("clean", Delete::class) {

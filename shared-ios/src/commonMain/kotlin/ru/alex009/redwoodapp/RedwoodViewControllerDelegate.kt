@@ -12,9 +12,14 @@ import kotlinx.coroutines.plus
 import platform.UIKit.UIStackView
 import platform.UIKit.UIView
 import ru.alex009.redwood.schema.widget.Button
+import ru.alex009.redwood.schema.widget.Card
+import ru.alex009.redwood.schema.widget.Image
+import ru.alex009.redwood.schema.widget.ImageButton
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
+import ru.alex009.redwood.schema.widget.Stack
 import ru.alex009.redwood.schema.widget.Text
+import ru.alex009.redwood.schema.widget.TextInput
 
 @Suppress("unused") // Called from Swift.
 class RedwoodViewControllerDelegate(
@@ -54,13 +59,22 @@ class RedwoodViewControllerDelegate(
 interface WidgetFactory : RedwoodAppSchemaWidgetFactory<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface TextView : Text<UIView>
+interface WidgetButton : Button<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface ButtonView : Button<UIView>
+interface WidgetCard : Card<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface TextInputView : Text<UIView>
+interface WidgetImageButton : ImageButton<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface ImageView : Text<UIView>
+interface WidgetStack : Stack<UIView>
+
+@Suppress("unused") // Called from Swift.
+interface WidgetImage : Image<UIView>
+
+@Suppress("unused") // Called from Swift.
+interface WidgetText : Text<UIView>
+
+@Suppress("unused") // Called from Swift.
+interface WidgetTextInput : TextInput<UIView>

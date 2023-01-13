@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		225D67DA2971B5F000A27CD1 /* IosWidgetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */; };
+		225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */; };
+		225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */; };
+		225D67E02971B69200A27CD1 /* IosWidgetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */; };
+		225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */; };
+		225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */; };
+		225D67E62971B71100A27CD1 /* IosImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67E52971B71100A27CD1 /* IosImageButton.swift */; };
+		225D67E82971B74100A27CD1 /* IosStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67E72971B74100A27CD1 /* IosStack.swift */; };
 		227ECA252957564C00A4CBC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA242957564C00A4CBC8 /* AppDelegate.swift */; };
 		227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA262957564C00A4CBC8 /* SceneDelegate.swift */; };
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
@@ -16,6 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetFactory.swift; sourceTree = "<group>"; };
+		225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetButton.swift; sourceTree = "<group>"; };
+		225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetText.swift; sourceTree = "<group>"; };
+		225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetImage.swift; sourceTree = "<group>"; };
+		225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetTextInput.swift; sourceTree = "<group>"; };
+		225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetCard.swift; sourceTree = "<group>"; };
+		225D67E52971B71100A27CD1 /* IosImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosImageButton.swift; sourceTree = "<group>"; };
+		225D67E72971B74100A27CD1 /* IosStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosStack.swift; sourceTree = "<group>"; };
 		227ECA222957564C00A4CBC8 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		227ECA242957564C00A4CBC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		227ECA262957564C00A4CBC8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,9 +56,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		225D67D82971B5DC00A27CD1 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */,
+				225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */,
+				225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */,
+				225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */,
+				225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */,
+				225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */,
+				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
+				225D67E72971B74100A27CD1 /* IosStack.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
 		227ECA232957564C00A4CBC8 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				225D67D82971B5DC00A27CD1 /* Widgets */,
 				227ECA242957564C00A4CBC8 /* AppDelegate.swift */,
 				227ECA262957564C00A4CBC8 /* SceneDelegate.swift */,
 				227ECA362957578F00A4CBC8 /* RedwoodViewController.swift */,
@@ -99,6 +131,7 @@
 				227ECA1E2957564C00A4CBC8 /* Sources */,
 				227ECA1F2957564C00A4CBC8 /* Frameworks */,
 				227ECA202957564C00A4CBC8 /* Resources */,
+				CD88424CBD5F254067BD37D4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -117,7 +150,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = orgName;
+				ORGANIZATIONNAME = "IceRock Development";
 				TargetAttributes = {
 					227ECA212957564C00A4CBC8 = {
 						CreatedOnToolsVersion = 14.1;
@@ -177,6 +210,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CD88424CBD5F254067BD37D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -184,9 +234,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225D67DA2971B5F000A27CD1 /* IosWidgetFactory.swift in Sources */,
+				225D67E02971B69200A27CD1 /* IosWidgetImage.swift in Sources */,
 				227ECA372957579000A4CBC8 /* RedwoodViewController.swift in Sources */,
+				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
+				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
+				225D67E82971B74100A27CD1 /* IosStack.swift in Sources */,
+				225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */,
 				227ECA252957564C00A4CBC8 /* AppDelegate.swift in Sources */,
 				227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */,
+				225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */,
+				225D67E62971B71100A27CD1 /* IosImageButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

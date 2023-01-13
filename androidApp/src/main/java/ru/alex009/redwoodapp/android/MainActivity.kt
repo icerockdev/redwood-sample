@@ -4,37 +4,33 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import ru.alex009.redwoodapp.Greeting
+import app.cash.redwood.compose.RedwoodContent
+import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
+import ru.alex009.redwoodapp.HelloWorld
+import ru.alex009.redwoodapp.android.widgets.ComposeWidgetFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val factories = SchemaWidgetFactories(
+            RedwoodAppSchema = ComposeWidgetFactory,
+            RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
+        )
+
         setContent {
-            MyApplicationTheme {
+            MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GreetingView(Greeting().greet())
+                    RedwoodContent(factories) {
+                        HelloWorld()
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text)
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
     }
 }

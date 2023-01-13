@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Aleksey Mikhailov on 24.12.2022.
-//  Copyright © 2022 orgName. All rights reserved.
+//  Copyright © 2022 IceRock Development. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = RedwoodViewController()
+        window?.rootViewController = UINavigationController(
+            rootViewController: RedwoodViewController()
+        )
         window?.makeKeyAndVisible()
     }
 

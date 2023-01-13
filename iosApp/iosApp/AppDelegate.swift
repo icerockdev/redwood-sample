@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Aleksey Mikhailov on 24.12.2022.
-//  Copyright © 2022 orgName. All rights reserved.
+//  Copyright © 2022 IceRock Development. All rights reserved.
 //
 
 import UIKit

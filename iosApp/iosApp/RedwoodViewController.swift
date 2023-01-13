@@ -3,7 +3,7 @@
 //  iosApp
 //
 //  Created by Aleksey Mikhailov on 24.12.2022.
-//  Copyright © 2022 orgName. All rights reserved.
+//  Copyright © 2022 IceRock Development. All rights reserved.
 //
 
 import UIKit
@@ -12,6 +12,7 @@ import shared_ios
 class RedwoodViewController: UIViewController {
     private var displayLink: CADisplayLink!
     private var delegate: RedwoodViewControllerDelegate!
+    private let widgetFactory = IosWidgetFactory()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,7 @@ class RedwoodViewController: UIViewController {
         let container = UIStackView()
         container.backgroundColor = .white
         container.axis = .vertical
-        container.alignment = .leading
+        container.alignment = .fill
         container.distribution = .fill
         container.translatesAutoresizingMaskIntoConstraints = false
 
@@ -31,7 +32,7 @@ class RedwoodViewController: UIViewController {
 
         let delegate = RedwoodViewControllerDelegate(
             root: container,
-            widgetFactory: self
+            widgetFactory: widgetFactory
         )
         self.delegate = delegate
     }
@@ -57,80 +58,4 @@ class RedwoodViewController: UIViewController {
     deinit {
         delegate.dispose()
     }
-}
-
-extension RedwoodViewController: WidgetFactory {
-    func Image() -> WidgetImage {
-        IosWidgetImage()
-    }
-    
-    func Text() -> WidgetText {
-        IosWidgetText()
-    }
-    
-    func TextInput() -> WidgetTextInput {
-        IosWidgetTextInput()
-    }
-}
-
-class IosWidgetImage: WidgetImage {
-    private let root: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = .red
-        return view
-    }()
-    
-    func url(url: String) {
-        root.image = UIImage(systemName: url)
-    }
-    
-    var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
-    
-    var value: Any { root }
-}
-
-class IosWidgetText: WidgetText {
-    private let root: UILabel = {
-        let view = UILabel()
-        view.backgroundColor = .green
-        return view
-    }()
-
-    func text(text: String) {
-        root.text = text
-    }
-    
-    var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
-    
-    var value: Any { root }
-}
-
-class IosWidgetTextInput: WidgetTextInput {
-    private let root: UITextField = {
-        let view = UITextField()
-        view.backgroundColor = .blue
-        view.borderStyle = .roundedRect
-        view.autocapitalizationType = .none
-        return view
-    }()
-    
-    func state(state: String) {
-        root.text = state
-    }
-
-    func hint(hint: String) {
-        root.placeholder = hint
-    }
-
-    func onChange(onChange: ((String) -> Void)? = nil) {
-        let identifier = UIAction.Identifier("TextInputBinding.onTextChanged")
-
-        root.removeAction(identifiedBy: identifier, for: .editingChanged)
-        root.addAction(UIAction(identifier: identifier, handler: { [unowned self] _ in
-            onChange?(self.root.text ?? "")
-        }), for: .editingChanged)
-    }
-
-    var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
-    var value: Any { root }
 }

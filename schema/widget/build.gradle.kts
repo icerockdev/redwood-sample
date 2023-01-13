@@ -3,8 +3,6 @@ plugins {
     id("app.cash.redwood.generator.widget")
 }
 
-//archivesBaseName = "schema-widget"
-
 kotlin {
     iosArm64()
     iosX64()
@@ -17,6 +15,7 @@ kotlin {
             dependencies {
                 api("app.cash.redwood:redwood-layout-widget:0.1.0")
                 api("app.cash.redwood:redwood-treehouse:0.1.0")
+                api(project(":schema:entity"))
             }
         }
     }

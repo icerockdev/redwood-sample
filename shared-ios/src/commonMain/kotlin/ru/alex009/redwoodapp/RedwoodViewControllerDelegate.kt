@@ -11,6 +11,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.plus
 import platform.UIKit.UIStackView
 import platform.UIKit.UIView
+import ru.alex009.redwood.schema.widget.Button
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import ru.alex009.redwood.schema.widget.Text
@@ -53,10 +54,7 @@ class RedwoodViewControllerDelegate(
 interface WidgetFactory : RedwoodAppSchemaWidgetFactory<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface TextView : Text<UIView>
+interface WidgetButton : Button<UIView>
 
 @Suppress("unused") // Called from Swift.
-interface TextInputView : Text<UIView>
-
-@Suppress("unused") // Called from Swift.
-interface ImageView : Text<UIView>
+interface WidgetText : Text<UIView>

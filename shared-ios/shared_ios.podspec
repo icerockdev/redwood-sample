@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'shared_ios'
     spec.version                  = '0.1.0'
-    spec.homepage                 = 'https://github.com/alex009'
+    spec.homepage                 = 'https://github.com/icerockdev'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''

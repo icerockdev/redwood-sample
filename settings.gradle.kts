@@ -1,3 +1,6 @@
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -14,6 +17,8 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "redwood-sample"
+
+includeBuild("build-logic")
 
 include(":androidApp")
 include(":shared", ":shared-ios")

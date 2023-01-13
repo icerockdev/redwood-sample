@@ -1,15 +1,23 @@
 plugins {
-    kotlin("multiplatform")
+    id("org.jetbrains.kotlin.multiplatform")
     kotlin("native.cocoapods")
     id("app.cash.redwood")
+    id("dev.icerock.mobile.multiplatform.ios-framework")
+    id("dev.icerock.mobile.multiplatform.android-manifest")
 }
 
 version = "0.1.0"
 
+framework {
+    export(project(":schema:widget"))
+    export(libs.mokoResources)
+    export(libs.mokoGraphics)
+}
+
 kotlin {
-    iosArm64()
-    iosX64()
+    ios()
     iosSimulatorArm64()
+
 
     cocoapods {
         homepage = "https://github.com/alex009"
@@ -26,5 +34,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
             }
         }
+        getByName("iosSimulatorArm64Main").dependsOn(getByName("iosMain"))
     }
 }

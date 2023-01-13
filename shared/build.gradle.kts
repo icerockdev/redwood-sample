@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("app.cash.redwood")
     id("dev.icerock.mobile.multiplatform-resources")
+    id("dev.icerock.mobile.multiplatform.ios-framework")
 }
 dependencies {
     commonMainApi("dev.icerock.moko:resources:0.20.1")
@@ -9,6 +10,22 @@ dependencies {
 
 multiplatformResources {
     multiplatformResourcesPackage = "org.example.library" // required
+}
+
+framework {
+    export(libs.multiplatformSettings)
+    export(libs.napier)
+    export(libs.mokoParcelize)
+    export(libs.mokoResources)
+    export(libs.mokoMvvmCore)
+    export(libs.mokoMvvmLiveData)
+    export(libs.mokoMvvmState)
+    export(libs.mokoUnits)
+    export(libs.mokoFields)
+    export(libs.mokoErrors)
+    export(libs.mokoCrashReportingCore)
+    export(libs.mokoCrashReportingCrashlytics)
+    export(libs.mokoCrashReportingNapier)
 }
 
 kotlin {

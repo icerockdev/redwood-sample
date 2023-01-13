@@ -18,10 +18,17 @@ buildscript {
     }
 
     dependencies {
-        classpath ("dev.icerock.moko:resources-generator:0.20.1")
+        classpath(libs.mokoResourcesGeneratorGradle)
+        classpath(libs.mokoNetworkGeneratorGradle)
+        classpath(libs.mokoUnitsGeneratorGradle)
+        classpath(libs.kotlinSerializationGradle)
+        classpath(libs.hiltGradle)
+        classpath(libs.firebaseCrashlyticsGradle)
+        classpath(libs.googleServicesGradle)
+        classpath(libs.navigationPlugin)
+        classpath(":build-logic")
     }
 }
-
 
 allprojects {
     repositories {

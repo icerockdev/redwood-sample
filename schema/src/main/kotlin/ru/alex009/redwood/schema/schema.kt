@@ -16,6 +16,9 @@ import dev.icerock.moko.resources.ColorResource
         Text::class,
         Image::class,
         Stack::class,
+        Card::class,
+        ImageButton::class,
+        Button::class,
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -35,7 +38,7 @@ data class TextInput(
     @Default("null")
     val onChange: (String) -> Unit,
     @Default("null")
-    @Property(4) val textStyle: TextStyle,
+    @Property(4) val textStyle: TextStyle?,
 )
 
 @Widget(2)
@@ -44,7 +47,7 @@ data class Text(
     @Property(2)
     @Default("false") val isSingleLine: Boolean,
     @Property(3)
-    @Default("null") val textStyle: TextStyle
+    @Default("null") val textStyle: TextStyle?
 )
 
 @Widget(3)
@@ -52,7 +55,7 @@ data class Image(
     @Property(1) val url: String,
 )
 
-@Widget(3)
+@Widget(7)
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
@@ -62,10 +65,10 @@ data class ImageButton(
     val iconPadding: Int?,
     @Property(4)
     @Default("null")
-    val textStyle: TextStyle
+    val textStyle: TextStyle?
 )
 
-@Widget(3)
+@Widget(8)
 data class Button(
     @Property(1) val text: String,
     @Property(2)
@@ -79,12 +82,12 @@ data class Button(
     val cornerRadius: Int?,
     @Property(5)
     @Default("null")
-    val textStyle: TextStyle
+    val textStyle: TextStyle?
 )
 
 @Widget(5)
 data class Card(
-    @Property(1) val background: String?,
+    @Property(1) val background: ColorResource?,
     @Property(2)
     @Default("null")
     val cornerRadius: Int?,

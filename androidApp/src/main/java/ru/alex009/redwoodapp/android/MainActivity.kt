@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             RedwoodAppSchema = ComposeUiWidgetFactory,
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
-
+        ColorRe
         val view = ComposeView(this)
         view.setContent {
             MyApplicationTheme {

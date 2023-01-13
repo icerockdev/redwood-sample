@@ -6,17 +6,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
-import ru.alex009.redwood.schema.widget.Image
+import ru.alex009.redwood.schema.widget.Text
 
-class ComposeImage : Image<@Composable () -> Unit> {
-    private var urlState by mutableStateOf("")
+class ComposeText : Text<@Composable () -> Unit> {
+    private var _text: String by mutableStateOf("")
+
     override var layoutModifiers: LayoutModifier = LayoutModifier
-
     override val value = @Composable {
-        Text(urlState)
+        Text(text = _text)
     }
 
-    override fun url(url: String) {
-        urlState = url
+    override fun text(text: String) {
+        _text = text
     }
 }

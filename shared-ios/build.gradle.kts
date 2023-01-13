@@ -11,15 +11,13 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        homepage = "https://github.com/alex009"
+        homepage = "https://github.com/icerockdev"
         summary = "redwood test"
 
         framework {
             isStatic = false
 
             export(project(":schema:widget"))
-            export("dev.icerock.moko:resources:0.20.1")
-            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 

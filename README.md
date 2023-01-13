@@ -2,7 +2,9 @@
 
 Sample application for https://github.com/cashapp/redwood
 
+![android-counter](https://user-images.githubusercontent.com/5010169/212373350-0e5b50ad-9775-43c1-92dd-cbfde7e0a1fc.gif)
 
+![ios-counter](https://user-images.githubusercontent.com/5010169/212373366-12adc35a-7512-457b-8033-a7ce2b78be77.gif)
 
 ## Run
 ### Android

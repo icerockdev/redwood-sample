@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../shared-ios"
 
 SPEC CHECKSUMS:
-  shared_ios: afeca706ebdff786adc19fab52a51c8d6fa3f61f
+  shared_ios: da642a7d9b1354fcb727dc5689810bc048ea1f7c
 
 PODFILE CHECKSUM: 781b9b0f72a0db3708da8d02a6b473a5a4b8da5f
 

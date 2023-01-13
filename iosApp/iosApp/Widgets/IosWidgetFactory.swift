@@ -15,27 +15,7 @@ class IosWidgetFactory: WidgetFactory {
         IosWidgetButton()
     }
     
-    func Card() -> Card {
-        IosWidgetCard()
-    }
-    
-    func ImageButton() -> ImageButton {
-        IosImageButton()
-    }
-    
-    func Stack() -> Stack {
-        IosStack()
-    }
-    
-    func Image() -> Image {
-        IosWidgetImage()
-    }
-    
     func Text() -> Text {
         IosWidgetText()
-    }
-    
-    func TextInput() -> TextInput {
-        IosWidgetTextInput()
     }
 }

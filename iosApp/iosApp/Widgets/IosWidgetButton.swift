@@ -17,26 +17,6 @@ class IosWidgetButton: WidgetButton {
         return view
     }()
     
-    func borderColor(borderColor: ColorResource?){
-        root.backgroundColor = borderColor?.getColor(
-            userInterfaceStyle: .uiuserinterfacestylelight
-        ).toUIColor()
-    }
-    
-    func background(background: ColorResource?) {
-        root.backgroundColor = background?.getColor(
-            userInterfaceStyle: .uiuserinterfacestylelight
-        ).toUIColor()
-   }
-    
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
-    
-    func cornerRadius(cornerRadius: KotlinInt?) {
-        // TODO
-    }
-    
     func text(text: String) {
         root.setTitle(text, for: .normal)
     }

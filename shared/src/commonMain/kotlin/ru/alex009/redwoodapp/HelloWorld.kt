@@ -13,7 +13,6 @@ import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import ru.alex009.redwood.schema.compose.Button
 import ru.alex009.redwood.schema.compose.Text
-import ru.alex009.redwood.schema.compose.TextInput
 
 @Composable
 fun HelloWorld() {
@@ -23,25 +22,22 @@ fun HelloWorld() {
         height = Constraint.Fill,
         horizontalAlignment = CrossAxisAlignment.Center
     ) {
-        var text: String by remember { mutableStateOf("some text") }
+        var counter: Int by remember { mutableStateOf(0) }
 
-        TextInput(
-            state = text,
-            hint = "super text",
-            onChange = { text = it }
-        )
+        Text(text = counter.toString())
 
         Row(
             width = Constraint.Fill,
             horizontalAlignment = MainAxisAlignment.SpaceBetween
         ) {
-            Text(text = "left $text")
-            Text(text = "right $text")
+            Button(
+                text = "+",
+                onClick = { counter++ }
+            )
+            Button(
+                text = "-",
+                onClick = { counter-- }
+            )
         }
-
-        Button(
-            text = "press me",
-            onClick = { text = "Hi!" }
-        )
     }
 }

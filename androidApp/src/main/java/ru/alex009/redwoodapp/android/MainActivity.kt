@@ -2,11 +2,11 @@ package ru.alex009.redwoodapp.android
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
 import ru.alex009.redwoodapp.HelloWorld
@@ -20,9 +20,8 @@ class MainActivity : ComponentActivity() {
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
 
-        val view = ComposeView(this)
-        view.setContent {
-            MyApplicationTheme {
+        setContent {
+            MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -33,6 +32,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        setContentView(view)
     }
 }

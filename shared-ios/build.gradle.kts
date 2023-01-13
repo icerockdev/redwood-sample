@@ -11,7 +11,7 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        homepage = "https://github.com/alex009"
+        homepage = "https://github.com/icerockdev"
         summary = "redwood test"
 
         framework {

@@ -11,6 +11,7 @@ import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
+import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.compose.Button
 import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwood.schema.compose.TextInput
@@ -41,6 +42,7 @@ fun HelloWorld() {
 
         Button(
             text = "press me",
+            buttonType = ButtonType.Primary,
             onClick = { text = "Hi!" }
         )
     }

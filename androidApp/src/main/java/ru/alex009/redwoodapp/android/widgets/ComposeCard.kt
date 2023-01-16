@@ -11,9 +11,6 @@ import dev.icerock.moko.resources.ColorResource
 import ru.alex009.redwood.schema.widget.Card
 
 class ComposeCard : Card<@Composable () -> Unit> {
-    private var _background: ColorResource? by mutableStateOf(null)
-    private var _cornerRadius: Int? by mutableStateOf(null)
-
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
     override val value = @Composable {
@@ -23,12 +20,4 @@ class ComposeCard : Card<@Composable () -> Unit> {
     }
 
     override val child = ComposeWidgetChildren()
-
-    override fun background(background: ColorResource?) {
-        _background = background
-    }
-
-    override fun cornerRadius(cornerRadius: Int?) {
-        _cornerRadius = cornerRadius
-    }
 }

@@ -8,7 +8,6 @@ import app.cash.redwood.schema.Property
 import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
-import dev.icerock.moko.resources.ColorResource
 
 @Schema(
     members = [
@@ -56,7 +55,7 @@ data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
     @Default("null")  val icon: String?,
-    @Property(5)
+    @Property(3)
     val onClick: () -> Unit,
 )
 

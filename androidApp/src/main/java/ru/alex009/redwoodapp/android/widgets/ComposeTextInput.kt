@@ -7,14 +7,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
-import ru.alex009.redwood.schema.TextStyle
 import ru.alex009.redwood.schema.widget.TextInput
 
 class ComposeTextInput : TextInput<@Composable () -> Unit> {
     private var _textState by mutableStateOf("")
     private var _hintState by mutableStateOf("")
     private var _onChangeState: (String) -> Unit by mutableStateOf({})
-    private var _textStyle: TextStyle? by mutableStateOf(null)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
@@ -36,9 +34,5 @@ class ComposeTextInput : TextInput<@Composable () -> Unit> {
 
     override fun onChange(onChange: ((String) -> Unit)?) {
         _onChangeState = onChange ?: {}
-    }
-
-    override fun textStyle(textStyle: TextStyle?) {
-        _textStyle = textStyle
     }
 }

@@ -56,16 +56,23 @@ data class ImageButton(
     @Property(2)
     @Default("null")  val icon: String?,
     @Property(3)
-    val onClick: () -> Unit,
+    @Default("true")
+    val enabled: Boolean,
+    @Property(3)
+    val onClick: () -> Unit
 )
 
 @Widget(5)
 data class Button(
     @Property(1) val text: String,
     @Property(2)
-    val onClick: () -> Unit,
+    val buttonType: ButtonType,
     @Property(3)
-    val buttonType: ButtonType
+    @Default("true")
+    val enabled: Boolean,
+    @Property(4)
+    val onClick: () -> Unit,
+
 )
 
 @Widget(6)

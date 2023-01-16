@@ -15,10 +15,14 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
     private var _text by mutableStateOf("")
     private var _icon: String? by mutableStateOf(null)
     private var _onClick: () -> Unit by mutableStateOf({})
+    private var _enabled by mutableStateOf(true)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        Button(onClick = _onClick) {
+        Button(
+            onClick = _onClick,
+            enabled = _enabled
+        ) {
             Row {
                 CoilImage(imageModel = _icon)
                 Text(text = _text)
@@ -36,5 +40,9 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
 
     override fun onClick(onClick: (() -> Unit)?) {
         _onClick = onClick ?: {}
+    }
+
+    override fun enabled(enabled: Boolean) {
+        _enabled = enabled
     }
 }

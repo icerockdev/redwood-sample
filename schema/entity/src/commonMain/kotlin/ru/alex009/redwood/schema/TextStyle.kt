@@ -9,3 +9,9 @@ data class TextStyle (
     val textColor: Color,
     val textFont: FontResource
 )
+
+enum class ButtonType {
+    Primary,
+    Secondary,
+    Action
+}

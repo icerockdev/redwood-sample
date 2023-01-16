@@ -37,17 +37,13 @@ data class TextInput(
     @Property(3)
     @Default("null")
     val onChange: (String) -> Unit,
-    @Default("null")
-    @Property(4) val textStyle: TextStyle?,
 )
 
 @Widget(2)
 data class Text(
     @Property(1) val text: String,
     @Property(2)
-    @Default("false") val isSingleLine: Boolean,
-    @Property(3)
-    @Default("null") val textStyle: TextStyle?
+    @Default("false") val isSingleLine: Boolean
 )
 
 @Widget(3)
@@ -60,12 +56,6 @@ data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
     @Default("null")  val icon: String?,
-    @Property(3)
-    @Default("null")
-    val iconPadding: Int?,
-    @Property(4)
-    @Default("null")
-    val textStyle: TextStyle?,
     @Property(5)
     val onClick: () -> Unit,
 )
@@ -74,27 +64,13 @@ data class ImageButton(
 data class Button(
     @Property(1) val text: String,
     @Property(2)
-    @Default("null")
-    val background: ColorResource?,
-    @Property(3)
-    @Default("null")
-    val borderColor: ColorResource?,
-    @Property(4)
-    @Default("null")
-    val cornerRadius: Int?,
-    @Property(5)
-    @Default("null")
-    val textStyle: TextStyle?,
-    @Property(6)
     val onClick: () -> Unit,
+    @Property(3)
+    val buttonType: ButtonType
 )
 
 @Widget(6)
 data class Card(
-    @Property(1) val background: ColorResource?,
-    @Property(2)
-    @Default("null")
-    val cornerRadius: Int?,
     @Children(1) val child: @Composable () -> Unit,
 )
 

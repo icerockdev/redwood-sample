@@ -42,7 +42,10 @@ data class TextInput(
 data class Text(
     @Property(1) val text: String,
     @Property(2)
-    @Default("false") val isSingleLine: Boolean
+    @Default("false") val isSingleLine: Boolean,
+    @Property(3)
+    @Default("TextType.Primary")
+    val textType: TextType?
 )
 
 @Widget(3)
@@ -54,10 +57,10 @@ data class Image(
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
-    @Default("null")  val icon: String?,
+    @Default("null")  val icon: Int?,
     @Property(3)
     @Default("true")
-    val enabled: Boolean,
+    val isClicked: Boolean,
     @Property(3)
     val onClick: () -> Unit
 )

@@ -1,7 +1,5 @@
 package ru.alex009.redwoodapp.android.widgets
 
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,6 +7,9 @@ import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.widget.Button
+import ru.alex009.redwoodapp.android.types.ActionButton
+import ru.alex009.redwoodapp.android.types.PrimaryButton
+import ru.alex009.redwoodapp.android.types.SecondaryButton
 
 class ComposeButton : Button<@Composable () -> Unit> {
     private var _text by mutableStateOf("")
@@ -18,11 +19,10 @@ class ComposeButton : Button<@Composable () -> Unit> {
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        Button(
-            onClick = _onClick,
-            enabled = _enabled
-        ) {
-            Text(text = _text)
+        when(_buttonType) {
+            ButtonType.Primary -> PrimaryButton(text = _text, enabled = _enabled, onClick = _onClick)
+            ButtonType.Secondary -> SecondaryButton(text = _text, enabled = _enabled, onClick = _onClick)
+            ButtonType.Action -> ActionButton(text = _text, enabled = _enabled, onClick = _onClick)
         }
     }
 

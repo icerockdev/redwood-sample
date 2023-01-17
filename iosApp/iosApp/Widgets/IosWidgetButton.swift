@@ -17,6 +17,10 @@ class IosWidgetButton: WidgetButton {
         return view
     }()
     
+    func buttonType(buttonType: EntityButtonType) {
+        
+    }
+    
     func borderColor(borderColor: ColorResource?){
         root.backgroundColor = borderColor?.getColor(
             userInterfaceStyle: .uiuserinterfacestylelight
@@ -28,10 +32,6 @@ class IosWidgetButton: WidgetButton {
             userInterfaceStyle: .uiuserinterfacestylelight
         ).toUIColor()
    }
-    
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
     
     func cornerRadius(cornerRadius: KotlinInt?) {
         // TODO

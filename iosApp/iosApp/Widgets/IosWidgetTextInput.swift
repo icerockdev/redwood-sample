@@ -18,10 +18,6 @@ class IosWidgetTextInput: WidgetTextInput {
         return view
     }()
     
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
-    
     func state(state: String) {
         root.text = state
     }

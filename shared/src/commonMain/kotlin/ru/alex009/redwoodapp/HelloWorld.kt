@@ -1,47 +1,42 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
-import app.cash.redwood.layout.api.CrossAxisAlignment
-import app.cash.redwood.layout.api.MainAxisAlignment
+import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
-import app.cash.redwood.layout.compose.Row
+import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.compose.Button
-import ru.alex009.redwood.schema.compose.Text
-import ru.alex009.redwood.schema.compose.TextInput
+import ru.alex009.redwood.schema.compose.Card
+import ru.alex009.redwood.schema.compose.Stack
 
 @Composable
 fun HelloWorld() {
-    Column(
-        padding = Padding(16),
-        width = Constraint.Fill,
-        height = Constraint.Fill,
-        horizontalAlignment = CrossAxisAlignment.Center
-    ) {
-        var text: String by remember { mutableStateOf("some text") }
-
-        TextInput(
-            state = text,
-            hint = "super text",
-            onChange = { text = it }
-        )
-
-        Row(
-            width = Constraint.Fill,
-            horizontalAlignment = MainAxisAlignment.SpaceBetween
-        ) {
-            Text(text = "left $text")
-            Text(text = "right $text")
+        Column (overflow = Overflow.Scroll, width = Constraint.Fill){
+            Card {
+                Button(
+                    layoutModifier = LayoutModifier.padding(Padding(10)),
+                    text = "press me",
+                    onClick = { "Hi!" },
+                    buttonType = ButtonType.Action
+                )
+            }
+            Stack(
+                child1 = {
+                    Button(
+                        text = "press me 2",
+                        onClick = { "Hi!" },
+                        buttonType = ButtonType.Action
+                    )
+                },
+                child2 = {
+                    Button(
+                        text = "press me 3",
+                        onClick = { "Hi!" },
+                        buttonType = ButtonType.Action
+                    )
+                }
+            )
         }
-
-        Button(
-            text = "press me",
-            onClick = { text = "Hi!" }
-        )
-    }
 }

@@ -27,10 +27,7 @@ class IosImageButton: WidgetImageButton {
     func text(text: String) {
         // TODO
     }
-    
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
+
     
     func onClick(onClick: (() -> Void)? = nil) {
         // TODO

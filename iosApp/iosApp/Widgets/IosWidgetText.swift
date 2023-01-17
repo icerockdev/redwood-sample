@@ -16,10 +16,6 @@ class IosWidgetText: WidgetText {
         return view
     }()
     
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
-    
     func isSingleLine(isSingleLine: Bool) {
         // TODO
     }

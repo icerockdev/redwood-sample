@@ -8,7 +8,6 @@ import app.cash.redwood.schema.Property
 import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
-import dev.icerock.moko.resources.ColorResource
 
 @Schema(
     members = [
@@ -43,7 +42,10 @@ data class TextInput(
 data class Text(
     @Property(1) val text: String,
     @Property(2)
-    @Default("false") val isSingleLine: Boolean
+    @Default("false") val isSingleLine: Boolean,
+    @Property(3)
+    @Default("TextType.Primary")
+    val textType: TextType?
 )
 
 @Widget(3)
@@ -55,18 +57,25 @@ data class Image(
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
-    @Default("null")  val icon: String?,
-    @Property(5)
-    val onClick: () -> Unit,
+    @Default("null")  val icon: Int?,
+    @Property(3)
+    @Default("true")
+    val isClicked: Boolean,
+    @Property(3)
+    val onClick: () -> Unit
 )
 
 @Widget(5)
 data class Button(
     @Property(1) val text: String,
     @Property(2)
-    val onClick: () -> Unit,
+    val buttonType: ButtonType,
     @Property(3)
-    val buttonType: ButtonType
+    @Default("true")
+    val enabled: Boolean,
+    @Property(4)
+    val onClick: () -> Unit,
+
 )
 
 @Widget(6)

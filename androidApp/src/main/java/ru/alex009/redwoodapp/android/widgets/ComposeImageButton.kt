@@ -1,41 +1,65 @@
 package ru.alex009.redwoodapp.android.widgets
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
-import ru.alex009.redwood.schema.TextStyle
 import ru.alex009.redwood.schema.widget.ImageButton
+import ru.alex009.redwoodapp.android.R
 
 class ComposeImageButton : ImageButton<@Composable () -> Unit> {
     private var _text by mutableStateOf("")
-    private var _icon: String? by mutableStateOf(null)
-    private var _iconPadding: Int? by mutableStateOf(null)
-    private var _textStyle: TextStyle? by mutableStateOf(null)
+    private var _icon: Int by mutableStateOf(0)
+    private var _onClick: () -> Unit by mutableStateOf({})
+    private var _isClicked by mutableStateOf(true)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-
+        Button(
+            onClick = _onClick,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent
+            ),
+            elevation = ButtonDefaults.elevation(0.dp, 0.dp)
+        ) {
+            Row {
+                Icon(
+                    modifier = Modifier.padding(end = 8.dp),
+                    painter = painterResource(_icon),
+                    contentDescription = null
+                )
+                Text(
+                    text = _text,
+                    color = if (_isClicked) Color(0xFF0C7BC7) else Color(0xFFA9A9A9)
+                )
+            }
+        }
     }
 
     override fun text(text: String) {
         _text = text
     }
 
-    override fun icon(icon: String?) {
-        _icon = icon
-    }
-
-    override fun textStyle(textStyle: TextStyle?) {
-        _textStyle = textStyle
-    }
-
-    override fun iconPadding(iconPadding: Int?) {
-        _iconPadding = iconPadding
+    override fun icon(icon: Int?) {
+        _icon = icon ?: R.drawable.like
     }
 
     override fun onClick(onClick: (() -> Unit)?) {
-        TODO("Not yet implemented")
+        _onClick = onClick ?: {}
+    }
+
+    override fun isClicked(isClicked: Boolean) {
+        _isClicked = isClicked
     }
 }

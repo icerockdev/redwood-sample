@@ -44,4 +44,6 @@ dependencies {
 
     implementation("app.cash.redwood:redwood-layout-composeui:0.1.0")
     implementation("app.cash.redwood:redwood-widget-compose-jvm:0.1.0")
+
+    implementation("com.github.skydoves:landscapist-coil:1.4.8")
 }

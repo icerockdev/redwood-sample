@@ -81,15 +81,11 @@ fun HelloWorld() {
                 }
             },
             child2 = {
-                Column(
-                    height = Constraint.Wrap
-                ) {
                     Button(
                         text = "Предложить пост",
                         buttonType = ButtonType.Primary,
                         onClick = { }
                     )
-                }
             }
         )
     }

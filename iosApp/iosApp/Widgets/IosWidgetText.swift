@@ -28,6 +28,11 @@ class IosWidgetText: WidgetText {
         root.text = text
     }
     
+    func textType(textType: EntityTextType?) {
+        // TODO
+    }
+    
+    
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
     var value: Any { root }

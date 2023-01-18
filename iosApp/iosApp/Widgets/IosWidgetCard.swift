@@ -11,26 +11,19 @@ import shared_ios
 
 class IosWidgetCard :  WidgetCard{
     
-    private let card: UIStackView = {
-        let container = UIStackView()
-        container.backgroundColor = .red
-        container.axis = .vertical
-        container.alignment = .fill
-        container.distribution = .fill
-        container.layer.cornerRadius = 20
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.isLayoutMarginsRelativeArrangement = true
+    private let card: MyCardView = {
+        let container = MyCardView()
+        container.backgroundColor = .gray
           return container;
     }()
     
-    private let root: UIStackView = {
-        let container = UIStackView()
-        container.axis = .vertical
-        container.alignment = .fill
-        container.distribution = .fill
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.isLayoutMarginsRelativeArrangement = true
-           return container;
+    private let root: MyCardView = {
+        let container = MyCardView()
+        container.translatesAutoresizingMaskIntoConstraints = true
+        container.clipsToBounds = true
+        container.backgroundColor = .gray
+        container.layer.cornerRadius = 16
+        return container;
     }()
     
    
@@ -40,17 +33,32 @@ class IosWidgetCard :  WidgetCard{
     }
 
     func myInsert(view: UIView,index: KotlinInt){
-        card.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        view.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        card.insertArrangedSubview(view, at: 0)
-        root.insertArrangedSubview(card, at: 0)
-        card.leadingAnchor.constraint(equalTo: root.leadingAnchor, constant: 15).isActive = true
-        card.topAnchor.constraint(equalTo: root.topAnchor, constant: 15).isActive = true
-        card.bottomAnchor.constraint(equalTo: root.bottomAnchor, constant: 15).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = true
+        root.insertArrangedSubview(view, at: 0)
+        view.leadingAnchor.constraint(equalTo:
+                root.leadingAnchor
+              ).isActive = true
+        view.topAnchor.constraint(equalTo:
+                root.topAnchor).isActive = true
+        view.leftAnchor.constraint(equalTo:
+                root.leftAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo:
+                root.widthAnchor).isActive = true
+        root.heightAnchor.constraint(equalTo:
+                view.heightAnchor).isActive = true
+        view.needsUpdateConstraints()
+        root.needsUpdateConstraints()
+        view.updateConstraintsIfNeeded()
+        root.updateConstraintsIfNeeded()
+        view.layoutSubviews()
+        root.layoutSubviews()
+        view.setNeedsLayout()
+        root.setNeedsLayout()
+        view.sizeThatFits(CGSize(width: 150, height:150))
+        root.sizeThatFits(CGSize(width: 150, height:150))
     }
     
     func background(background: ColorResource?) {
-       
     }
     
 
@@ -62,4 +70,11 @@ class IosWidgetCard :  WidgetCard{
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
     var value: Any { root }
+}
+
+class MyCardView: UIStackView{
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let childSize = subviews.first?.sizeThatFits(size)
+        return CGSize(width: size.width, height: childSize?.height ?? 32)
+    }
 }

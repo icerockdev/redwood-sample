@@ -10,15 +10,21 @@ import UIKit
 import shared_ios
 
 class IosImageButton: WidgetImageButton {
-    private let root: UIView = {
+    private let root: UIButton = {
         let view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = true
         return view
     }()
-     
-    func icon(icon: String?) {
+
+    func isClicked(isClicked: Bool) {
         // TODO
     }
+    
+    
+    func icon(icon: KotlinInt?) {
+        // TODO
+    }
+    
     
     func iconPadding(iconPadding: KotlinInt?) {
         // TODO

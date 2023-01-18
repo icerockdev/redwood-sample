@@ -21,6 +21,11 @@ class IosWidgetButton: WidgetButton {
         
     }
     
+    func enabled(enabled: Bool) {
+        // TODO
+    }
+    
+    
     func borderColor(borderColor: ColorResource?){
         root.backgroundColor = borderColor?.getColor(
             userInterfaceStyle: .uiuserinterfacestylelight

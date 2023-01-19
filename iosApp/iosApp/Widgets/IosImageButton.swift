@@ -10,36 +10,46 @@ import UIKit
 import shared_ios
 
 class IosImageButton: WidgetImageButton {
+  
     private let root: UIButton = {
-        let view = UIButton(type: .system)
+        let view = UIButton(type: .custom)
         view.translatesAutoresizingMaskIntoConstraints = true
+        view.backgroundColor = UIColor.clear
+        view.setTitleColor(.black, for: .normal)
+        view.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return view
-    }()
 
+    }()
+    
+    func cornerRadius(cornerRadius: KotlinInt?) {
+        // TODO
+    }
+    
+    func icon(icon: ImageResource?) {
+        root.setImage(icon?.toUIImage(), for: .normal)
+    }
+    
     func isClicked(isClicked: Bool) {
         // TODO
     }
     
     
-    func icon(icon: KotlinInt?) {
-        // TODO
-    }
-    
-    
-    func iconPadding(iconPadding: KotlinInt?) {
-        // TODO
-    }
-    
     func text(text: String) {
-        // TODO
+    //    root.setTitle(text, for: .normal)
     }
-
     
     func onClick(onClick: (() -> Void)? = nil) {
-        // TODO
+        let identifier = UIAction.Identifier("ButtonBinding.onPressed")
+        let action = UIAction(
+            identifier: identifier,
+            handler: { _ in onClick?() }
+        )
+
+        root.removeAction(identifiedBy: identifier, for: .touchUpInside)
+        root.addAction(action, for: .touchUpInside)
     }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
-    var value: Any { root }
+    var value: Any {root}
 }

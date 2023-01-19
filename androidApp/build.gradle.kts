@@ -41,8 +41,9 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
 
     implementation(project(":shared"))
-
     implementation("app.cash.redwood:redwood-layout-composeui:0.1.0")
+    implementation("app.cash.redwood:redwood-treehouse-lazylayout-api:0.1.0")
+    implementation("app.cash.redwood:redwood-treehouse:0.1.0")
     implementation("app.cash.redwood:redwood-widget-compose-jvm:0.1.0")
 
     implementation("com.github.skydoves:landscapist-coil:1.4.8")

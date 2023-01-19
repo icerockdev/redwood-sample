@@ -21,72 +21,23 @@ import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 import org.example.library.MR
 
+interface ColumnProvider {
+    @Composable
+    fun <T> create(
+        items: List<T>,
+        itemContent: @Composable (item: T) -> Unit,
+    )
+}
+
 @Composable
-fun HelloWorld() {
-    Column(
-        padding = Padding(16),
-        width = Constraint.Fill,
-        height = Constraint.Fill
-    ) {
-        Stack(
-            child1 = {
-                Column(overflow = Overflow.Scroll) {
-                    repeat(10) {
-                        Item(
-                            data = "31 Сентября 2022 в 12:01",
-                            text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                            isLike = true
-                        )
-                    }
-                    /*Card {
-                        Column(
-                            padding = Padding(16),
-                            width = Constraint.Fill,
-                            height = Constraint.Wrap,
-                            horizontalAlignment = CrossAxisAlignment.Center
-                        ) {
-                            var text: String by remember { mutableStateOf("some text") }
-                            var isButtonClicked: Boolean by remember { mutableStateOf(false) }
-
-                            TextInput(
-                                state = text,
-                                hint = "super text",
-                                onChange = { text = it }
-                            )
-
-                            Row(
-                                width = Constraint.Fill,
-                                horizontalAlignment = MainAxisAlignment.SpaceBetween
-                            ) {
-                                Text(text = "left $text", textType = TextType.Secondary)
-                                Text(text = "right $text")
-                            }
-
-                            Button(
-                                text = "press me",
-                                buttonType = ButtonType.Primary,
-                                onClick = { text = "Hi!" }
-                            )
-
-                            ImageButton(
-                                text = "16",
-                                icon = null,
-                                isClicked = isButtonClicked,
-                                onClick = {
-                                    isButtonClicked = !isButtonClicked
-                                }
-                            )
-                        }
-                    }*/
-                }
-            },
-            child2 = {
-                    Button(
-                        text = "Предложить пост",
-                        buttonType = ButtonType.Primary,
-                        onClick = { }
-                    )
-            }
+fun HelloWorld(
+    columnProvider: ColumnProvider,
+) {
+    columnProvider.create(listOf("1","2","3")){
+        Item(
+            data = it,
+            text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
+            isLike = true
         )
     }
 }
@@ -116,8 +67,8 @@ fun Item(data: String, text: String, isLike: Boolean) {
                     horizontalAlignment = MainAxisAlignment.End
                 ) {
                     ImageButton(
-                        text = "16",
-                        icon = null,//MR.images.like,
+                        text = "17",
+                        icon = null,
                         isClicked = _isLike,
                         onClick = { _isLike = !_isLike },
                         layoutModifier = LayoutModifier.padding(Padding(end = 8))

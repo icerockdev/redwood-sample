@@ -11,19 +11,14 @@ import shared_ios
 
 class IosWidgetCard :  WidgetCard{
     
-    private let card: MyCardView = {
-        let container = MyCardView()
-        container.backgroundColor = .gray
-          return container;
-    }()
-    
     private let root: MyCardView = {
         let container = MyCardView()
         container.translatesAutoresizingMaskIntoConstraints = true
-        container.clipsToBounds = true
-        container.backgroundColor = .gray
         container.layer.cornerRadius = 16
-        return container;
+        container.backgroundColor =  UIColor(red:242.0/255.0, green:242.0/255.0, blue:242.0/255.0, alpha:1.0)
+
+        container.clipsToBounds = true
+       return container;
     }()
     
    
@@ -46,26 +41,7 @@ class IosWidgetCard :  WidgetCard{
                 root.widthAnchor).isActive = true
         root.heightAnchor.constraint(equalTo:
                 view.heightAnchor).isActive = true
-        view.needsUpdateConstraints()
-        root.needsUpdateConstraints()
-        view.updateConstraintsIfNeeded()
-        root.updateConstraintsIfNeeded()
-        view.layoutSubviews()
-        root.layoutSubviews()
-        view.setNeedsLayout()
-        root.setNeedsLayout()
-        view.sizeThatFits(CGSize(width: 150, height:150))
-        root.sizeThatFits(CGSize(width: 150, height:150))
     }
-    
-    func background(background: ColorResource?) {
-    }
-    
-
-    func cornerRadius(cornerRadius: KotlinInt?) {
-   
-    }
-
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     

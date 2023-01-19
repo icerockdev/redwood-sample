@@ -10,9 +10,11 @@ import UIKit
 import shared_ios
 
 class IosWidgetText: WidgetText {
-    private let root: UILabel = {
-        let view = UILabel()
+    private let root: UITextView = {
+        let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = false
+        view.backgroundColor = UIColor.clear
         return view
     }()
     

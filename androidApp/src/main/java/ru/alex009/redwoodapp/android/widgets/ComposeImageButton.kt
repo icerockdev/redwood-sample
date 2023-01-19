@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
+import dev.icerock.moko.resources.ImageResource
 import ru.alex009.redwood.schema.widget.ImageButton
 import ru.alex009.redwoodapp.android.R
 
@@ -51,8 +52,8 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
         _text = text
     }
 
-    override fun icon(icon: Int?) {
-        _icon = icon ?: R.drawable.like
+    override fun icon(icon: ImageResource?) {
+        _icon = icon?.drawableResId ?: R.drawable.like
     }
 
     override fun onClick(onClick: (() -> Unit)?) {

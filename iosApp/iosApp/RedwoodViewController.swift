@@ -25,10 +25,10 @@ class RedwoodViewController: UIViewController {
         container.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(container)
-        container.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        container.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        container.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        container.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        container.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         let delegate = RedwoodViewControllerDelegate(
             root: container,

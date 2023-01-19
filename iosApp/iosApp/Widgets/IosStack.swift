@@ -12,9 +12,9 @@ import shared_ios
 class IosStack :  WidgetStack {
     private let root: MyStackView = {
         let container = MyStackView()
-        container.axis = .vertical
-        container.alignment = .leading
-        container.distribution = .equalSpacing
+        container.axis = .horizontal
+        container.alignment = .lastBaseline
+        container.distribution = .fillEqually
         container.translatesAutoresizingMaskIntoConstraints = true
         return container;
     }()
@@ -37,8 +37,7 @@ class IosStack :  WidgetStack {
     
     func myInsert2(view: UIView,index: KotlinInt){
         root.insertArrangedSubview(view, at: 0)
-        view.bottomAnchor.constraint(equalTo: root.bottomAnchor, constant: 400).isActive = true
-        view.heightAnchor.constraint(equalToConstant: 100)
+        view.bottomAnchor.constraint(equalTo: root.bottomAnchor).isActive = true
     }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
@@ -47,7 +46,7 @@ class IosStack :  WidgetStack {
     
     class MyStackView : UIStackView{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
-            return size
+            return CGSize(width: size.width, height: size.height-100)
         }
     }
 }

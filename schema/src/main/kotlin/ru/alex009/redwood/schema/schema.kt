@@ -8,6 +8,7 @@ import app.cash.redwood.schema.Property
 import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
+import dev.icerock.moko.resources.ImageResource
 
 @Schema(
     members = [
@@ -57,11 +58,11 @@ data class Image(
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
-    @Default("null")  val icon: Int?,
+    @Default("null")  val icon: ImageResource?,
     @Property(3)
     @Default("true")
     val isClicked: Boolean,
-    @Property(3)
+    @Property(4)
     val onClick: () -> Unit
 )
 

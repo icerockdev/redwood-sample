@@ -20,14 +20,6 @@ import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 
-interface ColumnProvider {
-    @Composable
-    fun <T> create(
-        items: List<T>,
-        itemContent: @Composable (item: T) -> Unit,
-    )
-}
-
 @Composable
 fun PostsList(routeToCreate: () -> Unit) {
     val itemsList = remember {
@@ -68,7 +60,7 @@ fun PostsList(routeToCreate: () -> Unit) {
         Stack(
             child1 = {
                 Column(width = Constraint.Fill) {
-                    columnProvider.create(itemsList) { cardItem ->
+                    for (cardItem in itemsList) {
                         Item(
                             data = cardItem.data,
                             text = cardItem.text,

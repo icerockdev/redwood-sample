@@ -43,7 +43,7 @@ class RedwoodViewControllerDelegate(
             )
         )
         composition.setContent {
-            HelloWorld()
+            PostsList()
         }
     }
 

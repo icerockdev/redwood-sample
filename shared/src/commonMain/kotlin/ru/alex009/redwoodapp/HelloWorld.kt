@@ -19,10 +19,9 @@ import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
-import org.example.library.MR
 
 @Composable
-fun HelloWorld() {
+fun PostsList(routeToCreate: () -> Unit) {
     Column(
         padding = Padding(16),
         width = Constraint.Fill,
@@ -137,3 +136,41 @@ fun Item(data: String, text: String, isLike: Boolean) {
         }
     }
 }
+
+@Composable
+fun CreateScreen(onSuccess: () -> Unit) {
+    Column {
+//        TextInput()
+        Button(
+            text = "done",
+            buttonType = ButtonType.Action,
+            onClick = {
+                onSuccess()
+            }
+        )
+    }
+}
+
+fun mainApp(): NavigationRoot {
+    return navigation {
+        register("list") { navigator ->
+            PostsList(routeToCreate = { navigator.navigate("create") })
+        }
+        register("create") { navigator ->
+            CreateScreen(onSuccess = { navigator.popUp() })
+        }
+    }
+}
+
+expect class NavigationRoot
+
+interface Navigator {
+    fun navigate(uri: String)
+    fun popUp()
+}
+
+interface NavigationDsl {
+    fun register(uri: String, screen: @Composable (Navigator) -> Unit)
+}
+
+expect fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot

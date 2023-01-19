@@ -18,6 +18,20 @@ kotlin {
                 api("dev.icerock.moko:resources:0.20.1")
             }
         }
+
+        val iosMain by creating {
+            dependsOn(commonMain)
+        }
+
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosX64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
     }
 }
 

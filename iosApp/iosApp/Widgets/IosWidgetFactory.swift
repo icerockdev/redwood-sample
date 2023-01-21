@@ -9,7 +9,11 @@
 import UIKit
 import shared_ios
 
-class IosWidgetFactory: WidgetFactory {
+class IosWidgetFactory: WidgetFactory, MySuperLazyColumnFactory {
+    
+    func MySuperLazyColumn() -> MySuperLazyColumn {
+        IosLazyColumn()
+    }
     
     func Button() -> Button {
         IosWidgetButton()

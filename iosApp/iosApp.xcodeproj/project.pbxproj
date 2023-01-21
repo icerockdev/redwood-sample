@@ -20,6 +20,7 @@
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
 		227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2F2957564D00A4CBC8 /* LaunchScreen.storyboard */; };
 		227ECA372957579000A4CBC8 /* RedwoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA362957578F00A4CBC8 /* RedwoodViewController.swift */; };
+		44D4154F297A47ED0044E27B /* IosLazyColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D4154E297A47ED0044E27B /* IosLazyColumn.swift */; };
 		617E7C3EEB7B6042DA8DC122 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		227ECA302957564D00A4CBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227ECA322957564D00A4CBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		227ECA362957578F00A4CBC8 /* RedwoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedwoodViewController.swift; sourceTree = "<group>"; };
+		44D4154E297A47ED0044E27B /* IosLazyColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosLazyColumn.swift; sourceTree = "<group>"; };
 		C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D27B09DFB8AAD8A46FED88 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E3291FEB2BF60736ED0C2E34 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */,
 				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
 				225D67E72971B74100A27CD1 /* IosStack.swift */,
+				44D4154E297A47ED0044E27B /* IosLazyColumn.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */,
 				225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */,
 				225D67E62971B71100A27CD1 /* IosImageButton.swift in Sources */,
+				44D4154F297A47ED0044E27B /* IosLazyColumn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

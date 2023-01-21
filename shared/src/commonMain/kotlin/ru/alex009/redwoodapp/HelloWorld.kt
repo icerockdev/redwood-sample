@@ -20,6 +20,7 @@ import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 import org.example.library.MR
+import ru.alex009.redwood.schema.compose.MySuperLazyColumn
 
 interface ColumnProvider {
     @Composable
@@ -31,15 +32,63 @@ interface ColumnProvider {
 
 @Composable
 fun HelloWorld(
-    columnProvider: ColumnProvider,
 ) {
-    columnProvider.create(listOf("1","2","3")){
-        Item(
-            data = it,
-            text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-            isLike = true
-        )
-    }
+   MySuperLazyColumn(listOf(
+       { Text( "text1") },
+       { Text("text2") },
+       { Text("text3") },
+       { Text("text4") },
+       { Text("text5") },
+       { Text("text6") },
+       { Text("text7") },
+       { Text("text8") },
+       { Text("text9") },
+       { Text("text10") },
+       { Text("text11") },
+       { Text("text12") },
+       { Text("text13") },
+       { Text("text14") },
+       { Text("text15") },
+       { Text("text16") },
+       { Text("text17") },
+       { Text("text18") },
+       { Text("text21") },
+       { Text("text22") },
+       { Text("text23") },
+       { Text("text24") },
+       { Text("text25") },
+       { Text("text26") },
+       { Text("text27") },
+       { Text("text28") },
+       { Text("text29") },
+       { Text("text30") },
+       { Text("text31") },
+       { Text("text32") },
+       { Text("text33") },
+       { Text("text34") },
+       { Text("text35") },
+       { Text("text36") },
+       { Text("text37") },
+       { Text("text38") },
+       { Text("text41") },
+       { Text("text42") },
+       { Text("text43") },
+       { Text("text44") },
+       { Text("text45") },
+       { Text("text46") },
+       { Text("text47") },
+       { Text("text48") },
+       { Text("text49") },
+       { Text("text50") },
+       { Text("text51") },
+       { Text("text52") },
+       { Text("text53") },
+       { Text("text54") },
+       { Text("text55") },
+       { Text("text56") },
+       { Text("text57") },
+       { Text("text58") }
+   ))
 }
 
 @Composable

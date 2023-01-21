@@ -1,9 +1,12 @@
 package ru.alex009.redwoodapp.android.widgets
 
 import androidx.compose.runtime.Composable
+import ru.alex009.redwood.schema.widget.MySuperLazyColumn
+import ru.alex009.redwood.schema.widget.MySuperLazyColumnFactory
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
-object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit> {
+object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit>,
+    MySuperLazyColumnFactory<@Composable () -> Unit> {
     override fun TextInput() = ComposeTextInput()
 
     override fun Text() = ComposeText()
@@ -17,5 +20,9 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun ImageButton() = ComposeImageButton()
 
     override fun Button() = ComposeButton()
+
+    override fun MySuperLazyColumn(): MySuperLazyColumn<() -> Unit> {
+       return ComposeSuperLazyColumn()
+    }
 
 }

@@ -37,19 +37,37 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MaterialTheme {
-                Column() {
-                    LazyColumn(modifier = Modifier.height(100.dp)){
-                        item { Text("text") }
-                    }
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colors.background
-                    ) {
-                        RedwoodContent(factories) {
-                        }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    RedwoodContent(factories) {
+                        HelloWorld()
                     }
                 }
             }
         }
     }
+}
+
+class ColumnProviderImpl(
+    val bridge: ProtocolBridge<@Composable () -> Unit>
+) : ColumnProvider {
+    @Composable
+    override fun <T> create(items: List<T>, itemContent: @Composable (item: T) -> Unit) {
+        val factories = SchemaWidgetFactories(
+            RedwoodAppSchema = ComposeWidgetFactory,
+            RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
+        )
+        LazyColumn() {
+            items.forEach {
+                item {
+                    RedwoodContent(factories) {
+                        itemContent.invoke(it)
+                    }
+                }
+            }
+        }
+    }
+
 }

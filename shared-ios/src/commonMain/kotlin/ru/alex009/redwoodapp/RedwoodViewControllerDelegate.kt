@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.BroadcastFrameClock
+import androidx.compose.runtime.Composable
 import app.cash.redwood.compose.RedwoodComposition
 import app.cash.redwood.layout.uiview.UIViewRedwoodLayoutWidgetFactory
 import app.cash.redwood.widget.UIViewChildren
@@ -15,6 +16,7 @@ import ru.alex009.redwood.schema.widget.Button
 import ru.alex009.redwood.schema.widget.Card
 import ru.alex009.redwood.schema.widget.Image
 import ru.alex009.redwood.schema.widget.ImageButton
+import ru.alex009.redwood.schema.widget.MySuperLazyColumn
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import ru.alex009.redwood.schema.widget.Stack
@@ -78,3 +80,4 @@ interface WidgetText : Text<UIView>
 
 @Suppress("unused") // Called from Swift.
 interface WidgetTextInput : TextInput<UIView>
+

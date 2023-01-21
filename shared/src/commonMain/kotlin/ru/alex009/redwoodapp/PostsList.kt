@@ -76,7 +76,7 @@ fun PostsList(routeToCreate: () -> Unit) {
                     Button(
                         text = "Предложить пост",
                         buttonType = ButtonType.Primary,
-                        onClick = { }
+                        onClick = { routeToCreate() }
                     )
                 }
             }
@@ -127,27 +127,13 @@ fun Item(data: String, text: String, isLike: Boolean) {
     }
 }
 
-@Composable
-fun CreateScreen(onSuccess: () -> Unit) {
-    Column {
-//        TextInput()
-        Button(
-            text = "done",
-            buttonType = ButtonType.Action,
-            onClick = {
-                onSuccess()
-            }
-        )
-    }
-}
-
 fun mainApp(): NavigationRoot {
     return navigation {
         register("list") { navigator ->
             PostsList(routeToCreate = { navigator.navigate("create") })
         }
         register("create") { navigator ->
-            CreateScreen(onSuccess = { navigator.popUp() })
+            CreatePost(onSuccess = { navigator.popUp() })
         }
     }
 }

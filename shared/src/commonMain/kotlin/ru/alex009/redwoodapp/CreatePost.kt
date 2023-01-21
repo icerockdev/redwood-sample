@@ -18,7 +18,7 @@ import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwood.schema.compose.TextInput
 
 @Composable
-fun CreatePost() {
+fun CreatePost(onSuccess: () -> Unit) {
     Column(
         height = Constraint.Fill,
         width = Constraint.Fill,
@@ -54,7 +54,7 @@ fun CreatePost() {
             Button(
                 text = "Отправить",
                 buttonType = ButtonType.Primary,
-                onClick = {}
+                onClick = { onSuccess() }
             )
         }
     }

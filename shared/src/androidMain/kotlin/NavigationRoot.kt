@@ -1,14 +1,33 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.widget.Widget
 
 actual class NavigationRoot(routes: MutableMap<String, @Composable (Navigator) -> Unit>) {
+    private val _routes = routes
+
     @Composable
     fun render(provider: Widget.Provider<@Composable () -> Unit>) {
         RedwoodContent(provider) {
             // android navigation componnent
+            val context = LocalContext.current
+            val navController = rememberNavController()
+            NavHost(
+                navController = navController,
+                startDestination = "list"
+            ) {
+                _routes.forEach { item ->
+                    composable(route = item.key) {
+                        item.value
+                    }
+                }
+            }
+
         }
     }
 }

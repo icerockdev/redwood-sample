@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,12 +15,15 @@ actual class NavigationRoot(routes: MutableMap<String, @Composable (Navigator) -
     @Composable
     fun render(provider: Widget.Provider<@Composable () -> Unit>) {
         val navController = rememberNavController()
-        val navigator = object : Navigator {
-            override fun navigate(uri: String) {
-                navController.navigate(uri)
-            }
-            override fun popBackStack() {
-                navController.popBackStack()
+        val navigator = remember {
+            object : Navigator {
+                override fun navigate(uri: String) {
+                    navController.navigate(uri)
+                }
+
+                override fun popBackStack() {
+                    navController.popBackStack()
+                }
             }
         }
 

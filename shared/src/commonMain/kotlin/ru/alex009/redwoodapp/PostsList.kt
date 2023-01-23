@@ -133,7 +133,7 @@ fun mainApp(): NavigationRoot {
             PostsList(routeToCreate = { navigator.navigate("create") })
         }
         register("create") { navigator ->
-            CreatePost(onSuccess = { navigator.popUp() })
+            CreatePost(onSuccess = { navigator.popBackStack() })
         }
     }
 }
@@ -142,7 +142,7 @@ expect class NavigationRoot
 
 interface Navigator {
     fun navigate(uri: String)
-    fun popUp()
+    fun popBackStack()
 }
 
 interface NavigationDsl {

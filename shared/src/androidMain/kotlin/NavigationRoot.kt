@@ -13,21 +13,27 @@ actual class NavigationRoot(routes: MutableMap<String, @Composable (Navigator) -
 
     @Composable
     fun render(provider: Widget.Provider<@Composable () -> Unit>) {
-        RedwoodContent(provider) {
-            // android navigation componnent
-            val context = LocalContext.current
-            val navController = rememberNavController()
-            NavHost(
-                navController = navController,
-                startDestination = "list"
-            ) {
-                _routes.forEach { item ->
-                    composable(route = item.key) {
-                        item.value
+        val navController = rememberNavController()
+        val navigator = object : Navigator {
+            override fun navigate(uri: String) {
+                navController.navigate(uri)
+            }
+            override fun popBackStack() {
+                navController.popBackStack()
+            }
+        }
+
+        NavHost(
+            navController = navController,
+            startDestination = "list"
+        ) {
+            _routes.forEach { item ->
+                composable(route = item.key) {
+                    RedwoodContent(provider) {
+                        item.value(navigator)
                     }
                 }
             }
-
         }
     }
 }

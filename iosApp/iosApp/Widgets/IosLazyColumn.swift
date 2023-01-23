@@ -11,7 +11,6 @@ import shared_ios
 
 class IosLazyColumn: MySuperLazyColumn {
     
-    private let dataSource = CompouseDataSource()
     
     private let root: UITableView = {
         let container = UITableView()
@@ -19,9 +18,19 @@ class IosLazyColumn: MySuperLazyColumn {
         container.rowHeight = UITableView.automaticDimension
         container.estimatedRowHeight = UITableView.automaticDimension
         container.allowsSelection = false
-        container.dataSource = dataSource
         return container;
     }()
+    
+    private let dataSource: CompouseDataSource
+    
+    init(){
+        dataSource = CompouseDataSource (tableView: root) {
+            (tableView: UITableView, indexPath: IndexPath, itemIdentifier: UInt) -> UITableViewCell? in
+            tableView.dequeueReusableCell(withIdentifier: indexPath.description)
+        }
+    }
+    
+    
     var counter = 1
     
     func childs(childs: [Redwood_widgetWidgetChildren]) {
@@ -29,9 +38,19 @@ class IosLazyColumn: MySuperLazyColumn {
     }
     
     func childs2(childs: [@convention(block) () -> KotlinUnit?]) {
-        counter = counter + 2)
-        let redwoodContent = RedwoodComposeContent(
+        counter = counter + 2
    }
+    
+    
+    var testChild: Redwood_widgetWidgetChildren {
+        ExposedKt.createViewChildrenListener(parent: root, insert: myInsert)
+    }
+
+    func myInsert(view: UIView,index: KotlinInt){
+        var data: [UIView] = dataSource.data
+        data.insert(view, at: 0)
+        dataSource.setData(newList:data)
+    }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
  
@@ -40,51 +59,23 @@ class IosLazyColumn: MySuperLazyColumn {
     
 }
 
-class CompouseDataSource: UIViewController, UITableViewDataSource {
+class CompouseDataSource: UITableViewDiffableDataSource<UInt, UInt>{
     
-    private let widgetFactory = IosWidgetFactory()
+     var data: [UIView] = []
     
-    var data: [@convention(block) () -> KotlinUnit?] = []
-    
-    func setData(newList: [@convention(block) () -> KotlinUnit?]){
+    func setData(newList: [UIView]){
         data = newList
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:MyCustomTableViewCell = MyCustomTableViewCell()
-          
-        let compouse = data[indexPath.row]
-        
-        
-        let delegate = RedwoodViewControllerDelegate(
-            root: cell.container,
-            widgetFactory: widgetFactory
-        )
-        return cell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let view = data[indexPath.first ?? 0]
+        let index = indexPath.first ?? 0
+        var cell =  tableView.dequeueReusableCell(withIdentifier: indexPath.description)
+        cell?.insertSubview(view, at: 0)
+        return cell!
     }
-}
-
-class MyCustomTableViewCell: UITableViewCell{
-    let container = UIStackView()
-
-       override func awakeFromNib() {
-           super.awakeFromNib()
-           container.translatesAutoresizingMaskIntoConstraints = true
-           contentView.addSubview(container)
-           container.backgroundColor = .white
-           container.axis = .vertical
-           container.alignment = .fill
-           container.distribution = .fill
-           container.translatesAutoresizingMaskIntoConstraints = false
-
-           container.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor).isActive = true
-           container.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor).isActive = true
-           container.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor).isActive = true
-           container.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
-       }
-
 }

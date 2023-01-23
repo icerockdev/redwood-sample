@@ -13,6 +13,8 @@ public interface MySuperLazyColumn<W : Any> : Widget<W> {
   public fun childs(childs: List<Widget.Children<W>>): Unit
 
   public fun childs2(childs: List<@Composable ()->Unit>): Unit
+
+  public val testChild: Widget.Children<W>
 }
 
 interface MySuperLazyColumnFactory<W:Any>{

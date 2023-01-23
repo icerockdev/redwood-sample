@@ -21,7 +21,12 @@ public fun MySuperLazyColumn(childs: List<@Composable ()->Unit>, layoutModifier:
           set(childs, MySuperLazyColumn<*>::childs2 )
       },
       content = {
-        into()
+          childs.forEach {
+              into(MySuperLazyColumn<*>::testChild) {
+                  it.invoke()
+              }
+          }
       },
       )
 }
+

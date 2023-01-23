@@ -80,4 +80,3 @@ interface WidgetText : Text<UIView>
 
 @Suppress("unused") // Called from Swift.
 interface WidgetTextInput : TextInput<UIView>
-

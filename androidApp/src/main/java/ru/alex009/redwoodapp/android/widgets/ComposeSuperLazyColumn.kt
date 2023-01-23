@@ -9,6 +9,7 @@ import app.cash.redwood.LayoutModifier
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
 import app.cash.redwood.widget.Widget
+import app.cash.redwood.widget.compose.ComposeWidgetChildren
 import com.skydoves.landscapist.coil.CoilImage
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.widget.Button
@@ -32,6 +33,8 @@ class ComposeSuperLazyColumn : MySuperLazyColumn<@Composable () -> Unit> {
     override fun childs2(childs: List<@Composable () -> Unit>) {
         _childs = childs
     }
+
+    override val testChild = ComposeWidgetChildren()
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
 

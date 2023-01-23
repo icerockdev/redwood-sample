@@ -8,7 +8,7 @@ actual class NavigationRoot : UINavigationController(nibName = null, bundle = nu
     fun setup(
         routes: MutableMap<String, @Composable (Navigator) -> Unit>
     ) {
-//        pushViewController(RedwoodViewController(r))
+      //
     }
 }
 
@@ -23,3 +23,5 @@ actual fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot {
     dsl.block()
     return NavigationRoot().apply { setup(routes) }
 }
+
+

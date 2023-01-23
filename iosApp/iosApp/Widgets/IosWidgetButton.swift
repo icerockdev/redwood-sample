@@ -9,27 +9,39 @@
 import UIKit
 import shared_ios
 
+//todo remove to coloes
+let mainColor = UIColor(red:55.0/255.0, green:121.0/255.0, blue:193.0/255.0, alpha:1.0)
+
 class IosWidgetButton: WidgetButton {
     
     private let root: UIButton = {
-        let view = UIButton(type: .system)
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view = UIButton(type: .custom)
+        view.translatesAutoresizingMaskIntoConstraints = true
         return view
+
     }()
     
-    func borderColor(borderColor: ColorResource?){
-        root.backgroundColor = borderColor?.getColor(
-            userInterfaceStyle: .uiuserinterfacestylelight
-        ).toUIColor()
+    func buttonType(buttonType: EntityButtonType) {
+        if(buttonType == EntityButtonType.primary){
+            root.titleLabel?.textColor = .white
+            root.backgroundColor = mainColor
+            root.layer.cornerRadius = 16
+            root.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            
+        }
+        if(buttonType == EntityButtonType.secondary){
+            root.titleLabel?.textColor = .white
+            root.backgroundColor = mainColor
+            root.layer.cornerRadius = 16
+        }
+        if(buttonType == EntityButtonType.action){
+            root.titleLabel?.textColor = .white
+            root.backgroundColor = mainColor
+            root.layer.cornerRadius = 16
+        }
     }
     
-    func background(background: ColorResource?) {
-        root.backgroundColor = background?.getColor(
-            userInterfaceStyle: .uiuserinterfacestylelight
-        ).toUIColor()
-   }
-    
-    func textStyle(textStyle: EntityTextStyle?) {
+    func enabled(enabled: Bool) {
         // TODO
     }
     

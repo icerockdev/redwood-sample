@@ -10,15 +10,13 @@ import UIKit
 import shared_ios
 
 class IosWidgetText: WidgetText {
-    private let root: UILabel = {
-        let view = UILabel()
+    private let root: UITextView = {
+        let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = false
+        view.backgroundColor = UIColor.clear
         return view
     }()
-    
-    func textStyle(textStyle: EntityTextStyle?) {
-        // TODO
-    }
     
     func isSingleLine(isSingleLine: Bool) {
         // TODO
@@ -31,6 +29,11 @@ class IosWidgetText: WidgetText {
     func text(text: String) {
         root.text = text
     }
+    
+    func textType(textType: EntityTextType?) {
+        // TODO
+    }
+    
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     

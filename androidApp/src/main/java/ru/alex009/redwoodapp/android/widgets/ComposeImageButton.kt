@@ -16,20 +16,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
 import dev.icerock.moko.resources.ImageResource
-import dev.icerock.moko.resources.desc.image.asImageDesc
-import org.example.library.MR
 import ru.alex009.redwood.schema.widget.ImageButton
 import ru.alex009.redwoodapp.android.R
 
 class ComposeImageButton : ImageButton<@Composable () -> Unit> {
     private var _text by mutableStateOf("")
-    private var _icon: ImageResource? by mutableStateOf(null)
+    private var _icon: Int by mutableStateOf(0)
     private var _onClick: () -> Unit by mutableStateOf({})
     private var _isClicked by mutableStateOf(true)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        //val tmp: ImageResource = MR.images.like
         Button(
             onClick = _onClick,
             colors = ButtonDefaults.buttonColors(
@@ -40,7 +37,7 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
             Row {
                 Icon(
                     modifier = Modifier.padding(end = 8.dp),
-                    painter = painterResource(_icon?.drawableResId ?: R.drawable.like /*tmp.drawableResId*/),
+                    painter = painterResource(_icon),
                     contentDescription = null
                 )
                 Text(
@@ -56,7 +53,7 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
     }
 
     override fun icon(icon: ImageResource?) {
-        _icon = icon
+        _icon = icon?.drawableResId ?: R.drawable.like
     }
 
     override fun onClick(onClick: (() -> Unit)?) {

@@ -25,27 +25,27 @@ fun PostsList(routeToCreate: () -> Unit) {
     val itemsList = remember {
         mutableStateListOf(
             CardItem(
-                data ="1 Сентября 2022 в 12:01",
+                data = "1 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             ),
             CardItem(
-                data ="2 Сентября 2022 в 12:01",
+                data = "2 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
             ),
             CardItem(
-                data ="3 Сентября 2022 в 12:01",
+                data = "3 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             ),
             CardItem(
-                data ="4 Сентября 2022 в 12:01",
+                data = "4 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
             ),
             CardItem(
-                data ="31 Сентября 2022 в 12:01",
+                data = "31 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             )
@@ -53,7 +53,7 @@ fun PostsList(routeToCreate: () -> Unit) {
     }
 
     Column(
-        padding = Padding( horizontal = 16),
+        padding = Padding(horizontal = 16),
         width = Constraint.Fill,
         height = Constraint.Fill
     ) {
@@ -129,12 +129,24 @@ fun Item(data: String, text: String, isLike: Boolean) {
 
 fun mainApp(): NavigationRoot {
     return navigation {
-        register("list") { navigator ->
-            PostsList(routeToCreate = { navigator.navigate("create") })
+        register("auth") { navigator ->
+            Button("Login", ButtonType.Primary, onClick = {
+                navigator.navigate("home")
+            })
         }
-        register("create") { navigator ->
-            CreatePost(onSuccess = { navigator.popBackStack() })
-        }
+        register("home", navigationTabs {
+            register("tab1") {
+                Text("tab1")
+            }
+            register("tab2", navigation {
+                register("list") { navigator ->
+                    PostsList(routeToCreate = { navigator.navigate("create") })
+                }
+                register("create") { navigator ->
+                    CreatePost(onSuccess = { navigator.popBackStack() })
+                }
+            })
+        })
     }
 }
 
@@ -147,6 +159,8 @@ interface Navigator {
 
 interface NavigationDsl {
     fun register(uri: String, screen: @Composable (Navigator) -> Unit)
+    fun register(uri: String, navigationRoot: NavigationRoot)
 }
 
 expect fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot
+expect fun navigationTabs(block: NavigationDsl.() -> Unit): NavigationRoot

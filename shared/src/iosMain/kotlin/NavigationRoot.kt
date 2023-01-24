@@ -19,7 +19,14 @@ actual fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot {
         override fun register(uri: String, screen: @Composable (Navigator) -> Unit) {
             routes[uri] = screen
         }
+        override fun register(uri: String, navigationRoot: NavigationRoot) {
+            TODO("Not yet implemented")
+        }
     }
     dsl.block()
     return NavigationRoot().apply { setup(routes) }
+}
+
+actual fun navigationTabs(block: NavigationDsl.() -> Unit): NavigationRoot {
+    TODO("Not yet implemented")
 }

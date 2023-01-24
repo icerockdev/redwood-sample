@@ -19,6 +19,7 @@ import dev.icerock.moko.resources.ImageResource
         Card::class,
         ImageButton::class,
         Button::class,
+        TabItem::class,
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -89,4 +90,17 @@ data class Card(
 data class Stack(
     @Children(1) val child1: @Composable () -> Unit,
     @Children(2) val child2: @Composable () -> Unit,
+)
+
+@Widget(8)
+data class TabItem(
+    @Property(1) val text: String,
+    @Property(2)
+    @Default("null")
+    val icon: ImageResource?,
+    @Property(3)
+    @Default("true")
+    val isClicked: Boolean,
+    @Property(4)
+    val onClick: () -> Unit,
 )

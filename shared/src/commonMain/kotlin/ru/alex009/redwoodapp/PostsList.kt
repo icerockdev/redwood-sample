@@ -27,27 +27,27 @@ fun PostsList(routeToCreate: () -> Unit) {
     val itemsList = remember {
         mutableStateListOf(
             CardItem(
-                data ="1 Сентября 2022 в 12:01",
+                data = "1 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             ),
             CardItem(
-                data ="2 Сентября 2022 в 12:01",
+                data = "2 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
             ),
             CardItem(
-                data ="3 Сентября 2022 в 12:01",
+                data = "3 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             ),
             CardItem(
-                data ="4 Сентября 2022 в 12:01",
+                data = "4 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
             ),
             CardItem(
-                data ="31 Сентября 2022 в 12:01",
+                data = "31 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
             )
@@ -55,7 +55,7 @@ fun PostsList(routeToCreate: () -> Unit) {
     }
 
     Column(
-        padding = Padding( horizontal = 16),
+        padding = Padding(horizontal = 16),
         width = Constraint.Fill,
         height = Constraint.Fill
     ) {
@@ -125,6 +125,26 @@ fun Item(data: String, text: String, isLike: Boolean) {
     }
 }
 
+fun mainApp(): NavigationRoot {
+    return navigation("auth") {
+        register("auth") { navigator ->
+            Button("Login", ButtonType.Primary, onClick = {
+                navigator.navigate("home")
+            })
+        }
+        register("home", navigationTabs("tab1") {
+            register("tab1") {
+                Text("tab1")
+            }
+            register("tab2", navigation("list") {
+                register("list") { navigator ->
+                    PostsList(routeToCreate = { navigator.navigate("create") })
+                }
+                register("create") { navigator ->
+                    CreatePost(onSuccess = { navigator.popBackStack() })
+                }
+            })
+        })
 fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): NavigationRoot {
     return navigation(widgetFactory) {
         register("list") { navigator ->
@@ -146,8 +166,11 @@ interface Navigator {
 
 interface NavigationDsl {
     fun register(uri: String, screen: @Composable (Navigator) -> Unit)
+    fun register(uri: String, navigationRoot: NavigationRoot)
 }
 
+expect fun navigation(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot
+expect fun navigationTabs(startDestination: String ,block: NavigationDsl.() -> Unit): NavigationRoot
 expect fun navigation(
     widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
     block: NavigationDsl.() -> Unit,

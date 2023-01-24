@@ -23,10 +23,21 @@ import platform.UIKit.addSubview
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import app.cash.redwood.layout.uiview.UIViewRedwoodLayoutWidgetFactory
+import kotlinx.cinterop.ObjCAction
+import platform.Foundation.NSDefaultRunLoopMode
+import platform.Foundation.NSRunLoop
+import platform.Foundation.NSRunLoopMode
+import platform.Foundation.NSSelectorFromString
+import platform.UIKit.UILayoutConstraintAxisHorizontal
+import platform.UIKit.UILayoutConstraintAxisVertical
+import platform.UIKit.UIStackViewAlignmentFill
+import platform.UIKit.UIStackViewDistributionFill
+import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
 
 class ComposeViewController(
     val compose: @Composable (Navigator) -> Unit,
-    val widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>
+    val widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>,
+    val navigator: Navigator
 ) : UIViewController(null, null) {
     private lateinit var displayLink: CADisplayLink
     private lateinit var delegate: RedwoodViewControllerDelegate
@@ -34,10 +45,10 @@ class ComposeViewController(
     override fun viewDidLoad() {
         super.viewDidLoad()
         val container = UIStackView()
-        // container.axis = .vertical
-        //container.alignment = .fill
-        //container.distribution = .fill
-        // container.translatesAutoresizingMaskIntoConstraints = false
+         container.setAxis(UILayoutConstraintAxisVertical)
+         container.setAlignment(UIStackViewAlignmentFill)
+         container.setDistribution(UIStackViewDistributionFill)
+         container.setTranslatesAutoresizingMaskIntoConstraints(false)
 
 
         view.addSubview(container)
@@ -46,30 +57,36 @@ class ComposeViewController(
         container.widthAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.widthAnchor).active = true
         container.bottomAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.bottomAnchor).active = true
 
-        val delegate = RedwoodViewControllerDelegate(container)
+        val delegate = RedwoodViewControllerDelegate(container, compose, navigator = navigator)
         this.delegate = delegate
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override fun viewDidAppear(animated: Boolean) {
         super.viewDidAppear(animated)
 
-        let displayLink = CADisplayLink.init(target: self, selector: #selector(tickClock))
-        displayLink.add(to: .current, forMode: .default)
-        self.displayLink = displayLink
+        val displayLink = CADisplayLink.displayLinkWithTarget(
+            target = this,
+            selector = NSSelectorFromString("tickClock")
+        )
+        displayLink.addToRunLoop(NSRunLoop.currentRunLoop, NSDefaultRunLoopMode)
+        this.displayLink = displayLink
     }
 
-    @objc func tickClock() {
+    @ObjCAction
+    fun tickClock() {
         delegate.tickClock()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
+    override fun viewDidDisappear(animated: Boolean) {
         super.viewDidDisappear(animated)
 
         displayLink.invalidate()
     }
 
     inner class RedwoodViewControllerDelegate(
-        root: UIStackView
+        root: UIStackView,
+        compose: @Composable (Navigator) -> Unit,
+        navigator: Navigator
     ) {
         private val clock = BroadcastFrameClock()
         private val scope: CoroutineScope = MainScope() + clock
@@ -88,7 +105,7 @@ class ComposeViewController(
                 )
             )
             composition.setContent {
-                PostsList(){}
+                compose.invoke(navigator)
             }
         }
 

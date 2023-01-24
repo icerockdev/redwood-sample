@@ -20,7 +20,6 @@ import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 
-import platform.UIKit.UIView
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 @Composable
@@ -73,15 +72,11 @@ fun PostsList(routeToCreate: () -> Unit) {
                 }
             },
             child2 = {
-                Column(
-                    height = Constraint.Wrap
-                ) {
                     Button(
                         text = "Предложить пост",
                         buttonType = ButtonType.Primary,
                         onClick = { routeToCreate() }
                     )
-                }
             }
         )
     }
@@ -130,7 +125,7 @@ fun Item(data: String, text: String, isLike: Boolean) {
     }
 }
 
-fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>): NavigationRoot {
+fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): NavigationRoot {
     return navigation(widgetFactory) {
         register("list") { navigator ->
             PostsList(routeToCreate = { navigator.navigate("create") })
@@ -142,6 +137,7 @@ fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>): NavigationRoo
 }
 
 expect class NavigationRoot
+expect class WidgetType
 
 interface Navigator {
     fun navigate(uri: String)
@@ -153,6 +149,8 @@ interface NavigationDsl {
 }
 
 expect fun navigation(
-    widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>,
+    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
     block: NavigationDsl.() -> Unit,
 ): NavigationRoot
+
+

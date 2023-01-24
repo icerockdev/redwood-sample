@@ -12,7 +12,7 @@ actual class NavigationRoot(val widgetFactory: RedwoodAppSchemaWidgetFactory<UIV
     val navigator = object : Navigator {
         override fun navigate(uri: String) {
             navigationMap.get(uri)?.let {
-                pushViewController(it, true)
+                pushViewController(it.invoke(), true)
             }
         }
 
@@ -21,18 +21,21 @@ actual class NavigationRoot(val widgetFactory: RedwoodAppSchemaWidgetFactory<UIV
         }
     }
 
-    val navigationMap: MutableMap<String, UIViewController> = mutableMapOf()
+    val navigationMap: MutableMap<String, ()->UIViewController> = mutableMapOf()
     fun setup(
         routes: MutableMap<String, @Composable (Navigator) -> Unit>
     ) {
         routes.forEach { entry ->
-            navigationMap.put(entry.key, ComposeViewController(entry.value, widgetFactory))
+            navigationMap.put(entry.key, {ComposeViewController(entry.value, widgetFactory, navigator)})
         }
+        setViewControllers(listOf(navigationMap.get("list")!!.invoke()),false)
     }
 }
 
+actual typealias WidgetType = UIView
+
 actual fun navigation(
-    widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>,
+    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
     block: NavigationDsl.() -> Unit,
 ): NavigationRoot {
     val routes: MutableMap<String, @Composable (Navigator) -> Unit> =

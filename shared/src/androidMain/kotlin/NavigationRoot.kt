@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.widget.Widget
+import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 actual class NavigationRoot(routes: MutableMap<String, @Composable (Navigator) -> Unit>) {
     private val _routes = routes
@@ -42,7 +43,9 @@ actual class NavigationRoot(routes: MutableMap<String, @Composable (Navigator) -
     }
 }
 
-actual fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot {
+actual fun navigation(
+    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+    block: NavigationDsl.() -> Unit): NavigationRoot {
     val routes: MutableMap<String, @Composable (Navigator) -> Unit> =
         mutableMapOf<String, @Composable (Navigator) -> Unit>()
     val dsl = object : NavigationDsl {

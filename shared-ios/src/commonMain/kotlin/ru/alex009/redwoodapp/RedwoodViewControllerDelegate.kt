@@ -11,12 +11,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.plus
 import platform.UIKit.UIStackView
 import platform.UIKit.UIView
+import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import ru.alex009.redwood.schema.widget.Button
 import ru.alex009.redwood.schema.widget.Card
 import ru.alex009.redwood.schema.widget.Image
 import ru.alex009.redwood.schema.widget.ImageButton
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
-import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import ru.alex009.redwood.schema.widget.Stack
 import ru.alex009.redwood.schema.widget.Text
 import ru.alex009.redwood.schema.widget.TextInput

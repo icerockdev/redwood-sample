@@ -6,6 +6,7 @@ import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIAccessibilityIdentificationProtocol
 import platform.UIKit.UIView
+import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 fun layoutModifier(): LayoutModifier = LayoutModifier
 
@@ -13,6 +14,8 @@ fun createViewChildren(parent: UIView): UIViewChildren = UIViewChildren(parent)
 
 fun createViewChildrenListener(parent: UIView,
 insert: (UIView, Int) -> Unit): UIViewChildren = UIViewChildren(parent, insert = insert)
+
+fun getNavigationRoot(widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>) = mainApp(widgetFactory)
 
 class UIViewWithIdentifier : UIView(frame = CGRectZero.readValue()),
     UIAccessibilityIdentificationProtocol {

@@ -29,6 +29,7 @@ kotlin {
             dependencies {
                 api(project(":schema:compose"))
                 api("dev.icerock.moko:resources:0.20.1")
+                implementation("app.cash.redwood:redwood-layout-uiview:0.1.0")
             }
         }
 

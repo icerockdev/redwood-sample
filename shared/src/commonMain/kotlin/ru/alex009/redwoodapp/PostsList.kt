@@ -20,6 +20,9 @@ import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 
+import platform.UIKit.UIView
+import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
+
 @Composable
 fun PostsList(routeToCreate: () -> Unit) {
     val itemsList = remember {
@@ -127,8 +130,8 @@ fun Item(data: String, text: String, isLike: Boolean) {
     }
 }
 
-fun mainApp(): NavigationRoot {
-    return navigation {
+fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>): NavigationRoot {
+    return navigation(widgetFactory) {
         register("list") { navigator ->
             PostsList(routeToCreate = { navigator.navigate("create") })
         }
@@ -149,4 +152,7 @@ interface NavigationDsl {
     fun register(uri: String, screen: @Composable (Navigator) -> Unit)
 }
 
-expect fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot
+expect fun navigation(
+    widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>,
+    block: NavigationDsl.() -> Unit,
+): NavigationRoot

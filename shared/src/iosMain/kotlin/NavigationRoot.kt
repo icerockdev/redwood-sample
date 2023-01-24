@@ -12,21 +12,10 @@ actual class NavigationRoot : UINavigationController(nibName = null, bundle = nu
     }
 }
 
-actual fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot {
-    val routes: MutableMap<String, @Composable (Navigator) -> Unit> =
-        mutableMapOf<String, @Composable (Navigator) -> Unit>()
-    val dsl = object : NavigationDsl {
-        override fun register(uri: String, screen: @Composable (Navigator) -> Unit) {
-            routes[uri] = screen
-        }
-        override fun register(uri: String, navigationRoot: NavigationRoot) {
-            TODO("Not yet implemented")
-        }
-    }
-    dsl.block()
-    return NavigationRoot().apply { setup(routes) }
+actual fun navigation(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot {
+    TODO("Not yet implemented")
 }
 
-actual fun navigationTabs(block: NavigationDsl.() -> Unit): NavigationRoot {
+actual fun navigationTabs(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot {
     TODO("Not yet implemented")
 }

@@ -128,17 +128,17 @@ fun Item(data: String, text: String, isLike: Boolean) {
 }
 
 fun mainApp(): NavigationRoot {
-    return navigation {
+    return navigation("auth") {
         register("auth") { navigator ->
             Button("Login", ButtonType.Primary, onClick = {
                 navigator.navigate("home")
             })
         }
-        register("home", navigationTabs {
+        register("home", navigationTabs("tab1") {
             register("tab1") {
                 Text("tab1")
             }
-            register("tab2", navigation {
+            register("tab2", navigation("list") {
                 register("list") { navigator ->
                     PostsList(routeToCreate = { navigator.navigate("create") })
                 }
@@ -162,5 +162,5 @@ interface NavigationDsl {
     fun register(uri: String, navigationRoot: NavigationRoot)
 }
 
-expect fun navigation(block: NavigationDsl.() -> Unit): NavigationRoot
-expect fun navigationTabs(block: NavigationDsl.() -> Unit): NavigationRoot
+expect fun navigation(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot
+expect fun navigationTabs(startDestination: String ,block: NavigationDsl.() -> Unit): NavigationRoot

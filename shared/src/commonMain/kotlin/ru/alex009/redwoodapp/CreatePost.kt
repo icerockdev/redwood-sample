@@ -18,7 +18,7 @@ import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwood.schema.compose.TextInput
 
 @Composable
-fun CreatePost(onSuccess: () -> Unit, args: String) {
+fun CreatePost(onSuccess: () -> Unit, args: String?) {
     Column(
         height = Constraint.Fill,
         width = Constraint.Fill,

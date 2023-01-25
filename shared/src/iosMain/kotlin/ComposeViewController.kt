@@ -37,8 +37,10 @@ import platform.UIKit.UIStackViewAlignmentFill
 import platform.UIKit.UIStackViewDistributionFill
 import platform.UIKit.UITabBarItem
 import platform.UIKit.backgroundColor
+import platform.UIKit.navigationItem
 import platform.UIKit.setTabBarItem
 import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
+import platform.UIKit.tabBarController
 import platform.UIKit.tabBarItem
 
 class ComposeViewController(
@@ -58,6 +60,7 @@ class ComposeViewController(
         container.setTranslatesAutoresizingMaskIntoConstraints(false)
         container.backgroundColor = UIColor.whiteColor
 
+        tabBarController?.navigationItem?.hidesBackButton = true
 
         view.addSubview(container)
         container.leadingAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.leadingAnchor).active =

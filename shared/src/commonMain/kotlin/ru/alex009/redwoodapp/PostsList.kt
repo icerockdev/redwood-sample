@@ -77,7 +77,7 @@ fun PostsList(routeToCreate: (String) -> Unit) {
             },
             child2 = {
                 Button(
-                    text = "Предложить пост",
+                    text = "Просмотр деталей",
                     buttonType = ButtonType.Primary,
                     onClick = { routeToCreate("button click") }
                 )
@@ -134,36 +134,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick:()->Unit) {
     }
 }
 
-fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): NavigationRoot {
-    return navigationTabs(widgetFactory, "auth") {
-        register(
-            "auth",
-            title = "fistTab",
-            icon = MR.images.ic_favorite_menu
-        ) { navigator ->
-            Text("First tab")
-        }
-        register(
-            "auth2",
-            title = "secondTab",
-            icon = MR.images.ic_favorite_menu,
-            navigation(widgetFactory, "start") {
-                register("start") { navigator->
-                    PostsList {
-                        navigator.navigate("second", it )
-                    }
-                }
-                register("second") {
-                    Column {
-                        Text("details screen", layoutModifier = LayoutModifier.padding(
-                            Padding(16)
-                        ))
-                    }
-                }
-            }
-        )
-    }
-}
+
 
 expect sealed class NavigationRoot {
     class NavigationSimple : NavigationRoot

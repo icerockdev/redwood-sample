@@ -46,7 +46,7 @@ class IosStack :  WidgetStack {
     
     class MyStackView : UIStackView{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
-            return CGSize(width: size.width, height: size.height-100)
+            return CGSize(width: size.width, height: size.height)
         }
     }
 }

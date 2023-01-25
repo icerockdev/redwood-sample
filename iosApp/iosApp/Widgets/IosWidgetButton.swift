@@ -27,19 +27,20 @@ class IosWidgetButton: WidgetButton {
             root.backgroundColor = mainColor
             root.layer.cornerRadius = 16
             root.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            
         }
         if(buttonType == EntityButtonType.secondary){
-            root.titleLabel?.textColor = .white
+            root.titleLabel?.textColor = mainColor
             root.backgroundColor = UIColor.clear
             root.layer.borderColor = mainColor.cgColor
             root.layer.borderWidth = 2
             root.layer.cornerRadius = 16
+            var frame = root.frame;
+            frame.size.width += 20; //l + r padding
+            root.frame = frame;
+            root.contentHorizontalAlignment = .center
         }
         if(buttonType == EntityButtonType.action){
-            root.titleLabel?.textColor = mainColor
             root.backgroundColor = UIColor.clear
-            root.layer.cornerRadius = 16
         }
     }
     

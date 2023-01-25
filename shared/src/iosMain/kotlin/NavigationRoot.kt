@@ -88,11 +88,13 @@ class MyNavigationSimple(
 
     val navigator = object : Navigator {
         override fun navigate(uri: String) {
-            val dir = uri.substringBefore('/')
-            val args = uri.substringAfter('/')
-            navigationMap.get(dir)?.let {
-                pushViewController(it.invoke(args), true)
+            navigationMap.get(uri)?.let {
+                pushViewController(it.invoke(null), true)
             }
+        }
+
+        override fun <T> navigate(uri: String, args: T) {
+            TODO("Not yet implemented")
         }
 
         override fun popBackStack() {
@@ -100,7 +102,7 @@ class MyNavigationSimple(
         }
     }
 
-    val navigationMap: MutableMap<String, (String) -> UIViewController> = mutableMapOf()
+    val navigationMap: MutableMap<String, (Any?) -> UIViewController> = mutableMapOf()
     fun setup(
         routes: MutableMap<String, NavigationRoot>
     ) {

@@ -150,7 +150,7 @@ fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): Navigatio
             navigation(widgetFactory, "start") {
                 register("start") { navigator->
                     PostsList {
-                        navigator.navigate("second/${it}")
+                        navigator.navigate("second", it )
                     }
                 }
                 register("second") {
@@ -176,6 +176,8 @@ expect class WidgetType
 
 interface Navigator {
     fun navigate(uri: String)
+
+    fun <T> navigate(uri: String, args:T)
     fun popBackStack()
 }
 

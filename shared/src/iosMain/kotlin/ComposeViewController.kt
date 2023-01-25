@@ -28,6 +28,7 @@ import platform.Foundation.NSDefaultRunLoopMode
 import platform.Foundation.NSRunLoop
 import platform.Foundation.NSRunLoopMode
 import platform.Foundation.NSSelectorFromString
+import platform.UIKit.UIColor
 import platform.UIKit.UIControlState
 import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UILayoutConstraintAxisHorizontal
@@ -35,6 +36,7 @@ import platform.UIKit.UILayoutConstraintAxisVertical
 import platform.UIKit.UIStackViewAlignmentFill
 import platform.UIKit.UIStackViewDistributionFill
 import platform.UIKit.UITabBarItem
+import platform.UIKit.backgroundColor
 import platform.UIKit.setTabBarItem
 import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
 import platform.UIKit.tabBarItem
@@ -50,17 +52,22 @@ class ComposeViewController(
     override fun viewDidLoad() {
         super.viewDidLoad()
         val container = UIStackView()
-         container.setAxis(UILayoutConstraintAxisVertical)
-         container.setAlignment(UIStackViewAlignmentFill)
-         container.setDistribution(UIStackViewDistributionFill)
-         container.setTranslatesAutoresizingMaskIntoConstraints(false)
+        container.setAxis(UILayoutConstraintAxisVertical)
+        container.setAlignment(UIStackViewAlignmentFill)
+        container.setDistribution(UIStackViewDistributionFill)
+        container.setTranslatesAutoresizingMaskIntoConstraints(false)
+        container.backgroundColor = UIColor.whiteColor
 
 
         view.addSubview(container)
-        container.leadingAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.leadingAnchor).active = true
-        container.topAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.topAnchor).active = true
-        container.widthAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.widthAnchor).active = true
-        container.bottomAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.bottomAnchor).active = true
+        container.leadingAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.leadingAnchor).active =
+            true
+        container.topAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.topAnchor).active =
+            true
+        container.widthAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.widthAnchor).active =
+            true
+        container.bottomAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.bottomAnchor).active =
+            true
 
         val delegate = RedwoodViewControllerDelegate(container, compose, navigator = navigator)
         this.delegate = delegate
@@ -99,7 +106,12 @@ class ComposeViewController(
         init {
             val children = UIViewChildren(
                 parent = root,
-                insert = { view, index -> root.insertArrangedSubview(view, atIndex = index.convert()) }
+                insert = { view, index ->
+                    root.insertArrangedSubview(
+                        view,
+                        atIndex = index.convert()
+                    )
+                }
             )
             val composition = RedwoodComposition(
                 scope = scope,

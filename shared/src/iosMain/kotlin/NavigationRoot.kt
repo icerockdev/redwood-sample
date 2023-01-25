@@ -18,7 +18,8 @@ import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 actual sealed class NavigationRoot {
     abstract fun getViewController(
         navigator: Navigator?,
-        widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
+         widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+        args: Any? = null,
     ): UIViewController
 
     actual class NavigationSimple(
@@ -28,7 +29,8 @@ actual sealed class NavigationRoot {
         val viewController = MyNavigationSimple(startDestination, widgetFactory)
         override fun getViewController(
             navigator: Navigator?,
-            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
+            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+            args: Any?,
         ): UIViewController {
             return viewController
         }
@@ -43,7 +45,8 @@ actual sealed class NavigationRoot {
         val viewController = MyNavigationTab(startDestination, widgetFactory)
         override fun getViewController(
             navigator: Navigator?,
-            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
+            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+            args: Any?,
         ): UIViewController {
             return viewController
         }
@@ -54,12 +57,27 @@ actual sealed class NavigationRoot {
         NavigationRoot() {
         override fun getViewController(
             navigator: Navigator?,
-            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
+            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+            args: Any?,
         ): UIViewController {
             // todo fix
             return ComposeViewController(composeFun, widgetFactory, navigator!!)
         }
-
+    }
+    // todo remove
+    actual class SimpleWithArgs<T>(
+        private val composeFun: @Composable (Navigator, T?) -> Unit
+    ) : NavigationRoot() {
+        override fun getViewController(
+            navigator: Navigator?,
+            widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+            args: Any?,
+        ): UIViewController {
+            // todo fix
+            val argsT = args as? T
+            val test :  @Composable (Navigator) -> Unit = {composeFun(it,argsT)}
+            return ComposeViewController(test, widgetFactory, navigator!!)
+        }
     }
 }
 
@@ -70,13 +88,15 @@ class MyNavigationSimple(
 
     val navigator = object : Navigator {
         override fun navigate(uri: String) {
-            navigationMap.get(uri)?.let {
-                pushViewController(it.invoke(uri), true)
+            val dir = uri.substringBefore('/')
+            val args = uri.substringAfter('/')
+            navigationMap.get(dir)?.let {
+                pushViewController(it.invoke(args), true)
             }
         }
 
         override fun popBackStack() {
-            //do nothing
+            popViewControllerAnimated(false)
         }
     }
 
@@ -102,7 +122,16 @@ class MyNavigationTab(
     private val startDestination: String,
     private val widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
 ) : UITabBarController(nibName = null, bundle = null) {
+    // todo remove?
+    val navigator = object : Navigator {
+        override fun navigate(uri: String) {
+            // do nothing
+        }
 
+        override fun popBackStack() {
+            // do nothing
+        }
+    }
     val navigationMap: MutableMap<String, () -> UIViewController> = mutableMapOf()
     fun setup(
         routes: MutableMap<String, NavigationRoot>,
@@ -111,7 +140,7 @@ class MyNavigationTab(
         routes.forEach { entry ->
             navigationMap.put(
                 entry.key,
-                { entry.value.getViewController(null, widgetFactory) })
+                { entry.value.getViewController(navigator, widgetFactory) })
         }
         setViewControllers(navigationMap.map { entity ->
             entity.value.invoke().apply {
@@ -119,7 +148,7 @@ class MyNavigationTab(
                 tabBarItem.image = icons.get(entity.key)?.icon?.toUIImage()
             }
         }, false)
-        tabBar.barTintColor = UIColor.whiteColor
+        tabBar.barTintColor = UIColor.grayColor
     }
 }
 
@@ -139,6 +168,10 @@ actual fun navigation(
 
         override fun register(uri: String, navigationRoot: NavigationRoot) {
             routes[uri] = navigationRoot
+        }
+
+        override fun <T> registerWithArgs(uri: String, screen: @Composable (Navigator, T?) -> Unit) {
+            routes[uri] = NavigationRoot.SimpleWithArgs<T>(screen)
         }
     }
     dsl.block()
@@ -171,7 +204,7 @@ actual fun navigationTabs(
             uri: String,
             title: String?,
             icon: ImageResource?,
-            screen: @Composable  (Navigator) -> Unit
+            screen: @Composable (Navigator) -> Unit
         ) {
             routes[uri] = NavigationRoot.Simple(screen)
             icons[uri] = TabItem(title, icon)

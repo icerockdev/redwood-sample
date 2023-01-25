@@ -111,6 +111,14 @@ sealed class NavigationRoot {
         }
 
     }
+
+    class SimpleWithArgs<T>(private val args: T? = null, private val composeFun: @Composable (Navigator, T?) -> Unit) : NavigationRoot() {
+        @Composable
+        override fun render(navigator: Navigator, provider: Widget.Provider<() -> Unit>) {
+            composeFun(navigator, args)
+        }
+
+    }
 }
 
 
@@ -119,11 +127,15 @@ actual fun navigation(startDestination: String, block: NavigationDsl.() -> Unit)
         mutableMapOf<String, NavigationRoot>()
     val dsl = object : NavigationDsl {
         override fun register(uri: String, screen: @Composable (Navigator) -> Unit) {
-            routes[uri] = NavigationRoot.Simple(screen)
+            routes[uri] = NavigationRoot.Simple(null, screen)
         }
 
         override fun register(uri: String, navigationRoot: NavigationRoot) {
             routes[uri] = navigationRoot
+        }
+
+        override fun <T> register(uri: String, args: T, screen: (Navigator, T) -> Unit) {
+            routes[uri] = NavigationRoot.Simple(args,screen)
         }
     }
     dsl.block()

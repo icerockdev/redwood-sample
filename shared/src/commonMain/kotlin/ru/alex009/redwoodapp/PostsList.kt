@@ -21,34 +21,34 @@ import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 
 @Composable
-fun PostsList(routeToCreate: () -> Unit) {
+fun PostsList(routeToCreate: (String) -> Unit) {
     val itemsList = remember {
         mutableStateListOf(
             CardItem(
                 data = "1 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = true
-            ),
+                isLike = true,
+            ) { routeToCreate("1 Сентября 2022 в 12:01") },
             CardItem(
                 data = "2 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
-            ),
+            ) { routeToCreate("2 Сентября 2022 в 12:01") },
             CardItem(
                 data = "3 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
-            ),
+            ) { routeToCreate("3 Сентября 2022 в 12:01") },
             CardItem(
                 data = "4 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = false
-            ),
+            ) { routeToCreate("4 Сентября 2022 в 12:01") },
             CardItem(
                 data = "31 Сентября 2022 в 12:01",
                 text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
                 isLike = true
-            )
+            ) { routeToCreate("31 Сентября 2022 в 12:01") },
         )
     }
 
@@ -64,28 +64,25 @@ fun PostsList(routeToCreate: () -> Unit) {
                         Item(
                             data = cardItem.data,
                             text = cardItem.text,
-                            isLike = cardItem.isLike
+                            isLike = cardItem.isLike,
+                            onClick = cardItem.onClick
                         )
                     }
                 }
             },
             child2 = {
-                Column(
-                    height = Constraint.Wrap
-                ) {
-                    Button(
-                        text = "Предложить пост",
-                        buttonType = ButtonType.Primary,
-                        onClick = { routeToCreate() }
-                    )
-                }
+                Button(
+                    text = "Предложить пост",
+                    buttonType = ButtonType.Primary,
+                    onClick = { routeToCreate("button click") }
+                )
             }
         )
     }
 }
 
 @Composable
-fun Item(data: String, text: String, isLike: Boolean) {
+fun Item(data: String, text: String, isLike: Boolean, onClick:()->Unit) {
     var _isLike: Boolean by remember { mutableStateOf(isLike) }
     Column(padding = Padding(top = 16)) {
         Card {
@@ -122,6 +119,11 @@ fun Item(data: String, text: String, isLike: Boolean) {
                         onClick = { _isLike = !_isLike },
                     )
                 }
+                Button(
+                    text = "Предложить пост",
+                    buttonType = ButtonType.Primary,
+                    onClick = { onClick() }
+                )
             }
         }
     }
@@ -140,24 +142,31 @@ fun mainApp(): NavigationRoot {
             }
             register("tab2", navigation("list") {
                 register("list") { navigator ->
-                    PostsList(routeToCreate = { navigator.navigate("create") })
+                    PostsList(routeToCreate = { navigator.navigate("create", it) })
                 }
-                register("create") { navigator ->
-                    CreatePost(onSuccess = { navigator.popBackStack() })
+                registerWithArgs<String>("create") { navigator, args ->
+                    CreatePost(onSuccess = { navigator.popBackStack() }, args)
                 }
             })
         })
     }
 }
 
-expect sealed class NavigationRoot
+expect sealed class NavigationRoot {
+    class NavigationSimple : NavigationRoot
+    class NavigationTabs : NavigationRoot
+    class Simple : NavigationRoot
+    class SimpleWithArgs<T>: NavigationRoot
+}
 
 interface Navigator {
     fun navigate(uri: String)
     fun popBackStack()
+    fun <T> navigate(uri: String, args: T)
 }
 
 interface NavigationDsl {
+    fun <T> registerWithArgs(uri: String, screen: @Composable (Navigator, T?) -> Unit)
     fun register(uri: String, screen: @Composable (Navigator) -> Unit)
     fun register(uri: String, navigationRoot: NavigationRoot)
 }

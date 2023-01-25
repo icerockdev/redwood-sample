@@ -1,5 +1,6 @@
 package ru.alex009.redwoodapp
 
+import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.navigation.NavArgs
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,9 +26,9 @@ import app.cash.redwood.widget.Widget
 
 actual sealed class NavigationRoot {
     @Composable
-    abstract fun Render(navigator: Navigator, provider: Widget.Provider<@Composable () -> Unit>)
+    abstract fun Render(navigator: Navigator, provider: Widget.Provider<@Composable () -> Unit>, args: Bundle?)
 
-    class NavigationSimple(
+    actual class NavigationSimple(
         private val startDestination: String,
         private val routes: MutableMap<String, NavigationRoot>
     ) : NavigationRoot() {
@@ -34,13 +36,20 @@ actual sealed class NavigationRoot {
         @Composable
         override fun Render(
             navigator: Navigator,
-            provider: Widget.Provider<@Composable () -> Unit>
+            provider: Widget.Provider<@Composable () -> Unit>,
+            args: Bundle?
         ) {
             val navController = rememberNavController()
             val nav = remember {
                 object : Navigator {
                     override fun navigate(uri: String) {
                         navController.navigate(uri)
+                    }
+
+                    override fun <T> navigate(uri: String, args: T) {
+                        val arguments = Bundle()
+                        arguments.putParcelable("ARGS", args)
+                        navController.navigate(uri, arguments)
                     }
 
                     override fun popBackStack() {
@@ -58,7 +67,9 @@ actual sealed class NavigationRoot {
                         Scaffold(
                             content = { innerPadding ->
                                 Box(modifier = Modifier.padding(innerPadding)) {
-                                    item.value.Render(nav, provider)
+                                    val args = it.arguments
+                                    item.value.Render(nav, provider, args)
+
                                 }
                             }
                         )
@@ -68,18 +79,26 @@ actual sealed class NavigationRoot {
         }
     }
 
-    class NavigationTabs(
+    actual class NavigationTabs(
         private val startDestination: String,
         private val routes: MutableMap<String, NavigationRoot>
     ) : NavigationRoot() {
 
         @Composable
-        override fun Render(navigator: Navigator, provider: Widget.Provider<() -> Unit>) {
+        override fun Render(
+            navigator: Navigator,
+            provider: Widget.Provider<() -> Unit>,
+            args: Bundle?
+        ) {
             val navController = rememberNavController()
             val nav = remember {
                 object : Navigator {
                     override fun navigate(uri: String) {
                         navController.navigate(uri)
+                    }
+
+                    override fun <T> navigate(uri: String, args: T) {
+                        TODO("Not yet implemented")
                     }
 
                     override fun popBackStack() {
@@ -135,7 +154,8 @@ actual sealed class NavigationRoot {
                             },
                             content = { innerPadding ->
                                 Box(modifier = Modifier.padding(innerPadding)) {
-                                    item.value.Render(nav, provider)
+                                    val args = it.arguments
+                                    item.value.Render(nav, provider, args)
                                 }
                             }
                         )
@@ -145,21 +165,41 @@ actual sealed class NavigationRoot {
         }
     }
 
-    class Simple(private val composeFun: @Composable (Navigator) -> Unit) : NavigationRoot() {
+    actual class Simple(private val composeFun: @Composable (Navigator) -> Unit) : NavigationRoot() {
         @Composable
-        override fun Render(navigator: Navigator, provider: Widget.Provider<() -> Unit>) {
+        override fun Render(
+            navigator: Navigator,
+            provider: Widget.Provider<() -> Unit>,
+            args: Bundle?
+        ) {
             RedwoodContent(provider) {
                 composeFun(navigator)
             }
         }
 
     }
+
+    actual class SimpleWithArgs<T>(private val composeFun: @Composable (Navigator, T?) -> Unit) : NavigationRoot() {
+        @Composable
+        override fun Render(
+            navigator: Navigator,
+            provider: Widget.Provider<() -> Unit>,
+            args: Bundle?
+        ) {
+            RedwoodContent(provider) {
+                composeFun(navigator, args!!.getParcelable("ARGS"))
+            }
+        }
+    }
 }
 
 actual fun navigation(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot {
-    val routes: MutableMap<String, NavigationRoot> =
-        mutableMapOf<String, NavigationRoot>()
+    val routes: MutableMap<String, NavigationRoot> = mutableMapOf()
     val dsl = object : NavigationDsl {
+        override fun <T> registerWithArgs(uri: String, screen: @Composable (Navigator, T?) -> Unit) {
+            routes[uri] = NavigationRoot.SimpleWithArgs<T>(screen)
+        }
+
         override fun register(uri: String, screen: @Composable (Navigator) -> Unit) {
             routes[uri] = NavigationRoot.Simple(screen)
         }
@@ -176,9 +216,12 @@ actual fun navigationTabs(
     startDestination: String,
     block: NavigationDsl.() -> Unit
 ): NavigationRoot {
-    val routes: MutableMap<String, NavigationRoot> =
-        mutableMapOf<String, NavigationRoot>()
+    val routes: MutableMap<String, NavigationRoot> = mutableMapOf()
     val dsl = object : NavigationDsl {
+        override fun <T> registerWithArgs(uri: String, screen: @Composable (Navigator, T?) -> Unit) {
+            routes[uri] = NavigationRoot.SimpleWithArgs<T>(screen)
+        }
+
         override fun register(uri: String, screen: @Composable (Navigator) -> Unit) {
             routes[uri] = NavigationRoot.Simple(screen)
         }

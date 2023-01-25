@@ -31,12 +31,14 @@ class IosWidgetButton: WidgetButton {
         }
         if(buttonType == EntityButtonType.secondary){
             root.titleLabel?.textColor = .white
-            root.backgroundColor = mainColor
+            root.backgroundColor = UIColor.clear
+            root.layer.borderColor = mainColor.cgColor
+            root.layer.borderWidth = 2
             root.layer.cornerRadius = 16
         }
         if(buttonType == EntityButtonType.action){
-            root.titleLabel?.textColor = .white
-            root.backgroundColor = mainColor
+            root.titleLabel?.textColor = mainColor
+            root.backgroundColor = UIColor.clear
             root.layer.cornerRadius = 16
         }
     }

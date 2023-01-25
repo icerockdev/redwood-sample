@@ -28,7 +28,6 @@ class RedwoodViewController: UIViewController {
         container.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        container.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         let delegate = RedwoodViewControllerDelegate(
             root: container,

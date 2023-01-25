@@ -12,6 +12,7 @@ import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
+import dev.icerock.moko.resources.ImageResource
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Button
@@ -72,11 +73,11 @@ fun PostsList(routeToCreate: () -> Unit) {
                 }
             },
             child2 = {
-                    Button(
-                        text = "Предложить пост",
-                        buttonType = ButtonType.Primary,
-                        onClick = { routeToCreate() }
-                    )
+                Button(
+                    text = "Предложить пост",
+                    buttonType = ButtonType.Primary,
+                    onClick = { routeToCreate() }
+                )
             }
         )
     }
@@ -125,38 +126,31 @@ fun Item(data: String, text: String, isLike: Boolean) {
     }
 }
 
-fun mainApp(): NavigationRoot {
-    return navigation("auth") {
-        register("auth") { navigator ->
-            Button("Login", ButtonType.Primary, onClick = {
-                navigator.navigate("home")
-            })
-        }
-        register("home", navigationTabs("tab1") {
-            register("tab1") {
-                Text("tab1")
-            }
-            register("tab2", navigation("list") {
-                register("list") { navigator ->
-                    PostsList(routeToCreate = { navigator.navigate("create") })
-                }
-                register("create") { navigator ->
-                    CreatePost(onSuccess = { navigator.popBackStack() })
-                }
-            })
-        })
 fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): NavigationRoot {
-    return navigation(widgetFactory) {
-        register("list") { navigator ->
-            PostsList(routeToCreate = { navigator.navigate("create") })
+    return navigationTabs(widgetFactory, "auth") {
+        register("auth") { navigator ->
+            Column {
+                Button("Login", ButtonType.Secondary, onClick = {
+                    navigator.navigate("auth2")
+                })
+            }
         }
-        register("create") { navigator ->
-            CreatePost(onSuccess = { navigator.popBackStack() })
+        register("auth2") { navigator ->
+            Column {
+                Button("SECOND SCREEN", ButtonType.Secondary, onClick = {
+                    navigator.navigate("home")
+                })
+            }
         }
     }
 }
 
-expect class NavigationRoot
+expect sealed class NavigationRoot {
+    class NavigationSimple : NavigationRoot
+    class NavigationTabs : NavigationRoot
+    class Simple : NavigationRoot
+}
+
 expect class WidgetType
 
 interface Navigator {
@@ -169,11 +163,32 @@ interface NavigationDsl {
     fun register(uri: String, navigationRoot: NavigationRoot)
 }
 
-expect fun navigation(startDestination: String, block: NavigationDsl.() -> Unit): NavigationRoot
-expect fun navigationTabs(startDestination: String ,block: NavigationDsl.() -> Unit): NavigationRoot
+interface TabNavigationDsl {
+    fun register(
+        uri: String,
+        title: String? = null,
+        icon: ImageResource? = null,
+        screen: @Composable (Navigator) -> Unit
+    )
+
+    fun register(
+        uri: String,
+        title: String? = null,
+        icon: ImageResource? = null,
+        navigationRoot: NavigationRoot
+    )
+}
+
 expect fun navigation(
     widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
-    block: NavigationDsl.() -> Unit,
+    startDestination: String,
+    block: NavigationDsl.() -> Unit
+): NavigationRoot
+
+expect fun navigationTabs(
+    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
+    startDestination: String,
+    block: TabNavigationDsl.() -> Unit
 ): NavigationRoot
 
 

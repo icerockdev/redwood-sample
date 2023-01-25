@@ -28,11 +28,16 @@ import platform.Foundation.NSDefaultRunLoopMode
 import platform.Foundation.NSRunLoop
 import platform.Foundation.NSRunLoopMode
 import platform.Foundation.NSSelectorFromString
+import platform.UIKit.UIControlState
+import platform.UIKit.UIControlStateNormal
 import platform.UIKit.UILayoutConstraintAxisHorizontal
 import platform.UIKit.UILayoutConstraintAxisVertical
 import platform.UIKit.UIStackViewAlignmentFill
 import platform.UIKit.UIStackViewDistributionFill
+import platform.UIKit.UITabBarItem
+import platform.UIKit.setTabBarItem
 import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
+import platform.UIKit.tabBarItem
 
 class ComposeViewController(
     val compose: @Composable (Navigator) -> Unit,

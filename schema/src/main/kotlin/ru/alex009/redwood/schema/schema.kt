@@ -19,7 +19,6 @@ import dev.icerock.moko.resources.ImageResource
         Card::class,
         ImageButton::class,
         Button::class,
-        TabItem::class,
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),

@@ -21,9 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        let rootNavigation = ExposedKt.getNavigationRoot(widgetFactory: IosWidgetFactory())
+        let rootNavigation = ExposedKt.mainApp()
         
-        window?.rootViewController = rootNavigation.getViewController(navigator: nil, widgetFactory: IosWidgetFactory(), args: nil)
+        window?.rootViewController = rootNavigation.createViewController(
+            provider: ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
+        )
         window?.makeKeyAndVisible()
     }
 

@@ -4,49 +4,38 @@ import androidx.compose.runtime.BroadcastFrameClock
 import androidx.compose.runtime.Composable
 import app.cash.redwood.compose.RedwoodComposition
 import app.cash.redwood.widget.UIViewChildren
+import app.cash.redwood.widget.Widget
+import kotlinx.cinterop.ObjCAction
 import kotlinx.cinterop.convert
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.plus
-import platform.QuartzCore.CADisplayLink
-import platform.UIKit.UIStackView
-import platform.UIKit.UIView
-import platform.UIKit.safeAreaLayoutGuide
-import platform.UIKit.UIViewController
-import platform.UIKit.leadingAnchor
-import platform.UIKit.topAnchor
-import platform.UIKit.bottomAnchor
-import platform.UIKit.trailingAnchor
-import platform.UIKit.widthAnchor
-import platform.UIKit.addSubview
-import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
-import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
-import app.cash.redwood.layout.uiview.UIViewRedwoodLayoutWidgetFactory
-import kotlinx.cinterop.ObjCAction
 import platform.Foundation.NSDefaultRunLoopMode
 import platform.Foundation.NSRunLoop
-import platform.Foundation.NSRunLoopMode
 import platform.Foundation.NSSelectorFromString
+import platform.QuartzCore.CADisplayLink
 import platform.UIKit.UIColor
-import platform.UIKit.UIControlState
-import platform.UIKit.UIControlStateNormal
-import platform.UIKit.UILayoutConstraintAxisHorizontal
 import platform.UIKit.UILayoutConstraintAxisVertical
+import platform.UIKit.UIStackView
 import platform.UIKit.UIStackViewAlignmentFill
 import platform.UIKit.UIStackViewDistributionFill
-import platform.UIKit.UITabBarItem
+import platform.UIKit.UIView
+import platform.UIKit.UIViewController
+import platform.UIKit.addSubview
 import platform.UIKit.backgroundColor
+import platform.UIKit.bottomAnchor
+import platform.UIKit.leadingAnchor
 import platform.UIKit.navigationItem
-import platform.UIKit.setTabBarItem
+import platform.UIKit.safeAreaLayoutGuide
 import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
 import platform.UIKit.tabBarController
-import platform.UIKit.tabBarItem
+import platform.UIKit.topAnchor
+import platform.UIKit.widthAnchor
 
-class ComposeViewController(
-    val compose: @Composable (Navigator) -> Unit,
-    val widgetFactory: RedwoodAppSchemaWidgetFactory<UIView>,
-    val navigator: Navigator
+internal class ComposeViewController(
+    private val provider: Widget.Provider<UIView>,
+    private val compose: @Composable () -> Unit,
 ) : UIViewController(null, null) {
     private lateinit var displayLink: CADisplayLink
     private lateinit var delegate: RedwoodViewControllerDelegate
@@ -72,7 +61,7 @@ class ComposeViewController(
         container.bottomAnchor.constraintEqualToAnchor(view.safeAreaLayoutGuide.bottomAnchor).active =
             true
 
-        val delegate = RedwoodViewControllerDelegate(container, compose, navigator = navigator)
+        val delegate = RedwoodViewControllerDelegate(container, compose)
         this.delegate = delegate
     }
 
@@ -100,8 +89,7 @@ class ComposeViewController(
 
     inner class RedwoodViewControllerDelegate(
         root: UIStackView,
-        compose: @Composable (Navigator) -> Unit,
-        navigator: Navigator
+        compose: @Composable () -> Unit
     ) {
         private val clock = BroadcastFrameClock()
         private val scope: CoroutineScope = MainScope() + clock
@@ -119,13 +107,10 @@ class ComposeViewController(
             val composition = RedwoodComposition(
                 scope = scope,
                 container = children,
-                provider = RedwoodAppSchemaWidgetFactories(
-                    RedwoodAppSchema = widgetFactory,
-                    RedwoodLayout = UIViewRedwoodLayoutWidgetFactory()
-                )
+                provider = provider
             )
             composition.setContent {
-                compose.invoke(navigator)
+                compose.invoke()
             }
         }
 

@@ -1,5 +1,6 @@
 package ru.alex009.redwoodapp
 
+import dev.icerock.moko.parcelize.Parcelable
 import dev.icerock.moko.resources.ImageResource
 import platform.UIKit.UIColor
 import platform.UIKit.UITabBarController
@@ -18,7 +19,7 @@ class NavigationTabController(
             // do nothing
         }
 
-        override fun <T> navigate(uri: String, args: T) {
+        override fun <T: Parcelable> navigate(uri: String, args: T) {
             // do nothing
         }
 

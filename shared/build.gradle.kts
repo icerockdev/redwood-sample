@@ -3,6 +3,7 @@ plugins {
     id("app.cash.redwood")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.android.library")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -29,6 +30,7 @@ kotlin {
             dependencies {
                 api(project(":schema:compose"))
                 api("dev.icerock.moko:resources:0.20.1")
+                api("dev.icerock.moko:parcelize:0.8.0")
             }
         }
 

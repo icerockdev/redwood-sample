@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
+import dev.icerock.moko.parcelize.Parcelable
 import dev.icerock.moko.resources.ImageResource
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
@@ -19,7 +20,7 @@ expect class WidgetType
 interface Navigator {
     fun navigate(uri: String)
 
-    fun <T> navigate(uri: String, args:T)
+    fun <T: Parcelable> navigate(uri: String, args:T)
     fun popBackStack()
 }
 

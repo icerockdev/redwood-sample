@@ -11,14 +11,21 @@ import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
+import dev.icerock.moko.parcelize.Parcelable
+import dev.icerock.moko.parcelize.Parcelize
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Button
 import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwood.schema.compose.TextInput
 
+@Parcelize
+data class CreatePostArgs(
+    val title: String
+): Parcelable
+
 @Composable
-fun CreatePost(onSuccess: () -> Unit, args: String?) {
+fun CreatePost(onSuccess: () -> Unit, args: CreatePostArgs?) {
     Column(
         height = Constraint.Fill,
         width = Constraint.Fill,

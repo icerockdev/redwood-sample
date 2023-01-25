@@ -45,13 +45,13 @@ fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): Navigatio
                     navigation(widgetFactory, "start") {
                         register("start") { navigator ->
                             PostsList {
-                                navigator.navigate("second", it)
+                                navigator.navigate("second", CreatePostArgs(it))
                             }
                         }
-                        register<String>("second") { navigator, args ->
+                        register<CreatePostArgs>("second") { navigator, args ->
                             Column {
                                 Text(
-                                    args ?: "No data", layoutModifier = LayoutModifier.padding(
+                                    args?.title ?: "No data", layoutModifier = LayoutModifier.padding(
                                         Padding(16)
                                     )
                                 )

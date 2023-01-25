@@ -72,7 +72,7 @@ actual sealed class NavigationRoot {
             args: Any?,
         ): UIViewController {
             // todo fix this
-            val argsT = (args as? T)?:(if(args == null) "oh no" else "test") as? T
+            val argsT = args as? T
             val test: @Composable (Navigator) -> Unit = { composeFun(it, argsT) }
             return ComposeViewController(test, widgetFactory, navigator!!)
         }

@@ -1,5 +1,6 @@
 package ru.alex009.redwoodapp
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,12 +24,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.widget.Widget
+import dev.icerock.moko.parcelize.Parcelable
 import dev.icerock.moko.resources.ImageResource
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 actual sealed class NavigationRoot {
     @Composable
-    abstract fun Render(navigator: Navigator, provider: Widget.Provider<@Composable () -> Unit>, args: Bundle?)
+    abstract fun Render(
+        navigator: Navigator,
+        provider: Widget.Provider<@Composable () -> Unit>,
+        args: Bundle?
+    )
 
     actual class NavigationSimple(
         private val startDestination: String,
@@ -48,7 +54,7 @@ actual sealed class NavigationRoot {
                         navController.navigate(uri)
                     }
 
-                    override fun <T> navigate(uri: String, args: T) {
+                    override fun <T : Parcelable> navigate(uri: String, args: T) {
                         val arguments = Bundle()
                         // todo T : Parcelable
                        arguments.putParcelable("ARGS", args)
@@ -100,7 +106,7 @@ actual sealed class NavigationRoot {
                         navController.navigate(uri)
                     }
 
-                    override fun <T> navigate(uri: String, args: T) {
+                    override fun <T : Parcelable> navigate(uri: String, args: T) {
                         TODO("Not yet implemented")
                     }
 
@@ -149,7 +155,8 @@ actual sealed class NavigationRoot {
                                             icon = {
                                                 Icon(
                                                     painter = painterResource(id = android.R.drawable.btn_star_big_on),
-                                                    contentDescription = null)
+                                                    contentDescription = null
+                                                )
                                             }
                                         )
                                     }
@@ -168,7 +175,8 @@ actual sealed class NavigationRoot {
         }
     }
 
-    actual class Simple(private val composeFun: @Composable (Navigator) -> Unit) : NavigationRoot() {
+    actual class Simple(private val composeFun: @Composable (Navigator) -> Unit) :
+        NavigationRoot() {
         @Composable
         override fun Render(
             navigator: Navigator,
@@ -182,7 +190,8 @@ actual sealed class NavigationRoot {
 
     }
 
-    actual class SimpleWithArgs<T>(private val composeFun: @Composable (Navigator, T?) -> Unit) : NavigationRoot() {
+    actual class SimpleWithArgs<T>(private val composeFun: @Composable (Navigator, T?) -> Unit) :
+        NavigationRoot() {
         @Composable
         override fun Render(
             navigator: Navigator,

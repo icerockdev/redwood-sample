@@ -1,5 +1,6 @@
 package ru.alex009.redwoodapp
 
+import dev.icerock.moko.parcelize.Parcelable
 import platform.UIKit.UINavigationController
 import platform.UIKit.UIViewController
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
@@ -16,7 +17,7 @@ class NavigationSimpleController(
             }
         }
 
-        override fun <T> navigate(uri: String, args: T) {
+        override fun <T: Parcelable> navigate(uri: String, args: T) {
             navigationMap.get(uri)?.let {
                 pushViewController(it.invoke(args), false)
             }

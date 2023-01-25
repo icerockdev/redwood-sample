@@ -17,6 +17,4 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun ImageButton() = ComposeImageButton()
 
     override fun Button() = ComposeButton()
-
-    override fun TabItem() = ComposeTabItem()
 }

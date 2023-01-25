@@ -150,7 +150,7 @@ fun mainApp(): NavigationRoot {
     }
 }
 
-expect class NavigationRoot
+expect sealed class NavigationRoot
 
 interface Navigator {
     fun navigate(uri: String)

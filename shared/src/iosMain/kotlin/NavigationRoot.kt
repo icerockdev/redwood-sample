@@ -3,15 +3,10 @@ package ru.alex009.redwoodapp
 import androidx.compose.runtime.Composable
 import dev.icerock.moko.resources.ImageResource
 import platform.UIKit.UIColor
-import platform.UIKit.UINavigationController
 import platform.UIKit.UITabBarController
-import platform.UIKit.UITabBarItem
 import platform.UIKit.UIViewController
 import platform.UIKit.UIView
 import platform.UIKit.navigationController
-import platform.UIKit.navigationItem
-import platform.UIKit.setTabBarItem
-import platform.UIKit.tabBarController
 import platform.UIKit.tabBarItem
 import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
@@ -27,7 +22,8 @@ actual sealed class NavigationRoot {
         private val startDestination: String,
         private val widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
     ) : NavigationRoot() {
-        val viewController = MyNavigationSimple(startDestination, widgetFactory)
+        val viewController =
+            NavigationSimpleController(startDestination, widgetFactory)
         override fun getViewController(
             navigator: Navigator?,
             widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
@@ -43,7 +39,7 @@ actual sealed class NavigationRoot {
         private val widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
     ) : NavigationRoot() {
 
-        val viewController = MyNavigationTab(startDestination, widgetFactory)
+        val viewController = NavigationTabController(startDestination, widgetFactory)
         override fun getViewController(
             navigator: Navigator?,
             widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
@@ -92,86 +88,6 @@ actual sealed class NavigationRoot {
     }
 }
 
-class MyNavigationSimple(
-    private val startDestination: String,
-    private val widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
-) : UINavigationController(nibName = null, bundle = null) {
-
-    val navigator = object : Navigator {
-        override fun navigate(uri: String) {
-            navigationMap.get(uri)?.let {
-                pushViewController(it.invoke(null), false)
-           }
-        }
-
-        override fun <T> navigate(uri: String, args: T) {
-            navigationMap.get(uri)?.let {
-                pushViewController(it.invoke(args), false)
-            }
-        }
-
-        override fun popBackStack() {
-            popViewControllerAnimated(false)
-        }
-    }
-
-    val navigationMap: MutableMap<String, (Any?) -> UIViewController> = mutableMapOf()
-    fun setup(
-        routes: MutableMap<String, NavigationRoot>
-    ) {
-        routes.forEach { entry ->
-            navigationMap.put(
-                entry.key,
-                { args -> entry.value.getViewController(navigator, widgetFactory, args) })
-        }
-        setViewControllers(
-            listOf(
-                navigationMap.get(startDestination)!!.invoke(startDestination)
-            ),
-            false
-        )
-    }
-}
-
-class MyNavigationTab(
-    private val startDestination: String,
-    private val widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>
-) : UITabBarController(nibName = null, bundle = null) {
-    // todo remove?
-    val navigator = object : Navigator {
-        override fun navigate(uri: String) {
-            // do nothing
-        }
-
-        override fun <T> navigate(uri: String, args: T) {
-            // do nothing
-        }
-
-        override fun popBackStack() {
-            // do nothing
-        }
-    }
-    val navigationMap: MutableMap<String, () -> UIViewController> = mutableMapOf()
-    fun setup(
-        routes: MutableMap<String, NavigationRoot>,
-        icons: MutableMap<String, TabItem>,
-    ) {
-        routes.forEach { entry ->
-            navigationMap.put(
-                entry.key,
-                { entry.value.getViewController(navigator, widgetFactory) })
-        }
-        setViewControllers(navigationMap.map { entity ->
-            entity.value.invoke().apply {
-                tabBarItem.title = icons.get(entity.key)?.title
-                tabBarItem.image = icons.get(entity.key)?.icon?.toUIImage()
-            }
-        }, false)
-        tabBar.barTintColor = UIColor.grayColor
-        navigationController?.navigationBarHidden = true
-    }
-}
-
 actual typealias WidgetType = UIView
 
 actual fun navigation(
@@ -190,7 +106,7 @@ actual fun navigation(
             routes[uri] = navigationRoot
         }
 
-        override fun <T> registerWithArgs(
+        override fun <T> register(
             uri: String,
             screen: @Composable (Navigator, T?) -> Unit
         ) {
@@ -238,7 +154,3 @@ actual fun navigationTabs(
         .apply { viewController.setup(routes, icons) }
 }
 
-data class TabItem(
-    val title: String? = null,
-    val icon: ImageResource? = null
-)

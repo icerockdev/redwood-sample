@@ -8,13 +8,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
-import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
-import dev.icerock.moko.resources.ImageResource
-import org.example.library.MR
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Button
@@ -133,57 +130,4 @@ fun Item(data: String, text: String, isLike: Boolean, onClick:()->Unit) {
         }
     }
 }
-
-
-
-expect sealed class NavigationRoot {
-    class NavigationSimple : NavigationRoot
-    class NavigationTabs : NavigationRoot
-    class Simple : NavigationRoot
-    class SimpleWithArgs<T>: NavigationRoot
-}
-
-expect class WidgetType
-
-interface Navigator {
-    fun navigate(uri: String)
-
-    fun <T> navigate(uri: String, args:T)
-    fun popBackStack()
-}
-
-interface NavigationDsl {
-    fun <T> registerWithArgs(uri: String, screen: @Composable (Navigator, T?) -> Unit)
-    fun register(uri: String, screen: @Composable (Navigator) -> Unit)
-    fun register(uri: String, navigationRoot: NavigationRoot)
-}
-
-interface TabNavigationDsl {
-    fun register(
-        uri: String,
-        title: String? = null,
-        icon: ImageResource? = null,
-        screen: @Composable (Navigator) -> Unit
-    )
-
-    fun register(
-        uri: String,
-        title: String? = null,
-        icon: ImageResource? = null,
-        navigationRoot: NavigationRoot
-    )
-}
-
-expect fun navigation(
-    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
-    startDestination: String,
-    block: NavigationDsl.() -> Unit
-): NavigationRoot
-
-expect fun navigationTabs(
-    widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>,
-    startDestination: String,
-    block: TabNavigationDsl.() -> Unit
-): NavigationRoot
-
 

@@ -48,7 +48,7 @@ fun mainApp(widgetFactory: RedwoodAppSchemaWidgetFactory<WidgetType>): Navigatio
                                 navigator.navigate("second", it)
                             }
                         }
-                        registerWithArgs<String>("second") { navigator, args ->
+                        register<String>("second") { navigator, args ->
                             Column {
                                 Text(
                                     args ?: "No data", layoutModifier = LayoutModifier.padding(

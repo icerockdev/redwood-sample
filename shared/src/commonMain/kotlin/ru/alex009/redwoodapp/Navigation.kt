@@ -8,7 +8,9 @@ import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 expect sealed class NavigationRoot {
     class NavigationSimple : NavigationRoot
     class NavigationTabs : NavigationRoot
+    //todo remove?
     class Simple : NavigationRoot
+    //todo rename
     class SimpleWithArgs<T>: NavigationRoot
 }
 

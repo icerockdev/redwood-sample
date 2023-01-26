@@ -69,7 +69,7 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
     registerScreen("/user/{userId}/orders") { _, args ->
         Column {
             Text(
-                text = args["title"]?:"no data",
+                text = args.toString(),
                 layoutModifier = LayoutModifier.padding(
                     Padding(16)
                 )

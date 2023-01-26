@@ -15,16 +15,20 @@ data class FlatNavigation(
         val navigator: Navigator = object : Navigator {
             override fun navigate(uri: String) {
                 val startUri = uri.substringBefore('?')
+                val key = routes.keys.find { it.isPlaceholderOf(startUri) } ?: return
                 val params = uri.substringAfter('?')
                 val paramsMap = mutableMapOf<String, String>()
                 params.split('&').forEach {
                     paramsMap[it.substringBefore('=')] = it.substringAfter('=')
                 }
-                val key = routes.keys.find { it.isPlaceHolderOf(startUri) } ?: return
                 val newViewController: UIViewController =
-                    routes[key]!!(provider, this, paramsMap.apply {
-                        startUri.getParams(key, key.getStableParts())
-                    })
+                    routes[key]!!(
+                        provider,
+                        this,
+                        paramsMap.apply {
+                            putAll(startUri.getParams(key, key.getStableParts()))
+                        }
+                    )
                 navController.pushViewController(newViewController, animated = true)
             }
 
@@ -40,18 +44,18 @@ data class FlatNavigation(
 }
 
 fun String.getStableParts(): List<String> {
-    if(contains('{').not()) return listOf(this)
+    if (contains('{').not()) return listOf(this)
     return split('{').map { it.split('}').last() }
 }
 
-fun String.isPlaceHolderOf(value: String): Boolean {
+fun String.isPlaceholderOf(value: String): Boolean {
     return value.checkPlaceholderPart(getStableParts())
 }
 
 fun String.checkPlaceholderPart(stablePart: List<String>): Boolean {
     if (isEmpty() && stablePart.isEmpty()) return true
     if (stablePart.size == 1 && this.equals(stablePart.get(0))) return true
-    return substringAfter(stablePart.get(0)).checkPlaceholderPart(
+    return contains(stablePart.get(0)) && substringAfter(stablePart.get(0)).checkPlaceholderPart(
         stablePart.subList(
             1,
             stablePart.size

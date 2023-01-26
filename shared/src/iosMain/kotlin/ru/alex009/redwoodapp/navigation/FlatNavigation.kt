@@ -1,13 +1,16 @@
 package ru.alex009.redwoodapp.navigation
 
 import app.cash.redwood.widget.Widget
+import platform.UIKit.UIColor
 import platform.UIKit.UINavigationController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
+import platform.UIKit.backgroundColor
 
 data class FlatNavigation(
     val startDestination: String,
-    val routes: MutableMap<String, FlatRouteData>
+    val routes: MutableMap<String, FlatRouteData>,
+    val navBarVisibility: MutableMap<String, Boolean>
 ) : NavigationHost {
 
     override fun createViewController(provider: Widget.Provider<UIView>): UIViewController {
@@ -30,6 +33,7 @@ data class FlatNavigation(
                         }
                     )
                 navController.pushViewController(newViewController, animated = true)
+                navController.navigationBarHidden = navBarVisibility[key]?.not()?:false
             }
 
             override fun popBackStack() {
@@ -39,6 +43,8 @@ data class FlatNavigation(
         val rootViewController: UIViewController =
             routes[startDestination]!!(provider, navigator, emptyMap())
         navController = UINavigationController(rootViewController)
+        navController.navigationBarHidden = navBarVisibility[startDestination]?.not()?:false
+        navController.navigationBar.backgroundColor = UIColor.whiteColor
         return navController
     }
 }

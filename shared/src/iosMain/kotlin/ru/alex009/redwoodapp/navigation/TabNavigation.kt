@@ -1,9 +1,11 @@
 package ru.alex009.redwoodapp.navigation
 
 import app.cash.redwood.widget.Widget
+import platform.UIKit.UIColor
 import platform.UIKit.UITabBarController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
+import platform.UIKit.backgroundColor
 import platform.UIKit.tabBarItem
 
 data class TabNavigation(
@@ -32,6 +34,8 @@ data class TabNavigation(
         }
         tabBarController = UITabBarController()
         tabBarController.setViewControllers(tabsViewControllers, animated = false)
+        tabBarController.tabBar.barTintColor = UIColor.blackColor
+        tabBarController.tabBar.backgroundColor = UIColor.whiteColor
         return tabBarController
     }
 }

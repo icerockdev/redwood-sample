@@ -27,11 +27,12 @@ class IosWidgetButton: WidgetButton {
             root.backgroundColor = mainColor
             root.layer.cornerRadius = 16
             root.heightAnchor.constraint(equalToConstant: 60).isActive = true
-         
-            
+            root.configuration?.contentInsets =  NSDirectionalEdgeInsets(top: 0.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
+            root.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
+            root.updateConfiguration()
         }
         if(buttonType == EntityButtonType.secondary){
-            root.titleLabel?.textColor = mainColor
+            root.setTitleColor(mainColor, for: UIControl.State.normal)
             root.backgroundColor = UIColor.clear
             root.layer.borderColor = mainColor.cgColor
             root.layer.borderWidth = 2
@@ -40,9 +41,12 @@ class IosWidgetButton: WidgetButton {
             frame.size.width += 20; //l + r padding
             root.frame = frame;
             root.contentHorizontalAlignment = .center
+            root.configuration?.contentInsets =  NSDirectionalEdgeInsets(top: 0.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
+            root.updateConfiguration()
         }
         if(buttonType == EntityButtonType.action){
-            root.backgroundColor = UIColor.clear
+            root.setTitleColor(mainColor, for: UIControl.State.normal)
+           root.backgroundColor = UIColor.clear
         }
     }
     

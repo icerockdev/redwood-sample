@@ -15,11 +15,26 @@ import ru.alex009.redwoodapp.navigation.navigationTabs
 
 fun mainApp(): NavigationHost {
     return navigation(startDestination = "login") {
-        registerScreen(uri = "login") { navigator, _ ->
+        registerScreen(
+            uri = "login",
+            isToolbarVisible = false
+        ) { navigator, _ ->
             Column(verticalAlignment = MainAxisAlignment.End) {
                 Column {
                     Button(
                         " Login ", buttonType = ButtonType.Primary,
+                        onClick = {
+                            navigator.navigate("tabs")
+                        }, layoutModifier = LayoutModifier.padding(Padding(16))
+                    )
+                    Button(
+                        " Login ", buttonType = ButtonType.Secondary,
+                        onClick = {
+                            navigator.navigate("tabs")
+                        }, layoutModifier = LayoutModifier.padding(Padding(16))
+                    )
+                    Button(
+                        " Login ", buttonType = ButtonType.Action,
                         onClick = {
                             navigator.navigate("tabs")
                         }, layoutModifier = LayoutModifier.padding(Padding(16))
@@ -29,6 +44,7 @@ fun mainApp(): NavigationHost {
         }
         registerNavigation(
             uri = "tabs",
+            isToolbarVisible = false,
             childNavigation = { _, _ ->
                 mainScreenNavigation()
             }
@@ -61,12 +77,18 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
 }
 
 private fun secondTabNavigation() = navigation(startDestination = "start") {
-    registerScreen("start") { navigator, _ ->
+    registerScreen(
+        "start",
+        isToolbarVisible = false,
+    ) { navigator, _ ->
         PostsList {
             navigator.navigate("/user/2/orders?query=dasdsa&order-by=id")
         }
     }
-    registerScreen("/user/{userId}/orders") { _, args ->
+    registerScreen(
+        "/user/{userId}/orders",
+        isToolbarVisible = true
+    ) { _, args ->
         Column {
             Text(
                 text = args.toString(),

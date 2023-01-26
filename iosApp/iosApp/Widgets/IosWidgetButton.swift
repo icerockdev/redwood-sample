@@ -27,6 +27,8 @@ class IosWidgetButton: WidgetButton {
             root.backgroundColor = mainColor
             root.layer.cornerRadius = 16
             root.heightAnchor.constraint(equalToConstant: 60).isActive = true
+         
+            
         }
         if(buttonType == EntityButtonType.secondary){
             root.titleLabel?.textColor = mainColor

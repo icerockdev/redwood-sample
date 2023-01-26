@@ -63,13 +63,13 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
 private fun secondTabNavigation() = navigation(startDestination = "start") {
     registerScreen("start") { navigator, _ ->
         PostsList {
-            navigator.navigate("second/$it")
+            navigator.navigate("/user/2/orders?query=dasdsa&order-by=id")
         }
     }
-    registerScreen("second/{title}") { _, args ->
+    registerScreen("/user/{userId}/orders") { _, args ->
         Column {
             Text(
-                text = args["title"] ?: "No data",
+                text = args["title"]?:"no data",
                 layoutModifier = LayoutModifier.padding(
                     Padding(16)
                 )

@@ -18,7 +18,8 @@ actual fun navigation(
             uri: String,
             screen: @Composable (Navigator, Map<String, String>) -> Unit
         ) {
-            routes[uri] = { provider, navigator, args ->
+            val startUri = uri.substringBefore('?')
+            routes[startUri] = { provider, navigator, args ->
                 ComposeViewController(provider) @Composable {
                     screen(navigator, args)
                 }
@@ -29,7 +30,8 @@ actual fun navigation(
             uri: String,
             childNavigation: (Navigator, Map<String, String>) -> NavigationHost
         ) {
-            routes[uri] = { provider, navigator, args ->
+            val startUri = uri.substringBefore('?')
+            routes[startUri] = { provider, navigator, args ->
                 childNavigation(navigator, args).createViewController(provider)
             }
         }

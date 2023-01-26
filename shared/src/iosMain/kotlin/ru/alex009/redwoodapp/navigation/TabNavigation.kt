@@ -26,7 +26,7 @@ data class TabNavigation(
         }
         val tabsViewControllers: List<UIViewController> = routes.map { (key, value) ->
             val vc: UIViewController = value.createViewController(provider, navigator)
-            vc.tabBarItem.title = value.title?.localized()
+            vc.tabBarItem.title = if(value.icon == null) "false" else "true" + value.icon?.toUIImage().toString()
             vc.tabBarItem.image = value.icon?.toUIImage()
             vc
         }

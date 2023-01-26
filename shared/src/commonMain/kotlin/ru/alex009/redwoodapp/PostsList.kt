@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.MainAxisAlignment
+import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
@@ -19,8 +20,6 @@ import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
-
-import ru.alex009.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 @Composable
 fun PostsList(routeToCreate: (String) -> Unit) {
@@ -61,7 +60,10 @@ fun PostsList(routeToCreate: (String) -> Unit) {
     ) {
         Stack(
             child1 = {
-                Column(width = Constraint.Fill) {
+                Column(
+                    width = Constraint.Fill,
+                    overflow = Overflow.Scroll
+                ) {
                     for (cardItem in itemsList) {
                         Item(
                             data = cardItem.data,

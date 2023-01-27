@@ -28,7 +28,8 @@ data class FlatNavigation(
                     routes[key]!!(
                         provider,
                         this,
-                        paramsMap.apply {
+                        paramsMap
+                            .apply {
                             putAll(startUri.getParams(key, key.getStableParts()))
                         }
                     )
@@ -62,6 +63,7 @@ fun String.isPlaceholderOf(value: String): Boolean {
 
 fun String.checkPlaceholderPart(stablePart: List<String>): Boolean {
     if (isEmpty() && stablePart.isEmpty()) return true
+    if (stablePart.size == 1 && stablePart.get(0).isEmpty()) return true
     if (stablePart.size == 1 && this.equals(stablePart.get(0))) return true
     return contains(stablePart.get(0)) && substringAfter(stablePart.get(0)).checkPlaceholderPart(
         stablePart.subList(

@@ -67,7 +67,11 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
         "/details/{date}?description={description}",
         isToolbarVisible = true
     ) { navController, args ->
-        DetailsScreen(navController, args.toString(), args.toString())
+        DetailsScreen(
+            navController,
+            args.get("date").orEmpty(),
+            args.get("description").orEmpty()
+        )
     }
 }
 

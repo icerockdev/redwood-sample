@@ -119,7 +119,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                     horizontalAlignment = MainAxisAlignment.End
                 ) {
                     var like: Int by remember { mutableStateOf(16) }
-                    var dislike: Int by remember { mutableStateOf(9) }
+                    var dislike: Int by remember { mutableStateOf(8) }
                     var isLiked: Boolean? by remember { mutableStateOf(null) }
                     ImageButton(
                         text = like.toString(),

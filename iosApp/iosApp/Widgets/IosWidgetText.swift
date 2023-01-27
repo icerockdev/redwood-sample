@@ -31,7 +31,9 @@ class IosWidgetText: WidgetText {
     }
     
     func textType(textType: EntityTextType?) {
-        // TODO
+        if(textType == EntityTextType.header){
+            root.font = .boldSystemFont(ofSize: 25)
+        }
     }
     
     

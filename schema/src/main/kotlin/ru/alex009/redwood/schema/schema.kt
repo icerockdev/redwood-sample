@@ -51,7 +51,10 @@ data class Text(
 
 @Widget(3)
 data class Image(
-    @Property(1) val url: String,
+    @Property(1) val width: Int?,
+    @Property(2) val height: Int?,
+    @Property(3) val url: String?,
+    @Property(4) val placeholder: ImageResource?,
 )
 
 @Widget(4)

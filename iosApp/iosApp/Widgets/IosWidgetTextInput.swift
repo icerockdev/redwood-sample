@@ -12,7 +12,7 @@ import shared_ios
 class IosWidgetTextInput: WidgetTextInput {
     
     private let root: UITextField = {
-        let view = UITextField()
+        let view = FillUITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.borderStyle = .roundedRect
         return view
@@ -40,4 +40,11 @@ class IosWidgetTextInput: WidgetTextInput {
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
     var value: Any { root }
+}
+
+class FillUITextField : UITextField{
+        override func sizeThatFits(_ size: CGSize) -> CGSize {
+            let originalSize = super.sizeThatFits(size)
+            return CGSize(width: size.width, height: originalSize.height)
+        }
 }

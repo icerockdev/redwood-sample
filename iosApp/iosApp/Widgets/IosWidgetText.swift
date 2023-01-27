@@ -34,6 +34,9 @@ class IosWidgetText: WidgetText {
         if(textType == EntityTextType.header){
             root.font = .boldSystemFont(ofSize: 25)
         }
+        if(textType == EntityTextType.primary){
+            root.font = .systemFont(ofSize: 12)
+        }
     }
     
     

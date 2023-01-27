@@ -15,6 +15,7 @@ class IosImageButton: WidgetImageButton {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 10
         configuration.baseBackgroundColor = UIColor.clear
+
         let view = UIButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         view.backgroundColor = UIColor.clear
@@ -36,6 +37,7 @@ class IosImageButton: WidgetImageButton {
     
     func text(text: String) {
        root.setTitle(text, for: .normal)
+       root.titleLabel?.font = .italicSystemFont(ofSize: 12)
     }
     
     func onClick(onClick: (() -> Void)? = nil) {

@@ -23,28 +23,7 @@ fun mainApp(): NavigationHost {
             uri = "login",
             isToolbarVisible = false
         ) { navigator, _ ->
-            Box {
-                Column {
-                    Button(
-                        " Login ", buttonType = ButtonType.Primary,
-                        onClick = {
-                            navigator.navigate("tabs")
-                        }, layoutModifier = LayoutModifier.padding(Padding(16))
-                    )
-                    Button(
-                        " Login ", buttonType = ButtonType.Secondary,
-                        onClick = {
-                            navigator.navigate("tabs")
-                        }, layoutModifier = LayoutModifier.padding(Padding(16))
-                    )
-                    Button(
-                        " Login ", buttonType = ButtonType.Action,
-                        onClick = {
-                            navigator.navigate("tabs")
-                        }, layoutModifier = LayoutModifier.padding(Padding(16))
-                    )
-                }
-            }
+            LoginScreen(navigator)
         }
         registerNavigation(
             uri = "tabs",
@@ -70,7 +49,7 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
         title = "Настройки".desc(),
         icon = MR.images.settings,
         screen = {
-            ProfileScreen()
+            ProfileScreen(it)
         }
     )
 }
@@ -112,3 +91,15 @@ fun Box(content: @Composable () -> Unit) {
         }
     }
 }
+
+data class User(
+    val firstName: String,
+    val secondName: String
+)
+
+val User.fullName: String
+    get() {
+       return "$firstName $secondName"
+    }
+
+fun User.size(): Int = fullName.length

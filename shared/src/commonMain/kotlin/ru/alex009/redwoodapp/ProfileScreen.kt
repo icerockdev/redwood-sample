@@ -15,9 +15,11 @@ import ru.alex009.redwood.schema.compose.Image
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 import org.example.library.MR
+import ru.alex009.redwoodapp.navigation.Navigator
+import ru.alex009.redwoodapp.navigation.navigation
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navigator: Navigator) {
     Stack(
         child1 = {
             Row(
@@ -45,6 +47,15 @@ fun ProfileScreen() {
                 }
             }
         },
-        child2 = { Button("Выход", buttonType = ButtonType.Secondary) }
+        child2 = {
+            Column(
+                height = Constraint.Wrap,
+                horizontalAlignment = CrossAxisAlignment.Center,
+                width = Constraint.Fill
+            ) { Button("Выход", buttonType = ButtonType.Secondary,
+            onClick = {
+
+            }) }
+        }
     )
 }

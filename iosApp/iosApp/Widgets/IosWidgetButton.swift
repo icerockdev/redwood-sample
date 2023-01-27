@@ -16,24 +16,30 @@ class IosWidgetButton: WidgetButton {
     
     
     
-    private let root: UIButton = {
+    private let root: FillButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 10
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20)
-        let view = UIButton(configuration: configuration)
+        let view = FillButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         return view
 
     }()
     
+    var _buttonType: EntityButtonType? = nil
+    
     func buttonType(buttonType: EntityButtonType) {
+        _buttonType = buttonType
         if(buttonType == EntityButtonType.primary){
-            root.titleLabel?.textColor = .white
             root.backgroundColor = mainColor
             root.layer.cornerRadius = 16
-        }
+            root.configuration?.baseBackgroundColor = UIColor.clear
+            root.setTitleColor(.white, for: UIControl.State.normal)
+            root.setTitleColor(.white, for: UIControl.State.disabled)
+           }
         if(buttonType == EntityButtonType.secondary){
             root.setTitleColor(mainColor, for: UIControl.State.normal)
+            root.setTitleColor(.lightGray, for: UIControl.State.disabled)
             root.backgroundColor = UIColor.clear
             root.layer.borderColor = mainColor.cgColor
             root.layer.borderWidth = 2
@@ -50,15 +56,19 @@ class IosWidgetButton: WidgetButton {
     }
     
     func enabled(enabled: Bool) {
-        // TODO
-    }
-    
-    func cornerRadius(cornerRadius: KotlinInt?) {
-        // TODO
+        root.isEnabled = enabled
+        if(_buttonType == EntityButtonType.primary){
+            if(enabled){
+                root.backgroundColor = mainColor
+            }else{
+                root.backgroundColor = .lightGray
+            }
+        }
     }
     
     func text(text: String) {
         root.setTitle(text, for: .normal)
+        root.setTitle(text, for: .disabled)
     }
     
     func onClick(onClick: (() -> Void)? = nil) {
@@ -75,4 +85,11 @@ class IosWidgetButton: WidgetButton {
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
     var value: Any {root}
+}
+
+class FillButton : UIButton{
+        override func sizeThatFits(_ size: CGSize) -> CGSize {
+            let originalSize = super.sizeThatFits(size)
+            return CGSize(width: size.width, height: originalSize.height)
+        }
 }

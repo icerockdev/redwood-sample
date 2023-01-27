@@ -30,15 +30,24 @@ class IosStack :  WidgetStack {
     func myInsert(view: UIView,index: KotlinInt){
         root.insertArrangedSubview(view, at: 0)
         view.bottomAnchor.constraint(equalTo: root.bottomAnchor).isActive = true
-            view.widthAnchor.constraint(equalTo: root.widthAnchor).isActive = true
-            view.heightAnchor.constraint(equalTo: root.heightAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: root.widthAnchor).isActive = true
+        view.heightAnchor.constraint(equalTo: root.heightAnchor).isActive = true
         view.centerXAnchor.constraint(equalTo: root.centerXAnchor).isActive = true
     }
     
     func myInsert2(view: UIView,index: KotlinInt){
         root.insertArrangedSubview(view, at: 0)
+        // todo fix size logic
+        let size = view.sizeThatFits(CGSize(width: 200.0,height: 200.0))
+        var height = 60.0
+        if(size.height != 0) {
+            height = size.height
+            
+        }
+        view.widthAnchor.constraint(equalTo: root.widthAnchor).isActive = true
+        view.heightAnchor.constraint(equalToConstant: height).isActive = true
         view.bottomAnchor.constraint(equalTo: root.bottomAnchor).isActive = true
-    }
+       }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     

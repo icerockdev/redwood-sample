@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.widget.Text
+import ru.alex009.redwoodapp.android.types.HeaderText
 import ru.alex009.redwoodapp.android.types.PrimaryText
 import ru.alex009.redwoodapp.android.types.SecondaryText
 
@@ -17,12 +18,16 @@ class ComposeText : Text<@Composable () -> Unit> {
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        when(_textType) {
+        when (_textType) {
             TextType.Primary -> PrimaryText(
                 text = _textState,
                 isSingleLine = _isSingleLine
             )
             TextType.Secondary -> SecondaryText(
+                text = _textState,
+                isSingleLine = _isSingleLine
+            )
+            TextType.Header -> HeaderText(
                 text = _textState,
                 isSingleLine = _isSingleLine
             )

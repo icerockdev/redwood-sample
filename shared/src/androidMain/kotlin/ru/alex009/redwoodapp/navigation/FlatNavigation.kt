@@ -60,7 +60,7 @@ data class FlatNavigation(
                         }
                     }
 
-                    val tmp = entry.arguments?.toString()?.substringAfter("dat=")?.substringBefore(' ')
+                    val tmp = entry.arguments?.toString()?.substringAfter("dat=")?.substringBefore('}')
                     val params = tmp?.substringAfter('?')
                     params?.split('&')?.forEach {
                         argsMap[it.substringBefore('=')] = it.substringAfter('=')

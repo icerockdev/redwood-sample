@@ -2,28 +2,23 @@ package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
-import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
-import ru.alex009.redwood.schema.ButtonType
+import org.example.library.MR
 import ru.alex009.redwood.schema.TextType
-import ru.alex009.redwood.schema.compose.Button
 import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
-import ru.alex009.redwood.schema.compose.Stack
-import ru.alex009.redwood.schema.compose.Text
-import org.example.library.MR
 import ru.alex009.redwood.schema.compose.Space
+import ru.alex009.redwood.schema.compose.Text
 
 @Composable
 fun PostsList(routeToCreate: (String, String) -> Unit) {

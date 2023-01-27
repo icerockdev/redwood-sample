@@ -69,8 +69,8 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
     ) { navController, args ->
         DetailsScreen(
             navController,
-            args.get("date").orEmpty(),
-            args.get("description").orEmpty()
+            args["date"].orEmpty(),
+            args["description"].orEmpty()
         )
     }
 }

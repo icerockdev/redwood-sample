@@ -123,11 +123,14 @@ fun Item(data: String, text: String, isLike: Boolean, onClick:()->Unit) {
                         onClick = { _isLike = !_isLike },
                     )
                 }
-                Button(
-                    text = "Предложить пост",
-                    buttonType = ButtonType.Primary,
-                    onClick = { onClick() }
-                )
+                Column (height = Constraint.Wrap){
+                    Button(
+                        text = "Предложить пост",
+                        buttonType = ButtonType.Primary,
+                        onClick = { onClick() },
+                        layoutModifier = LayoutModifier.padding(Padding(16))
+                    )
+                }
             }
         }
     }

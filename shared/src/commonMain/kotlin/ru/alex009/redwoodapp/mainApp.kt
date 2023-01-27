@@ -1,9 +1,13 @@
 package ru.alex009.redwoodapp
 
+import androidx.compose.runtime.Composable
 import app.cash.redwood.LayoutModifier
+import app.cash.redwood.layout.api.Constraint
+import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
+import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.resources.desc.desc
 import org.example.library.MR
 import ru.alex009.redwood.schema.ButtonType
@@ -19,7 +23,7 @@ fun mainApp(): NavigationHost {
             uri = "login",
             isToolbarVisible = false
         ) { navigator, _ ->
-            Column(verticalAlignment = MainAxisAlignment.End) {
+            Box {
                 Column {
                     Button(
                         " Login ", buttonType = ButtonType.Primary,
@@ -58,10 +62,9 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
         title = "fistTab".desc(),
         icon = MR.images.ic_favorite_menu,
         screen = {
-            Column {
+            Box {
                 Text(
-                    text = "First tab",
-                    layoutModifier = LayoutModifier.padding(Padding(16))
+                    text = "First tab"
                 )
             }
         }
@@ -69,7 +72,7 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
     registerNavigation(
         uri = "auth2",
         title = "secondTab".desc(),
-        icon = MR.images.ic_favorite_menu,
+        icon = MR.images.like,
         childNavigation = {
             secondTabNavigation()
         }
@@ -89,13 +92,27 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
         "/user/{userId}/orders",
         isToolbarVisible = true
     ) { _, args ->
-        Column {
+        Box {
             Text(
-                text = args.toString(),
-                layoutModifier = LayoutModifier.padding(
-                    Padding(16)
-                )
+                text = args.toString()
             )
+        }
+    }
+}
+
+@Composable
+fun Box(content: @Composable () -> Unit) {
+    Column(
+        horizontalAlignment = CrossAxisAlignment.Center,
+        verticalAlignment = MainAxisAlignment.Center,
+        height = Constraint.Fill
+    ) {
+        Row(
+            verticalAlignment = CrossAxisAlignment.Center,
+            horizontalAlignment = MainAxisAlignment.Center,
+            width = Constraint.Fill
+        ) {
+            content()
         }
     }
 }

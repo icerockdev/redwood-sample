@@ -14,8 +14,13 @@ let mainColor = UIColor(red:55.0/255.0, green:121.0/255.0, blue:193.0/255.0, alp
 
 class IosWidgetButton: WidgetButton {
     
+    
+    
     private let root: UIButton = {
-        let view = UIButton(type: .custom)
+        var configuration = UIButton.Configuration.filled()
+        configuration.imagePadding = 10
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20)
+        let view = UIButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         return view
 
@@ -26,10 +31,6 @@ class IosWidgetButton: WidgetButton {
             root.titleLabel?.textColor = .white
             root.backgroundColor = mainColor
             root.layer.cornerRadius = 16
-            root.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            root.configuration?.contentInsets =  NSDirectionalEdgeInsets(top: 0.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
-            root.contentEdgeInsets = UIEdgeInsets(top: 8.0, left: 16.0, bottom: 8.0, right: 16.0)
-            root.updateConfiguration()
         }
         if(buttonType == EntityButtonType.secondary){
             root.setTitleColor(mainColor, for: UIControl.State.normal)
@@ -37,16 +38,14 @@ class IosWidgetButton: WidgetButton {
             root.layer.borderColor = mainColor.cgColor
             root.layer.borderWidth = 2
             root.layer.cornerRadius = 16
-            var frame = root.frame;
-            frame.size.width += 20; //l + r padding
-            root.frame = frame;
             root.contentHorizontalAlignment = .center
-            root.configuration?.contentInsets =  NSDirectionalEdgeInsets(top: 0.0, leading: 30.0, bottom: 0.0, trailing: 30.0)
+            root.configuration?.baseBackgroundColor = UIColor.clear
             root.updateConfiguration()
         }
         if(buttonType == EntityButtonType.action){
             root.setTitleColor(mainColor, for: UIControl.State.normal)
-           root.backgroundColor = UIColor.clear
+            root.configuration?.baseBackgroundColor = UIColor.clear
+            root.backgroundColor = UIColor.clear
         }
     }
     

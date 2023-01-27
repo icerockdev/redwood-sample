@@ -26,34 +26,18 @@ import org.example.library.MR
 import ru.alex009.redwood.schema.compose.Space
 
 @Composable
-fun PostsList(routeToCreate: (String) -> Unit) {
-    val itemsList = remember {
-        mutableStateListOf(
-            CardItem(
-                data = "1 Сентября 2022 в 12:01",
-                text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = true,
-            ) { routeToCreate("1 Сентября 2022 в 12:01") },
-            CardItem(
-                data = "2 Сентября 2022 в 12:01",
-                text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = false
-            ) { routeToCreate("2 Сентября 2022 в 12:01") },
-            CardItem(
-                data = "3 Сентября 2022 в 12:01",
-                text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = true
-            ) { routeToCreate("3 Сентября 2022 в 12:01") },
-            CardItem(
-                data = "4 Сентября 2022 в 12:01",
-                text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = false
-            ) { routeToCreate("4 Сентября 2022 в 12:01") },
-            CardItem(
-                data = "31 Сентября 2022 в 12:01",
-                text = "Никого не смущает огромная популяция кенгуру, которых в австралии почти столько же, сколько и людей, проживающих там? ",
-                isLike = true
-            ) { routeToCreate("31 Сентября 2022 в 12:01") },
+fun PostsList(routeToCreate: (String, String) -> Unit) {
+    val itemsList by remember {
+        mutableStateOf(
+            NEWS_LIST.mapIndexed { index, it ->
+                CardItem(
+                    data = it.first,
+                    text = it.second,
+                    isLike = index % 2 == 0,
+                ) {
+                    routeToCreate(it.first, it.second)
+                }
+            }
         )
     }
 
@@ -62,42 +46,24 @@ fun PostsList(routeToCreate: (String) -> Unit) {
         width = Constraint.Fill,
         height = Constraint.Fill
     ) {
-        Stack(
-            child1 = {
-                Column(
-                    width = Constraint.Fill,
-                    overflow = Overflow.Scroll
-                ) {
-                    for (cardItem in itemsList) {
-                        Item(
-                            data = cardItem.data,
-                            text = cardItem.text,
-                            isLike = cardItem.isLike,
-                            onClick = cardItem.onClick
-                        )
-                    }
-                    Space(
-                        background = Color(0x00000000),
-                        width = -1,
-                        height = 80
-                    )
-                }
-            },
-            child2 = {
-                Column(
-                    height = Constraint.Wrap,
-                    horizontalAlignment = CrossAxisAlignment.Center,
-                    width = Constraint.Fill
-                ) {
-                    Button(
-                        text = "Просмотр деталей",
-                        buttonType = ButtonType.Primary,
-                        onClick = { routeToCreate("button click") },
-                        layoutModifier = LayoutModifier.padding(Padding(bottom = 16))
-                    )
-                }
+        Column(
+            width = Constraint.Fill,
+            overflow = Overflow.Scroll
+        ) {
+            for (cardItem in itemsList) {
+                Item(
+                    data = cardItem.data,
+                    text = cardItem.text,
+                    isLike = cardItem.isLike,
+                    onClick = cardItem.onClick
+                )
             }
-        )
+            Space(
+                background = Color(0x00000000),
+                width = 0,
+                height = 80
+            )
+        }
     }
 }
 

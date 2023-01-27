@@ -52,10 +52,20 @@ fun ProfileScreen(navigator: Navigator) {
                 height = Constraint.Wrap,
                 horizontalAlignment = CrossAxisAlignment.Center,
                 width = Constraint.Fill
-            ) { Button("Выход", buttonType = ButtonType.Secondary,
-            onClick = {
-
-            }) }
+            ) {
+                Button(
+                    "Выход", buttonType = ButtonType.Secondary,
+                    onClick = {
+                        navigator.navigate("login")
+                    },
+                    layoutModifier = LayoutModifier.padding(
+                        Padding(
+                            horizontal = 16,
+                            vertical = 16
+                        )
+                    )
+                )
+            }
         }
     )
 }

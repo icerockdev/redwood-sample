@@ -10,6 +10,10 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func Space() -> Space {
+        IosWidgetSpace()
+    }
+    
     
     func Button() -> Button {
         IosWidgetButton()

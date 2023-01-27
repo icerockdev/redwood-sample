@@ -11,6 +11,7 @@ import shared_ios
 
 class IosWidgetCard :  WidgetCard{
     
+    
     private let root: MyCardView = {
         let container = MyCardView()
         container.translatesAutoresizingMaskIntoConstraints = true
@@ -21,7 +22,14 @@ class IosWidgetCard :  WidgetCard{
        return container;
     }()
     
-   
+    func onClick(onClick: (() -> Void)? = nil) {
+        if(onClick != nil){
+            root.setOnClickListener {
+                onClick!()
+            }
+        }
+        
+    }
     
     var child: Redwood_widgetWidgetChildren {
         ExposedKt.createViewChildrenListener(parent: root, insert: myInsert)
@@ -54,3 +62,23 @@ class MyCardView: UIStackView{
         return CGSize(width: size.width, height: childSize?.height ?? 32)
     }
 }
+
+extension UIView {
+    
+    func setOnClickListener(action :@escaping () -> Void){
+        let tapRecogniser = ClickListener(target: self, action: #selector(onViewClicked(sender:)))
+        tapRecogniser.onClick = action
+        self.addGestureRecognizer(tapRecogniser)
+    }
+     
+    @objc func onViewClicked(sender: ClickListener) {
+        if let onClick = sender.onClick {
+            onClick()
+        }
+    }
+     
+}
+
+class ClickListener: UITapGestureRecognizer {
+     var onClick : (() -> Void)? = nil
+    }

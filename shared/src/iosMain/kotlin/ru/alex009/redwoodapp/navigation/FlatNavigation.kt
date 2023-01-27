@@ -33,7 +33,7 @@ data class FlatNavigation(
                         }
                     )
                 navController.pushViewController(newViewController, animated = true)
-                navController.navigationBarHidden = navBarVisibility[key]?.not()?:false
+                navController.navigationBarHidden = navBarVisibility[key]?.not() ?: false
             }
 
             override fun popBackStack() {
@@ -43,14 +43,16 @@ data class FlatNavigation(
         val rootViewController: UIViewController =
             routes[startDestination]!!(provider, navigator, emptyMap())
         navController = UINavigationController(rootViewController)
-        navController.navigationBarHidden = navBarVisibility[startDestination]?.not()?:false
+        navController.navigationBarHidden = navBarVisibility[startDestination]?.not() ?: false
         navController.navigationBar.backgroundColor = UIColor.whiteColor
         return navController
     }
 }
 
+fun String.getParams(placeholder:String) = this.getParams(placeholder,placeholder.getStableParts())
+
 fun String.getStableParts(): List<String> {
-    if (contains('{').not()) return listOf(this)
+    if(contains('{').not()) return listOf(this)
     return split('{').map { it.split('}').last() }
 }
 
@@ -74,6 +76,10 @@ fun String.getParams(placeholder: String, stablePart: List<String>): Map<String,
     if (stablePart.size == 1 && this.equals(stablePart.get(0))) return mapOf()
     val mapParams = mutableMapOf<String, String>()
     val currentStablePart = stablePart.get(0)
+    if(currentStablePart.isEmpty()){
+        mapParams[placeholder.removePrefix("{").removeSuffix("}")] = this
+        return mapParams
+    }
     mapParams[placeholder.substringBefore(currentStablePart)
         .removePrefix("{")
         .removeSuffix("}")] = substringBefore(currentStablePart)

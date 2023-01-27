@@ -59,19 +59,15 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
         "start",
         isToolbarVisible = false,
     ) { navigator, _ ->
-        PostsList {
-            navigator.navigate("/user/2/orders?query=dasdsa&order-by=id")
+        PostsList { date, text ->
+            navigator.navigate("/details/${date}?description=${text}")
         }
     }
     registerScreen(
-        "/user/{userId}/orders?query={queryParam}&order-by={orderParam}",
+        "/details/{date}?description={description}",
         isToolbarVisible = true
-    ) { _, args ->
-        Box {
-            Text(
-                text = args.toString()
-            )
-        }
+    ) { navController, args ->
+        DetailsScreen(navController, args.toString(), args.toString())
     }
 }
 
@@ -91,15 +87,3 @@ fun Box(content: @Composable () -> Unit) {
         }
     }
 }
-
-data class User(
-    val firstName: String,
-    val secondName: String
-)
-
-val User.fullName: String
-    get() {
-       return "$firstName $secondName"
-    }
-
-fun User.size(): Int = fullName.length

@@ -19,7 +19,7 @@ class IosWidgetButton: WidgetButton {
     private let root: UIButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 10
-        configuration.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20)
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20)
         let view = UIButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         return view

@@ -26,6 +26,7 @@ import platform.UIKit.addSubview
 import platform.UIKit.backgroundColor
 import platform.UIKit.bottomAnchor
 import platform.UIKit.leadingAnchor
+import platform.UIKit.navigationController
 import platform.UIKit.navigationItem
 import platform.UIKit.safeAreaLayoutGuide
 import platform.UIKit.setTranslatesAutoresizingMaskIntoConstraints
@@ -35,6 +36,7 @@ import platform.UIKit.widthAnchor
 
 internal class ComposeViewController(
     private val provider: Widget.Provider<UIView>,
+    private val isNavigationVisible: Boolean,
     private val compose: @Composable () -> Unit,
 ) : UIViewController(null, null) {
     private lateinit var displayLink: CADisplayLink
@@ -74,6 +76,7 @@ internal class ComposeViewController(
         )
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop, NSDefaultRunLoopMode)
         this.displayLink = displayLink
+        navigationController?.navigationBarHidden = isNavigationVisible.not()
     }
 
     @ObjCAction

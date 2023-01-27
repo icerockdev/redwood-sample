@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
+import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
@@ -20,6 +21,7 @@ import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
+import org.example.library.MR
 
 @Composable
 fun PostsList(routeToCreate: (String) -> Unit) {
@@ -75,60 +77,106 @@ fun PostsList(routeToCreate: (String) -> Unit) {
                 }
             },
             child2 = {
-                Button(
-                    text = "Просмотр деталей",
-                    buttonType = ButtonType.Primary,
-                    onClick = { routeToCreate("button click") }
-                )
+                Column(
+                    height = Constraint.Wrap,
+                    horizontalAlignment = CrossAxisAlignment.Center,
+                    width = Constraint.Fill
+                ) {
+                    Button(
+                        text = "Просмотр деталей",
+                        buttonType = ButtonType.Primary,
+                        onClick = { routeToCreate("button click") },
+                        layoutModifier = LayoutModifier.padding(Padding(bottom = 16))
+                    )
+                }
             }
         )
     }
 }
 
 @Composable
-fun Item(data: String, text: String, isLike: Boolean, onClick:()->Unit) {
+fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
     var _isLike: Boolean by remember { mutableStateOf(isLike) }
     Column(padding = Padding(top = 16)) {
         Card {
             Column(
-                padding = Padding(16)
+                padding = Padding(top = 16, start = 16, bottom = 8, end = 16)
             ) {
                 Text(
                     text = data,
                     isSingleLine = true,
                     textType = TextType.Secondary,
-                    layoutModifier = LayoutModifier.padding(Padding(bottom = 16))
+                    layoutModifier = LayoutModifier.padding(Padding(bottom = 0))
                 )
                 Text(
                     text = text,
                     isSingleLine = false,
                     textType = TextType.Primary,
-                    layoutModifier = LayoutModifier.padding(Padding(bottom = 16))
+                    layoutModifier = LayoutModifier.padding(Padding(bottom = 0))
                 )
                 Row(
                     width = Constraint.Fill,
                     horizontalAlignment = MainAxisAlignment.End
                 ) {
+                    var like: Int by remember { mutableStateOf(16) }
+                    var dislike: Int by remember { mutableStateOf(9) }
+                    var isLiked: Boolean? by remember { mutableStateOf(null) }
                     ImageButton(
-                        text = "16",
-                        icon = null, //MR.images.getImageByFileName("like"),
+                        text = like.toString(),
+                        icon = if (isLiked == true) MR.images.like_cliked else MR.images.like,
                         isClicked = _isLike,
-                        onClick = { _isLike = !_isLike },
+                        onClick = {
+                            when (isLiked) {
+                                null -> {
+                                    like = like + 1
+                                    isLiked = true
+                                }
+                                true -> {
+                                    like = like - 1
+                                    isLiked = null
+                                }
+                                else -> {
+                                    like = like + 1
+                                    dislike = dislike - 1
+                                    isLiked = true
+                                }
+                            }
+
+                        },
                         layoutModifier = LayoutModifier.padding(Padding(end = 8))
                     )
                     ImageButton(
-                        text = "9",
-                        icon = null, //MR.images.dislike,
+                        text = dislike.toString(),
+                        icon = if (isLiked == false) MR.images.dislike_cliked else MR.images.dislike,
                         isClicked = _isLike,
-                        onClick = { _isLike = !_isLike },
+                        onClick = {
+                            when (isLiked) {
+                                null -> {
+                                    dislike = dislike + 1
+                                    isLiked = false
+                                }
+                                false -> {
+                                    dislike = dislike - 1
+                                    isLiked = null
+                                }
+                                else -> {
+                                    like = like - 1
+                                    dislike = dislike + 1
+                                    isLiked = false
+                                }
+                            }
+                        },
                     )
                 }
-                Column (height = Constraint.Wrap){
+                Column(
+                    height = Constraint.Wrap,
+                    horizontalAlignment = CrossAxisAlignment.Center,
+                    width = Constraint.Fill
+                ) {
                     Button(
-                        text = "Предложить пост",
-                        buttonType = ButtonType.Primary,
+                        text = "Подробнее",
+                        buttonType = ButtonType.Action,
                         onClick = { onClick() },
-                        layoutModifier = LayoutModifier.padding(Padding(16))
                     )
                 }
             }

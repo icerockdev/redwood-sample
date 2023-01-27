@@ -12,7 +12,10 @@ import shared_ios
 class IosImageButton: WidgetImageButton {
   
     private let root: UIButton = {
-        let view = UIButton(type: .custom)
+        var configuration = UIButton.Configuration.filled()
+        configuration.imagePadding = 10
+        configuration.baseBackgroundColor = UIColor.clear
+        let view = UIButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         view.backgroundColor = UIColor.clear
         view.setTitleColor(.black, for: .normal)
@@ -20,10 +23,7 @@ class IosImageButton: WidgetImageButton {
         return view
 
     }()
-    
-    func cornerRadius(cornerRadius: KotlinInt?) {
-        // TODO
-    }
+  
     
     func icon(icon: ImageResource?) {
         root.setImage(icon?.toUIImage(), for: .normal)
@@ -35,7 +35,7 @@ class IosImageButton: WidgetImageButton {
     
     
     func text(text: String) {
-    //    root.setTitle(text, for: .normal)
+       root.setTitle(text, for: .normal)
     }
     
     func onClick(onClick: (() -> Void)? = nil) {

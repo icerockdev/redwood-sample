@@ -30,7 +30,7 @@ actual fun navigationTabs(
                 title = title,
                 icon = icon,
                 createViewController = { provider, navigator ->
-                    ComposeViewController(provider) @Composable {
+                    ComposeViewController(provider, false) @Composable {
                         screen(navigator)
                     }
                 }

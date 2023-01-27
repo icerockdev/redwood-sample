@@ -14,7 +14,7 @@ actual fun navigation(
     block: FlatNavigationDsl.() -> Unit
 ): NavigationHost {
     val routes: MutableMap<String, FlatRouteData> = mutableMapOf()
-    val navBarVisibility : MutableMap<String, Boolean> = mutableMapOf()
+    val navBarVisibility: MutableMap<String, Boolean> = mutableMapOf()
     val dsl = object : FlatNavigationDsl {
         override fun registerScreen(
             uri: String,
@@ -23,11 +23,11 @@ actual fun navigation(
         ) {
             val startUri = uri.substringBefore('?')
             routes[startUri] = { provider, navigator, args ->
-                ComposeViewController(provider) @Composable {
+                ComposeViewController(provider, navBarVisibility[startUri] ?: true) @Composable {
                     screen(navigator, args)
                 }
             }
-            navBarVisibility[startUri]= isToolbarVisible
+            navBarVisibility[startUri] = isToolbarVisible
         }
 
         override fun registerNavigation(
@@ -39,7 +39,7 @@ actual fun navigation(
             routes[startUri] = { provider, navigator, args ->
                 childNavigation(navigator, args).createViewController(provider)
             }
-            navBarVisibility[startUri]= isToolbarVisible
+            navBarVisibility[startUri] = isToolbarVisible
         }
     }
     dsl.block()

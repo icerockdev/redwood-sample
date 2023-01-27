@@ -6,6 +6,9 @@ import platform.UIKit.UINavigationController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 import platform.UIKit.backgroundColor
+import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.getParams
+import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.getStableParts
+import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.isPlaceholderOf
 
 data class FlatNavigation(
     val startDestination: String,
@@ -33,12 +36,12 @@ data class FlatNavigation(
                             putAll(startUri.getParams(key, key.getStableParts()))
                         }
                     )
-                navController.pushViewController(newViewController, animated = true)
+                navController.pushViewController(newViewController, animated = false)
                 navController.navigationBarHidden = navBarVisibility[key]?.not() ?: false
             }
 
             override fun popBackStack() {
-                navController.popViewControllerAnimated(true)
+                navController.popViewControllerAnimated(false)
             }
         }
         val rootViewController: UIViewController =
@@ -50,45 +53,3 @@ data class FlatNavigation(
     }
 }
 
-fun String.getParams(placeholder:String) = this.getParams(placeholder,placeholder.getStableParts())
-
-fun String.getStableParts(): List<String> {
-    if(contains('{').not()) return listOf(this)
-    return split('{').map { it.split('}').last() }
-}
-
-fun String.isPlaceholderOf(value: String): Boolean {
-    return value.checkPlaceholderPart(getStableParts())
-}
-
-fun String.checkPlaceholderPart(stablePart: List<String>): Boolean {
-    if (isEmpty() && stablePart.isEmpty()) return true
-    if (stablePart.size == 1 && stablePart.get(0).isEmpty()) return true
-    if (stablePart.size == 1 && this.equals(stablePart.get(0))) return true
-    return contains(stablePart.get(0)) && substringAfter(stablePart.get(0)).checkPlaceholderPart(
-        stablePart.subList(
-            1,
-            stablePart.size
-        )
-    )
-}
-
-fun String.getParams(placeholder: String, stablePart: List<String>): Map<String, String> {
-    if (isEmpty() && stablePart.isEmpty()) return mapOf()
-    if (stablePart.size == 1 && this.equals(stablePart.get(0))) return mapOf()
-    val mapParams = mutableMapOf<String, String>()
-    val currentStablePart = stablePart.get(0)
-    if(currentStablePart.isEmpty()){
-        mapParams[placeholder.removePrefix("{").removeSuffix("}")] = this
-        return mapParams
-    }
-    mapParams[placeholder.substringBefore(currentStablePart)
-        .removePrefix("{")
-        .removeSuffix("}")] = substringBefore(currentStablePart)
-    val otherParams = substringAfter(currentStablePart).getParams(
-        placeholder.substringAfter(currentStablePart),
-        stablePart.subList(1, stablePart.size)
-    )
-    mapParams.putAll(otherParams)
-    return mapParams.filterKeys { it.isNotEmpty() }
-}

@@ -14,7 +14,7 @@ class IosWidgetSpace: Space {
     private let root: UIView = {
         let container = UIView()
 
-        container.translatesAutoresizingMaskIntoConstraints = true
+        container.translatesAutoresizingMaskIntoConstraints = false
         return container;
     }()
     

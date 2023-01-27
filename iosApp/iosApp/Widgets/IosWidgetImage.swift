@@ -12,7 +12,7 @@ import shared_ios
 class IosWidgetImage: WidgetImage {
  
     private let root: UIImageView = {
-        let view = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0))
+        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = true
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -59,11 +59,7 @@ class IosWidgetImage: WidgetImage {
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                       // if(self?._width != nil && self?._height != nil){
-                            self?.root.image = image.resizeImageTo(size: CGSize(width: 200, height: 200))
-                     //   }else{
-                     //       self?.root.image = image
-                    //    }
+                        self?.root.image = image
                     }
                 }
             }

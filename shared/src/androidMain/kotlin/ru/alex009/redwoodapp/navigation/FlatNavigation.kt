@@ -36,7 +36,7 @@ data class FlatNavigation(
             startDestination = startDestination
         ) {
             routes.forEach { item ->
-                val argsNameList: List<String> = item.key.getArgs()
+                val argsNameList: List<String> = item.key.getArgs()// + item.key.getParams()
                 composable(
                     route = item.key,
                     arguments = if (argsNameList.isEmpty()) {
@@ -76,7 +76,22 @@ data class FlatNavigation(
 fun String.getArgs(): List<String> {
     val result = mutableListOf<String>()
 
-    val tmp = this.split('/')
+    val tmp = this.substringBefore('?').split('/')
+    if (tmp.isEmpty() || tmp.size == 1) return listOf()
+    tmp.forEach {
+        if (it.contains('}')) {
+            result.add(it.removePrefix("{")
+                .removeSuffix("}"))
+        }
+    }
+
+    return result
+}
+
+fun String.getParams(): List<String> {
+    val result = mutableListOf<String>()
+
+    val tmp = this.substringAfter('?').split('&')
     if (tmp.isEmpty() || tmp.size == 1) return listOf()
     tmp.forEach {
         if (it.contains('}')) {

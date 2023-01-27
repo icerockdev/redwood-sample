@@ -38,6 +38,7 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
                 Icon(
                     modifier = Modifier.padding(end = 8.dp),
                     painter = painterResource(_icon),
+                    tint = Color.Unspecified,
                     contentDescription = null
                 )
                 Text(

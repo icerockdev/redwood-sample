@@ -128,16 +128,16 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                         onClick = {
                             when (isLiked) {
                                 null -> {
-                                    like = like + 1
+                                    like += 1
                                     isLiked = true
                                 }
                                 true -> {
-                                    like = like - 1
+                                    like -= 1
                                     isLiked = null
                                 }
                                 else -> {
-                                    like = like + 1
-                                    dislike = dislike - 1
+                                    like += 1
+                                    dislike -= 1
                                     isLiked = true
                                 }
                             }
@@ -152,16 +152,16 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                         onClick = {
                             when (isLiked) {
                                 null -> {
-                                    dislike = dislike + 1
+                                    dislike += 1
                                     isLiked = false
                                 }
                                 false -> {
-                                    dislike = dislike - 1
+                                    dislike -= 1
                                     isLiked = null
                                 }
                                 else -> {
-                                    like = like - 1
-                                    dislike = dislike + 1
+                                    like -= 1
+                                    dislike += 1
                                     isLiked = false
                                 }
                             }

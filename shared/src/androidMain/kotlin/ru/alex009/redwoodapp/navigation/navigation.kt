@@ -14,6 +14,7 @@ actual fun navigation(
     val dsl = object : FlatNavigationDsl {
         override fun registerScreen(
             uri: String,
+            isToolbarVisible: Boolean,
             screen: @Composable (Navigator, Map<String, String>) -> Unit
         ) {
             routes[uri] = { provider, navigator, args ->
@@ -25,6 +26,7 @@ actual fun navigation(
 
         override fun registerNavigation(
             uri: String,
+            isToolbarVisible: Boolean,
             childNavigation: (Navigator, Map<String, String>) -> NavigationHost
         ) {
             routes[uri] = @Composable { provider, navigator, args ->

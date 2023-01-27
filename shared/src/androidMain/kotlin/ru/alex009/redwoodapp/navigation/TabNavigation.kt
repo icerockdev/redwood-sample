@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp.navigation
 
 import android.content.Context
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavBackStackEntry
@@ -88,12 +90,20 @@ data class TabNavigation(
         val context: Context = LocalContext.current
 
         BottomNavigationItem(
+            modifier = Modifier.background(Color.White),
             label = {
                 val title: StringDesc = data.title ?: return@BottomNavigationItem
                 Text(text = title.toString(context))
             },
             selected = currentRoute == key,
-            onClick = { navController.navigate(key) },
+            selectedContentColor = Color.Black,
+            unselectedContentColor = Color.Gray,
+            onClick = {
+                navController.navigate(key) {
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            },
             icon = {
                 val icon: ImageResource = data.icon ?: return@BottomNavigationItem
 

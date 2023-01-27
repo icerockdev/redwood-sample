@@ -56,25 +56,25 @@ fun mainApp(): NavigationHost {
     }
 }
 
-private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestination = "auth") {
+private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestination = "line") {
+    registerNavigation(
+        uri = "line",
+        title = "Лента".desc(),
+        icon = MR.images.line,
+        childNavigation = {
+            secondTabNavigation()
+        }
+    )
     registerScreen(
-        uri = "auth",
-        title = "fistTab".desc(),
-        icon = MR.images.ic_favorite_menu,
+        uri = "settings",
+        title = "Настройки".desc(),
+        icon = MR.images.settings,
         screen = {
             Box {
                 Text(
                     text = "First tab"
                 )
             }
-        }
-    )
-    registerNavigation(
-        uri = "auth2",
-        title = "secondTab".desc(),
-        icon = MR.images.like,
-        childNavigation = {
-            secondTabNavigation()
         }
     )
 }

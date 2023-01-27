@@ -70,11 +70,7 @@ private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestina
         title = "Настройки".desc(),
         icon = MR.images.settings,
         screen = {
-            Box {
-                Text(
-                    text = "First tab"
-                )
-            }
+            ProfileScreen()
         }
     )
 }

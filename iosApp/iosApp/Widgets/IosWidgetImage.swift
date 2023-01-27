@@ -10,17 +10,91 @@ import UIKit
 import shared_ios
 
 class IosWidgetImage: WidgetImage {
+ 
     private let root: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        let view = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 200.0))
+        view.translatesAutoresizingMaskIntoConstraints = true
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
-    func url(url: String) {
-        root.image = UIImage(systemName: url)
+    var _placeholder: UIImage? = nil
+    var _width: CGFloat? = nil
+    var _height: CGFloat? = nil
+    
+    func url(url: String?) {
+        if(url != nil){
+            root.load(url: URL(string:url!)!)
+        }
+    }
+    
+    func placeholder(placeholder: ImageResource?) {
+        var image = placeholder?.toUIImage()
+         _placeholder = image
+        if(_width != nil && _height != nil){
+            image = _placeholder?.resizeImageTo(size: CGSize(width: _width!, height: _height!))
+        }
+        if(image != nil){
+            root.layer.cornerRadius = image!.size.width / 2;
+            root.layer.masksToBounds = true
+        }
+        root.image = image
+    }
+    
+    func width(width: KotlinInt?) {
+        _width = CGFloat(width?.intValue ?? 10)
+    }
+    
+    func height(height: KotlinInt?) {
+        _height = CGFloat(height?.intValue ?? 10)
     }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
     var value: Any { root }
+    
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                       // if(self?._width != nil && self?._height != nil){
+                            self?.root.image = image.resizeImageTo(size: CGSize(width: 200, height: 200))
+                     //   }else{
+                     //       self?.root.image = image
+                    //    }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+extension UIImage {
+    
+    func resizeImageTo(size: CGSize) -> UIImage? {
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        self.draw(in: CGRect(origin: CGPoint.zero, size: size))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return resizedImage
+    }
 }

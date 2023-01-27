@@ -8,6 +8,8 @@ import app.cash.redwood.schema.Property
 import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
+import dev.icerock.moko.graphics.Color
+import dev.icerock.moko.graphics.parseColor
 import dev.icerock.moko.resources.ImageResource
 
 @Schema(
@@ -19,6 +21,7 @@ import dev.icerock.moko.resources.ImageResource
         Card::class,
         ImageButton::class,
         Button::class,
+        Space::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -61,7 +64,7 @@ data class Image(
 data class ImageButton(
     @Property(1) val text: String,
     @Property(2)
-    @Default("null")  val icon: ImageResource?,
+    @Default("null") val icon: ImageResource?,
     @Property(3)
     @Default("true")
     val isClicked: Boolean,
@@ -80,11 +83,13 @@ data class Button(
     @Property(4)
     val onClick: () -> Unit,
 
-)
+    )
 
 @Widget(6)
 data class Card(
     @Children(1) val child: @Composable () -> Unit,
+    @Property(2)
+    val onClick: () -> Unit,
 )
 
 //todo fix to normal list
@@ -92,4 +97,12 @@ data class Card(
 data class Stack(
     @Children(1) val child1: @Composable () -> Unit,
     @Children(2) val child2: @Composable () -> Unit,
+)
+
+@Widget(8)
+data class Space(
+    @Property(1) val background: Color = Color(0x00000000),
+    // -1 max size
+    @Property(2) val width: Int,
+    @Property(3) val height: Int,
 )

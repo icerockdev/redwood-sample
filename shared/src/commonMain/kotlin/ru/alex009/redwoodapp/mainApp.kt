@@ -64,7 +64,7 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
         }
     }
     registerScreen(
-        "/user/{userId}/orders",
+        "/user/{userId}/orders?query={queryParam}&order-by={orderParam}",
         isToolbarVisible = true
     ) { _, args ->
         Box {

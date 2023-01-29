@@ -25,7 +25,7 @@ import ru.alex009.redwoodapp.shared.R
 data class FlatNavigation(
     val startDestination: String,
     val routes: MutableMap<String, FlatRouteData>,
-    val isToolbarVisible: Boolean
+    val navBarVisibility: MutableMap<String, Boolean>
 ) : NavigationHost {
 
     @Composable
@@ -66,7 +66,7 @@ data class FlatNavigation(
                 ) { entry ->
                     Scaffold(
                         topBar = {
-                            if (isToolbarVisible) {
+                            if (navBarVisibility[navController.currentDestination?.route] == true) {
                                 TopAppBar(
                                     backgroundColor = Color.White,
                                     contentColor = Color.Black,
@@ -78,7 +78,7 @@ data class FlatNavigation(
                                             contentDescription = null
                                         )
                                     }
-                                    Text(text = "tool bar")
+                                    Text(text = "")
                                 }
                             }
                         }

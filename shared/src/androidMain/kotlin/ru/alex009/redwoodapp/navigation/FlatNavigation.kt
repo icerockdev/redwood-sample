@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -173,6 +174,8 @@ fun String.getParams(): List<String> {
 class ScreenSettingsImpl() : ScreenSettings {
 
     var text: StringDesc by mutableStateOf("".desc())
+
+    lateinit var viewModelStoreOwner: ViewModelStoreOwner
     override fun setTitle(title: StringDesc) {
         this.text = title
     }

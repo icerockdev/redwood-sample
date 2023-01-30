@@ -19,9 +19,16 @@ import ru.alex009.redwood.schema.compose.TextInput
 import ru.alex009.redwoodapp.navigation.Navigator
 import org.example.library.MR
 import ru.alex009.redwoodapp.Box
+import ru.alex009.redwoodapp.SimpleLoginViewModel
+import ru.alex009.redwoodapp.getViewModel
+import ru.alex009.redwoodapp.navigation.ScreenSettings
 
 @Composable
-fun LoginScreen(navigator: Navigator) {
+fun LoginScreen(navigator: Navigator, screenSettings: ScreenSettings) {
+    val viewModel: SimpleLoginViewModel = getViewModel(
+        screenSettings) {
+        SimpleLoginViewModel()
+    }
     Box {
         Column(
             horizontalAlignment = CrossAxisAlignment.Center,
@@ -53,7 +60,8 @@ fun LoginScreen(navigator: Navigator) {
                 inputType = InputType.Password
             )
             Button(
-                MR.strings.auth_button.desc(), buttonType = ButtonType.Primary,
+                viewModel.LoginButtonTitle,
+                buttonType = ButtonType.Primary,
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {
                     navigator.navigate("tabs")

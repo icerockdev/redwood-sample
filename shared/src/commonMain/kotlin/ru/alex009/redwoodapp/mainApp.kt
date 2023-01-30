@@ -22,8 +22,8 @@ fun mainApp(): NavigationHost {
         registerScreen(
             uri = "login",
             isToolbarVisible = false
-        ) { navigator, _, _ ->
-            LoginScreen(navigator)
+        ) { navigator, _, screenSettings ->
+            LoginScreen(navigator, screenSettings)
         }
         registerNavigation(
             uri = "tabs",

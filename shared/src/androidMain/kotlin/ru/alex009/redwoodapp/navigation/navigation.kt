@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.widget.Widget
 
@@ -20,6 +21,7 @@ actual fun navigation(
             screen: @Composable (Navigator, Map<String, String>, ScreenSettings) -> Unit
         ) {
             routes[uri] = { provider, navigator, args ->
+                screenSettings.viewModelStoreOwner = requireNotNull(LocalViewModelStoreOwner.current)
                 RedwoodContent(provider = provider) {
                     screen(navigator, args, screenSettings)
                 }

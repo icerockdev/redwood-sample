@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
+import ru.alex009.redwood.schema.InputType
 import ru.alex009.redwood.schema.widget.TextInput
 
 class ComposeTextInput : TextInput<@Composable () -> Unit> {
@@ -72,5 +73,9 @@ class ComposeTextInput : TextInput<@Composable () -> Unit> {
 
     override fun onChange(onChange: ((String) -> Unit)?) {
         _onChangeState = onChange ?: {}
+    }
+
+    override fun inputType(inputType: InputType?) {
+        // to do
     }
 }

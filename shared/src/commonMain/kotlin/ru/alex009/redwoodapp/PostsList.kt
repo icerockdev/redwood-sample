@@ -1,6 +1,7 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,15 +14,21 @@ import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
+import dev.icerock.moko.resources.desc.desc
 import org.example.library.MR
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Space
 import ru.alex009.redwood.schema.compose.Text
+import ru.alex009.redwoodapp.navigation.ScreenSettings
 
 @Composable
-fun PostsList(routeToCreate: (String, String) -> Unit) {
+fun PostsList(screenSettings: ScreenSettings, routeToCreate: (String, String) -> Unit) {
+    LaunchedEffect(screenSettings){
+        screenSettings.setTitle("Posts".desc())
+    }
+
     val itemsList by remember {
         mutableStateOf(
             NEWS_LIST.mapIndexed { index, it ->

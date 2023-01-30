@@ -36,7 +36,8 @@ class ComposeImage : Image<@Composable () -> Unit> {
             else
                 Modifier.clip(CircleShape),
             imageModel = _urlState,
-            placeHolder = painterResource(_placeholder ?: R.drawable.empty)
+            placeHolder = painterResource(_placeholder ?: R.drawable.empty),
+            error = painterResource(_placeholder ?: R.drawable.empty)
         )
     }
 

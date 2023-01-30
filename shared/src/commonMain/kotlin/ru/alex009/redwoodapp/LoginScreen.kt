@@ -49,7 +49,7 @@ fun LoginScreen(navigator: Navigator) {
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {
                     navigator.navigate("tabs")
-                }, layoutModifier = LayoutModifier.padding(Padding(horizontal = 16, vertical = 100))
+                }, layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 100, end = 16))
             )
         }
     }

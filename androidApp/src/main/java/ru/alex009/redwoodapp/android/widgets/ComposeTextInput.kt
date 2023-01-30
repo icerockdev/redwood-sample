@@ -14,16 +14,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
 import ru.alex009.redwood.schema.InputType
 import ru.alex009.redwood.schema.widget.TextInput
 
 class ComposeTextInput : TextInput<@Composable () -> Unit> {
     private var _textState by mutableStateOf("")
-    private var _hintState by mutableStateOf("")
+    private var _hintState: StringDesc by mutableStateOf("".desc())
     private var _onChangeState: (String) -> Unit by mutableStateOf({})
+    private var _inputType: InputType? by mutableStateOf(InputType.Text)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
@@ -40,11 +45,22 @@ class ComposeTextInput : TextInput<@Composable () -> Unit> {
             modifier = Modifier.fillMaxWidth(),
             value = _textState,
             onValueChange = _onChangeState,
+            visualTransformation = if (_inputType == InputType.Password) {
+                PasswordVisualTransformation()
+            } else {
+                VisualTransformation.None
+            },
+            singleLine = true,
             decorationBox = { innerTextField ->
                 TextFieldDefaults.OutlinedTextFieldDecorationBox(
                     value = _textState,
                     innerTextField = innerTextField,
-                    placeholder = { Text(text = _hintState, color = Color(0xFFA9A9A9))},
+                    placeholder = {
+                        Text(
+                            text = _hintState.toString(LocalContext.current),
+                            color = Color(0xFFA9A9A9)
+                        )
+                    },
                     enabled = true,
                     singleLine = false,
                     visualTransformation = VisualTransformation.None,
@@ -67,7 +83,7 @@ class ComposeTextInput : TextInput<@Composable () -> Unit> {
         _textState = state
     }
 
-    override fun hint(hint: String) {
+    override fun hint(hint: StringDesc) {
         _hintState = hint
     }
 
@@ -76,6 +92,6 @@ class ComposeTextInput : TextInput<@Composable () -> Unit> {
     }
 
     override fun inputType(inputType: InputType?) {
-        // to do
+        _inputType = inputType
     }
 }

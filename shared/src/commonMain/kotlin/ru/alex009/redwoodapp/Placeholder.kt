@@ -42,3 +42,7 @@ val NEWS_LIST = listOf<Pair<String, String>>(
         "Одним из неожиданных и приятных сюрпризов конференции Xbox Developer_Direct стал анонс Hi-Fi Rush — ритм-экшена от создателей The Evil Within."
     )
 )
+
+const val USR_NAME = "Иванов Петр"
+
+const val USER_AVATAR = "https://www.dierennieuws.nl/wp-content/uploads/2022/01/kat-in-sneeuw-800x445.jpg"

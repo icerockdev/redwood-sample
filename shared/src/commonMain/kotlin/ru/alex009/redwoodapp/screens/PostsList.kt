@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package ru.alex009.redwoodapp.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,7 +21,9 @@ import ru.alex009.redwood.schema.compose.Card
 import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Space
 import ru.alex009.redwood.schema.compose.Text
+import ru.alex009.redwoodapp.NEWS_LIST
 import ru.alex009.redwoodapp.navigation.ScreenSettings
+import ru.alex009.redwoodapp.screens.entity.CardItem
 
 @Composable
 fun PostsList(screenSettings: ScreenSettings, routeToCreate: (String, String) -> Unit) {
@@ -100,7 +102,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                         var dislike: Int by remember { mutableStateOf(7) }
                         var isLiked: Boolean? by remember { mutableStateOf(isLike) }
                         ImageButton(
-                            text = like.toString(),
+                            text = like.toString().desc(),
                             icon = if (isLiked == true) MR.images.like_cliked else MR.images.like,
                             isClicked = isLiked == true,
                             onClick = {
@@ -124,7 +126,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                             layoutModifier = LayoutModifier.padding(Padding(end = 8))
                         )
                         ImageButton(
-                            text = dislike.toString(),
+                            text = dislike.toString().desc(),
                             icon = if (isLiked == false) MR.images.dislike_cliked else MR.images.dislike,
                             isClicked = isLiked == false,
                             onClick = {

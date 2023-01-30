@@ -12,15 +12,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
 import dev.icerock.moko.resources.ImageResource
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
 import ru.alex009.redwood.schema.widget.ImageButton
 import ru.alex009.redwoodapp.android.R
 
 class ComposeImageButton : ImageButton<@Composable () -> Unit> {
-    private var _text by mutableStateOf("")
+    private var _text : StringDesc by mutableStateOf("".desc())
     private var _icon: Int by mutableStateOf(0)
     private var _onClick: () -> Unit by mutableStateOf({})
     private var _isClicked by mutableStateOf(true)
@@ -42,14 +45,14 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
                     contentDescription = null
                 )
                 Text(
-                    text = _text,
+                    text = _text.toString(LocalContext.current),
                     color = if (_isClicked) Color(0xFF0C7BC7) else Color(0xFFA9A9A9)
                 )
             }
         }
     }
 
-    override fun text(text: String) {
+    override fun text(text: StringDesc) {
         _text = text
     }
 

@@ -14,8 +14,6 @@ let mainColor = UIColor(red:55.0/255.0, green:121.0/255.0, blue:193.0/255.0, alp
 
 class IosWidgetButton: WidgetButton {
     
-    
-    
     private let root: FillButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 10
@@ -66,9 +64,9 @@ class IosWidgetButton: WidgetButton {
         }
     }
     
-    func text(text: String) {
-        root.setTitle(text, for: .normal)
-        root.setTitle(text, for: .disabled)
+    func text(text: StringDesc) {
+        root.setTitle(text.localized(), for: .normal)
+        root.setTitle(text.localized(), for: .disabled)
     }
     
     func onClick(onClick: (() -> Void)? = nil) {

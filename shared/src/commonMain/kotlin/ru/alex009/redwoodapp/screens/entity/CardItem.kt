@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package ru.alex009.redwoodapp.screens.entity
 
 data class CardItem(
     val data: String,

@@ -12,15 +12,16 @@ actual fun navigation(
 ): NavigationHost {
     val routes: MutableMap<String, FlatRouteData> = mutableMapOf()
     val navBarVisibility: MutableMap<String, Boolean> = mutableMapOf()
+    val screenSettings = ScreenSettingsImpl()
     val dsl = object : FlatNavigationDsl {
         override fun registerScreen(
             uri: String,
             isToolbarVisible: Boolean,
-            screen: @Composable (Navigator, Map<String, String>) -> Unit
+            screen: @Composable (Navigator, Map<String, String>, ScreenSettings) -> Unit
         ) {
             routes[uri] = { provider, navigator, args ->
                 RedwoodContent(provider = provider) {
-                    screen(navigator, args)
+                    screen(navigator, args, screenSettings)
                 }
             }
             navBarVisibility[uri] = isToolbarVisible
@@ -29,15 +30,15 @@ actual fun navigation(
         override fun registerNavigation(
             uri: String,
             isToolbarVisible: Boolean,
-            childNavigation: (Navigator, Map<String, String>) -> NavigationHost
+            childNavigation: (Navigator, Map<String, String>, ScreenSettings) -> NavigationHost
         ) {
             routes[uri] = @Composable { provider, navigator, args ->
-                childNavigation(navigator, args).Render(provider)
+                childNavigation(navigator, args, screenSettings).Render(provider)
             }
             navBarVisibility[uri] = isToolbarVisible
         }
     }
     dsl.block()
-    return FlatNavigation(startDestination, routes, navBarVisibility)
+    return FlatNavigation(startDestination, routes, navBarVisibility, screenSettings)
 }
 

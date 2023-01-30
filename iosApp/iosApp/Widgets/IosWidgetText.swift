@@ -10,6 +10,7 @@ import UIKit
 import shared_ios
 
 class IosWidgetText: WidgetText {
+
     private let root: UITextView = {
         let view = UITextView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,12 +22,8 @@ class IosWidgetText: WidgetText {
     func isSingleLine(isSingleLine: Bool) {
         // TODO
     }
-    
-    func textStyle(textStyle: String?) {
-        // TODO
-    }
 
-    func text(text: String) {
+    func text(text_ text: String) {
         root.text = text
     }
     

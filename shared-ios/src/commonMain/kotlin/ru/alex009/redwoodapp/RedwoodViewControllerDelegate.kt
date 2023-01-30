@@ -21,41 +21,6 @@ import ru.alex009.redwood.schema.widget.Stack
 import ru.alex009.redwood.schema.widget.Text
 import ru.alex009.redwood.schema.widget.TextInput
 
-@Suppress("unused") // Called from Swift.
-class RedwoodViewControllerDelegate(
-    root: UIStackView,
-    widgetFactory: WidgetFactory
-) {
-    private val clock = BroadcastFrameClock()
-    private val scope: CoroutineScope = MainScope() + clock
-
-    init {
-        val children = UIViewChildren(
-            parent = root,
-            insert = { view, index -> root.insertArrangedSubview(view, atIndex = index.convert()) }
-        )
-        val composition = RedwoodComposition(
-            scope = scope,
-            container = children,
-            provider = RedwoodAppSchemaWidgetFactories(
-                RedwoodAppSchema = widgetFactory,
-                RedwoodLayout = UIViewRedwoodLayoutWidgetFactory()
-            )
-        )
-        composition.setContent {
-
-        }
-    }
-
-    fun tickClock() {
-        clock.sendFrame(0L) // Compose does not use frame time.
-    }
-
-    fun dispose() {
-        scope.cancel()
-    }
-}
-
 interface WidgetFactory : RedwoodAppSchemaWidgetFactory<UIView>
 
 @Suppress("unused") // Called from Swift.

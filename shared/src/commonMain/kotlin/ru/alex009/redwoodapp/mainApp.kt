@@ -1,64 +1,65 @@
 package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.Composable
-import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
-import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.resources.desc.desc
 import org.example.library.MR
-import ru.alex009.redwood.schema.ButtonType
-import ru.alex009.redwood.schema.compose.Button
-import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwoodapp.navigation.NavigationHost
+import ru.alex009.redwoodapp.navigation.Navigator
 import ru.alex009.redwoodapp.navigation.navigation
 import ru.alex009.redwoodapp.navigation.navigationTabs
+import ru.alex009.redwoodapp.screens.DetailsScreen
+import ru.alex009.redwoodapp.screens.LoginScreen
+import ru.alex009.redwoodapp.screens.PostsList
+import ru.alex009.redwoodapp.screens.ProfileScreen
 
 fun mainApp(): NavigationHost {
     return navigation(startDestination = "login") {
         registerScreen(
             uri = "login",
             isToolbarVisible = false
-        ) { navigator, _, _->
+        ) { navigator, _, _ ->
             LoginScreen(navigator)
         }
         registerNavigation(
             uri = "tabs",
             isToolbarVisible = false,
-            childNavigation = { _, _,_ ->
-                mainScreenNavigation()
+            childNavigation = { navigator, _, _ ->
+                mainScreenNavigation(navigator)
             }
         )
     }
 }
 
-private fun mainScreenNavigation(): NavigationHost = navigationTabs(startDestination = "line") {
-    registerNavigation(
-        uri = "line",
-        title = "Лента".desc(),
-        icon = MR.images.line,
-        childNavigation = {
-            secondTabNavigation()
-        }
-    )
-    registerScreen(
-        uri = "settings",
-        title = "Настройки".desc(),
-        icon = MR.images.settings,
-        screen = {
-            ProfileScreen(it)
-        }
-    )
-}
+private fun mainScreenNavigation(rootNavigator: Navigator): NavigationHost =
+    navigationTabs(startDestination = "line") {
+        registerNavigation(
+            uri = "line",
+            title = MR.strings.tab_list.desc(),
+            icon = MR.images.line,
+            childNavigation = {
+                secondTabNavigation()
+            }
+        )
+        registerScreen(
+            uri = "settings",
+            title = MR.strings.tab_settings.desc(),
+            icon = MR.images.settings,
+            screen = {
+                ProfileScreen(rootNavigator)
+            }
+        )
+    }
 
 private fun secondTabNavigation() = navigation(startDestination = "start") {
     registerScreen(
         "start",
-        isToolbarVisible = false,
-    ) { navigator, _ , screenSettings->
+        isToolbarVisible = true,
+    ) { navigator, _, screenSettings ->
         PostsList(screenSettings) { date, text ->
             navigator.navigate("/details/${date}?description=${text}")
         }
@@ -66,7 +67,7 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
     registerScreen(
         "/details/{date}?description={description}",
         isToolbarVisible = true
-    ) { navController, args , screenSettings->
+    ) { navController, args, screenSettings ->
         DetailsScreen(
             navController,
             args["date"].orEmpty(),

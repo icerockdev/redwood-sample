@@ -6,6 +6,7 @@ import platform.UIKit.UINavigationController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 import platform.UIKit.backgroundColor
+import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.ScreenSettingsImpl
 import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.getParams
 import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.getStableParts
 import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.isPlaceholderOf
@@ -13,11 +14,13 @@ import ru.alex009.redwoodapp.ru.alex009.redwoodapp.navigation.isPlaceholderOf
 data class FlatNavigation(
     val startDestination: String,
     val routes: MutableMap<String, FlatRouteData>,
-    val navBarVisibility: MutableMap<String, Boolean>
+    val navBarVisibility: MutableMap<String, Boolean>,
+    val screenSettings: ScreenSettingsImpl
 ) : NavigationHost {
 
     override fun createViewController(provider: Widget.Provider<UIView>): UIViewController {
         lateinit var navController: UINavigationController
+
         val navigator: Navigator = object : Navigator {
             override fun navigate(uri: String) {
                 val startUri = uri.substringBefore('?')
@@ -49,6 +52,7 @@ data class FlatNavigation(
         navController = UINavigationController(rootViewController)
         navController.navigationBarHidden = navBarVisibility[startDestination]?.not() ?: false
         navController.navigationBar.backgroundColor = UIColor.whiteColor
+        screenSettings.init(navController)
         return navController
     }
 }

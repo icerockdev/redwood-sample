@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package ru.alex009.redwoodapp.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,6 +9,7 @@ import app.cash.redwood.layout.compose.Column
 import dev.icerock.moko.resources.desc.desc
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Text
+import ru.alex009.redwoodapp.LONG_TEXT
 import ru.alex009.redwoodapp.navigation.Navigator
 import ru.alex009.redwoodapp.navigation.ScreenSettings
 

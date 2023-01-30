@@ -31,13 +31,19 @@ class IosImageButton: WidgetImageButton {
     }
     
     func isClicked(isClicked: Bool) {
-        // TODO
+        if(isClicked){
+            root.setTitleColor(mainColor, for: .normal)
+            
+        } else {
+            root.setTitleColor(.gray, for: .normal)
+            
+        }
     }
     
     
-    func text(text: String) {
-       root.setTitle(text, for: .normal)
-       root.titleLabel?.font = .italicSystemFont(ofSize: 12)
+    func text(text: StringDesc) {
+        root.setTitle(text.localized(), for: .normal)
+        root.titleLabel?.font = .italicSystemFont(ofSize: 12)
     }
     
     func onClick(onClick: (() -> Void)? = nil) {

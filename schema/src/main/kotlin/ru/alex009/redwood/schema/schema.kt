@@ -11,6 +11,7 @@ import app.cash.redwood.schema.Widget
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.graphics.parseColor
 import dev.icerock.moko.resources.ImageResource
+import dev.icerock.moko.resources.desc.StringDesc
 
 @Schema(
     members = [
@@ -35,8 +36,7 @@ data class TextInput(
     @Default("\"\"")
     val state: String,
     @Property(2)
-    @Default("\"\"")
-    val hint: String,
+    val hint: StringDesc,
     @Property(3)
     @Default("null")
     val onChange: (String) -> Unit,
@@ -65,7 +65,7 @@ data class Image(
 
 @Widget(4)
 data class ImageButton(
-    @Property(1) val text: String,
+    @Property(1) val text: StringDesc,
     @Property(2)
     @Default("null") val icon: ImageResource?,
     @Property(3)
@@ -77,7 +77,7 @@ data class ImageButton(
 
 @Widget(5)
 data class Button(
-    @Property(1) val text: String,
+    @Property(1) val text: StringDesc,
     @Property(2)
     val buttonType: ButtonType,
     @Property(3)

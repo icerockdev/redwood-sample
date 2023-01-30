@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Auth-->
+    <string name="auth.login">Login</string>
+    <string name="auth.password">Password</string>
+    <string name="auth.button">Login</string>
+    <!-- Navigation-->
+    <string name="tab.list">List</string>
+    <string name="tab.settings">Settings</string>
+    <!-- Profile-->
+    <string name="profile.logout">Logout</string>
+  </resources>

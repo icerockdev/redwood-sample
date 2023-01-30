@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package ru.alex009.redwoodapp.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,6 +10,7 @@ import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
+import dev.icerock.moko.resources.desc.desc
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.InputType
 import ru.alex009.redwood.schema.compose.Button
@@ -17,10 +18,15 @@ import ru.alex009.redwood.schema.compose.Image
 import ru.alex009.redwood.schema.compose.TextInput
 import ru.alex009.redwoodapp.navigation.Navigator
 import org.example.library.MR
+import ru.alex009.redwoodapp.Box
+
 @Composable
 fun LoginScreen(navigator: Navigator) {
     Box {
-        Column(horizontalAlignment = CrossAxisAlignment.Center, verticalAlignment = MainAxisAlignment.Center) {
+        Column(
+            horizontalAlignment = CrossAxisAlignment.Center,
+            verticalAlignment = MainAxisAlignment.Center
+        ) {
             var login: String by remember { mutableStateOf("") }
             var password: String by remember { mutableStateOf("") }
             Image(
@@ -30,14 +36,16 @@ fun LoginScreen(navigator: Navigator) {
                 layoutModifier = LayoutModifier.padding(Padding(bottom = 100)),
                 url = null
             )
-            TextInput(login, "Login", layoutModifier = LayoutModifier.padding(Padding(16)),
+            TextInput(login,
+                MR.strings.auth_login.desc(),
+                layoutModifier = LayoutModifier.padding(Padding(16)),
                 onChange = {
                     login = it
                 }
             )
             TextInput(
                 password,
-                "Password",
+                MR.strings.auth_password.desc(),
                 layoutModifier = LayoutModifier.padding(Padding(horizontal = 16)),
                 onChange = {
                     password = it
@@ -45,7 +53,7 @@ fun LoginScreen(navigator: Navigator) {
                 inputType = InputType.Password
             )
             Button(
-                "Login", buttonType = ButtonType.Primary,
+                MR.strings.auth_button.desc(), buttonType = ButtonType.Primary,
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {
                     navigator.navigate("tabs")

@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package ru.alex009.redwoodapp.screens
 
 import androidx.compose.runtime.Composable
 import app.cash.redwood.LayoutModifier
@@ -8,6 +8,7 @@ import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
+import dev.icerock.moko.resources.desc.desc
 import ru.alex009.redwood.schema.ButtonType
 import ru.alex009.redwood.schema.TextType
 import ru.alex009.redwood.schema.compose.Button
@@ -15,8 +16,9 @@ import ru.alex009.redwood.schema.compose.Image
 import ru.alex009.redwood.schema.compose.Stack
 import ru.alex009.redwood.schema.compose.Text
 import org.example.library.MR
+import ru.alex009.redwoodapp.USER_AVATAR
+import ru.alex009.redwoodapp.USR_NAME
 import ru.alex009.redwoodapp.navigation.Navigator
-import ru.alex009.redwoodapp.navigation.navigation
 
 @Composable
 fun ProfileScreen(navigator: Navigator) {
@@ -35,12 +37,12 @@ fun ProfileScreen(navigator: Navigator) {
                     Image(
                         width = 120,
                         height = 120,
-                        url = "https://www.dierennieuws.nl/wp-content/uploads/2022/01/kat-in-sneeuw-800x445.jpg",
+                        url = USER_AVATAR,
                         placeholder = MR.images.ava_preview,
                         layoutModifier = LayoutModifier.padding(Padding(top = 120))
                     )
                     Text(
-                        "Иванов Петр",
+                        USR_NAME,
                         layoutModifier = LayoutModifier.padding(Padding(top = 12)),
                         textType = TextType.Header
                     )
@@ -54,7 +56,8 @@ fun ProfileScreen(navigator: Navigator) {
                 width = Constraint.Fill
             ) {
                 Button(
-                    "Выход", buttonType = ButtonType.Secondary,
+                    MR.strings.profile_logout.desc(),
+                    buttonType = ButtonType.Secondary,
                     onClick = {
                         navigator.navigate("login")
                     },

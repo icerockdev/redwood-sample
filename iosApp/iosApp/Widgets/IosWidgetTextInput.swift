@@ -10,8 +10,7 @@ import UIKit
 import shared_ios
 
 class IosWidgetTextInput: WidgetTextInput {
-
-    
+ 
     private let root: UITextField = {
         let view = FillUITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -23,8 +22,8 @@ class IosWidgetTextInput: WidgetTextInput {
         root.text = state
     }
 
-    func hint(hint: String) {
-        root.placeholder = hint
+    func hint(hint: StringDesc) {
+        root.placeholder = hint.localized()
     }
 
     func onChange(onChange: ((String) -> Void)? = nil) {

@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "ru.alex009.redwoodapp.android"
+    namespace = "dev.icerock.redwoodapp.android"
     compileSdk = 33
     defaultConfig {
-        applicationId = "ru.alex009.redwoodapp.android"
+        applicationId = "dev.icerock.redwoodapp.android"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -41,7 +41,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
 
     implementation(project(":shared"))
-
     implementation("app.cash.redwood:redwood-layout-composeui:0.1.0")
     implementation("app.cash.redwood:redwood-widget-compose-jvm:0.1.0")
+
+    implementation("com.github.skydoves:landscapist-coil:1.4.8")
 }

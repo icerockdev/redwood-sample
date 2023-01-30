@@ -2,6 +2,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform")
     kotlin("native.cocoapods")
     id("app.cash.redwood")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 version = "0.1.0"
@@ -18,6 +19,7 @@ kotlin {
             isStatic = false
 
             export(project(":schema:widget"))
+            export("dev.icerock.moko:resources:0.20.1")
         }
     }
 
@@ -26,6 +28,7 @@ kotlin {
             dependencies {
                 api(project(":schema:widget"))
                 api(project(":shared"))
+                api("dev.icerock.moko:resources:0.20.1")
                 implementation("app.cash.redwood:redwood-layout-uiview:0.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
@@ -34,3 +37,8 @@ kotlin {
         getByName("iosSimulatorArm64Main").dependsOn(getByName("iosMain"))
     }
 }
+
+multiplatformResources {
+    multiplatformResourcesPackage = "org.example.shared_ios" // required
+}
+

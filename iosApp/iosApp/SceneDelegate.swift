@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import shared_ios
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,8 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = UINavigationController(
-            rootViewController: RedwoodViewController()
+        let rootNavigation = ExposedKt.mainApp()
+        
+        window?.rootViewController = rootNavigation.createViewController(
+            provider: ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
         )
         window?.makeKeyAndVisible()
     }

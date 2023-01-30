@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="error_color">#9E0D39FF</color>
+	<color name="green_color">#4CD964FF</color>
+</resources>

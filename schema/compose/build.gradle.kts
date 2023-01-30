@@ -24,5 +24,5 @@ kotlin {
 
 redwoodSchema {
     source.set(project(":schema"))
-    type.set("ru.alex009.redwood.schema.RedwoodAppSchema")
+    type.set("dev.icerock.redwood.schema.RedwoodAppSchema")
 }

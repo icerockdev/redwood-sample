@@ -5,7 +5,7 @@ import app.cash.redwood.widget.Widget
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 import dev.icerock.redwoodapp.ComposeViewController
-import dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation.ScreenSettingsImpl
+import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.ScreenSettingsImpl
 
 typealias FlatRouteData = (Widget.Provider<UIView>, Navigator, Map<String, String>) -> UIViewController
 

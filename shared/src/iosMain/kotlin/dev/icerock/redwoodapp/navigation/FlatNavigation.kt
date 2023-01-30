@@ -6,10 +6,10 @@ import platform.UIKit.UINavigationController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 import platform.UIKit.backgroundColor
-import dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation.ScreenSettingsImpl
-import dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation.getParams
-import dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation.getStableParts
-import dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation.isPlaceholderOf
+import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.ScreenSettingsImpl
+import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.getParams
+import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.getStableParts
+import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.isPlaceholderOf
 
 data class FlatNavigation(
     val startDestination: String,

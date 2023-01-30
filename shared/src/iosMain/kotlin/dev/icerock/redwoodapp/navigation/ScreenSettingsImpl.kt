@@ -1,4 +1,4 @@
-package dev.icerock.redwoodapp.ru.alex009.redwoodapp.navigation
+package dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation
 
 import dev.icerock.moko.resources.desc.StringDesc
 import platform.UIKit.UINavigationController

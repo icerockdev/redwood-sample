@@ -1,4 +1,4 @@
-package ru.alex009.redwoodapp
+package dev.icerock.redwoodapp
 
 import androidx.compose.runtime.BroadcastFrameClock
 import androidx.compose.runtime.Composable

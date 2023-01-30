@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.alex009.redwoodapp.shared"
+    namespace = "dev.icerock.redwoodapp.shared"
     compileSdk = 33
     defaultConfig {
         minSdk = 24
@@ -31,6 +31,7 @@ kotlin {
                 api(project(":schema:compose"))
                 api("dev.icerock.moko:resources:0.20.1")
                 api("dev.icerock.moko:parcelize:0.8.0")
+                api("dev.icerock.moko:mvvm-core:0.15.0")
             }
         }
 

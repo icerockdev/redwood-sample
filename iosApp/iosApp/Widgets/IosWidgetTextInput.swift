@@ -10,6 +10,7 @@ import UIKit
 import shared_ios
 
 class IosWidgetTextInput: WidgetTextInput {
+
     
     private let root: UITextField = {
         let view = FillUITextField()
@@ -35,6 +36,12 @@ class IosWidgetTextInput: WidgetTextInput {
 
         root.removeAction(identifiedBy: identifier, for: .editingChanged)
         root.addAction(action, for: .editingChanged)
+    }
+    
+    func inputType(inputType: EntityInputType?) {
+        if(inputType == EntityInputType.password){
+            root.isSecureTextEntry = true
+        }
     }
 
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()

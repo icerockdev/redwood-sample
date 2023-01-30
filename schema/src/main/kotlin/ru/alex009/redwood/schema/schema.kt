@@ -40,6 +40,9 @@ data class TextInput(
     @Property(3)
     @Default("null")
     val onChange: (String) -> Unit,
+    @Property(4)
+    @Default("null")
+    val inputType: InputType?,
 )
 
 @Widget(2)

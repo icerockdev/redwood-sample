@@ -21,13 +21,22 @@ import dev.icerock.moko.resources.desc.StringDesc
         Card::class,
         ImageButton::class,
         Button::class,
-        Space::class
+        Space::class,
+        HalfWightContainer::class,
+        SquareImage::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
     ],
 )
 interface RedwoodAppSchema
+
+@Widget(9)
+// fill max width
+data class SquareImage(
+    @Property(3) val url: String?,
+    @Property(4) val placeholder: ImageResource?,
+)
 
 @Widget(1)
 data class TextInput(
@@ -60,6 +69,9 @@ data class Image(
     @Property(2) val height: Int?,
     @Property(3) val url: String?,
     @Property(4) val placeholder: ImageResource?,
+    @Property(5)
+    @Default("0")
+    val cornierRadius: Int
 )
 
 @Widget(4)
@@ -71,7 +83,9 @@ data class ImageButton(
     @Default("true")
     val isClicked: Boolean,
     @Property(4)
-    val onClick: () -> Unit
+    val onClick: () -> Unit,
+    @Property(5)
+    val type: ImageButtonType
 )
 
 @Widget(5)
@@ -107,4 +121,13 @@ data class Space(
     // -1 max size
     @Property(2) val width: Int,
     @Property(3) val height: Int,
+)
+@Widget(10)
+data class HalfWightContainer(
+    @Children(1) val child1: () -> Unit
+)
+
+data class BottomSheet(
+    @Children(1) val body: () -> Unit,
+    @Children(2) val bottomSheetContent: () -> Unit
 )

@@ -5,3 +5,8 @@ enum class ButtonType {
     Secondary,
     Action
 }
+
+enum class ImageButtonType{
+    Notification,
+    Primary
+}

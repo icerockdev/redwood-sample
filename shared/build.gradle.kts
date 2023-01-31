@@ -30,7 +30,7 @@ kotlin {
             dependencies {
                 api(project(":schema:compose"))
                 api("dev.icerock.moko:resources:0.20.1")
-                api("dev.icerock.moko:parcelize:0.8.0")
+                api("dev.icerock.moko:mvvm-core:0.15.0")
             }
         }
 

@@ -22,13 +22,13 @@ fun mainApp(): NavigationHost {
         registerScreen(
             uri = "login",
             isToolbarVisible = false
-        ) { navigator, _, screenSettings ->
-            LoginScreen(navigator, screenSettings)
+        ) { navigator, _, screenSettings, viewModelOwner ->
+            LoginScreen(navigator, screenSettings,viewModelOwner)
         }
         registerNavigation(
             uri = "tabs",
             isToolbarVisible = false,
-            childNavigation = { navigator, _, _ ->
+            childNavigation = { navigator, _, _, _ ->
                 mainScreenNavigation(navigator)
             }
         )
@@ -59,15 +59,15 @@ private fun secondTabNavigation() = navigation(startDestination = "start") {
     registerScreen(
         "start",
         isToolbarVisible = true,
-    ) { navigator, _, screenSettings ->
-        PostsList(screenSettings) { date, text ->
+    ) { navigator, _, screenSettings, viweModelOwner ->
+        PostsList(screenSettings,viweModelOwner) { date, text ->
             navigator.navigate("/details/${date}?description=${text}")
         }
     }
     registerScreen(
         "/details/{date}?description={description}",
         isToolbarVisible = true
-    ) { navController, args, screenSettings ->
+    ) { navController, args, screenSettings, _ ->
         DetailsScreen(
             navController,
             args["date"].orEmpty(),

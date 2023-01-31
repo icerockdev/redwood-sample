@@ -2,9 +2,11 @@ package ru.alex009.redwoodapp
 
 import androidx.compose.runtime.BroadcastFrameClock
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import app.cash.redwood.compose.RedwoodComposition
 import app.cash.redwood.widget.UIViewChildren
 import app.cash.redwood.widget.Widget
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.cinterop.ObjCAction
 import kotlinx.cinterop.convert
 import kotlinx.coroutines.CoroutineScope
@@ -37,7 +39,8 @@ import platform.UIKit.widthAnchor
 internal class ComposeViewController(
     private val provider: Widget.Provider<UIView>,
     private val isNavigationVisible: Boolean,
-    private val compose: @Composable () -> Unit,
+    private val viewModelOwner: ViewModelOwner,
+    private val compose: @Composable () -> Unit
 ) : UIViewController(null, null) {
     private lateinit var displayLink: CADisplayLink
     private lateinit var delegate: RedwoodViewControllerDelegate
@@ -123,6 +126,10 @@ internal class ComposeViewController(
 
         fun dispose() {
             scope.cancel()
+            viewModelOwner.mutableMap.values.forEach {
+                it.onCleared()
+            }
+            viewModelOwner.mutableMap.clear()
         }
     }
 }

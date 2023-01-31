@@ -22,18 +22,28 @@ import ru.alex009.redwood.schema.compose.ImageButton
 import ru.alex009.redwood.schema.compose.Space
 import ru.alex009.redwood.schema.compose.Text
 import ru.alex009.redwoodapp.NEWS_LIST
+import ru.alex009.redwoodapp.SimpleListViewModel
+import ru.alex009.redwoodapp.ViewModelOwner
+import ru.alex009.redwoodapp.getViewModel
 import ru.alex009.redwoodapp.navigation.ScreenSettings
 import ru.alex009.redwoodapp.screens.entity.CardItem
 
 @Composable
-fun PostsList(screenSettings: ScreenSettings, routeToCreate: (String, String) -> Unit) {
-    LaunchedEffect(screenSettings){
+fun PostsList(
+    screenSettings: ScreenSettings,
+    viewModelOwner: ViewModelOwner,
+    routeToCreate: (String, String) -> Unit,
+) {
+    LaunchedEffect(screenSettings) {
         screenSettings.setTitle("Posts".desc())
+    }
+    val viewModel: SimpleListViewModel = getViewModel(viewModelOwner) {
+        SimpleListViewModel()
     }
 
     val itemsList by remember {
         mutableStateOf(
-            NEWS_LIST.mapIndexed { index, it ->
+            viewModel.listData.mapIndexed { index, it ->
                 CardItem(
                     data = it.first,
                     text = it.second,

@@ -20,6 +20,7 @@ kotlin {
 
             export(project(":schema:widget"))
             export("dev.icerock.moko:resources:0.20.1")
+            export("dev.icerock.moko:mvvm-core:0.15.0")
         }
     }
 
@@ -29,6 +30,10 @@ kotlin {
                 api(project(":schema:widget"))
                 api(project(":shared"))
                 api("dev.icerock.moko:resources:0.20.1")
+
+                api("dev.icerock.moko:mvvm-core:0.15.0")
+
+
                 implementation("app.cash.redwood:redwood-layout-uiview:0.1.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")

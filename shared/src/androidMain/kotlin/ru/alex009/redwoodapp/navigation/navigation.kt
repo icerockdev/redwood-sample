@@ -1,9 +1,12 @@
 package ru.alex009.redwoodapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import app.cash.redwood.compose.RedwoodContent
 import app.cash.redwood.widget.Widget
+import ru.alex009.redwoodapp.ViewModelOwner
 
 typealias FlatRouteData = @Composable (Widget.Provider<() -> Unit>, Navigator, Map<String, String>) -> Unit
 
@@ -18,12 +21,18 @@ actual fun navigation(
         override fun registerScreen(
             uri: String,
             isToolbarVisible: Boolean,
-            screen: @Composable (Navigator, Map<String, String>, ScreenSettings) -> Unit
-        ) {
+            screen: @Composable (
+                Navigator,
+                Map<String, String>,
+                ScreenSettings,
+                ViewModelOwner
+            ) -> Unit) {
             routes[uri] = { provider, navigator, args ->
-                screenSettings.viewModelStoreOwner = requireNotNull(LocalViewModelStoreOwner.current)
+                val owner = requireNotNull(LocalViewModelStoreOwner.current)
                 RedwoodContent(provider = provider) {
-                    screen(navigator, args, screenSettings)
+                    CompositionLocalProvider(LocalViewModelStoreOwner provides owner) {
+                        screen(navigator, args, screenSettings, ViewModelOwner())
+                    }
                 }
             }
             navBarVisibility[uri] = isToolbarVisible
@@ -32,10 +41,10 @@ actual fun navigation(
         override fun registerNavigation(
             uri: String,
             isToolbarVisible: Boolean,
-            childNavigation: (Navigator, Map<String, String>, ScreenSettings) -> NavigationHost
+            childNavigation: (Navigator, Map<String, String>, ScreenSettings, ViewModelOwner) -> NavigationHost
         ) {
             routes[uri] = @Composable { provider, navigator, args ->
-                childNavigation(navigator, args, screenSettings).Render(provider)
+                childNavigation(navigator, args, screenSettings, ViewModelOwner()).Render(provider)
             }
             navBarVisibility[uri] = isToolbarVisible
         }

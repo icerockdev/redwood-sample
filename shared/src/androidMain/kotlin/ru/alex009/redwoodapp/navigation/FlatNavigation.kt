@@ -174,8 +174,6 @@ fun String.getParams(): List<String> {
 class ScreenSettingsImpl() : ScreenSettings {
 
     var text: StringDesc by mutableStateOf("".desc())
-
-    lateinit var viewModelStoreOwner: ViewModelStoreOwner
     override fun setTitle(title: StringDesc) {
         this.text = title
     }

@@ -20,13 +20,17 @@ import ru.alex009.redwoodapp.navigation.Navigator
 import org.example.library.MR
 import ru.alex009.redwoodapp.Box
 import ru.alex009.redwoodapp.SimpleLoginViewModel
+import ru.alex009.redwoodapp.ViewModelOwner
 import ru.alex009.redwoodapp.getViewModel
 import ru.alex009.redwoodapp.navigation.ScreenSettings
 
 @Composable
-fun LoginScreen(navigator: Navigator, screenSettings: ScreenSettings) {
-    val viewModel: SimpleLoginViewModel = getViewModel(
-        screenSettings) {
+fun LoginScreen(
+    navigator: Navigator,
+    screenSettings: ScreenSettings,
+    viewModelOwner: ViewModelOwner
+) {
+    val viewModel: SimpleLoginViewModel = getViewModel(viewModelOwner) {
         SimpleLoginViewModel()
     }
     Box {

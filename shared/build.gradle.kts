@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.alex009.redwoodapp.shared"
+    namespace = "dev.icerock.redwoodapp.shared"
     compileSdk = 33
     defaultConfig {
         minSdk = 24

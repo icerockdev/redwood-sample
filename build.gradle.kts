@@ -11,16 +11,6 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources").version("0.20.1").apply(false)
 }
 
-buildscript {
-    repositories {
-        gradlePluginPortal()
-    }
-
-    dependencies {
-        classpath("dev.icerock.moko:resources-generator:0.20.1")
-    }
-}
-
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

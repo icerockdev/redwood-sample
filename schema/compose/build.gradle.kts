@@ -16,7 +16,6 @@ kotlin {
         commonMain {
             dependencies {
                 api("app.cash.redwood:redwood-layout-compose:0.1.0")
-                api("app.cash.redwood:redwood-layout-compose:0.1.0")
                 api(project(":schema:widget"))
             }
         }
@@ -25,5 +24,5 @@ kotlin {
 
 redwoodSchema {
     source.set(project(":schema"))
-    type.set("ru.alex009.redwood.schema.RedwoodAppSchema")
+    type.set("dev.icerock.redwood.schema.RedwoodAppSchema")
 }

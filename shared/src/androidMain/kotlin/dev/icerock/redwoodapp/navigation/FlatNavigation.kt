@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -47,10 +48,14 @@ data class FlatNavigation(
             object : Navigator {
                 override fun navigate(uri: String) {
                     navController.navigate(uri)
+                    screenSettings.navigationBar = null
+                    screenSettings.text = "".desc()
                 }
 
                 override fun popBackStack() {
                     navController.popBackStack()
+                    screenSettings.navigationBar = null
+                    screenSettings.text = "".desc()
                 }
             }
         }
@@ -78,30 +83,35 @@ data class FlatNavigation(
                     Scaffold(
                         topBar = {
                             if (navBarVisibility[navController.currentDestination?.route] == true) {
-                                TopAppBar(
-                                    backgroundColor = Color.White,
-                                    contentColor = Color.Black,
-                                    elevation = 2.dp,
-                                    title = {
-                                        Text(
-                                            text = screenSettings.text.toString(LocalContext.current)
-                                        )
-                                    },
-                                    navigationIcon = {
-                                        if (navController.backQueue.size != 2) {
-                                            IconButton(
-                                                onClick = {
-                                                    navController.popBackStack()
+                                val settingsNavBar = screenSettings.navigationBar
+                                if (settingsNavBar != null) {
+                                    settingsNavBar.invoke(navController)
+                                } else {
+                                    TopAppBar(
+                                        backgroundColor = Color.White,
+                                        contentColor = Color.Black,
+                                        elevation = 2.dp,
+                                        title = {
+                                            Text(
+                                                text = screenSettings.text.toString(LocalContext.current)
+                                            )
+                                        },
+                                        navigationIcon = {
+                                            if (navController.backQueue.size != 2) {
+                                                IconButton(
+                                                    onClick = {
+                                                        navController.popBackStack()
+                                                    }
+                                                ) {
+                                                    Icon(
+                                                        painter = painterResource(id = R.drawable.arrow_left),
+                                                        contentDescription = null
+                                                    )
                                                 }
-                                            ) {
-                                                Icon(
-                                                    painter = painterResource(id = R.drawable.arrow_left),
-                                                    contentDescription = null
-                                                )
                                             }
                                         }
-                                    }
-                                )
+                                    )
+                                }
                             }
                         }
                     ) { innerPadding ->
@@ -170,8 +180,14 @@ fun String.getParams(): List<String> {
 class ScreenSettingsImpl() : ScreenSettings {
 
     var text: StringDesc by mutableStateOf("".desc())
+
+    var navigationBar: (@Composable (NavController) -> Unit)? by mutableStateOf(null)
     override fun setTitle(title: StringDesc) {
         this.text = title
+    }
+
+    override fun setNavigationBar(navigationBar: NavigationBar) {
+        this.navigationBar = { navigationBar.Render(navController = it) }
     }
 
 }

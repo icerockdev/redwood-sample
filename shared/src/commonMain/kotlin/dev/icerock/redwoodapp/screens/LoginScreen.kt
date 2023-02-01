@@ -1,6 +1,8 @@
 package dev.icerock.redwoodapp.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +24,7 @@ import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.SimpleLoginViewModel
 import dev.icerock.redwoodapp.ViewModelOwner
 import dev.icerock.redwoodapp.getViewModel
+import dev.icerock.redwoodapp.navigation.NavigationBar
 import dev.icerock.redwoodapp.navigation.ScreenSettings
 
 @Composable
@@ -30,8 +33,29 @@ fun LoginScreen(
     screenSettings: ScreenSettings,
     viewModelOwner: ViewModelOwner
 ) {
+
     val viewModel: SimpleLoginViewModel = getViewModel(viewModelOwner) {
         SimpleLoginViewModel()
+    }
+
+    val buttontext by viewModel.tetxFlow.collectAsState()
+
+    LaunchedEffect(screenSettings) {
+        screenSettings.setNavigationBar(NavigationBar.SimpleNavigationBar {
+            setTitle("Login".desc())
+            addAction(MR.images.line, null) {
+                viewModel.setText("CART")
+            }
+            addAction(viewModel.likeResource, null) {
+                viewModel.setLike(viewModel.likeFlow.value.not())
+            }
+            addAction(
+                MR.images.settings,
+                viewModel.badge
+            ) {
+                viewModel.onNotificationClicl()
+            }
+        })
     }
     Box {
         Column(
@@ -64,7 +88,7 @@ fun LoginScreen(
                 inputType = InputType.Password
             )
             Button(
-                viewModel.LoginButtonTitle,
+                buttontext,
                 buttonType = ButtonType.Primary,
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {

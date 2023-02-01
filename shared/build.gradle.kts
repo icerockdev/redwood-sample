@@ -31,13 +31,17 @@ kotlin {
                 api(project(":schema:compose"))
                 api("dev.icerock.moko:resources:0.20.1")
                 api("dev.icerock.moko:mvvm-core:0.15.0")
+                api("dev.icerock.moko:fields-core:0.11.0")
+                api("dev.icerock.moko:fields-flow:0.11.0")
+                api("app.cash.redwood:redwood-treehouse:0.2.0")
+                api("app.cash.redwood:redwood-treehouse-lazylayout-compose:0.2.0")
             }
         }
 
         val iosMain by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation("app.cash.redwood:redwood-layout-uiview:0.1.0")
+                implementation("app.cash.redwood:redwood-layout-uiview:0.2.0")
             }
         }
 

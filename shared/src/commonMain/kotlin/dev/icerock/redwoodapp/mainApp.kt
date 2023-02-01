@@ -7,6 +7,7 @@ import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.schema.compose.Text
 import org.example.library.MR
 import dev.icerock.redwoodapp.navigation.NavigationHost
 import dev.icerock.redwoodapp.navigation.Navigator
@@ -21,12 +22,20 @@ fun mainApp(): NavigationHost {
     return navigation(startDestination = "login") {
         registerScreen(
             uri = "login",
-            isToolbarVisible = false
+            isToolbarVisible = true
         ) { navigator, _, screenSettings, viewModelOwner ->
             LoginScreen(navigator, screenSettings,viewModelOwner)
         }
-        registerNavigation(
+        registerScreen(
             uri = "tabs",
+            isToolbarVisible = true
+        ) { navigator, _, screenSettings, viewModelOwner ->
+            Box {
+                Text("SecondScreem")
+            }
+        }
+        registerNavigation(
+            uri = "sdsd",
             isToolbarVisible = false,
             childNavigation = { navigator, _, _, _ ->
                 mainScreenNavigation(navigator)

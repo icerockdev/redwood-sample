@@ -35,4 +35,5 @@ expect fun navigation(
 
 interface ScreenSettings {
     fun setTitle(title: StringDesc)
+    fun setNavigationBar(navigationBar: NavigationBar)
 }

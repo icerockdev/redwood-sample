@@ -54,4 +54,8 @@ class ComposeImage : Image<@Composable () -> Unit> {
     override fun placeholder(placeholder: ImageResource?) {
         _placeholder = placeholder?.drawableResId
     }
+
+    override fun cornierRadius(cornierRadius: Int) {
+        TODO("Not yet implemented")
+    }
 }

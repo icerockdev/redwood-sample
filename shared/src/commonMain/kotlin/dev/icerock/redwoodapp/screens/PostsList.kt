@@ -15,6 +15,7 @@ import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.schema.ImageButtonType
 import org.example.library.MR
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Card
@@ -133,6 +134,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                                 }
 
                             },
+                            type = ImageButtonType.Primary,
                             layoutModifier = LayoutModifier.padding(Padding(end = 8))
                         )
                         ImageButton(
@@ -156,6 +158,7 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                                     }
                                 }
                             },
+                            type = ImageButtonType.Primary,
                         )
                     }
                 }

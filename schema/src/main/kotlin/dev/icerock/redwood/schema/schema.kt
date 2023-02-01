@@ -31,13 +31,6 @@ import dev.icerock.moko.resources.desc.StringDesc
 )
 interface RedwoodAppSchema
 
-@Widget(9)
-// fill max width
-data class SquareImage(
-    @Property(3) val url: String?,
-    @Property(4) val placeholder: ImageResource?,
-)
-
 @Widget(1)
 data class TextInput(
     @Property(1)
@@ -122,12 +115,15 @@ data class Space(
     @Property(2) val width: Int,
     @Property(3) val height: Int,
 )
+
+@Widget(9)
+// fill max width
+data class SquareImage(
+    @Property(3) val url: String?,
+    @Property(4) val placeholder: ImageResource?,
+)
+
 @Widget(10)
 data class HalfWightContainer(
     @Children(1) val child1: () -> Unit
-)
-
-data class BottomSheet(
-    @Children(1) val body: () -> Unit,
-    @Children(2) val bottomSheetContent: () -> Unit
 )

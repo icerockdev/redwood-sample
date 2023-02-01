@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PrimaryButton(text: String, enabled: Boolean, onClick: () -> Unit) {
     Button(
-        modifier = Modifier.fillMaxWidth().height(40.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(40.dp),
         onClick = onClick,
         enabled = enabled,
         shape = RoundedCornerShape(8.dp),
@@ -74,5 +76,6 @@ fun PreviewButton() {
     ) {
         PrimaryButton("Text", true, {})
         SecondaryButton(text = "text", enabled = true, {})
+        ActionButton(text = "Text", enabled = true, onClick = {})
     }
 }

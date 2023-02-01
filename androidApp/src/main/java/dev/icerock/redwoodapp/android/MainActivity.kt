@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
+import dev.icerock.redwoodapp.android.theme.AppTheme
 import dev.icerock.redwoodapp.android.widgets.ComposeWidgetFactory
 import dev.icerock.redwoodapp.mainApp
 import dev.icerock.redwoodapp.navigation.NavigationHost
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         val app: NavigationHost = mainApp()
 
         setContent {
-            MaterialTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background

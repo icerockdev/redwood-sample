@@ -19,6 +19,7 @@ import app.cash.redwood.LayoutModifier
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.schema.ImageButtonType
 import dev.icerock.redwoodapp.android.R
 import dev.icerock.redwood.schema.widget.ImageButton
 
@@ -62,6 +63,10 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
 
     override fun onClick(onClick: (() -> Unit)?) {
         _onClick = onClick ?: {}
+    }
+
+    override fun type(type: ImageButtonType) {
+        TODO("Not yet implemented")
     }
 
     override fun isClicked(isClicked: Boolean) {

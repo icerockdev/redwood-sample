@@ -6,7 +6,6 @@ import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 import dev.icerock.redwoodapp.ComposeViewController
 import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.ScreenSettingsImpl
 
 typealias FlatRouteData = (Widget.Provider<UIView>, Navigator, Map<String, String>, ViewModelOwner) -> UIViewController
 
@@ -16,7 +15,6 @@ actual fun <T : Any> navigation(
     block: FlatNavigationDsl<T>.() -> Unit
 ): NavigationHost {
     val routes: MutableMap<String, FlatRouteData> = mutableMapOf()
-    val screenSettings = ScreenSettingsImpl(factory)
     val viewModelOwners: MutableMap<String, ViewModelOwner> = mutableMapOf()
 
     val dsl = object : FlatNavigationDsl<T> {
@@ -32,6 +30,7 @@ actual fun <T : Any> navigation(
         ) {
             val startUri = uri.substringBefore('?')
             routes[startUri] = { provider, navigator, args, viewModelOwner ->
+                val screenSettings = ScreenSettingsImpl(factory)
                 ComposeViewController(
                     provider,
                     viewModelOwner
@@ -42,6 +41,8 @@ actual fun <T : Any> navigation(
                         screenSettings,
                         viewModelOwner
                     )
+                }.also {
+                    screenSettings.init(it)
                 }
             }
             viewModelOwners[startUri] = ViewModelOwner(mutableMapOf())
@@ -54,21 +55,23 @@ actual fun <T : Any> navigation(
         ) {
             val startUri = uri.substringBefore('?')
             routes[startUri] = { provider, navigator, args, viewModelOwner ->
+                val screenSettings = ScreenSettingsImpl(factory)
                 childNavigation(
                     navigator,
                     args,
                     screenSettings,
                     viewModelOwner
-                ).createViewController(provider)
+                ).createViewController(provider).also {
+                    screenSettings.init(it)
+                }
             }
             viewModelOwners[startUri] = ViewModelOwner(mutableMapOf())
         }
     }
     dsl.block()
-    return FlatNavigation(
+    return FlatNavigation<T>(
         startDestination = startDestination,
         routes = routes,
-        viewModelOwners = viewModelOwners,
-        screenSettings = screenSettings
+        viewModelOwners = viewModelOwners
     )
 }

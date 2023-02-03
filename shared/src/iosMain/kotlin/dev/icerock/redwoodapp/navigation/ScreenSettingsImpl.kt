@@ -1,20 +1,16 @@
-package dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation
+package dev.icerock.redwoodapp.navigation
 
-import dev.icerock.moko.resources.desc.StringDesc
-import dev.icerock.redwoodapp.navigation.FlatNavigationFactory
-import dev.icerock.redwoodapp.navigation.NavigationBar
-import platform.UIKit.UINavigationController
-import dev.icerock.redwoodapp.navigation.ScreenSettings
+import platform.UIKit.UIViewController
 
 class ScreenSettingsImpl<T>(val flatNavigationFactory: FlatNavigationFactory<T>) : ScreenSettings<T> {
 
-    private var navController: UINavigationController? = null
-    fun init(navController: UINavigationController) {
-        this.navController = navController
+    private var viewController: UIViewController? = null
+    fun init(viewController: UIViewController) {
+        this.viewController = viewController
     }
 
     override fun setToolbarData(title: T) {
-        navController?.let {
+        viewController?.let {
             flatNavigationFactory.render(it, title)
         }
     }

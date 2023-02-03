@@ -1,13 +1,10 @@
 package dev.icerock.redwoodapp.navigation
 
 import app.cash.redwood.widget.Widget
-import platform.UIKit.UIColor
 import platform.UIKit.UINavigationController
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
-import platform.UIKit.backgroundColor
 import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.ScreenSettingsImpl
 import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.getParams
 import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.getStableParts
 import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.isPlaceholderOf
@@ -16,8 +13,7 @@ import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.isPlaceholderOf
 data class FlatNavigation<T>(
     val startDestination: String,
     val routes: MutableMap<String, FlatRouteData>,
-    val viewModelOwners: MutableMap<String, ViewModelOwner>,
-    val screenSettings: ScreenSettingsImpl<T>
+    val viewModelOwners: MutableMap<String, ViewModelOwner>
 ) : NavigationHost {
 
     override fun createViewController(provider: Widget.Provider<UIView>): UIViewController {
@@ -52,12 +48,11 @@ data class FlatNavigation<T>(
         val rootViewController: UIViewController =
             routes[startDestination]!!(provider, navigator, emptyMap(), viewModelOwners[startDestination]!!)
         navController = UINavigationController(rootViewController)
-        screenSettings.init(navController)
         return navController
     }
 }
 
 actual interface FlatNavigationFactory<T>{
 
-    fun render(navControler: UINavigationController, data: T)
+    fun render(viewController: UIViewController, data: T)
 }

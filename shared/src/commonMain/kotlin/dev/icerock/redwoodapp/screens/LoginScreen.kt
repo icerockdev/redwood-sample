@@ -27,7 +27,6 @@ import dev.icerock.redwoodapp.ToolabrArgs
 import dev.icerock.redwoodapp.ToolbarAction
 import dev.icerock.redwoodapp.ViewModelOwner
 import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.NavigationBar
 import dev.icerock.redwoodapp.navigation.ScreenSettings
 
 @Composable

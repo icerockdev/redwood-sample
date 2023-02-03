@@ -9,6 +9,8 @@ import platform.UIKit.UIAccessibilityIdentificationProtocol
 import platform.UIKit.UIView
 import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
 import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
+import dev.icerock.redwoodapp.ToolabrArgs
+import dev.icerock.redwoodapp.navigation.FlatNavigationFactory
 
 fun layoutModifier(): LayoutModifier = LayoutModifier
 
@@ -19,7 +21,14 @@ fun createViewChildrenListener(
     insert: (UIView, Int) -> Unit
 ): UIViewChildren = UIViewChildren(parent, insert = insert)
 
-fun mainApp() = dev.icerock.redwoodapp.mainApp()
+fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>) = dev.icerock.redwoodapp.mainApp(flatNavigationFactory)
+
+interface IosFlatNavigationFactory : FlatNavigationFactory<ToolabrArgs>
+
+// todo fix
+fun fixMe(arg1 : ToolabrArgs.Simple, arg2: ToolabrArgs.NoToolbar){}
+typealias MyArgsSimple = ToolabrArgs.Simple
+typealias MyArgsNone = ToolabrArgs.NoToolbar
 
 class UIViewWithIdentifier : UIView(frame = CGRectZero.readValue()),
     UIAccessibilityIdentificationProtocol {

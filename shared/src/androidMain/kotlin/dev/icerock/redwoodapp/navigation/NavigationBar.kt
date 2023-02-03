@@ -109,7 +109,7 @@ actual sealed class NavigationBar {
                             }
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.arrow_left),
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_24),
                                 contentDescription = null
                             )
                         }
@@ -117,26 +117,20 @@ actual sealed class NavigationBar {
                 },
                 actions = {
                     actions.forEach {
-                        Box(
-                            modifier = Modifier
-                                .width(40.dp)
-                                .height(40.dp)
-                                .clickable {
-                                    it.onClick()
+                        Box {
+                            IconButton(
+                                onClick = it.onClick
+                            ) {
+                                val iconState = it.iconFlow?.collectAsState(null)
+                                val icon = iconState?.value ?: it.icon
+                                if (icon != null) {
+                                    Image(
+                                        painter = painterResource(
+                                            id = icon.drawableResId
+                                        ),
+                                        contentDescription = ""
+                                    )
                                 }
-                        ) {
-                            val iconState = it.iconFlow?.collectAsState(null)
-                            val icon = iconState?.value ?: it.icon
-                            if(icon!=null) {
-                                Image(
-                                    modifier = Modifier.align(Alignment.Center)
-                                        .width(24.dp)
-                                        .height(24.dp),
-                                    painter = painterResource(
-                                        id = icon.drawableResId
-                                    ),
-                                    contentDescription = ""
-                                )
                             }
                             if (it.badge != null) {
                                 val text by it.badge.collectAsState(initial = "".desc())

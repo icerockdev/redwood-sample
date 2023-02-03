@@ -17,11 +17,14 @@ import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.InputType
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Image
+import dev.icerock.redwood.schema.compose.ImageButton
 import dev.icerock.redwood.schema.compose.TextInput
 import dev.icerock.redwoodapp.navigation.Navigator
 import org.example.library.MR
 import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.SimpleLoginViewModel
+import dev.icerock.redwoodapp.ToolabrArgs
+import dev.icerock.redwoodapp.ToolbarAction
 import dev.icerock.redwoodapp.ViewModelOwner
 import dev.icerock.redwoodapp.getViewModel
 import dev.icerock.redwoodapp.navigation.NavigationBar
@@ -30,7 +33,7 @@ import dev.icerock.redwoodapp.navigation.ScreenSettings
 @Composable
 fun LoginScreen(
     navigator: Navigator,
-    screenSettings: ScreenSettings,
+    screenSettings: ScreenSettings<ToolabrArgs>,
     viewModelOwner: ViewModelOwner
 ) {
 
@@ -40,22 +43,30 @@ fun LoginScreen(
 
     val buttontext by viewModel.tetxFlow.collectAsState()
 
-    LaunchedEffect(screenSettings) {
-        screenSettings.setNavigationBar(NavigationBar.SimpleNavigationBar {
-            setTitle("Login".desc())
-            addAction(MR.images.line, null) {
-                viewModel.setText("CART")
-            }
-            addAction(viewModel.likeResource, null) {
-                viewModel.setLike(viewModel.likeFlow.value.not())
-            }
-            addAction(
-                MR.images.settings,
-                viewModel.badge
-            ) {
-                viewModel.onNotificationClicl()
-            }
-        })
+    val isLiked by viewModel.likeResource.collectAsState(MR.images.like)
+    val badge by viewModel.badge.collectAsState(null)
+    LaunchedEffect(screenSettings, badge, isLiked) {
+        screenSettings.setToolbarData(
+            title = ToolabrArgs.Simple(
+                "Login".desc(),
+                listOf(ToolbarAction(
+                    MR.images.line,
+                    null
+                ) {
+                    viewModel.setText("clicked")
+                }, ToolbarAction(
+                    isLiked,
+                    null
+                ) {
+                    viewModel.setLike()
+                }, ToolbarAction(
+                    MR.images.settings,
+                    badge
+                ) {
+                    viewModel.onNotificationClicl()
+                })
+            )
+        )
     }
     Box {
         Column(
@@ -68,7 +79,7 @@ fun LoginScreen(
                 120,
                 120,
                 placeholder = MR.images.ava_preview,
-                layoutModifier = LayoutModifier.padding(Padding(bottom = 100)),
+                layoutModifier = LayoutModifier.padding(Padding(bottom = 50)),
                 url = null
             )
             TextInput(login,
@@ -76,8 +87,7 @@ fun LoginScreen(
                 layoutModifier = LayoutModifier.padding(Padding(16)),
                 onChange = {
                     login = it
-                }
-            )
+                })
             TextInput(
                 password,
                 MR.strings.auth_password.desc(),
@@ -93,7 +103,8 @@ fun LoginScreen(
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {
                     navigator.navigate("tabs")
-                }, layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 100, end = 16))
+                },
+                layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 50, end = 16))
             )
         }
     }

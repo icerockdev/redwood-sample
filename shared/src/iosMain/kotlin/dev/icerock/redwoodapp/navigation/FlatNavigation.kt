@@ -13,12 +13,11 @@ import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.getStableParts
 import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.isPlaceholderOf
 
 
-data class FlatNavigation(
+data class FlatNavigation<T>(
     val startDestination: String,
     val routes: MutableMap<String, FlatRouteData>,
     val viewModelOwners: MutableMap<String, ViewModelOwner>,
-    val navBarVisibility: MutableMap<String, Boolean>,
-    val screenSettings: ScreenSettingsImpl
+    val screenSettings: ScreenSettingsImpl<T>
 ) : NavigationHost {
 
     override fun createViewController(provider: Widget.Provider<UIView>): UIViewController {
@@ -44,7 +43,6 @@ data class FlatNavigation(
                         viewModelOwners[startDestination]!!
                     )
                 navController.pushViewController(newViewController, animated = false)
-                navController.navigationBarHidden = navBarVisibility[key]?.not() ?: false
             }
 
             override fun popBackStack() {
@@ -54,10 +52,12 @@ data class FlatNavigation(
         val rootViewController: UIViewController =
             routes[startDestination]!!(provider, navigator, emptyMap(), viewModelOwners[startDestination]!!)
         navController = UINavigationController(rootViewController)
-        navController.navigationBarHidden = navBarVisibility[startDestination]?.not() ?: false
-        navController.navigationBar.backgroundColor = UIColor.whiteColor
         screenSettings.init(navController)
         return navController
     }
 }
 
+actual interface FlatNavigationFactory<T>{
+
+    fun render(navControler: UINavigationController, data: T)
+}

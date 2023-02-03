@@ -4,14 +4,14 @@ import androidx.compose.runtime.Composable
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.redwoodapp.ViewModelOwner
 
-interface FlatNavigationDsl {
+interface FlatNavigationDsl<T: Any> {
     fun registerScreen(
         uri: String,
         isToolbarVisible: Boolean = true,
         screen: @Composable (
             Navigator,
             Map<String, String>,
-            ScreenSettings,
+            ScreenSettings<T>,
             ViewModelOwner
         ) -> Unit
     )
@@ -22,18 +22,20 @@ interface FlatNavigationDsl {
         childNavigation: (
             Navigator,
             Map<String, String>,
-            ScreenSettings,
+            ScreenSettings<T>,
             ViewModelOwner
         ) -> NavigationHost
     )
 }
 
-expect fun navigation(
+expect fun <T : Any> navigation(
     startDestination: String,
-    block: FlatNavigationDsl.() -> Unit
+    factory: FlatNavigationFactory<T>,
+    block: FlatNavigationDsl<T>.() -> Unit,
 ): NavigationHost
 
-interface ScreenSettings {
-    fun setTitle(title: StringDesc)
-    fun setNavigationBar(navigationBar: NavigationBar)
+interface ScreenSettings<T> {
+    fun setToolbarData(title: T)
 }
+
+expect interface FlatNavigationFactory<T>

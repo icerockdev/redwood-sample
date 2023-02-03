@@ -10,6 +10,7 @@ import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.LONG_TEXT
+import dev.icerock.redwoodapp.ToolabrArgs
 import dev.icerock.redwoodapp.navigation.Navigator
 import dev.icerock.redwoodapp.navigation.ScreenSettings
 
@@ -18,11 +19,8 @@ fun DetailsScreen(
     navigator: Navigator,
     date: String,
     details: String,
-    screenSettings: ScreenSettings
+    screenSettings: ScreenSettings<ToolabrArgs>
 ) {
-    LaunchedEffect(screenSettings){
-        screenSettings.setTitle(date.desc())
-    }
     Column(
         overflow = Overflow.Scroll
     ) {

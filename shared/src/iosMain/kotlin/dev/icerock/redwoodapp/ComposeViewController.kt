@@ -38,7 +38,6 @@ import platform.UIKit.widthAnchor
 
 internal class ComposeViewController(
     private val provider: Widget.Provider<UIView>,
-    private val isNavigationVisible: Boolean,
     private val viewModelOwner: ViewModelOwner,
     private val compose: @Composable () -> Unit
 ) : UIViewController(null, null) {
@@ -79,7 +78,6 @@ internal class ComposeViewController(
         )
         displayLink.addToRunLoop(NSRunLoop.currentRunLoop, NSDefaultRunLoopMode)
         this.displayLink = displayLink
-        navigationController?.navigationBarHidden = isNavigationVisible.not()
     }
 
     @ObjCAction

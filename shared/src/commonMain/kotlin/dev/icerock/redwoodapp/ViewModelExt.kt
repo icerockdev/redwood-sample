@@ -35,8 +35,8 @@ class SimpleLoginViewModel() : ViewModel() {
         _notification.value = _notification.value + 1
     }
 
-    fun setLike(value: Boolean) {
-        likeFlow.value = value
+    fun setLike() {
+        likeFlow.value = likeFlow.value.not()
     }
 }
 

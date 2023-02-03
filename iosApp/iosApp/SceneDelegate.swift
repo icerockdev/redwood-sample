@@ -21,7 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        let rootNavigation = ExposedKt.mainApp()
+        let factory = NavBarFavtory()
+        let rootNavigation = ExposedKt.mainApp(flatNavigationFactory: factory)
         
         window?.rootViewController = rootNavigation.createViewController(
             provider: ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())

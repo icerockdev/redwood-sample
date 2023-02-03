@@ -10,23 +10,23 @@ import dev.icerock.redwoodapp.dev.icerock.redwoodapp.navigation.ScreenSettingsIm
 
 typealias FlatRouteData = (Widget.Provider<UIView>, Navigator, Map<String, String>, ViewModelOwner) -> UIViewController
 
-actual fun navigation(
+actual fun <T : Any> navigation(
     startDestination: String,
-    block: FlatNavigationDsl.() -> Unit
+    factory: FlatNavigationFactory<T>,
+    block: FlatNavigationDsl<T>.() -> Unit
 ): NavigationHost {
     val routes: MutableMap<String, FlatRouteData> = mutableMapOf()
-    val navBarVisibility: MutableMap<String, Boolean> = mutableMapOf()
-    val screenSettings = ScreenSettingsImpl()
+    val screenSettings = ScreenSettingsImpl(factory)
     val viewModelOwners: MutableMap<String, ViewModelOwner> = mutableMapOf()
 
-    val dsl = object : FlatNavigationDsl {
+    val dsl = object : FlatNavigationDsl<T> {
         override fun registerScreen(
             uri: String,
             isToolbarVisible: Boolean,
             screen: @Composable (
                 Navigator,
                 Map<String, String>,
-                ScreenSettings,
+                ScreenSettings<T>,
                 ViewModelOwner
             ) -> Unit
         ) {
@@ -34,7 +34,6 @@ actual fun navigation(
             routes[startUri] = { provider, navigator, args, viewModelOwner ->
                 ComposeViewController(
                     provider,
-                    navBarVisibility[startUri] ?: true,
                     viewModelOwner
                 ) @Composable {
                     screen(
@@ -46,13 +45,12 @@ actual fun navigation(
                 }
             }
             viewModelOwners[startUri] = ViewModelOwner(mutableMapOf())
-            navBarVisibility[startUri] = isToolbarVisible
         }
 
         override fun registerNavigation(
             uri: String,
             isToolbarVisible: Boolean,
-            childNavigation: (Navigator, Map<String, String>, ScreenSettings, ViewModelOwner) -> NavigationHost
+            childNavigation: (Navigator, Map<String, String>, ScreenSettings<T>, ViewModelOwner) -> NavigationHost
         ) {
             val startUri = uri.substringBefore('?')
             routes[startUri] = { provider, navigator, args, viewModelOwner ->
@@ -64,14 +62,12 @@ actual fun navigation(
                 ).createViewController(provider)
             }
             viewModelOwners[startUri] = ViewModelOwner(mutableMapOf())
-            navBarVisibility[startUri] = isToolbarVisible
         }
     }
     dsl.block()
     return FlatNavigation(
         startDestination = startDestination,
         routes = routes,
-        navBarVisibility = navBarVisibility,
         viewModelOwners = viewModelOwners,
         screenSettings = screenSettings
     )

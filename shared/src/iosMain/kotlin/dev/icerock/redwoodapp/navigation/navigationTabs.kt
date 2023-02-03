@@ -36,7 +36,6 @@ actual fun navigationTabs(
                 createViewController = { provider, navigator ->
                     ComposeViewController(
                         provider,
-                        false,
                         viewModelOwners[uri]!!
                     ) @Composable {
                         screen(navigator)

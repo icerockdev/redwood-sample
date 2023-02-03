@@ -56,15 +56,15 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.activity:activity-compose:1.6.1")
-                implementation("androidx.compose.ui:ui:1.3.3")
-                implementation("androidx.compose.ui:ui-tooling:1.3.3")
-                implementation("androidx.compose.foundation:foundation:1.3.1")
-                implementation("androidx.compose.foundation:foundation-layout:1.3.1")
-                implementation("androidx.compose.material:material:1.3.1")
-                implementation("com.google.android.material:compose-theme-adapter:1.2.1")
-                implementation("androidx.navigation:navigation-compose:2.5.3")
-                implementation("androidx.navigation:navigation-runtime-ktx:2.5.3")
+                api("androidx.activity:activity-compose:1.6.1")
+                api("androidx.compose.ui:ui:1.3.3")
+                api("androidx.compose.ui:ui-tooling:1.3.3")
+                api("androidx.compose.foundation:foundation:1.3.1")
+                api("androidx.compose.foundation:foundation-layout:1.3.1")
+                api("androidx.compose.material:material:1.3.1")
+                api("com.google.android.material:compose-theme-adapter:1.2.1")
+                api("androidx.navigation:navigation-compose:2.5.3")
+                api("androidx.navigation:navigation-runtime-ktx:2.5.3")
             }
         }
     }

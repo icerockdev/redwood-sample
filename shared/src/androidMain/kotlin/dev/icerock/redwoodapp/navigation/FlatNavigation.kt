@@ -9,6 +9,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,12 +33,14 @@ import app.cash.redwood.widget.Widget
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwoodapp.shared.R
+import kotlinx.coroutines.flow.MutableStateFlow
 
-data class FlatNavigation(
+data class FlatNavigation<T : Any>(
     val startDestination: String,
     val routes: MutableMap<String, FlatRouteData>,
     val navBarVisibility: MutableMap<String, Boolean>,
-    val screenSettings: ScreenSettingsImpl
+    val screenSettings: ScreenSettingsImpl<T>,
+    val tapbarFactory: FlatNavigationFactory<T>
 ) : NavigationHost {
 
     @Composable
@@ -48,14 +51,10 @@ data class FlatNavigation(
             object : Navigator {
                 override fun navigate(uri: String) {
                     navController.navigate(uri)
-                    screenSettings.navigationBar = null
-                    screenSettings.text = "".desc()
                 }
 
                 override fun popBackStack() {
                     navController.popBackStack()
-                    screenSettings.navigationBar = null
-                    screenSettings.text = "".desc()
                 }
             }
         }
@@ -82,37 +81,9 @@ data class FlatNavigation(
                 ) { entry ->
                     Scaffold(
                         topBar = {
-                            if (navBarVisibility[navController.currentDestination?.route] == true) {
-                                val settingsNavBar = screenSettings.navigationBar
-                                if (settingsNavBar != null) {
-                                    settingsNavBar.invoke(navController)
-                                } else {
-                                    TopAppBar(
-                                        backgroundColor = Color.White,
-                                        contentColor = Color.Black,
-                                        elevation = 2.dp,
-                                        title = {
-                                            Text(
-                                                text = screenSettings.text.toString(LocalContext.current)
-                                            )
-                                        },
-                                        navigationIcon = {
-                                            if (navController.backQueue.size != 2) {
-                                                IconButton(
-                                                    onClick = {
-                                                        navController.popBackStack()
-                                                    }
-                                                ) {
-                                                    Icon(
-                                                        painter = painterResource(id = R.drawable.arrow_left),
-                                                        contentDescription = null
-                                                    )
-                                                }
-                                            }
-                                        }
-                                    )
-                                }
-                            }
+                            val data: T? by screenSettings.data.collectAsState()
+                            if(data == null) return@Scaffold
+                            tapbarFactory.RenderToolbar(navController = navController, data = data as T)
                         }
                     ) { innerPadding ->
                         Box(modifier = androidx.compose.ui.Modifier.padding(innerPadding)) {
@@ -177,17 +148,11 @@ fun String.getParams(): List<String> {
 }
 
 
-class ScreenSettingsImpl() : ScreenSettings {
+class ScreenSettingsImpl<T>() : ScreenSettings<T> {
 
-    var text: StringDesc by mutableStateOf("".desc())
+    var data = MutableStateFlow<T?>(null)
 
-    var navigationBar: (@Composable (NavController) -> Unit)? by mutableStateOf(null)
-    override fun setTitle(title: StringDesc) {
-        this.text = title
+    override fun setToolbarData(data: T) {
+       this.data.value = data
     }
-
-    override fun setNavigationBar(navigationBar: NavigationBar) {
-        this.navigationBar = { navigationBar.Render(navController = it) }
-    }
-
 }

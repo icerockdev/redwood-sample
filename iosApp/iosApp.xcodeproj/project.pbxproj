@@ -19,6 +19,7 @@
 		227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA262957564C00A4CBC8 /* SceneDelegate.swift */; };
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
 		227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2F2957564D00A4CBC8 /* LaunchScreen.storyboard */; };
+		443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F5E50298B9E100079910A /* NavBarFactory.swift */; };
 		449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B364A2983D6960008710D /* IosWidgetSpace.swift */; };
 		617E7C3EEB7B6042DA8DC122 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		227ECA2D2957564D00A4CBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		227ECA302957564D00A4CBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227ECA322957564D00A4CBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		443F5E50298B9E100079910A /* NavBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarFactory.swift; sourceTree = "<group>"; };
 		449B364A2983D6960008710D /* IosWidgetSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSpace.swift; sourceTree = "<group>"; };
 		C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D27B09DFB8AAD8A46FED88 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		227ECA232957564C00A4CBC8 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				443F5E4F298B9DEB0079910A /* NavBar */,
 				225D67D82971B5DC00A27CD1 /* Widgets */,
 				227ECA242957564C00A4CBC8 /* AppDelegate.swift */,
 				227ECA262957564C00A4CBC8 /* SceneDelegate.swift */,
@@ -91,6 +94,14 @@
 				C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		443F5E4F298B9DEB0079910A /* NavBar */ = {
+			isa = PBXGroup;
+			children = (
+				443F5E50298B9E100079910A /* NavBarFactory.swift */,
+			);
+			path = NavBar;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -238,6 +249,7 @@
 				225D67E02971B69200A27CD1 /* IosWidgetImage.swift in Sources */,
 				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
 				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
+				443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */,
 				225D67E82971B74100A27CD1 /* IosStack.swift in Sources */,
 				449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */,
 				225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */,

@@ -23,6 +23,7 @@ import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.NEWS_LIST
 import dev.icerock.redwoodapp.SimpleListViewModel
+import dev.icerock.redwoodapp.ToolabrArgs
 import dev.icerock.redwoodapp.ViewModelOwner
 import dev.icerock.redwoodapp.getViewModel
 import dev.icerock.redwoodapp.navigation.ScreenSettings
@@ -30,12 +31,12 @@ import dev.icerock.redwoodapp.screens.entity.CardItem
 
 @Composable
 fun PostsList(
-    screenSettings: ScreenSettings,
+    screenSettings: ScreenSettings<ToolabrArgs>,
     viewModelOwner: ViewModelOwner,
     routeToCreate: (String, String) -> Unit,
 ) {
     LaunchedEffect(screenSettings) {
-        screenSettings.setTitle("Posts".desc())
+        screenSettings.setToolbarData(ToolabrArgs.Simple("Posts".desc()))
     }
     val viewModel: SimpleListViewModel = getViewModel(viewModelOwner) {
         SimpleListViewModel()

@@ -19,6 +19,9 @@
 		227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA262957564C00A4CBC8 /* SceneDelegate.swift */; };
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
 		227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2F2957564D00A4CBC8 /* LaunchScreen.storyboard */; };
+		443EFE5C2990D061001C3B2A /* IosWidgetBanners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */; };
+		443EFE602990D1BD001C3B2A /* BannersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443EFE5F2990D1BD001C3B2A /* BannersView.xib */; };
+		443EFE632990D88C001C3B2A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE622990D88C001C3B2A /* Colors.swift */; };
 		443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F5E50298B9E100079910A /* NavBarFactory.swift */; };
 		449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B364A2983D6960008710D /* IosWidgetSpace.swift */; };
 		617E7C3EEB7B6042DA8DC122 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */; };
@@ -39,6 +42,9 @@
 		227ECA2D2957564D00A4CBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		227ECA302957564D00A4CBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227ECA322957564D00A4CBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetBanners.swift; sourceTree = "<group>"; };
+		443EFE5F2990D1BD001C3B2A /* BannersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BannersView.xib; sourceTree = "<group>"; };
+		443EFE622990D88C001C3B2A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		443F5E50298B9E100079910A /* NavBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarFactory.swift; sourceTree = "<group>"; };
 		449B364A2983D6960008710D /* IosWidgetSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSpace.swift; sourceTree = "<group>"; };
 		C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +76,8 @@
 				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
 				225D67E72971B74100A27CD1 /* IosStack.swift */,
 				449B364A2983D6960008710D /* IosWidgetSpace.swift */,
+				443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */,
+				443EFE5F2990D1BD001C3B2A /* BannersView.xib */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -77,6 +85,7 @@
 		227ECA232957564C00A4CBC8 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				443EFE612990D87E001C3B2A /* Theme */,
 				443F5E4F298B9DEB0079910A /* NavBar */,
 				225D67D82971B5DC00A27CD1 /* Widgets */,
 				227ECA242957564C00A4CBC8 /* AppDelegate.swift */,
@@ -94,6 +103,14 @@
 				C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		443EFE612990D87E001C3B2A /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				443EFE622990D88C001C3B2A /* Colors.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		443F5E4F298B9DEB0079910A /* NavBar */ = {
@@ -191,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443EFE602990D1BD001C3B2A /* BannersView.xib in Resources */,
 				227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */,
 				227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */,
 			);
@@ -245,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443EFE5C2990D061001C3B2A /* IosWidgetBanners.swift in Sources */,
 				225D67DA2971B5F000A27CD1 /* IosWidgetFactory.swift in Sources */,
 				225D67E02971B69200A27CD1 /* IosWidgetImage.swift in Sources */,
+				443EFE632990D88C001C3B2A /* Colors.swift in Sources */,
 				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
 				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
 				443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */,

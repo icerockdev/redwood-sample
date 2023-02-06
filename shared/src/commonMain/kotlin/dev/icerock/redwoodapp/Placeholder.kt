@@ -46,3 +46,5 @@ val NEWS_LIST = listOf<Pair<String, String>>(
 const val USR_NAME = "Иванов Петр"
 
 const val USER_AVATAR = "https://www.dierennieuws.nl/wp-content/uploads/2022/01/kat-in-sneeuw-800x445.jpg"
+const val BANNER = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/2560px-Cat_August_2010-4.jpg"
+const val BANNER_2 = "https://www.humanesociety.org/sites/default/files/styles/2000x850/public/2022-08/hl-yp-cats-579652.jpg?h=a0b0b8d2&itok=Ha4SyumM"

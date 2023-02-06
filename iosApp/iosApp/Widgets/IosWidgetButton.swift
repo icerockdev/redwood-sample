@@ -9,8 +9,6 @@
 import UIKit
 import shared_ios
 
-//todo remove to coloes
-let mainColor = UIColor(red:55.0/255.0, green:121.0/255.0, blue:193.0/255.0, alpha:1.0)
 
 class IosWidgetButton: WidgetButton {
     

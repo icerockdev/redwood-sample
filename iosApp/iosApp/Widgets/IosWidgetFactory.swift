@@ -10,6 +10,10 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func Banners() -> Banners {
+        IosWidgetBanners()
+    }
+    
     func Space() -> Space {
         IosWidgetSpace()
     }

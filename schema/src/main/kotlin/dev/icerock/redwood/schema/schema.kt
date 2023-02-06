@@ -21,7 +21,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         Card::class,
         ImageButton::class,
         Button::class,
-        Space::class
+        Space::class,
+        Banners::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -107,4 +108,9 @@ data class Space(
     // -1 max size
     @Property(2) val width: Int,
     @Property(3) val height: Int,
+)
+
+@Widget(9)
+data class Banners(
+    @Property(1) val bannersList: List<BannerData>
 )

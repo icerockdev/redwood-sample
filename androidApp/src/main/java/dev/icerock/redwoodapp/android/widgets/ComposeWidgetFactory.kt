@@ -1,6 +1,7 @@
 package dev.icerock.redwoodapp.android.widgets
 
 import androidx.compose.runtime.Composable
+import dev.icerock.redwood.schema.widget.Banners
 import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 
 object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit> {
@@ -19,4 +20,5 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun Button() = ComposeButton()
 
     override fun Space() = ComposeSpace()
+    override fun Banners(): Banners<() -> Unit> =  ComposeBanners()
 }

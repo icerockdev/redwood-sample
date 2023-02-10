@@ -123,9 +123,11 @@ class MyBannersController: UIViewController {
             )
             page.setOnClickListener(action: {
                 bannersList[i].onClick()
-                
             })
-          
+            
+            let label = UILabel(frame: CGRect(x: 16, y: 16, width: page.frame.size.width - 32, height: page.frame.size.height - 32))
+            page.addSubview(label)
+            label.text = action.title
         }
     }
 }

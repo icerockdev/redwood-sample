@@ -9,6 +9,7 @@ import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
+import dev.icerock.moko.fields.flow.FormField
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -33,7 +34,7 @@ fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>): Navigati
         registerScreen(
             uri = "cart"
         ) { navigator, _, screenSettings, viewModelOwner ->
-            MarketScreen(navigator, screenSettings)
+            MarketScreen(navigator, screenSettings, viewModelOwner)
         }
         registerScreen(
             uri = "login"
@@ -44,15 +45,18 @@ fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>): Navigati
             uri = "tabs"
         ) { navigator, _, screenSettings, viewModelOwner ->
             Box {
-                LaunchedEffect(screenSettings){
+                LaunchedEffect(screenSettings) {
                     screenSettings.setToolbarData(ToolabrArgs.Simple("SecondScreen".desc()))
                 }
-                Column (horizontalAlignment = CrossAxisAlignment.Center){
+                Column(horizontalAlignment = CrossAxisAlignment.Center) {
                     Text("SecondScreem")
-                    Button("Next Screen".desc(), onClick = {
-                        navigator.navigate( "3") },
-                    buttonType = ButtonType.Primary,
-                    layoutModifier = LayoutModifier.padding(Padding(16)))
+                    Button(
+                        "Next Screen".desc(), onClick = {
+                            navigator.navigate("3")
+                        },
+                        buttonType = ButtonType.Primary,
+                        layoutModifier = LayoutModifier.padding(Padding(16))
+                    )
                 }
             }
         }
@@ -60,7 +64,7 @@ fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>): Navigati
             uri = "3"
         ) { navigator, _, screenSettings, viewModelOwner ->
             Box {
-                LaunchedEffect(screenSettings){
+                LaunchedEffect(screenSettings) {
                     screenSettings.setToolbarData(ToolabrArgs.NoToolbar)
                 }
                 Column {
@@ -147,11 +151,25 @@ sealed class ToolabrArgs {
         val actoins: List<ToolbarAction> = listOf()
     ) : ToolabrArgs()
 
+    data class Search(
+        val search: FormField<String, StringDesc?>,
+        val placeholder: StringDesc?,
+        val actoin: ToolbarAction,
+        val leftButton: ToolbarButton?,
+        val rightButton: ToolbarButton?,
+    ) : ToolabrArgs()
+
     object NoToolbar : ToolabrArgs()
 }
+
+data class ToolbarButton(
+    val title: StringDesc,
+    val icon: ImageResource,
+    val onCLick: () -> Unit
+)
 
 data class ToolbarAction(
     val icon: ImageResource,
     val badge: StringDesc?,
-    val onCLick: ()->Unit
+    val onCLick: () -> Unit
 )

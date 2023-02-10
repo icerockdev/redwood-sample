@@ -8,10 +8,17 @@ object Colors {
     val error = Color(0xFFC02828)
     val success = Color(0xFF12A354)
 
+
+
+    val primary88 = Color(0xFF7662D9)
+    val primary12 = Color(0x1D684CDC)
+
     val black = Color(0xFF313033)
-    val black90 = Color(0xFF605D62)
-    val black80 = Color(0xFF939094)
-    val black70 = Color(0xFFA59FA6)
-    val black60 = Color(0xFFEFECEF)
-    val black50 = Color(0xFFFFFBFE)
+    val gray90 = Color(0xFF605D62)
+    val gray80 = Color(0xFF939094)
+    val gray70 = Color(0xFFA59FA6)
+    val gray60 = Color(0xFFEFECEF)
+    val gray50 = Color(0xFFFFFBFE)
+    val black33 = Color(0x54313033)
+    val black18 = Color(0x2C313033)
 }

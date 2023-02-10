@@ -10,6 +10,18 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func ProductCard() -> ProductCard {
+        IosWidgetProductCard()
+    }
+    
+    func RowWithWeight() -> RowWithWeight {
+        IosRowWithWeight()
+    }
+    
+    func ShortButton() -> ShortButton {
+        IosShortButton()
+    }
+    
     func Banners() -> Banners {
         IosWidgetBanners()
     }

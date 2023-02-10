@@ -40,7 +40,6 @@ import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.widget.Banners
 import dev.icerock.redwood.schema.widget.Image
 import dev.icerock.redwoodapp.android.theme.Colors
-import dev.icerock.redwoodapp.android.theme.Colors.black60
 
 @OptIn(ExperimentalPagerApi::class)
 class ComposeBanners : Banners<() -> Unit> {
@@ -81,7 +80,7 @@ class ComposeBanners : Banners<() -> Unit> {
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
-                            .background(color = black60)
+                            .background(color = Colors.black18)
                             .clickable {
                                 data.onClick.invoke()
                             },
@@ -104,7 +103,7 @@ class ComposeBanners : Banners<() -> Unit> {
                 totalDots = 3,
                 selectedIndex = state.currentPage,
                 selectedColor = Colors.primary,
-                unSelectedColor = black60
+                unSelectedColor = Colors.black18
             )
         }
 

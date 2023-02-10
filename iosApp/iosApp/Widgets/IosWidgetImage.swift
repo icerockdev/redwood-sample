@@ -42,7 +42,7 @@ class IosWidgetImage: WidgetImage {
         root.image = image
     }
     
-    func width(width: KotlinInt?) {
+    func width(width_ width: KotlinInt?) {
         _width = CGFloat(width?.intValue ?? 10)
     }
     

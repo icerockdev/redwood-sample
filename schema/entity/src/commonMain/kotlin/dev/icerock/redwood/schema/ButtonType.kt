@@ -3,5 +3,12 @@ package dev.icerock.redwood.schema
 enum class ButtonType {
     Primary,
     Secondary,
-    Action
+    Text,
+    Tonal,
+}
+
+sealed class Size {
+    object Wrap : Size()
+    object Fill : Size()
+    data class Const(val value: Int) : Size()
 }

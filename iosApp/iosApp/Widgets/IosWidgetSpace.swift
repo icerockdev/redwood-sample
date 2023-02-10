@@ -26,7 +26,7 @@ class IosWidgetSpace: Space {
         root.heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
     }
     
-    func width(width_ width: Int32) {
+    func width(width__ width: Int32) {
         root.widthAnchor.constraint(equalToConstant: CGFloat(width)).isActive = true
     }
     

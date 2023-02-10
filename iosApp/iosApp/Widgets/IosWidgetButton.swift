@@ -11,13 +11,16 @@ import shared_ios
 
 
 class IosWidgetButton: WidgetButton {
+  
     
+
     private let root: FillButton = {
         var configuration = UIButton.Configuration.filled()
         configuration.imagePadding = 10
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20)
         let view = FillButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
+        view.clipsToBounds = true
         return view
 
     }()
@@ -27,37 +30,75 @@ class IosWidgetButton: WidgetButton {
     func buttonType(buttonType: EntityButtonType) {
         _buttonType = buttonType
         if(buttonType == EntityButtonType.primary){
-            root.backgroundColor = mainColor
-            root.layer.cornerRadius = 16
+            root.backgroundColor = primaryColor
+            root.layer.cornerRadius = 24
             root.configuration?.baseBackgroundColor = UIColor.clear
+            root.isHighlighted = false
             root.setTitleColor(.white, for: UIControl.State.normal)
             root.setTitleColor(.white, for: UIControl.State.disabled)
+            root.tintColor = .white
            }
         if(buttonType == EntityButtonType.secondary){
-            root.setTitleColor(mainColor, for: UIControl.State.normal)
-            root.setTitleColor(.lightGray, for: UIControl.State.disabled)
+            root.setTitleColor(primaryColor, for: UIControl.State.normal)
+            root.setTitleColor(black60, for: UIControl.State.disabled)
             root.backgroundColor = UIColor.clear
             root.layer.borderColor = mainColor.cgColor
             root.layer.borderWidth = 2
-            root.layer.cornerRadius = 16
+            root.layer.cornerRadius = 24
             root.contentHorizontalAlignment = .center
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.updateConfiguration()
+            root.tintColor = primaryColor
         }
-        if(buttonType == EntityButtonType.action){
-            root.setTitleColor(mainColor, for: UIControl.State.normal)
+        if(buttonType == EntityButtonType.text){
+            root.setTitleColor(primaryColor, for: UIControl.State.normal)
             root.configuration?.baseBackgroundColor = UIColor.clear
+            root.layer.cornerRadius = 24
             root.backgroundColor = UIColor.clear
+            root.tintColor = primaryColor
         }
+        if(buttonType == EntityButtonType.tonal){
+            root.backgroundColor = primary88
+            root.layer.cornerRadius = 24
+            root.configuration?.baseBackgroundColor = UIColor.clear
+            root.setTitleColor(black, for: UIControl.State.normal)
+            root.setTitleColor(black, for: UIControl.State.disabled)
+            root.tintColor = black
+        }
+    }
+    
+    func width(width: EntitySize) {
+        root.widgetWidth = width
+    }
+    
+    func icon(icon: ImageResource?) {
+        let image = icon?.toUIImage()?.withTintColor(getTintColor())
+        root.setImage(image, for: .normal)
+        root.setImage(image?.withTintColor(black70), for: .disabled)
+        root.setImage(image, for: .focused)
     }
     
     func enabled(enabled: Bool) {
         root.isEnabled = enabled
         if(_buttonType == EntityButtonType.primary){
             if(enabled){
-                root.backgroundColor = mainColor
+                root.backgroundColor = primaryColor
             }else{
-                root.backgroundColor = .lightGray
+                root.backgroundColor = black60
+            }
+        }
+        if(_buttonType == EntityButtonType.tonal){
+            if(enabled){
+                root.backgroundColor = primary12
+            }else{
+                root.backgroundColor = black60
+            }
+        }
+        if(_buttonType == EntityButtonType.secondary){
+            if(enabled){
+                root.layer.borderColor = primaryColor.cgColor
+            }else{
+                root.layer.borderColor = black60.cgColor
             }
         }
     }
@@ -66,6 +107,22 @@ class IosWidgetButton: WidgetButton {
         root.setTitle(text.localized(), for: .normal)
         root.setTitle(text.localized(), for: .disabled)
     }
+    
+    func getTintColor() -> UIColor{
+        if(_buttonType == EntityButtonType.primary){
+            return .white
+           }
+        if(_buttonType == EntityButtonType.secondary){
+            return primaryColor
+        }
+        if(_buttonType == EntityButtonType.text){
+            return primaryColor
+        }
+            return black
+
+    }
+    
+    
     
     func onClick(onClick: (() -> Void)? = nil) {
         let identifier = UIAction.Identifier("ButtonBinding.onPressed")
@@ -84,8 +141,25 @@ class IosWidgetButton: WidgetButton {
 }
 
 class FillButton : UIButton{
+    
+    var widgetWidth : EntitySize = EntitySize.Wrap() {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+    
         override func sizeThatFits(_ size: CGSize) -> CGSize {
+            if(widgetWidth is EntitySize.Wrap){
+                let originalSize = super.sizeThatFits(size)
+                return CGSize(width: originalSize.width, height: 48)
+            }
+            if(widgetWidth is EntitySize.Const){
+                let originalSize = super.sizeThatFits(CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: size.height))
+                return CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: 48)
+            }
             let originalSize = super.sizeThatFits(size)
-            return CGSize(width: size.width, height: originalSize.height)
+            return CGSize(width: size.width, height: 48)
+      
         }
 }
+

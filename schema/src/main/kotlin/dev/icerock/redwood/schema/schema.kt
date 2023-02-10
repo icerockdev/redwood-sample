@@ -22,7 +22,10 @@ import dev.icerock.moko.resources.desc.StringDesc
         ImageButton::class,
         Button::class,
         Space::class,
-        Banners::class
+        Banners::class,
+        ShortButton::class,
+        RowWithWeight::class,
+        ProductCard::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -84,9 +87,29 @@ data class Button(
     @Default("true")
     val enabled: Boolean,
     @Property(4)
+    @Default("null")
+    val icon: ImageResource?,
+    @Property(6)
+    @Default("Size.Wrap")
+    val width: Size,
+    @Property(5)
     val onClick: () -> Unit,
+)
 
-    )
+@Widget(10)
+data class ShortButton(
+    @Property(1) val text: StringDesc,
+    @Property(2)
+    val buttonType: ButtonType,
+    @Property(3)
+    @Default("true")
+    val enabled: Boolean,
+    @Property(4)
+    @Default("null")
+    val icon: ImageResource?,
+    @Property(5)
+    val onClick: () -> Unit,
+)
 
 @Widget(6)
 data class Card(
@@ -113,4 +136,34 @@ data class Space(
 @Widget(9)
 data class Banners(
     @Property(1) val bannersList: List<BannerData>
+)
+
+@Widget(11)
+data class RowWithWeight(
+    @Children(1)
+    val childs: () -> Unit
+)
+
+@Widget(12)
+data class ProductCard(
+    @Property(1)
+    val title: StringDesc,
+    @Property(2)
+    val image: String,
+    @Property(3)
+    val isLiked: Boolean,
+    @Property(4)
+    val badge: StringDesc?,
+    @Property(5)
+    val price: StringDesc,
+    @Property(6)
+    val oldPrice: StringDesc?,
+    @Property(7)
+    val subtitle: StringDesc?,
+    @Property(8)
+    val footer: StringDesc?,
+    @Property(9)
+    val onLikeClick: ()->Unit,
+    @Children(1)
+    val action: ()->Unit,
 )

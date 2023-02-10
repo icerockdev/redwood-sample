@@ -20,14 +20,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        window = UIWindow(windowScene: scene)
-        let factory = NavBarFavtory()
-        let rootNavigation = ExposedKt.mainApp(flatNavigationFactory: factory)
+        let window = UIWindow(windowScene: scene)
+        window.backgroundColor = .systemBackground
         
-        window?.rootViewController = rootNavigation.createViewController(
+        let rootNavigation = ExposedKt.mainApp(
+            flatNavigationFactory: NavBarFavtory()
+        )
+        window.rootViewController = rootNavigation.createViewController(
             provider: ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
         )
-        window?.makeKeyAndVisible()
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -10,6 +10,10 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func CounterButton() -> CounterButton {
+        IosWidgetCounter()
+    }
+    
     func ProductCard() -> ProductCard {
         IosWidgetProductCard()
     }

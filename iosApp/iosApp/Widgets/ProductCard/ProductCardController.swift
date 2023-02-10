@@ -142,8 +142,8 @@ class ProductCardController : UIViewController{
         fotterView.heightAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.height)).isActive = true
         fotterView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 56).isActive = true
         fotterView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-       // container.bottomAnchor.constraint(equalTo: fotterView.bottomAnchor).isActive = true
-    }
+        container.bottomAnchor.constraint(equalTo: fotterView.bottomAnchor).isActive = true
+     }
     
     func setIsLeked(value:Bool){
         if(value){
@@ -208,7 +208,6 @@ class ProductCardController : UIViewController{
     
     class ProductCardView: UIView{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
-            let originalSize = super.sizeThatFits(size)
             let chilsdsHeight = subviews.max { a, b in
                 a.frame.maxY < b.frame.maxY
             }?.frame.maxY

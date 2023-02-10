@@ -16,27 +16,26 @@ class IosRowWithWeight :  RowWithWeight {
         container.axis = .horizontal
         container.alignment = .top
         container.distribution = .fillProportionally
+        container.translatesAutoresizingMaskIntoConstraints = false
         return container;
     }()
 
     var childs: Redwood_widgetWidgetChildren {
-        ExposedKt.createViewChildrenWithLayoutParams(parent: root, insert: myInsert)
-        
-        
+        ExposedKt.createViewChildrenListener(parent: root, insert: myInsert)
     }
 
     
     func myInsert(view: UIView,index: KotlinInt){
-        root.insertArrangedSubview(view, at: 0)
+        root.insertArrangedSubview(view, at:  index.intValue)
     }
 
     
     func myInsert(view: UIView,index: KotlinInt, layoutModifier: Redwood_runtimeLayoutModifier){
         if(layoutModifier is Redwood_layout_layoutmodifiersPadding){
             // do something
-            root.insertArrangedSubview(view, at: 0)
+            root.insertArrangedSubview(view, at: index.intValue)
         }else{
-            root.insertArrangedSubview(view, at: 0)
+            root.insertArrangedSubview(view, at: index.intValue)
         }
     }
 
@@ -46,8 +45,10 @@ class IosRowWithWeight :  RowWithWeight {
     
     class RowWithWeightView : UIStackView{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
-            let childSize = subviews.first?.sizeThatFits(size)
-            return CGSize(width: size.width, height: childSize?.height ?? 32)
+            let chilsdsHeight = subviews.max { a, b in
+                a.frame.maxY < b.frame.maxY
+            }?.frame.maxY
+            return CGSize(width: size.width, height:  (344) + 12)
         }
     }
 }

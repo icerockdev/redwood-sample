@@ -12,8 +12,6 @@ import shared_ios
 class NavBarFavtory : IosFlatNavigationFactory{
     
     func render(viewController: UIViewController, data: Any?) {
-        viewController.navigationController?.navigationBar.backgroundColor = UIColor.white
-      
         let args : SharedToolabrArgs? = data as? SharedToolabrArgs
         if(args == nil || args is SharedToolabrArgs.NoToolbar){
             viewController.navigationController?.setToolbarHidden(true, animated: false)

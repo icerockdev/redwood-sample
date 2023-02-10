@@ -29,7 +29,8 @@ class NavBarFavtory : IosFlatNavigationFactory{
                 }
             })
             
-            viewController.navigationItem.setRightBarButtonItems(buttons.reversed(), animated: false)
+            viewController.navigationItem.setLeftBarButton(buttons.reversed(), animated: false)
+            viewController.navigationItem.titleView
         }
     }
     

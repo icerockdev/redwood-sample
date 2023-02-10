@@ -16,9 +16,9 @@ expect inline fun <reified VM : ViewModel> getViewModel(
 expect class ViewModelOwner
 
 class SimpleLoginViewModel() : ViewModel() {
-    val LoginButtonTitle: StringDesc = "VIEWMODEL TEXT".desc()
+    val LoginButtonTitle: StringDesc = "Login".desc()
 
-    private val _textFlow = MutableStateFlow<StringDesc>("VIEWMODEL TEXT".desc())
+    private val _textFlow = MutableStateFlow<StringDesc>("Login".desc())
     val tetxFlow: StateFlow<StringDesc> = _textFlow
     private val _notification = MutableStateFlow<Int>(0)
     val badge: Flow<StringDesc> = _notification.map { it.toString().desc() }

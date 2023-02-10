@@ -102,6 +102,7 @@ class ProductCardController : UIViewController{
         container.addSubview(titleView)
         container.addSubview(subtitleView)
         container.addSubview(fotterView)
+        
     }
     
     var flag = true

@@ -24,10 +24,9 @@ import dev.icerock.redwoodapp.navigation.navigation
 import dev.icerock.redwoodapp.navigation.navigationTabs
 import dev.icerock.redwoodapp.screens.DetailsScreen
 import dev.icerock.redwoodapp.screens.LoginScreen
-import dev.icerock.redwoodapp.screens.MarketScreen
+import dev.icerock.redwoodapp.screens.market.MarketScreen
 import dev.icerock.redwoodapp.screens.PostsList
 import dev.icerock.redwoodapp.screens.ProfileScreen
-import kotlinx.coroutines.flow.Flow
 
 fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>): NavigationHost {
     return navigation(startDestination = "cart", flatNavigationFactory) {

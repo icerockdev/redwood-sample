@@ -25,7 +25,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         Banners::class,
         ShortButton::class,
         RowWithWeight::class,
-        ProductCard::class
+        ProductCard::class,
+        CounterButton::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -166,4 +167,17 @@ data class ProductCard(
     val onLikeClick: ()->Unit,
     @Children(1)
     val action: ()->Unit,
+)
+
+@Widget(13)
+data class CounterButton(
+    @Property(1)
+    val count: StringDesc,
+    @Property(2)
+    val onAddClick: ()->Unit,
+    @Property(3)
+    val onRemoveClick: ()->Unit,
+    @Property(4)
+    @Default("Size.Wrap")
+    val width: Size,
 )

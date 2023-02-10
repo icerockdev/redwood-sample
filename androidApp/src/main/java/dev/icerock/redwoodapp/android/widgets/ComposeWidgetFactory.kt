@@ -2,6 +2,7 @@ package dev.icerock.redwoodapp.android.widgets
 
 import androidx.compose.runtime.Composable
 import dev.icerock.redwood.schema.widget.Banners
+import dev.icerock.redwood.schema.widget.CounterButton
 import dev.icerock.redwood.schema.widget.ProductCard
 import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import dev.icerock.redwood.schema.widget.RowWithWeight
@@ -23,12 +24,14 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun Button() = ComposeButton()
 
     override fun Space() = ComposeSpace()
-    override fun Banners(): Banners<() -> Unit> =  ComposeBanners()
+    override fun Banners(): Banners<() -> Unit> = ComposeBanners()
     override fun ShortButton(): ShortButton<() -> Unit> = ComposeShortButton()
 
     override fun RowWithWeight(): RowWithWeight<() -> Unit> =
-       ComposeRowWithWeight()
+        ComposeRowWithWeight()
 
     override fun ProductCard(): ProductCard<() -> Unit> =
         ComposeProductCard()
+
+    override fun CounterButton(): CounterButton<() -> Unit> = ComposeCounterButton()
 }

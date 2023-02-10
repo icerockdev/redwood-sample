@@ -45,27 +45,28 @@ fun LoginScreen(
     val isLiked by viewModel.likeResource.collectAsState(MR.images.like)
     val badge by viewModel.badge.collectAsState(null)
     LaunchedEffect(screenSettings, badge, isLiked) {
-        screenSettings.setToolbarData(
-            title = ToolabrArgs.Simple(
-                "Login".desc(),
-                listOf(ToolbarAction(
-                    MR.images.line,
-                    null
-                ) {
-                    viewModel.setText("clicked")
-                }, ToolbarAction(
-                    isLiked,
-                    null
-                ) {
-                    viewModel.setLike()
-                }, ToolbarAction(
-                    MR.images.settings,
-                    badge
-                ) {
-                    viewModel.onNotificationClicl()
-                })
-            )
-        )
+        screenSettings.setToolbarData(ToolabrArgs.NoToolbar)
+       // screenSettings.setToolbarData(
+       //     title = ToolabrArgs.Simple(
+       //         "Login".desc(),
+       //         listOf(ToolbarAction(
+       //             MR.images.line,
+       //             null
+       //         ) {
+       //             viewModel.setText("clicked")
+       //         }, ToolbarAction(
+       //             isLiked,
+       //             null
+       //         ) {
+       //             viewModel.setLike()
+       //         }, ToolbarAction(
+       //             MR.images.settings,
+       //             badge
+       //         ) {
+       //             viewModel.onNotificationClicl()
+       //         })
+       //     )
+       // )
     }
     Box {
         Column(

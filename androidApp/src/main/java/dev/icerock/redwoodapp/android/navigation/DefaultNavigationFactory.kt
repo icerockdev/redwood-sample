@@ -178,9 +178,9 @@ class DefaultNavigationTapbar : FlatNavigationFactory<ToolabrArgs> {
                                 modifier = Modifier
                                     .align(Alignment.CenterStart)
                                     .padding(start = 8.dp, bottom = 8.dp)
+                                    .clip(CircleShape)
                                     .clickable { it.onCLick() }
-                                    .padding(end = 8.dp)
-                                    .clip(CircleShape),
+                                    .padding(end = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Image(
@@ -198,9 +198,9 @@ class DefaultNavigationTapbar : FlatNavigationFactory<ToolabrArgs> {
                                 modifier = Modifier
                                     .align(Alignment.CenterEnd)
                                     .padding(end = 8.dp, bottom = 8.dp)
+                                    .clip(CircleShape)
                                     .clickable { it.onCLick() }
-                                    .padding(start = 8.dp)
-                                    .clip(CircleShape),
+                                    .padding(end = 8.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Image(

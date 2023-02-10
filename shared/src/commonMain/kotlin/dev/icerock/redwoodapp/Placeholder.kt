@@ -1,5 +1,7 @@
 package dev.icerock.redwoodapp
 
+import dev.icerock.redwoodapp.screens.market.Product
+
 
 const val LONG_TEXT: String =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices eros in cursus turpis massa tincidunt dui. Venenatis cras sed felis eget velit. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida hendrerit. Arcu bibendum at varius vel pharetra. Imperdiet sed euismod nisi porta lorem mollis. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Interdum varius sit amet mattis vulputate enim nulla aliquet. Amet massa vitae tortor condimentum lacinia. Quam id leo in vitae turpis massa sed elementum. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio.\n" +
@@ -45,6 +47,82 @@ val NEWS_LIST = listOf<Pair<String, String>>(
 
 const val USR_NAME = "Иванов Петр"
 
-const val USER_AVATAR = "https://www.dierennieuws.nl/wp-content/uploads/2022/01/kat-in-sneeuw-800x445.jpg"
-const val BANNER = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/2560px-Cat_August_2010-4.jpg"
-const val BANNER_2 = "https://www.humanesociety.org/sites/default/files/styles/2000x850/public/2022-08/hl-yp-cats-579652.jpg?h=a0b0b8d2&itok=Ha4SyumM"
+const val USER_AVATAR =
+    "https://www.dierennieuws.nl/wp-content/uploads/2022/01/kat-in-sneeuw-800x445.jpg"
+const val BANNER =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/2560px-Cat_August_2010-4.jpg"
+const val BANNER_2 =
+    "https://www.humanesociety.org/sites/default/files/styles/2000x850/public/2022-08/hl-yp-cats-579652.jpg?h=a0b0b8d2&itok=Ha4SyumM"
+
+val PRODUCTS_MOCK = listOf<Product>(
+    Product(
+        id = "product1",
+        title = "cat food 1",
+        cost = "$8000",
+        oldCost = "$16000",
+        subtitle = "В наличии",
+        date = "Доставка 14.12.23",
+        badge = "50%",
+        imageUrl = USER_AVATAR
+    ),
+    Product(
+        id = "product2",
+        title = "cat food 2",
+        cost = "$8000",
+        oldCost = null,
+        subtitle = null,
+        date = "Доставка 14.12.23",
+        badge = null,
+        imageUrl = BANNER
+    ),
+    Product(
+        id = "product3",
+        title = "cat food 3",
+        cost = "$8000",
+        oldCost = null,
+        subtitle = null,
+        date = null,
+        badge =  null,
+        imageUrl = BANNER_2
+    ),
+    Product(
+        id = "product4",
+        title = "cat food 4",
+        cost = "$8000",
+        oldCost = "$16000",
+        subtitle = null,
+        date = null,
+        badge = "50%",
+        imageUrl = USER_AVATAR
+    ),
+    Product(
+        id = "product5",
+        title = "dog food 1",
+        cost = "$8000",
+        oldCost = null,
+        subtitle = "В наличии",
+        date = null,
+        badge = null,
+        imageUrl = BANNER
+    ),
+    Product(
+        id = "product6",
+        title = "dog food 2",
+        cost = "$8000",
+        oldCost = "$16000",
+        subtitle = "В наличии",
+        date = "Доставка 14.12.23",
+        badge = "50%",
+        imageUrl = BANNER_2
+    ),
+    Product(
+        id = "product7",
+        title = "dog food 3",
+        cost = "$8000",
+        oldCost = "$16000",
+        subtitle = "В наличии",
+        date = "Доставка 14.12.23",
+        badge = "50%",
+        imageUrl = USER_AVATAR
+    ),
+)

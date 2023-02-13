@@ -105,7 +105,7 @@ class NavBarController: NavigationNavBarController {
     
     var navBarData: NavigationNavBarData? = nil {
         didSet {
-            print("set \(navBarData)")
+            render(viewController: vc, data: navBarData)
         }
     }
     
@@ -113,5 +113,71 @@ class NavBarController: NavigationNavBarController {
     
     init(vc: UIViewController) {
         self.vc = vc
+    }
+    
+    func render(viewController: UIViewController, data: Any?) {
+        let args : SharedToolbarArgs? = data as? SharedToolbarArgs
+        if args is SharedToolbarArgs.NoToolbar {
+            viewController.navigationController?.setNavigationBarHidden(true, animated: false)
+            return
+        }
+        if args is SharedToolbarArgs.Simple {
+            let simpleArgs = args as! SharedToolbarArgs.Simple
+            viewController.navigationController?.setNavigationBarHidden(false, animated: false)
+            viewController.navigationItem.title = simpleArgs.title.localized()
+            let buttons:[UIBarButtonItem] = simpleArgs.actions.map({action in
+                if(action.badge != nil){
+                    return createActionButtonWithBadge(action: action)
+                }else{
+                    return createActionButton(action: action)
+                }
+            })
+            
+            viewController.navigationItem.setRightBarButtonItems(
+                buttons.reversed(),
+                animated: false
+            )
+            return
+        }
+        
+        viewController.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    func createActionButton(action: SharedToolbarAction) -> UIBarButtonItem {
+        let button = UIBarButtonItem(image: UIImage(named: action.icon.assetImageName))
+        button.target = button
+        let uiAction = UIAction(handler: { uiAction in
+            action.onClick()
+        })
+        let uiImage = UIImage(named: action.icon.assetImageName)
+        button.primaryAction = uiAction
+        button.image = uiImage
+        return button
+    }
+    
+    func createActionButtonWithBadge(action: SharedToolbarAction) -> UIBarButtonItem {
+        let button = UIBarButtonItem()
+        button.target = button
+        let uiImage = UIImage(named: action.icon.assetImageName)
+        let uiAction = UIAction(handler: { uiAction in
+            action.onClick()
+        })
+        let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+        filterBtn.setImage(uiImage?.withTintColor(.systemBlue), for: .normal)
+        filterBtn.addAction(uiAction, for: .touchUpInside)
+        
+        let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+        lblBadge.backgroundColor = .red
+        lblBadge.clipsToBounds = true
+        lblBadge.layer.cornerRadius = 7
+        lblBadge.text = action.badge?.localized()
+        lblBadge.textColor = UIColor.white
+        lblBadge.font = .systemFont(ofSize: 10)
+        lblBadge.textAlignment = .center
+        
+        filterBtn.addSubview(lblBadge)
+        button.customView = filterBtn
+        
+        return button
     }
 }

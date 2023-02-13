@@ -45,8 +45,8 @@ class RedwoodViewController: UIViewController {
         self.delegate = delegateBuilder(container)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         let displayLink = CADisplayLink.init(target: self, selector: #selector(tickClock))
         displayLink.add(to: .current, forMode: .default)

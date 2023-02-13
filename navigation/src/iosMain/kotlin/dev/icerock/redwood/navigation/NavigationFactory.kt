@@ -5,6 +5,7 @@
 package dev.icerock.redwood.navigation
 
 import app.cash.redwood.widget.Widget
+import dev.icerock.redwood.navigation.navbar.NavBarController
 import platform.UIKit.UIStackView
 import platform.UIKit.UIView
 import platform.UIKit.UIViewController
@@ -27,4 +28,6 @@ actual interface NavigationFactory {
     fun createComposeScreen(
         delegate: (UIStackView) -> RedwoodViewControllerDelegate
     ): UIViewController
+
+    fun createNavBarController(vc: UIViewController): NavBarController
 }

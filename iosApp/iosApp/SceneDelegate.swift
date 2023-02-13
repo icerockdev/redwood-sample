@@ -81,6 +81,10 @@ class Factory: NavigationNavigationFactory {
         return self
     }
     
+    func createNavBarController(vc: UIViewController) -> NavigationNavBarController {
+        return NavBarController(vc: vc)
+    }
+    
     var provider: Redwood_widgetWidgetProvider {
         ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
     }
@@ -89,5 +93,25 @@ class Factory: NavigationNavigationFactory {
 extension Factory: NavigationNavigationRoot {
     func setViewController(viewController: UIViewController) {
         window.rootViewController = viewController
+    }
+}
+
+class NavBarController: NavigationNavBarController {
+    var isNavigationBarVisible: Bool = true {
+        didSet {
+            self.vc.navigationController?.isNavigationBarHidden = !isNavigationBarVisible
+        }
+    }
+    
+    var navBarData: NavigationNavBarData? = nil {
+        didSet {
+            print("set \(navBarData)")
+        }
+    }
+    
+    private let vc: UIViewController
+    
+    init(vc: UIViewController) {
+        self.vc = vc
     }
 }

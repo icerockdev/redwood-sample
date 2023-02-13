@@ -4,18 +4,21 @@
 
 package dev.icerock.redwood.navigation
 
+import app.cash.redwood.widget.Widget
 import dev.icerock.redwood.navigation.navigator.Navigator
+import platform.UIKit.UIView
 import platform.UIKit.UIViewController
 
-internal fun Map<String, (Navigator, Map<String, String>) -> UIViewController>.createDestinationViewController(
-    navigator: Navigator,
+internal fun <Nav : Navigator> Map<String, ViewControllerFactory<Nav>>.createDestinationViewController(
+    provider: Widget.Provider<UIView>,
+    navigator: Nav,
     destination: String
 ): UIViewController {
     val (data, args) = this.firstNotNullOf { (uri, data) ->
         val args: Map<String, String> = destination.readUriArgs(uri) ?: return@firstNotNullOf null
         data to args
     }
-    return data(navigator, args)
+    return data(provider, navigator, args)
 }
 
 internal fun String.readUriArgs(route: String): Map<String, String>? {

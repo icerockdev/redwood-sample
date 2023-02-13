@@ -41,8 +41,8 @@ fun LoginScreen(
             horizontalAlignment = CrossAxisAlignment.Center,
             verticalAlignment = MainAxisAlignment.Center
         ) {
-            var login: String by remember { mutableStateOf("") }
-            var password: String by remember { mutableStateOf("") }
+            var login: String by remember { mutableStateOf("123") }
+            var password: String by remember { mutableStateOf("123") }
             Image(
                 120,
                 120,

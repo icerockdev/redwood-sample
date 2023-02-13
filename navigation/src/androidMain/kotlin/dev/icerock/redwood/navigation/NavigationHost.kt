@@ -11,3 +11,5 @@ actual interface NavigationHost {
     @Composable
     fun Render(provider: Widget.Provider<@Composable () -> Unit>)
 }
+
+actual typealias NavigationRoot = NavigationHost

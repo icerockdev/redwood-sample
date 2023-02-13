@@ -22,12 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         window.backgroundColor = .systemBackground
-        
-        let rootNavigation = ExposedKt.mainApp(
-            flatNavigationFactory: NavBarFavtory()
-        )
-        window.rootViewController = rootNavigation.createViewController(
-            provider: ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
+        ExposedKt.mainApp(
+            navigationFactory: Factory(window: window)
         )
         window.makeKeyAndVisible()
         
@@ -65,3 +61,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+class Factory: NavigationNavigationFactory {
+    
+    private let window: UIWindow
+    
+    init(window: UIWindow) {
+        self.window = window
+    }
+    
+    func createComposeScreen(
+        delegate: @escaping (UIStackView) -> NavigationRedwoodViewControllerDelegate
+    ) -> UIViewController {
+        return RedwoodViewController { stackView in
+            delegate(stackView)
+        }
+    }
+    
+    func createRootNavigation() -> NavigationNavigationRoot {
+        return self
+    }
+    
+    var provider: Redwood_widgetWidgetProvider {
+        ExposedKt.widgetProvider(widgetFactory: IosWidgetFactory())
+    }
+}
+
+extension Factory: NavigationNavigationRoot {
+    func setViewController(viewController: UIViewController) {
+        window.rootViewController = viewController
+    }
+}

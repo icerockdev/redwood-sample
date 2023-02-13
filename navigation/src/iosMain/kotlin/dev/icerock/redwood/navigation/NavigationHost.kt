@@ -11,3 +11,7 @@ import platform.UIKit.UIViewController
 actual interface NavigationHost {
     fun createViewController(provider: Widget.Provider<UIView>): UIViewController
 }
+
+actual interface NavigationRoot {
+    fun setViewController(viewController: UIViewController)
+}

@@ -4,6 +4,32 @@
 
 package dev.icerock.redwood.navigation
 
+import dev.icerock.redwood.navigation.navigator.Navigator
+import platform.UIKit.UIViewController
+
+internal fun Map<String, (Navigator, Map<String, String>) -> UIViewController>.createDestinationViewController(
+    navigator: Navigator,
+    destination: String
+): UIViewController {
+    val (data, args) = this.firstNotNullOf { (uri, data) ->
+        val args: Map<String, String> = destination.readUriArgs(uri) ?: return@firstNotNullOf null
+        data to args
+    }
+    return data(navigator, args)
+}
+
+internal fun String.readUriArgs(route: String): Map<String, String>? {
+    val startUri: String = this.substringBefore('?')
+    if (!route.isPlaceholderOf(startUri)) return null
+
+    val params: String = this.substringAfter('?')
+    val paramsMap: MutableMap<String, String> = mutableMapOf()
+    params.split('&').forEach {
+        paramsMap[it.substringBefore('=')] = it.substringAfter('=')
+    }
+    return paramsMap + startUri.getParams(route, route.getStableParts())
+}
+
 internal fun String.getParams(placeholder: String) =
     this.getParams(placeholder, placeholder.getStableParts())
 

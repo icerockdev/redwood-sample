@@ -3,6 +3,7 @@ package dev.icerock.redwoodapp
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.navigation.NavigationFactory
 import dev.icerock.redwood.navigation.NavigationHost
+import dev.icerock.redwood.navigation.NavigationRoot
 import dev.icerock.redwood.navigation.navigation
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationFactoryScope
@@ -17,7 +18,7 @@ import org.example.library.MR
 
 fun mainApp(
     navigationFactory: NavigationFactory
-): NavigationHost = navigation(
+): NavigationRoot = navigation(
     navigationFactory = navigationFactory,
     startDestination = Screens.LOGIN
 ) {

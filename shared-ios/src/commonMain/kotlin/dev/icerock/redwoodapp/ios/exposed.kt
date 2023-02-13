@@ -4,15 +4,15 @@ import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.Padding
 import app.cash.redwood.layout.uiview.UIViewRedwoodLayoutWidgetFactory
 import app.cash.redwood.widget.UIViewChildren
+import dev.icerock.redwood.navigation.NavigationFactory
 import dev.icerock.redwood.schema.Size
+import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
+import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
+import dev.icerock.redwoodapp.ToolbarArgs
 import kotlinx.cinterop.readValue
 import platform.CoreGraphics.CGRectZero
 import platform.UIKit.UIAccessibilityIdentificationProtocol
 import platform.UIKit.UIView
-import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactories
-import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
-import dev.icerock.redwoodapp.ToolbarArgs
-import dev.icerock.redwood.navigation.flat.FlatNavigationFactory
 
 fun layoutModifier(): LayoutModifier = LayoutModifier
 
@@ -23,10 +23,10 @@ fun createViewChildrenListener(
     insert: (UIView, Int) -> Unit
 ): UIViewChildren = UIViewChildren(parent, insert = insert)
 
-fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolbarArgs>) =
-    dev.icerock.redwoodapp.mainApp(flatNavigationFactory)
+fun mainApp(navigationFactory: NavigationFactory) =
+    dev.icerock.redwoodapp.mainApp(navigationFactory)
 
-interface IosFlatNavigationFactory : FlatNavigationFactory<ToolbarArgs>
+//interface IosFlatNavigationFactory : FlatNavigationFactory<ToolbarArgs>
 
 // todo fix
 fun fixMe(arg1: ToolbarArgs.Simple, arg2: ToolbarArgs.NoToolbar) {}
@@ -54,4 +54,3 @@ fun widgetProvider(
     RedwoodAppSchema = widgetFactory,
     RedwoodLayout = UIViewRedwoodLayoutWidgetFactory()
 )
-

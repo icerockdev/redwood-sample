@@ -10,4 +10,4 @@ expect fun navigation(
     navigationFactory: NavigationFactory,
     startDestination: String,
     block: NavigationScope.() -> Unit
-): NavigationHost
+): NavigationRoot

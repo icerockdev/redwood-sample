@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224842B6299A7FD7008EC82D /* RedwoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224842B5299A7FD7008EC82D /* RedwoodViewController.swift */; };
 		225D67DA2971B5F000A27CD1 /* IosWidgetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */; };
 		225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */; };
 		225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		224842B5299A7FD7008EC82D /* RedwoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedwoodViewController.swift; sourceTree = "<group>"; };
 		225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetFactory.swift; sourceTree = "<group>"; };
 		225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetButton.swift; sourceTree = "<group>"; };
 		225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetText.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224842B4299A7FC8008EC82D /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				224842B5299A7FD7008EC82D /* RedwoodViewController.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		225D67D82971B5DC00A27CD1 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +108,7 @@
 		227ECA232957564C00A4CBC8 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				224842B4299A7FC8008EC82D /* Navigation */,
 				443EFE612990D87E001C3B2A /* Theme */,
 				443F5E4F298B9DEB0079910A /* NavBar */,
 				225D67D82971B5DC00A27CD1 /* Widgets */,
@@ -316,6 +327,7 @@
 				449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */,
 				225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */,
 				44E470FF299692D700C9B488 /* IosWidgetCounter.swift in Sources */,
+				224842B6299A7FD7008EC82D /* RedwoodViewController.swift in Sources */,
 				227ECA252957564C00A4CBC8 /* AppDelegate.swift in Sources */,
 				227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */,
 				225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */,

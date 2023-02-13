@@ -5,3 +5,5 @@
 package dev.icerock.redwood.navigation
 
 expect interface NavigationHost
+
+expect interface NavigationRoot

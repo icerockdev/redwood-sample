@@ -5,24 +5,26 @@
 package dev.icerock.redwood.navigation.viewmodel
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 
 @Composable
 actual inline fun <reified VM : ViewModel> getViewModel(
     crossinline factory: () -> VM
 ): VM {
-    TODO()
-//    return viewModelOwner.getViewModel(factory)
+    val store: ViewModelStore = LocalViewModelStore.current
+    return getViewModel(store, factory)
 }
-//
-//actual class ViewModelOwner(
-//    val mutableMap: MutableMap<String, ViewModel>
-//) {
-//    inline fun <reified VM : ViewModel> getViewModel(factory: () -> VM): VM {
-//        val key = VM::class.simpleName.orEmpty()
-//        if (mutableMap.containsKey(key).not()) {
-//            mutableMap[key] = factory.invoke()
-//        }
-//        return mutableMap[key]!! as VM
-//    }
-//}
+
+inline fun <reified VM : ViewModel> getViewModel(
+    store: ViewModelStore,
+    crossinline factory: () -> VM
+): VM {
+    return store.getViewModel(VM::class) {
+        factory()
+    }
+}
+
+val LocalViewModelStore = staticCompositionLocalOf<ViewModelStore> {
+    error("LocalViewModelStore not provided")
+}

@@ -58,7 +58,7 @@ class IosWidgetCard :  WidgetCard{
 
 class MyCardView: UIStackView{
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let childSize = subviews.first?.sizeThatFits(size)
+        let childSize = subviews.first?.sizeThatFits(CGSize(width: size.width, height: size.width))
         return CGSize(width: size.width, height: childSize?.height ?? 32)
     }
 }

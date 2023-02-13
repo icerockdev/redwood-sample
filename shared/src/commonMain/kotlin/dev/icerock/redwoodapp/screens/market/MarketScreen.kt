@@ -28,6 +28,7 @@ import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Banners
 import dev.icerock.redwood.schema.compose.Button
+import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.CounterButton
 import dev.icerock.redwood.schema.compose.ProductCard
 import dev.icerock.redwood.schema.compose.RowWithWeight
@@ -124,8 +125,15 @@ fun MarketScreen(
         )
 
         val productlList by viewModel.productList.collectAsState(listOf())
+        productlList.firstOrNull()?.render(viewModel)
+        Card(child = {
+            productlList.firstOrNull()?.render(viewModel)
+        })
+        RowWithWeight {
+            productlList.firstOrNull()?.render(viewModel)
 
-        productlList.forEachIndexed { index, product ->
+        }
+            productlList.forEachIndexed { index, product ->
             if (index % 2 != 0) return@forEachIndexed
             RowWithWeight {
                 product.render(viewModel)

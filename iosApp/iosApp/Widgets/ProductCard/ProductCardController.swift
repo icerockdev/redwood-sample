@@ -107,7 +107,6 @@ class ProductCardController : UIViewController{
     
     var flag = true
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         image.frame = CGRect(x: 19, y: 8, width: view.frame.width - 38, height:
                                 view.frame.width - 38)
         image.layer.zPosition = 1.0
@@ -140,10 +139,10 @@ class ProductCardController : UIViewController{
         let fotterViewSize  = fotterView.sizeThatFits(view.frame.size)
         fotterView.widthAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.width)).isActive = true
         fotterView.heightAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.height)).isActive = true
-        fotterView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 56).isActive = true
         fotterView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        container.bottomAnchor.constraint(equalTo: fotterView.bottomAnchor).isActive = true
-     }
+        fotterView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 56).isActive = true
+        super.viewDidLayoutSubviews()
+    }
     
     func setIsLeked(value:Bool){
         if(value){
@@ -208,10 +207,10 @@ class ProductCardController : UIViewController{
     
     class ProductCardView: UIView{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
-            let chilsdsHeight = subviews.max { a, b in
+            var chilsdsHeightMax = subviews.max { a, b in
                 a.frame.maxY < b.frame.maxY
             }?.frame.maxY
-            return CGSize(width: size.width, height:  (chilsdsHeight ?? 344) + 12)
+            return CGSize(width: size.width, height:  (chilsdsHeightMax ?? 344) + 12)
         }
     }
     

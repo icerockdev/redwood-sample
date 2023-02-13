@@ -39,13 +39,13 @@ class IosStack :  WidgetStack {
         root.insertArrangedSubview(view, at: 0)
         // todo fix size logic
         let size = view.sizeThatFits(CGSize(width: 200.0,height: 200.0))
-        var height = 60.0
+        var height = 72
         if(size.height != 0) {
-            height = size.height
+            height = Int(size.height)
             
         }
         view.widthAnchor.constraint(equalTo: root.widthAnchor).isActive = true
-        view.heightAnchor.constraint(equalToConstant: height).isActive = true
+        view.heightAnchor.constraint(equalToConstant: CGFloat(height)).isActive = true
         view.bottomAnchor.constraint(equalTo: root.bottomAnchor).isActive = true
        }
     

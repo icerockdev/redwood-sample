@@ -6,8 +6,9 @@
     <string name="auth.password">Password</string>
     <string name="auth.button">Login</string>
     <!-- Navigation-->
-    <string name="tab.list">List</string>
-    <string name="tab.settings">Settings</string>
+    <string name="tab.list">Tests</string>
+    <string name="tab.toggle">Toggle</string>
+    <string name="tab.settings">Profile</string>
     <!-- Profile-->
     <string name="profile.logout">Logout</string>
   </resources>

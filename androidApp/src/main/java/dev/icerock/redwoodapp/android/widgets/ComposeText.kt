@@ -5,8 +5,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.widget.Text
+import dev.icerock.redwoodapp.android.types.BoldText
 import dev.icerock.redwoodapp.android.types.HeaderText
 import dev.icerock.redwoodapp.android.types.PrimaryText
 import dev.icerock.redwoodapp.android.types.SecondaryText
@@ -31,6 +33,10 @@ class ComposeText : Text<@Composable () -> Unit> {
                 text = _textState,
                 isSingleLine = _isSingleLine
             )
+            TextType.Bold -> BoldText(
+                text = _textState,
+                isSingleLine = _isSingleLine
+            )
         }
     }
 
@@ -44,5 +50,9 @@ class ComposeText : Text<@Composable () -> Unit> {
 
     override fun textType(textType: TextType?) {
         _textType = textType ?: TextType.Primary
+    }
+
+    override fun width(width: Size) {
+        //
     }
 }

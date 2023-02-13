@@ -11,8 +11,8 @@ import shared_ios
 
 class IosRowWithWeight :  RowWithWeight {
     
-    private let root: RowWithWeightView = {
-        let container = RowWithWeightView()
+    private let root: UIStackView = {
+        let container = UIStackView()
         container.axis = .horizontal
         container.alignment = .top
         container.distribution = .fillProportionally
@@ -26,18 +26,14 @@ class IosRowWithWeight :  RowWithWeight {
 
     
     func myInsert(view: UIView,index: KotlinInt){
+        let text = UILabel()
+        text.text = "text"
+        root.insertArrangedSubview(text, at:  index.intValue)
+    
         root.insertArrangedSubview(view, at:  index.intValue)
     }
 
-    
-    func myInsert(view: UIView,index: KotlinInt, layoutModifier: Redwood_runtimeLayoutModifier){
-        if(layoutModifier is Redwood_layout_layoutmodifiersPadding){
-            // do something
-            root.insertArrangedSubview(view, at: index.intValue)
-        }else{
-            root.insertArrangedSubview(view, at: index.intValue)
-        }
-    }
+
 
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
@@ -48,7 +44,7 @@ class IosRowWithWeight :  RowWithWeight {
             let chilsdsHeight = subviews.max { a, b in
                 a.frame.maxY < b.frame.maxY
             }?.frame.maxY
-            return CGSize(width: size.width, height:  (344) + 12)
+            return CGSize(width: size.width, height:  200)
         }
     }
 }

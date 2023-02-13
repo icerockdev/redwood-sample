@@ -29,12 +29,6 @@ fun createViewChildrenListener(
     insert: (UIView, Int) -> Unit
 ): UIViewChildren = UIViewChildren(parent, insert = insert)
 
-fun createViewChildrenWithLayoutParams(
-    parent: UIView,
-    insert: (UIView, Int, LayoutModifier) -> Unit
-): MyUIViewChildren = MyUIViewChildren(parent, insert)
-
-
 fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>) =
     dev.icerock.redwoodapp.mainApp(flatNavigationFactory)
 
@@ -67,56 +61,3 @@ fun widgetProvider(
     RedwoodLayout = UIViewRedwoodLayoutWidgetFactory()
 )
 
-class MyUIViewChildren(
-    private val parent: UIView,
-    private val insert: (UIView, Int, LayoutModifier) -> Unit
-) : Widget.Children<UIView> {
-    private val _widgets = MutableListChildren<UIView>()
-    public val widgets: List<Widget<UIView>> get() = _widgets
-
-    override fun insert(index: Int, widget: Widget<UIView>) {
-        _widgets.insert(index, widget)
-        insert(widget.value, index, widget.layoutModifiers)
-        invalidate()
-    }
-
-    override fun move(fromIndex: Int, toIndex: Int, count: Int) {
-        _widgets.move(fromIndex, toIndex, count)
-
-        val subviews = Array(count) {
-            parent.typedSubviews[fromIndex].also(UIView::removeFromSuperview)
-        }
-
-        val newIndex = if (toIndex > fromIndex) {
-            toIndex - count
-        } else {
-            toIndex
-        }
-        subviews.forEachIndexed { offset, view ->
-            insert(view, newIndex + offset,_widgets[newIndex+offset].layoutModifiers)
-        }
-        invalidate()
-    }
-
-    override fun remove(index: Int, count: Int) {
-        _widgets.remove(index, count)
-
-        repeat(count) {
-            parent.typedSubviews[index].removeFromSuperview()
-        }
-        invalidate()
-    }
-
-    override fun onLayoutModifierUpdated(index: Int) {
-        invalidate()
-    }
-
-    private fun invalidate() {
-        parent.setNeedsDisplay()
-        parent.invalidateIntrinsicContentSize()
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-internal val UIView.typedSubviews: List<UIView>
-    get() = subviews as List<UIView>

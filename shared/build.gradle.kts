@@ -35,6 +35,8 @@ kotlin {
                 api("dev.icerock.moko:fields-flow:0.11.0")
                 api("app.cash.redwood:redwood-treehouse:0.2.0")
                 api("app.cash.redwood:redwood-treehouse-lazylayout-compose:0.2.0")
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                api("com.russhwolf:multiplatform-settings:0.9")
             }
         }
 

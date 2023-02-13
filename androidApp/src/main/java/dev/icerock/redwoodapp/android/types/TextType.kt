@@ -36,3 +36,13 @@ fun HeaderText(text: String, isSingleLine: Boolean) {
         maxLines = if (isSingleLine) 1 else Int.MAX_VALUE
     )
 }
+
+@Composable
+fun BoldText(text: String, isSingleLine: Boolean) {
+    Text(
+        text = text,
+        color = Color.Black,
+        fontSize = 17.sp,
+        maxLines = if (isSingleLine) 1 else Int.MAX_VALUE
+    )
+}

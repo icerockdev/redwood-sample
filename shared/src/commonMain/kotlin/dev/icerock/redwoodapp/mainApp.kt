@@ -6,6 +6,7 @@ import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
+import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
@@ -14,6 +15,7 @@ import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.schema.ButtonType
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.navigation.FlatNavigationFactory
@@ -23,56 +25,26 @@ import dev.icerock.redwoodapp.navigation.Navigator
 import dev.icerock.redwoodapp.navigation.navigation
 import dev.icerock.redwoodapp.navigation.navigationTabs
 import dev.icerock.redwoodapp.screens.DetailsScreen
-import dev.icerock.redwoodapp.screens.LoginScreen
+import dev.icerock.redwoodapp.screens.demo.LoginScreen
 import dev.icerock.redwoodapp.screens.market.MarketScreen
 import dev.icerock.redwoodapp.screens.PostsList
-import dev.icerock.redwoodapp.screens.ProfileScreen
+import dev.icerock.redwoodapp.screens.demo.ProfileScreen
+import dev.icerock.redwoodapp.screens.demo.TestCompleteScreen
+import dev.icerock.redwoodapp.screens.demo.TestListScreen
+import dev.icerock.redwoodapp.screens.demo.TestStep
+import dev.icerock.redwoodapp.screens.demo.TestStepScreen
+import dev.icerock.redwoodapp.screens.demo.ToogleScreen
+import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 fun mainApp(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>): NavigationHost {
-    return navigation(startDestination = "cart", flatNavigationFactory) {
+    return navigation(startDestination =  Screens.LOGIN, flatNavigationFactory) {
         registerScreen(
-            uri = "cart"
-        ) { navigator, _, screenSettings, viewModelOwner ->
-            MarketScreen(navigator, screenSettings, viewModelOwner)
-        }
-        registerScreen(
-            uri = "login"
+            uri = Screens.LOGIN
         ) { navigator, _, screenSettings, viewModelOwner ->
             LoginScreen(navigator, screenSettings, viewModelOwner)
         }
-        registerScreen(
-            uri = "tabs"
-        ) { navigator, _, screenSettings, viewModelOwner ->
-            Box {
-                LaunchedEffect(screenSettings) {
-                    screenSettings.setToolbarData(ToolabrArgs.Simple("SecondScreen".desc()))
-                }
-                Column(horizontalAlignment = CrossAxisAlignment.Center) {
-                    Text("SecondScreem")
-                    Button(
-                        "Next Screen".desc(), onClick = {
-                            navigator.navigate("3")
-                        },
-                        buttonType = ButtonType.Primary,
-                        layoutModifier = LayoutModifier.padding(Padding(16))
-                    )
-                }
-            }
-        }
-        registerScreen(
-            uri = "3"
-        ) { navigator, _, screenSettings, viewModelOwner ->
-            Box {
-                LaunchedEffect(screenSettings) {
-                    screenSettings.setToolbarData(ToolabrArgs.NoToolbar)
-                }
-                Column {
-                    Text("No toolbar screen")
-                }
-            }
-        }
         registerNavigation(
-            uri = "sdsd",
+            uri = Screens.TABS,
             isToolbarVisible = false,
             childNavigation = { navigator, _, _, _ ->
                 mainScreenNavigation(navigator, flatNavigationFactory)
@@ -85,43 +57,68 @@ private fun mainScreenNavigation(
     rootNavigator: Navigator,
     flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>
 ): NavigationHost =
-    navigationTabs(startDestination = "line") {
+    navigationTabs(startDestination = Screens.TEST_LIST) {
         registerNavigation(
-            uri = "line",
+            uri = Screens.TEST_LIST,
             title = MR.strings.tab_list.desc(),
-            icon = MR.images.line,
+            icon = MR.images.list,
             childNavigation = {
-                secondTabNavigation(flatNavigationFactory = flatNavigationFactory)
+                secondTabNavigation(
+                    tabNavController = it,
+                    flatNavigationFactory = flatNavigationFactory)
+            }
+        )
+        registerNavigation(
+            uri = Screens.TOGGLE,
+            title = MR.strings.tab_toggle.desc(),
+            icon = MR.images.toggl,
+            childNavigation = {
+                navigation(startDestination = Screens.TOGGLE, flatNavigationFactory) {
+                    registerScreen(
+                        Screens.TOGGLE,
+                        isToolbarVisible = true,
+                    ) { navigator, _, screenSettings, viweModelOwner ->
+                        ToogleScreen(screenSettings, viweModelOwner)
+                    }
+                }
             }
         )
         registerScreen(
-            uri = "settings",
+            uri = Screens.PROFILE,
             title = MR.strings.tab_settings.desc(),
-            icon = MR.images.settings,
+            icon = MR.images.profile,
             screen = {
                 ProfileScreen(rootNavigator)
             }
         )
     }
 
-private fun secondTabNavigation(flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>) =
-    navigation(startDestination = "start", flatNavigationFactory) {
+private fun secondTabNavigation(tabNavController: Navigator, flatNavigationFactory: FlatNavigationFactory<ToolabrArgs>) =
+    navigation(startDestination = Screens.TEST_LIST, flatNavigationFactory) {
         registerScreen(
-            "start",
+            Screens.TEST_LIST,
             isToolbarVisible = true,
         ) { navigator, _, screenSettings, viweModelOwner ->
-            PostsList(screenSettings, viweModelOwner) { date, text ->
-                navigator.navigate("/details/${date}?description=${text}")
-            }
+            TestListScreen(navigator, screenSettings, viweModelOwner)
         }
         registerScreen(
-            "/details/{date}?description={description}",
+            Screens.TEST_STEP,
+            isToolbarVisible = true
+        ) { navController, args, screenSettings, viweModelOwner ->
+            TestStepScreen(
+                navController,
+                args["testId"]?.toInt()?:0,
+                screenSettings,
+                viweModelOwner
+            )
+        }
+        registerScreen(
+            Screens.TEST_FINAL,
             isToolbarVisible = true
         ) { navController, args, screenSettings, _ ->
-            DetailsScreen(
+            TestCompleteScreen(
+                tabNavController,
                 navController,
-                args["date"].orEmpty(),
-                args["description"].orEmpty(),
                 screenSettings
             )
         }

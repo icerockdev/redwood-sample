@@ -56,7 +56,10 @@ data class Text(
     @Default("false") val isSingleLine: Boolean,
     @Property(3)
     @Default("TextType.Primary")
-    val textType: TextType?
+    val textType: TextType?,
+    @Property(4)
+    @Default("Size.Wrap")
+    val width: Size,
 )
 
 @Widget(3)

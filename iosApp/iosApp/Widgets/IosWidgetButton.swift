@@ -21,6 +21,7 @@ class IosWidgetButton: WidgetButton {
         let view = FillButton(configuration: configuration)
         view.translatesAutoresizingMaskIntoConstraints = true
         view.clipsToBounds = true
+        view.titleLabel?.numberOfLines = 0
         return view
 
     }()
@@ -52,6 +53,7 @@ class IosWidgetButton: WidgetButton {
         }
         if(buttonType == EntityButtonType.text){
             root.setTitleColor(primaryColor, for: UIControl.State.normal)
+            root.setTitleColor(primaryColor, for: UIControl.State.highlighted)
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.layer.cornerRadius = 24
             root.backgroundColor = UIColor.clear
@@ -148,17 +150,27 @@ class FillButton : UIButton{
         }
     }
     
+    var contentSize : CGSize = CGSize(width: 48, height: 48)
+    
+    override var intrinsicContentSize: CGSize {
+       return contentSize
+    }
+    
         override func sizeThatFits(_ size: CGSize) -> CGSize {
             if(widgetWidth is EntitySize.Wrap){
                 let originalSize = super.sizeThatFits(size)
-                return CGSize(width: originalSize.width, height: 48)
+                contentSize = CGSize(width: originalSize.width, height: originalSize.height)
+                return contentSize
             }
             if(widgetWidth is EntitySize.Const){
                 let originalSize = super.sizeThatFits(CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: size.height))
-                return CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: 48)
+                contentSize = CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: originalSize.height)
+                return contentSize
             }
-            let originalSize = super.sizeThatFits(size)
-            return CGSize(width: size.width, height: 48)
+            let originalSize = super.sizeThatFits(
+                CGSize(width: size.width, height: size.height))
+            contentSize =  CGSize(width:  size.width, height: originalSize.height)
+            return contentSize
       
         }
 }

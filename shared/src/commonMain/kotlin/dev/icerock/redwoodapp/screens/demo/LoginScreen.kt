@@ -1,4 +1,4 @@
-package dev.icerock.redwoodapp.screens
+package dev.icerock.redwoodapp.screens.demo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,19 +15,19 @@ import app.cash.redwood.layout.compose.Column
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.InputType
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Image
-import dev.icerock.redwood.schema.compose.ImageButton
 import dev.icerock.redwood.schema.compose.TextInput
 import dev.icerock.redwoodapp.navigation.Navigator
 import org.example.library.MR
 import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.SimpleLoginViewModel
 import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ToolbarAction
 import dev.icerock.redwoodapp.ViewModelOwner
 import dev.icerock.redwoodapp.getViewModel
 import dev.icerock.redwoodapp.navigation.ScreenSettings
+import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 @Composable
 fun LoginScreen(
@@ -78,7 +78,7 @@ fun LoginScreen(
             Image(
                 120,
                 120,
-                placeholder = MR.images.ava_preview,
+                placeholder = MR.images.logo,
                 layoutModifier = LayoutModifier.padding(Padding(bottom = 50)),
                 url = null
             )
@@ -99,10 +99,11 @@ fun LoginScreen(
             )
             Button(
                 buttontext,
+                width = Size.Fill,
                 buttonType = ButtonType.Primary,
                 enabled = login.isNotEmpty() && password.isNotEmpty(),
                 onClick = {
-                    navigator.navigate("tabs")
+                    navigator.navigate(Screens.TABS)
                 },
                 layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 50, end = 16))
             )

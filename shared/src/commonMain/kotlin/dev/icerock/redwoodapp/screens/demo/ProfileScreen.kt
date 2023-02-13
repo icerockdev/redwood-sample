@@ -14,13 +14,12 @@ import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Image
-import dev.icerock.redwood.schema.compose.Stack
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.Box
 import org.example.library.MR
 import dev.icerock.redwoodapp.USER_AVATAR
 import dev.icerock.redwoodapp.USR_NAME
-import dev.icerock.redwoodapp.navigation.Navigator
+import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 @Composable

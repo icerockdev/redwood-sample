@@ -8,10 +8,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
-import dev.icerock.redwoodapp.android.navigation.DefaultNavigationTapbar
+import dev.icerock.redwood.navigation.NavigationHost
+import dev.icerock.redwoodapp.android.navigation.AndroidNavigationFactory
 import dev.icerock.redwoodapp.android.widgets.ComposeWidgetFactory
 import dev.icerock.redwoodapp.mainApp
-import dev.icerock.redwoodapp.navigation.NavigationHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
 
-        val app: NavigationHost = mainApp(DefaultNavigationTapbar())
+        val app: NavigationHost = mainApp(AndroidNavigationFactory())
 
         setContent {
             MaterialTheme {

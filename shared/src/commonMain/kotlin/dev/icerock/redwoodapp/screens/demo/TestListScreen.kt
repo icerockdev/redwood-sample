@@ -11,43 +11,36 @@ import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
-import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.desc
-import dev.icerock.redwood.schema.ButtonType
+import dev.icerock.redwood.navigation.navbar.NavBarController
+import dev.icerock.redwood.navigation.navbar.rememberNavBarController
+import dev.icerock.redwood.navigation.navigator.Navigator
+import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.TextType
-import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Image
-import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.SimpleLoginViewModel
-import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.Navigator
-import dev.icerock.redwoodapp.navigation.ScreenSettings
-import kotlinx.coroutines.flow.MutableStateFlow
-import dev.icerock.redwoodapp.screens.demo.Mock
+import dev.icerock.redwoodapp.ToolbarArgs
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.example.library.MR
 
 @Composable
 fun TestListScreen(
-    navigator: Navigator,
-    screenSettings: ScreenSettings<ToolabrArgs>,
-    viewModelOwner: ViewModelOwner
+    navigator: Navigator
 ) {
-    val viewModel: TestListViewModel = getViewModel(viewModelOwner) {
+    val viewModel: TestListViewModel = getViewModel {
         TestListViewModel()
     }
+    val navBarController: NavBarController = rememberNavBarController()
 
-    LaunchedEffect(screenSettings) {
-        screenSettings.setToolbarData(ToolabrArgs.Simple("Test list".desc()))
+    LaunchedEffect(navBarController) {
+        navBarController.navBarData = ToolbarArgs.Simple("Test list".desc())
     }
 
     Column(width = Constraint.Fill, overflow = Overflow.Scroll) {
-        val tests by viewModel.testList.collectAsState()
+        val tests: List<Test> by viewModel.testList.collectAsState()
 
         tests.forEach {
             Card(

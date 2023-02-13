@@ -7,6 +7,9 @@ import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.navigation.navbar.NavBarController
+import dev.icerock.redwood.navigation.navbar.rememberNavBarController
+import dev.icerock.redwood.navigation.navigator.HistoryNavigator
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
@@ -14,28 +17,24 @@ import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.Box
-import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.navigation.Navigator
-import dev.icerock.redwoodapp.navigation.ScreenSettings
-import dev.icerock.redwoodapp.screens.demo.navigation.Screens
+import dev.icerock.redwoodapp.ToolbarArgs
 import org.example.library.MR
 
 @Composable
 fun TestCompleteScreen(
-    navigator: Navigator,
-    tabNavigator: Navigator,
-    screenSettings: ScreenSettings<ToolabrArgs>
+    navigator: HistoryNavigator
 ) {
-    LaunchedEffect(screenSettings) {
-        screenSettings.setToolbarData(ToolabrArgs.Simple("Результаты теста".desc()))
+    val navBarController: NavBarController = rememberNavBarController()
+
+    LaunchedEffect(navBarController) {
+        navBarController.navBarData = ToolbarArgs.Simple("Результаты теста".desc())
     }
 
     Box {
         Column(horizontalAlignment = CrossAxisAlignment.Center) {
             Image(
-                120,
-                120,
+                width = 120,
+                height = 120,
                 placeholder = MR.images.checked_big,
                 layoutModifier = LayoutModifier.padding(Padding(bottom = 50)),
                 url = null
@@ -44,15 +43,17 @@ fun TestCompleteScreen(
             Text("Верных ответов 85%", textType = TextType.Primary)
 
             Button(
-                layoutModifier = LayoutModifier.padding(Padding(top = 50,
-                start = 16, end = 16)),
+                layoutModifier = LayoutModifier.padding(
+                    Padding(
+                        top = 50,
+                        start = 16, end = 16
+                    )
+                ),
                 text = "Продолжить".desc(),
                 buttonType = ButtonType.Primary,
                 width = Size.Fill,
                 onClick = {
-                    tabNavigator.popBackStack()
-                    tabNavigator.popBackStack()
-                    tabNavigator.popBackStack()
+                    navigator.popToRoot()
                 }
             )
         }

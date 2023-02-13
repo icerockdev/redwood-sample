@@ -31,6 +31,7 @@ class RedwoodViewControllerDelegateImpl internal constructor(
 ) : RedwoodViewControllerDelegate {
     private val clock = BroadcastFrameClock()
     private val scope: CoroutineScope = MainScope() + clock
+    private val store: ViewModelStore = ViewModelStore()
 
     init {
         val children = UIViewChildren(
@@ -48,11 +49,10 @@ class RedwoodViewControllerDelegateImpl internal constructor(
             provider = provider
         )
         composition.setContent {
-            val store: ViewModelStore = remember { ViewModelStore() }
             val value: ProvidedValue<ViewModelStore> = remember(store) {
                 LocalViewModelStore provides store
             }
-            
+
             currentComposer.startProviders(arrayOf(value))
             compose.invoke()
             currentComposer.endProviders()
@@ -65,10 +65,7 @@ class RedwoodViewControllerDelegateImpl internal constructor(
 
     override fun dispose() {
         scope.cancel()
-//            viewModelOwner.mutableMap.values.forEach {
-//                it.onCleared()
-//            }
-//            viewModelOwner.mutableMap.clear()
+        store.clear()
     }
 }
 

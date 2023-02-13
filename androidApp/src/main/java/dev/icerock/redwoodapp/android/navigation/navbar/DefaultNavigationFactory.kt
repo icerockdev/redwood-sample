@@ -23,6 +23,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,7 +38,9 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.navigation.navbar.NavBarData
@@ -64,6 +68,11 @@ class AndroidNavBarFactory : NavBarFactory {
         data: ToolbarArgs.Simple,
         navController: NavController
     ) {
+        val entry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
+        val backQueue: ArrayDeque<NavBackStackEntry> = remember(navController, entry) {
+            navController.backQueue
+        }
+        println("hi: ${backQueue.joinToString { it.destination.displayName }}")
         TopAppBar(
             backgroundColor = Color.White,
             contentColor = Color.Black,
@@ -71,7 +80,7 @@ class AndroidNavBarFactory : NavBarFactory {
             title = {
                 Text(text = data.title.toString(LocalContext.current))
             },
-            navigationIcon = if (navController.backQueue.isNotEmpty()) {
+            navigationIcon = if (backQueue.size > 2) {
                 {
                     IconButton(
                         onClick = { navController.popBackStack() }

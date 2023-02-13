@@ -13,7 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -54,11 +53,9 @@ data class FlatNavigation(
                 }
 
                 override fun popToRoot() {
-                    val entry: NavBackStackEntry = navController.backQueue.last()
-                    navController.popBackStack(
-                        destinationId = entry.destination.id,
-                        inclusive = false
-                    )
+                    while (navController.backQueue.size > 2) {
+                        navController.popBackStack()
+                    }
                 }
             }
         }

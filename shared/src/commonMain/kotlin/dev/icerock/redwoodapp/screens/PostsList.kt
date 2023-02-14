@@ -15,34 +15,31 @@ import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.resources.desc.desc
-import org.example.library.MR
+import dev.icerock.redwood.navigation.navbar.NavBarController
+import dev.icerock.redwood.navigation.navbar.rememberNavBarController
+import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.ImageButton
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.NEWS_LIST
 import dev.icerock.redwoodapp.SimpleListViewModel
-import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.ScreenSettings
+import dev.icerock.redwoodapp.ToolbarArgs
 import dev.icerock.redwoodapp.screens.entity.CardItem
+import org.example.library.MR
 
 @Composable
 fun PostsList(
-    screenSettings: ScreenSettings<ToolabrArgs>,
-    viewModelOwner: ViewModelOwner,
     routeToCreate: (String, String) -> Unit,
 ) {
-    LaunchedEffect(screenSettings) {
-        screenSettings.setToolbarData(ToolabrArgs.Simple("Posts".desc()))
-    }
-    val viewModel: SimpleListViewModel = getViewModel(viewModelOwner) {
-        SimpleListViewModel()
+    val viewModel: SimpleListViewModel = getViewModel { SimpleListViewModel() }
+    val navBarController: NavBarController = rememberNavBarController()
+
+    LaunchedEffect(navBarController) {
+        navBarController.navBarData = ToolbarArgs.Simple("Posts".desc())
     }
 
-    val itemsList by remember {
+    val itemsList: List<CardItem> by remember {
         mutableStateOf(
             viewModel.listData.mapIndexed { index, it ->
                 CardItem(
@@ -122,10 +119,12 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                                         like += 1
                                         isLiked = true
                                     }
+
                                     true -> {
                                         like -= 1
                                         isLiked = null
                                     }
+
                                     else -> {
                                         like += 1
                                         dislike -= 1
@@ -146,10 +145,12 @@ fun Item(data: String, text: String, isLike: Boolean, onClick: () -> Unit) {
                                         dislike += 1
                                         isLiked = false
                                     }
+
                                     false -> {
                                         dislike -= 1
                                         isLiked = null
                                     }
+
                                     else -> {
                                         like -= 1
                                         dislike += 1

@@ -29,6 +29,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":schema:compose"))
+                api(project(":navigation"))
                 api("dev.icerock.moko:resources:0.20.1")
                 api("dev.icerock.moko:mvvm-core:0.15.0")
                 api("dev.icerock.moko:fields-core:0.11.0")
@@ -65,8 +66,6 @@ kotlin {
                 api("androidx.compose.foundation:foundation-layout:1.3.1")
                 api("androidx.compose.material:material:1.3.1")
                 api("com.google.android.material:compose-theme-adapter:1.2.1")
-                api("androidx.navigation:navigation-compose:2.5.3")
-                api("androidx.navigation:navigation-runtime-ktx:2.5.3")
             }
         }
     }

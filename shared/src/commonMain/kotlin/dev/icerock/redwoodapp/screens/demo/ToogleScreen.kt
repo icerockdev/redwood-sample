@@ -1,14 +1,15 @@
 package dev.icerock.redwoodapp.screens.demo
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
+import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
@@ -16,38 +17,17 @@ import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.Box
-import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.ScreenSettings
-import dev.icerock.redwoodapp.screens.demo.navigation.Screens
-import kotlinx.coroutines.flow.MutableStateFlow
-import org.example.library.MR
-import com.russhwolf.settings.Settings
-import com.russhwolf.settings.nullableBoolean
-import com.russhwolf.settings.nullableString
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import dev.icerock.moko.resources.desc.StringDesc
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
+import org.example.library.MR
 
 @Composable
-fun ToogleScreen(
-    screenSettings: ScreenSettings<ToolabrArgs>,
-    viewModelOwner: ViewModelOwner
-) {
-    val viewModel: ToggleViewModel = getViewModel(viewModelOwner) {
-        ToggleViewModel()
-    }
-
-    LaunchedEffect(screenSettings) {
-        screenSettings.setToolbarData(ToolabrArgs.NoToolbar)
-    }
+fun ToogleScreen() {
+    val viewModel: ToggleViewModel = getViewModel { ToggleViewModel() }
 
     Box {
         Column(horizontalAlignment = CrossAxisAlignment.Center) {
@@ -56,14 +36,14 @@ fun ToogleScreen(
             Image(
                 120,
                 120,
-                placeholder = if(isStarted) MR.images.on else MR.images.of,
+                placeholder = if (isStarted) MR.images.on else MR.images.of,
                 layoutModifier = LayoutModifier.padding(Padding(bottom = 25)),
                 url = null
             )
             val currentTime by viewModel.currentTime.collectAsState()
             if (isStarted) {
                 Text(currentTime ?: "00:00:00", textType = TextType.Header)
-            }else {
+            } else {
                 Text(
                     "Запустите таймер для начала",
                     textType = TextType.Primary,
@@ -116,7 +96,8 @@ class ToggleViewModel() : ViewModel() {
                 while (true) {
                     delay(250)
                     val currentDateTime = Clock.System.now()
-                    val diff = currentDateTime.epochSeconds - (startDate.value ?: currentDateTime).epochSeconds
+                    val diff = currentDateTime.epochSeconds - (startDate.value
+                        ?: currentDateTime).epochSeconds
                     val seconds = (diff % 60).toTime()
                     val minutes = (diff / 60 % 60).toTime()
                     val hours = (diff / 3600).toTime()
@@ -129,19 +110,18 @@ class ToggleViewModel() : ViewModel() {
         }
     }
 
-    private fun Long.toTime():String{
-       return this.toString().let {
-            if(it.length == 1) {
+    private fun Long.toTime(): String {
+        return this.toString().let {
+            if (it.length == 1) {
                 "0" + it
-            }else{
+            } else {
                 it
             }
         }
     }
 
-    companion object{
+    companion object {
         var _isToogleStart = false
         var _startDate: Instant? = null
     }
 }
-

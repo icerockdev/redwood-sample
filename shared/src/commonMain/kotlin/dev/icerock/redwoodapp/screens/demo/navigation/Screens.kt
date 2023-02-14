@@ -2,6 +2,7 @@ package dev.icerock.redwoodapp.screens.demo.navigation
 
 object Screens {
     const val LOGIN = "LOGIN"
+    const val MAIN = "MAIN"
     const val TABS = "TABS"
     const val PROFILE = "PROFILE"
     const val TEST_LIST = "TEST_LIST"

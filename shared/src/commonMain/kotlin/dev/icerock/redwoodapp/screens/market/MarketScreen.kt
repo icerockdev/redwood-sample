@@ -4,9 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.remember
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
@@ -17,11 +14,13 @@ import app.cash.redwood.treehouse.FlowWithInitialValue
 import app.cash.redwood.treehouse.HostConfiguration
 import app.cash.redwood.treehouse.ZiplineTreehouseUi
 import app.cash.redwood.treehouse.lazylayout.api.LazyListIntervalContent
-import dev.icerock.moko.fields.flow.FormField
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.resources.desc.image.ImageDescUrl
+import dev.icerock.redwood.navigation.navbar.NavBarController
+import dev.icerock.redwood.navigation.navbar.rememberNavBarController
+import dev.icerock.redwood.navigation.navigator.Navigator
+import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.BannerData
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
@@ -32,58 +31,42 @@ import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.CounterButton
 import dev.icerock.redwood.schema.compose.ProductCard
 import dev.icerock.redwood.schema.compose.RowWithWeight
-import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.BANNER
 import dev.icerock.redwoodapp.BANNER_2
-import dev.icerock.redwoodapp.ToolabrArgs
 import dev.icerock.redwoodapp.ToolbarAction
+import dev.icerock.redwoodapp.ToolbarArgs
 import dev.icerock.redwoodapp.ToolbarButton
 import dev.icerock.redwoodapp.USER_AVATAR
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.Navigator
-import dev.icerock.redwoodapp.navigation.ScreenSettings
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import org.example.library.MR
 
 @Composable
 fun MarketScreen(
-    navigator: Navigator,
-    screenSettings: ScreenSettings<ToolabrArgs>,
-    viewModelOwner: ViewModelOwner
+    navigator: Navigator
 ) {
+    val viewModel: MarketViewModel = getViewModel { MarketViewModel() }
+    val navBarController: NavBarController = rememberNavBarController()
 
-    val viewModel: MarketViewModel = getViewModel(viewModelOwner) {
-        MarketViewModel()
-    }
+    val badgeCount: StringDesc? by viewModel.badge.collectAsState()
 
-    val badgeCount by viewModel.badge.collectAsState()
-
-    LaunchedEffect(screenSettings, badgeCount) {
-        screenSettings.setToolbarData(
-            ToolabrArgs.Search(
-                search = viewModel.searchField,
-                placeholder = "Placeholder".desc(),
-                actoin = ToolbarAction(
-                    icon = MR.images.icon,
-                    badge = badgeCount,
-                    onCLick = viewModel::onNootificationClick
-                ),
-                leftButton = ToolbarButton(
-                    title = "left button".desc(),
-                    icon = MR.images.icon,
-                    onCLick = {}
-                ),
-                rightButton = ToolbarButton(
-                    title = "right button".desc(),
-                    icon = MR.images.icon,
-                    onCLick = {}
-                )
+    LaunchedEffect(navBarController, badgeCount) {
+        navBarController.navBarData = ToolbarArgs.Search(
+            search = viewModel.searchField,
+            placeholder = "Placeholder".desc(),
+            action = ToolbarAction(
+                icon = MR.images.icon,
+                badge = badgeCount,
+                onClick = viewModel::onNootificationClick
+            ),
+            leftButton = ToolbarButton(
+                title = "left button".desc(),
+                icon = MR.images.icon,
+                onClick = {}
+            ),
+            rightButton = ToolbarButton(
+                title = "right button".desc(),
+                icon = MR.images.icon,
+                onClick = {}
             )
         )
     }
@@ -133,7 +116,7 @@ fun MarketScreen(
             productlList.firstOrNull()?.render(viewModel)
 
         }
-            productlList.forEachIndexed { index, product ->
+        productlList.forEachIndexed { index, product ->
             if (index % 2 != 0) return@forEachIndexed
             RowWithWeight {
                 product.render(viewModel)

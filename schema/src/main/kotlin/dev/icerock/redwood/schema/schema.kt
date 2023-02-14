@@ -26,7 +26,10 @@ import dev.icerock.moko.resources.desc.StringDesc
         ShortButton::class,
         RowWithWeight::class,
         ProductCard::class,
-        CounterButton::class
+        CounterButton::class,
+        Switch::class,
+        ListItem::class,
+        Divider::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -167,9 +170,9 @@ data class ProductCard(
     @Property(8)
     val footer: StringDesc?,
     @Property(9)
-    val onLikeClick: ()->Unit,
+    val onLikeClick: () -> Unit,
     @Children(1)
-    val action: ()->Unit,
+    val action: () -> Unit,
 )
 
 @Widget(13)
@@ -177,10 +180,50 @@ data class CounterButton(
     @Property(1)
     val count: StringDesc,
     @Property(2)
-    val onAddClick: ()->Unit,
+    val onAddClick: () -> Unit,
     @Property(3)
-    val onRemoveClick: ()->Unit,
+    val onRemoveClick: () -> Unit,
     @Property(4)
     @Default("Size.Wrap")
     val width: Size,
+)
+
+@Widget(14)
+data class Switch(
+    @Property(1)
+    val isActive: Boolean,
+    @Property(2)
+    val onChangeState: (Boolean) -> Unit,
+    @Property(3)
+    val isEnabled: Boolean
+)
+
+@Widget(15)
+data class ListItem(
+    @Property(1)
+    val title: StringDesc,
+    @Property(2)
+    @Default("null")
+    val subtitle: StringDesc?,
+    @Property(3)
+    @Default("null")
+    val icon: ImageResource?,
+    @Property(4)
+    @Default("null")
+    val height: Int?,
+    @Property(5)
+    @Default("null")
+    val onClick: (() -> Unit)?,
+    @Property(6)
+    @Default("null")
+    val tintColor: Color?,
+    @Children(1)
+    val child: () -> Unit,
+)
+
+@Widget(16)
+data class Divider(
+    @Property(1)
+    @Default("true")
+    val isVertical: Boolean
 )

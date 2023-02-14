@@ -42,7 +42,7 @@ fun BoldText(text: String, isSingleLine: Boolean) {
     Text(
         text = text,
         color = Color.Black,
-        fontSize = 17.sp,
+        fontSize = 22.sp,
         maxLines = if (isSingleLine) 1 else Int.MAX_VALUE
     )
 }

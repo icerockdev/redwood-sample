@@ -10,6 +10,18 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func Divider() -> Divider {
+        IosWidgetDivider()
+    }
+    
+    func ListItem() -> ListItem {
+        
+    }
+    
+    func Switch() -> Switch {
+        IosWidgetSwitch()
+    }
+    
     func CounterButton() -> CounterButton {
         IosWidgetCounter()
     }

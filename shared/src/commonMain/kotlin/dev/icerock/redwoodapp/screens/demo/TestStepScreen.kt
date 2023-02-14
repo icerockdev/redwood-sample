@@ -20,7 +20,10 @@ import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Card
+import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
+import dev.icerock.redwood.schema.compose.ListItem
+import dev.icerock.redwood.schema.compose.RowWithWeight
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Stack
 import dev.icerock.redwood.schema.compose.Text
@@ -58,21 +61,38 @@ fun TestStepScreen(
     }
     val questions by viewModel.questions.collectAsState()
     val answers by viewModel.answers.collectAsState()
-
+    val qustionTite by viewModel.qustionTitle.collectAsState()
+    val currentQuestion by viewModel.qurrentQuestion.collectAsState()
+    val isBackButtonEnabled by viewModel.isBackButtonEnabled.collectAsState()
+    val qurrentQuestionAnswer by viewModel.qurrentQuestionAnser.collectAsState()
+    val isNextButtonEnabled by viewModel.isNextButtonEnabled.collectAsState()
     Stack(
         child1 = {
             Column(
                 overflow = Overflow.Scroll,
                 horizontalAlignment = CrossAxisAlignment.Start
             ) {
-                questions.forEachIndexed { questIndex, question ->
+                Row {
+                    Text(
+                        qustionTite,
+                        textType = TextType.Primary, layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                horizontal = 16,
+                                vertical = 16
+                            )
+                        ),
+                        width = Size.Fill
+                    )
+                }
+                currentQuestion?.let { question ->
                     Row {
                         Text(
                             question.qustion,
                             textType = TextType.Bold, layoutModifier = LayoutModifier.padding(
                                 Padding(
-                                    horizontal = 12,
-                                    vertical = 6
+                                    start = 16,
+                                    end = 16,
+                                    bottom = 16
                                 )
                             ),
                             width = Size.Fill
@@ -82,17 +102,20 @@ fun TestStepScreen(
                     question.answers.forEachIndexed { answerIndex, answer ->
 
 
-                        Button(
-                            text = answer.desc(),
-                            buttonType = ButtonType.Text,
-                            icon = if (answers.get(questIndex) == answerIndex) MR.images.radioClicked else MR.images.radio,
-                            width = Size.Wrap,
-                            onClick = { viewModel.setAnswer(questIndex, answerIndex) }
-                        )
+                        Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
+                        ListItem(
+                            title = answer.desc(),
+                            subtitle = null,
+                            icon = if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio,
+                            onClick = { viewModel.setAnswer(answerIndex) }
+                        ) {}
+
                     }
                 }
+
+                Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
                 Column {
-                   Text("   ", layoutModifier = LayoutModifier.padding(Padding(32)))
+                    Text("   ", layoutModifier = LayoutModifier.padding(Padding(32)))
                 }
 
                 Column {
@@ -103,20 +126,50 @@ fun TestStepScreen(
         },
         child2 = {
             Column(verticalAlignment = MainAxisAlignment.End) {
-                Button(
-                    layoutModifier = LayoutModifier.padding(Padding(16)),
-                    text = ("Далее").desc(),
-                    buttonType = ButtonType.Primary,
-                    enabled = questions.size == answers.size,
-                    width = Size.Fill,
-                    onClick = {
-                        if (viewModel.testDetails.value.steps.size == step + 1) {
-                            navigator.navigate(Screens.TEST_FINAL)
-                        } else {
-                            navigator.navigate(Screens.testStep(step + 1))
+                RowWithWeight {
+                    Button(
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                top = 16,
+                                bottom = 16,
+                                end = 8,
+                                start = 16
+                            )
+                        ),
+                        text = ("Назад").desc(),
+                        buttonType = ButtonType.Primary,
+                        enabled = isBackButtonEnabled,
+                        width = Size.Fill,
+                        onClick = {
+                            viewModel.onBackTap()
                         }
-                    }
-                )
+                    )
+                    Button(
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                top = 16,
+                                bottom = 16,
+                                end = 16,
+                                start = 8
+                            )
+                        ),
+                        text = ("Далее").desc(),
+                        buttonType = ButtonType.Primary,
+                        enabled = isNextButtonEnabled,
+                        width = Size.Fill,
+                        onClick = {
+                            if (viewModel.currentQuestionIndex.value != viewModel.questions.value.size - 1) {
+                                viewModel.onNextTap()
+                                return@Button
+                            }
+                            if (viewModel.testDetails.value.steps.size == step + 1) {
+                                navigator.navigate(Screens.TEST_FINAL)
+                            } else {
+                                navigator.navigate(Screens.testStep(step + 1))
+                            }
+                        }
+                    )
+                }
             }
         }
     )
@@ -128,19 +181,45 @@ class TestStepViewModel(step: Int) : ViewModel() {
     val testStep = testDetails.combine(_step) { test, step -> test.steps[step] }
     val title = testStep.map { it.title }.stateIn(viewModelScope, SharingStarted.Lazily, "")
     val questions =
-        testStep.map { it.questions }.stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+        testStep.map { it.questions }
+            .stateIn(viewModelScope, SharingStarted.Lazily, listOf())
+    val currentQuestionIndex = MutableStateFlow(0)
+    val qurrentQuestion = questions.combine(currentQuestionIndex) { list, index ->
+        list.getOrNull(index)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+
+
+    val isBackButtonEnabled = currentQuestionIndex.map { it != 0 }
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     val answers = MutableStateFlow<Map<Int, Int>>(mapOf())
+    val qurrentQuestionAnser = answers.combine(currentQuestionIndex) { answer, index ->
+        answer.get(index)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, null)
+    val isNextButtonEnabled = qurrentQuestionAnser.map { it != null }
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+    val qustionTitle = currentQuestionIndex.combine(questions) { index, qusetions ->
+        "Вопрос ${index+1} из ${qusetions.size}"
+    }.stateIn(viewModelScope, SharingStarted.Lazily, "")
 
     fun setStep(step: Int) {
         _step.value = step
         answers.value = mapOf()
     }
 
-    fun setAnswer(question: Int, answer: Int) {
+    fun setAnswer(answer: Int) {
         val map = mutableMapOf<Int, Int>()
         map.putAll(answers.value)
-        map.put(question, answer)
+        map.put(currentQuestionIndex.value, answer)
         answers.value = map
+    }
+
+    fun onNextTap() {
+        currentQuestionIndex.value = currentQuestionIndex.value + 1
+    }
+
+    fun onBackTap() {
+        currentQuestionIndex.value = currentQuestionIndex.value - 1
     }
 }
 

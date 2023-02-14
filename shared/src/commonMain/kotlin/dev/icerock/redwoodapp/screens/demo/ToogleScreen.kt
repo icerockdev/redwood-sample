@@ -119,7 +119,7 @@ class ToggleViewModel() : ViewModel() {
                     val diff = currentDateTime.epochSeconds - (startDate.value ?: currentDateTime).epochSeconds
                     val seconds = (diff % 60).toTime()
                     val minutes = (diff / 60 % 60).toTime()
-                    val hours = (diff / 360).toTime()
+                    val hours = (diff / 3600).toTime()
                     currentTime.value = "${hours}:${minutes}:${seconds}"
                 }
             }

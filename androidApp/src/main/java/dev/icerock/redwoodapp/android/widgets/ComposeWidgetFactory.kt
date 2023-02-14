@@ -3,12 +3,22 @@ package dev.icerock.redwoodapp.android.widgets
 import androidx.compose.runtime.Composable
 import dev.icerock.redwood.schema.widget.Banners
 import dev.icerock.redwood.schema.widget.CounterButton
+import dev.icerock.redwood.schema.widget.Divider
+import dev.icerock.redwood.schema.widget.ListItem
 import dev.icerock.redwood.schema.widget.ProductCard
 import dev.icerock.redwood.schema.widget.RedwoodAppSchemaWidgetFactory
 import dev.icerock.redwood.schema.widget.RowWithWeight
 import dev.icerock.redwood.schema.widget.ShortButton
+import dev.icerock.redwood.schema.widget.Switch
 
 object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit> {
+
+    override fun Divider(): Divider<() -> Unit> = ComposeDivider()
+    override fun ListItem(): ListItem<() -> Unit> =
+        ComposeListItem()
+    override fun Switch(): Switch<() -> Unit> =
+        ComposeSwitch()
+
     override fun TextInput() = ComposeTextInput()
 
     override fun Text() = ComposeText()

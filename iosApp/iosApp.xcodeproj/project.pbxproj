@@ -22,6 +22,8 @@
 		443EFE5C2990D061001C3B2A /* IosWidgetBanners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */; };
 		443EFE632990D88C001C3B2A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE622990D88C001C3B2A /* Colors.swift */; };
 		443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F5E50298B9E100079910A /* NavBarFactory.swift */; };
+		44556F37299B5652009D161B /* IosDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44556F36299B5652009D161B /* IosDivider.swift */; };
+		44556F39299B5711009D161B /* IosWidgetSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44556F38299B5711009D161B /* IosWidgetSwitch.swift */; };
 		449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B364A2983D6960008710D /* IosWidgetSpace.swift */; };
 		44E470FF299692D700C9B488 /* IosWidgetCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E470FE299692D700C9B488 /* IosWidgetCounter.swift */; };
 		44E47101299692E700C9B488 /* IosWidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E47100299692E700C9B488 /* IosWidgetController.swift */; };
@@ -50,6 +52,8 @@
 		443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetBanners.swift; sourceTree = "<group>"; };
 		443EFE622990D88C001C3B2A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		443F5E50298B9E100079910A /* NavBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarFactory.swift; sourceTree = "<group>"; };
+		44556F36299B5652009D161B /* IosDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosDivider.swift; sourceTree = "<group>"; };
+		44556F38299B5711009D161B /* IosWidgetSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSwitch.swift; sourceTree = "<group>"; };
 		449B364A2983D6960008710D /* IosWidgetSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSpace.swift; sourceTree = "<group>"; };
 		44E470FE299692D700C9B488 /* IosWidgetCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetCounter.swift; sourceTree = "<group>"; };
 		44E47100299692E700C9B488 /* IosWidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetController.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				44F0379929937DD100AC965C /* ProductCard */,
 				225D67D92971B5F000A27CD1 /* IosWidgetFactory.swift */,
 				225D67DB2971B63000A27CD1 /* IosWidgetButton.swift */,
+				44556F36299B5652009D161B /* IosDivider.swift */,
+				44556F38299B5711009D161B /* IosWidgetSwitch.swift */,
 				225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */,
 				225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */,
 				225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */,
@@ -307,6 +313,7 @@
 				44E47101299692E700C9B488 /* IosWidgetController.swift in Sources */,
 				44F037942993586200AC965C /* IosShortButton.swift in Sources */,
 				443EFE632990D88C001C3B2A /* Colors.swift in Sources */,
+				44556F37299B5652009D161B /* IosDivider.swift in Sources */,
 				44F0379829937CBC00AC965C /* IosWidgetProductCard.swift in Sources */,
 				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
 				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
@@ -321,6 +328,7 @@
 				225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */,
 				225D67E62971B71100A27CD1 /* IosImageButton.swift in Sources */,
 				44F0379B29937E0700AC965C /* ProductCardController.swift in Sources */,
+				44556F39299B5711009D161B /* IosWidgetSwitch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

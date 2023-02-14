@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
@@ -80,7 +82,7 @@ data class FlatNavigation(
                             topBar = {
                                 if (navBarController.isNavigationBarVisible.not()) return@Scaffold
 
-                                val data: NavBarData? = navBarController.navBarData
+                                val data: NavBarData? by (navBarController as AndroidNavBarController).navBarDataHolder.collectAsState()
                                 navBarFactory.RenderToolbar(
                                     navController = navController,
                                     data = data

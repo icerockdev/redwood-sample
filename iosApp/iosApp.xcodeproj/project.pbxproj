@@ -20,6 +20,7 @@
 		227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA262957564C00A4CBC8 /* SceneDelegate.swift */; };
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
 		227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2F2957564D00A4CBC8 /* LaunchScreen.storyboard */; };
+		44182681299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44182680299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift */; };
 		443EFE5C2990D061001C3B2A /* IosWidgetBanners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */; };
 		443EFE632990D88C001C3B2A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE622990D88C001C3B2A /* Colors.swift */; };
 		443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443F5E50298B9E100079910A /* NavBarFactory.swift */; };
@@ -52,6 +53,7 @@
 		227ECA2D2957564D00A4CBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		227ECA302957564D00A4CBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227ECA322957564D00A4CBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44182680299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareAnimatedConstraint.swift; sourceTree = "<group>"; };
 		443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetBanners.swift; sourceTree = "<group>"; };
 		443EFE622990D88C001C3B2A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		443F5E50298B9E100079910A /* NavBarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarFactory.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		225D67D82971B5DC00A27CD1 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				4418267F299BA0DA00403061 /* WidgetTextInput */,
 				44E470FD299656E800C9B488 /* Banners */,
 				44E470FC299656D500C9B488 /* CounterButton */,
 				44F0379929937DD100AC965C /* ProductCard */,
@@ -103,7 +106,6 @@
 				44556F3A299B5DF8009D161B /* IosWidgetListItem.swift */,
 				225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */,
 				225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */,
-				225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */,
 				225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */,
 				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
 				225D67E72971B74100A27CD1 /* IosStack.swift */,
@@ -136,6 +138,15 @@
 				C7F363DBFAC730C3510B9993 /* Pods_iosApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4418267F299BA0DA00403061 /* WidgetTextInput */ = {
+			isa = PBXGroup;
+			children = (
+				225D67E12971B6B400A27CD1 /* IosWidgetTextInput.swift */,
+				44182680299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift */,
+			);
+			path = WidgetTextInput;
 			sourceTree = "<group>";
 		};
 		443EFE612990D87E001C3B2A /* Theme */ = {
@@ -335,6 +346,7 @@
 				44F03796299358F600AC965C /* IosRowWithWeight.swift in Sources */,
 				44556F3B299B5DF8009D161B /* IosWidgetListItem.swift in Sources */,
 				225D67E82971B74100A27CD1 /* IosStack.swift in Sources */,
+				44182681299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift in Sources */,
 				449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */,
 				225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */,
 				44E470FF299692D700C9B488 /* IosWidgetCounter.swift in Sources */,

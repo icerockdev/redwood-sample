@@ -45,7 +45,7 @@ class IosWidgetText: WidgetText {
             root.font = .systemFont(ofSize: 12)
         }
         if(textType == EntityTextType.bold){
-            root.font = .boldSystemFont(ofSize: 15)
+            root.font = .boldSystemFont(ofSize: 22)
         }
     }
     

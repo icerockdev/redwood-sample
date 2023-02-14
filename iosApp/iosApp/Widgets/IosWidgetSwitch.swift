@@ -14,7 +14,6 @@ class IosWidgetSwitch: Switch {
 
     private let root: UISwitch = {
         let view = UISwitch()
-        view.thumbTintColor = primaryColor
         view.onTintColor = primaryColor
         return view
 

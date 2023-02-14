@@ -14,6 +14,7 @@ import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
@@ -28,7 +29,6 @@ import dev.icerock.redwoodapp.Box
 import org.example.library.MR
 import dev.icerock.redwoodapp.USER_AVATAR
 import dev.icerock.redwoodapp.USR_NAME
-import dev.icerock.redwoodapp.navigation.Navigator
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 @Composable
@@ -62,7 +62,7 @@ fun ProfileScreen(navigator: Navigator) {
                     subtitle = "example@gmail.com".desc(),
                     onClick = null,
                     child = {},
-                    icon = MR.images.profile
+                    icon = null
                 )
                 Divider()
                 var switchActive by remember { mutableStateOf(false) }
@@ -71,7 +71,7 @@ fun ProfileScreen(navigator: Navigator) {
                     title = "Получать уведомления".desc(),
                     subtitle = "На электронную почту".desc(),
                     onClick = {switchActive = switchActive.not()},
-                    icon = MR.images.settings
+                    icon = null
                 ) {
                     Switch(isActive = switchActive,
                         isEnabled = true,
@@ -82,7 +82,7 @@ fun ProfileScreen(navigator: Navigator) {
                     title = "Получать уведомления".desc(),
                     subtitle = "В приложении".desc(),
                     onClick = null,
-                    icon = MR.images.settings
+                    icon = null
                 ) {
                     Switch(isActive = false,
                         isEnabled = false,
@@ -95,7 +95,7 @@ fun ProfileScreen(navigator: Navigator) {
                     onClick = {
                               navigator.navigate(Screens.LOGIN)
                     },
-                    icon = MR.images.radio,
+                    icon = null,
                     tintColor = Color(0xFFC02828)
                 ) {
                 }

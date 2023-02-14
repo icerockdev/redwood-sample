@@ -26,11 +26,8 @@ class IosRowWithWeight :  RowWithWeight {
 
     
     func myInsert(view: UIView,index: KotlinInt){
-        let text = UILabel()
-        text.text = "text"
-        root.insertArrangedSubview(text, at:  index.intValue)
-    
         root.insertArrangedSubview(view, at:  index.intValue)
+        view.heightAnchor.constraint(equalToConstant: 72).isActive = true
     }
 
 

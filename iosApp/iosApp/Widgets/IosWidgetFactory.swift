@@ -15,7 +15,7 @@ class IosWidgetFactory: WidgetFactory {
     }
     
     func ListItem() -> ListItem {
-        
+        IosWidgetListItem()
     }
     
     func Switch() -> Switch {

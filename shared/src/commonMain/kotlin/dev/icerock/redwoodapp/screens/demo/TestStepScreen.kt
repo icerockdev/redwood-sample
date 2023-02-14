@@ -15,6 +15,10 @@ import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.desc
+import dev.icerock.redwood.navigation.navbar.NavBarController
+import dev.icerock.redwood.navigation.navbar.rememberNavBarController
+import dev.icerock.redwood.navigation.navigator.Navigator
+import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
@@ -28,11 +32,7 @@ import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Stack
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.SimpleLoginViewModel
-import dev.icerock.redwoodapp.ToolabrArgs
-import dev.icerock.redwoodapp.ViewModelOwner
-import dev.icerock.redwoodapp.getViewModel
-import dev.icerock.redwoodapp.navigation.Navigator
-import dev.icerock.redwoodapp.navigation.ScreenSettings
+import dev.icerock.redwoodapp.ToolbarArgs
 import kotlinx.coroutines.flow.MutableStateFlow
 import dev.icerock.redwoodapp.screens.demo.Mock
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
@@ -46,19 +46,20 @@ import org.example.library.MR
 fun TestStepScreen(
     navigator: Navigator,
     step: Int,
-    screenSettings: ScreenSettings<ToolabrArgs>,
-    viewModelOwner: ViewModelOwner
 ) {
-    val viewModel: TestStepViewModel = getViewModel(viewModelOwner) {
-        TestStepViewModel(step)
+
+    val viewModel: TestStepViewModel = getViewModel { TestStepViewModel(step) }
+    val navBarController: NavBarController = rememberNavBarController()
+
+    val title: String by viewModel.title.collectAsState()
+
+    LaunchedEffect(navBarController, title) {
+        navBarController.navBarData = ToolbarArgs.Simple(title.desc())
     }
-    val title by viewModel.title.collectAsState()
-    LaunchedEffect(screenSettings) {
+    LaunchedEffect(step) {
         viewModel.setStep(step)
     }
-    LaunchedEffect(screenSettings, title) {
-        screenSettings.setToolbarData(ToolabrArgs.Simple(title.desc()))
-    }
+
     val questions by viewModel.questions.collectAsState()
     val answers by viewModel.answers.collectAsState()
     val qustionTite by viewModel.qustionTitle.collectAsState()
@@ -77,8 +78,10 @@ fun TestStepScreen(
                         qustionTite,
                         textType = TextType.Primary, layoutModifier = LayoutModifier.padding(
                             Padding(
-                                horizontal = 16,
-                                vertical = 16
+                                start = 16,
+                                end = 16,
+                                top = 24,
+                                bottom = 16
                             )
                         ),
                         width = Size.Fill
@@ -92,7 +95,7 @@ fun TestStepScreen(
                                 Padding(
                                     start = 16,
                                     end = 16,
-                                    bottom = 16
+                                    bottom = 8
                                 )
                             ),
                             width = Size.Fill
@@ -102,18 +105,17 @@ fun TestStepScreen(
                     question.answers.forEachIndexed { answerIndex, answer ->
 
 
-                        Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
                         ListItem(
                             title = answer.desc(),
                             subtitle = null,
                             icon = if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio,
                             onClick = { viewModel.setAnswer(answerIndex) }
                         ) {}
+                        Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
 
                     }
                 }
 
-                Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
                 Column {
                     Text("   ", layoutModifier = LayoutModifier.padding(Padding(32)))
                 }
@@ -125,8 +127,8 @@ fun TestStepScreen(
 
         },
         child2 = {
-            Column(verticalAlignment = MainAxisAlignment.End) {
-                RowWithWeight {
+            RowWithWeight {
+                Column(verticalAlignment = MainAxisAlignment.End) {
                     Button(
                         layoutModifier = LayoutModifier.padding(
                             Padding(
@@ -144,6 +146,8 @@ fun TestStepScreen(
                             viewModel.onBackTap()
                         }
                     )
+                }
+                Column(verticalAlignment = MainAxisAlignment.End) {
                     Button(
                         layoutModifier = LayoutModifier.padding(
                             Padding(
@@ -199,7 +203,7 @@ class TestStepViewModel(step: Int) : ViewModel() {
     val isNextButtonEnabled = qurrentQuestionAnser.map { it != null }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
     val qustionTitle = currentQuestionIndex.combine(questions) { index, qusetions ->
-        "Вопрос ${index+1} из ${qusetions.size}"
+        "Вопрос ${index + 1} из ${qusetions.size}"
     }.stateIn(viewModelScope, SharingStarted.Lazily, "")
 
     fun setStep(step: Int) {

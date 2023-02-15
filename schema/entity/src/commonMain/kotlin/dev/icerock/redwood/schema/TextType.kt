@@ -4,5 +4,6 @@ enum class TextType {
     Header,
     Primary,
     Bold,
-    Secondary
+    Secondary,
+    H2,
 }

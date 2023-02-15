@@ -32,7 +32,8 @@ class IosWidgetButton: WidgetButton {
         _buttonType = buttonType
         if(buttonType == EntityButtonType.primary){
             root.backgroundColor = primaryColor
-            root.layer.cornerRadius = 24
+            root.layer.borderColor = primaryColor.cgColor
+            root.layer.cornerRadius = 10
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.isHighlighted = false
             root.setTitleColor(.white, for: UIControl.State.normal)
@@ -43,9 +44,9 @@ class IosWidgetButton: WidgetButton {
             root.setTitleColor(primaryColor, for: UIControl.State.normal)
             root.setTitleColor(black60, for: UIControl.State.disabled)
             root.backgroundColor = UIColor.clear
-            root.layer.borderColor = mainColor.cgColor
+            root.layer.borderColor = primaryColor.cgColor
             root.layer.borderWidth = 2
-            root.layer.cornerRadius = 24
+            root.layer.cornerRadius = 10
             root.contentHorizontalAlignment = .center
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.updateConfiguration()
@@ -55,13 +56,13 @@ class IosWidgetButton: WidgetButton {
             root.setTitleColor(primaryColor, for: UIControl.State.normal)
             root.setTitleColor(primaryColor, for: UIControl.State.highlighted)
             root.configuration?.baseBackgroundColor = UIColor.clear
-            root.layer.cornerRadius = 24
+            root.layer.cornerRadius = 10
             root.backgroundColor = UIColor.clear
             root.tintColor = primaryColor
         }
         if(buttonType == EntityButtonType.tonal){
             root.backgroundColor = primary88
-            root.layer.cornerRadius = 24
+            root.layer.cornerRadius = 10
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.setTitleColor(black, for: UIControl.State.normal)
             root.setTitleColor(black, for: UIControl.State.disabled)

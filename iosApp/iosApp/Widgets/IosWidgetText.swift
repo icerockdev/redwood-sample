@@ -34,15 +34,22 @@ class IosWidgetText: WidgetText {
     }
 
     func text(text_ text: String) {
-        root.text = text
+       
+        root.attributedText = text.colorSubstringsBetweenTags(start: "<b>", end: "</b>", color: .red, font: .boldSystemFont(ofSize: 15))
     }
+
     
     func textType(textType: EntityTextType?) {
         if(textType == EntityTextType.header){
             root.font = .boldSystemFont(ofSize: 25)
         }
         if(textType == EntityTextType.primary){
+            root.font = .systemFont(ofSize: 14)
+            root.textColor = black
+        }
+        if(textType == EntityTextType.secondary){
             root.font = .systemFont(ofSize: 12)
+            root.textColor = black70
         }
         if(textType == EntityTextType.bold){
             root.font = .boldSystemFont(ofSize: 22)
@@ -89,4 +96,25 @@ class IosWidgetText: WidgetText {
 
 
 
+}
+
+extension String {
+    func colorSubstringsBetweenTags(start: String, end: String, color: UIColor, font: UIFont? = nil) -> NSAttributedString {
+        var string = self
+        let attribute = NSMutableAttributedString(string: string)
+        
+        while let openedEm = string.range(of: start, range: string.startIndex..<string.endIndex) {
+            let substringFrom = openedEm.upperBound
+            guard let closedEm = string.range(of: end, range: openedEm.upperBound..<string.endIndex) else { return attribute }
+            let substringTo = closedEm.lowerBound
+            let nsrange = NSRange(substringFrom..<substringTo, in: string)
+            if let font = font { attribute.addAttributes([.font: font], range: nsrange) }
+            attribute.addAttribute(.foregroundColor, value: color, range: nsrange)
+            attribute.mutableString.replaceCharacters(in: NSRange(closedEm, in: string), with: "")
+            attribute.mutableString.replaceCharacters(in: NSRange(openedEm, in: string), with: "")
+            string = attribute.mutableString as String
+        }
+        
+        return attribute
+    }
 }

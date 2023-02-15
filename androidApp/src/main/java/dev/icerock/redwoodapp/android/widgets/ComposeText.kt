@@ -8,6 +8,7 @@ import app.cash.redwood.LayoutModifier
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.widget.Text
+import dev.icerock.redwoodapp.android.theme.TextStyles
 import dev.icerock.redwoodapp.android.types.BoldText
 import dev.icerock.redwoodapp.android.types.HeaderText
 import dev.icerock.redwoodapp.android.types.PrimaryText
@@ -36,6 +37,11 @@ class ComposeText : Text<@Composable () -> Unit> {
             TextType.Bold -> BoldText(
                 text = _textState,
                 isSingleLine = _isSingleLine
+            )
+            TextType.H2 -> PrimaryText(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.header3
             )
         }
     }

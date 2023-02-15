@@ -18,8 +18,11 @@ import dev.icerock.redwood.navigation.viewmodel.getViewModel
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.InputType
 import dev.icerock.redwood.schema.Size
+import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
+import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Image
+import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
 import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.SimpleLoginViewModel
@@ -37,44 +40,48 @@ fun LoginScreen(
     val buttonText: StringDesc by viewModel.tetxFlow.collectAsState()
 
     Box {
-        Column(
-            horizontalAlignment = CrossAxisAlignment.Center,
-            verticalAlignment = MainAxisAlignment.Center
-        ) {
-            var login: String by remember { mutableStateOf("123") }
-            var password: String by remember { mutableStateOf("123") }
-            Image(
-                120,
-                120,
-                placeholder = MR.images.logo,
-                layoutModifier = LayoutModifier.padding(Padding(bottom = 50)),
-                url = null
-            )
-            TextInput(login,
-                MR.strings.auth_login.desc(),
-                layoutModifier = LayoutModifier.padding(Padding(16)),
-                onChange = {
-                    login = it
-                })
-            TextInput(
-                password,
-                MR.strings.auth_password.desc(),
-                layoutModifier = LayoutModifier.padding(Padding(horizontal = 16)),
-                onChange = {
-                    password = it
-                },
-                inputType = InputType.Password
-            )
-            Button(
-                buttonText,
-                width = Size.Fill,
-                buttonType = ButtonType.Primary,
-                enabled = login.isNotEmpty() && password.isNotEmpty(),
-                onClick = {
-                    navigator.navigate(Screens.MAIN)
-                },
-                layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 50, end = 16))
-            )
-        }
+        Card(
+            layoutModifier = LayoutModifier.padding(Padding(horizontal = 16)),
+            child = {
+                Column(
+                    horizontalAlignment = CrossAxisAlignment.Start,
+                    verticalAlignment = MainAxisAlignment.Center
+                ) {
+                    var login: String by remember { mutableStateOf("123") }
+                    var password: String by remember { mutableStateOf("123") }
+                    Text(
+                        "Вход в аккаунт",
+                        textType = TextType.Header,
+                        layoutModifier = LayoutModifier.padding(Padding(24)),
+                        )
+                    TextInput(login,
+                        MR.strings.auth_login.desc(),
+                        layoutModifier = LayoutModifier.padding(Padding(horizontal = 24, vertical = 12)),
+                        onChange = {
+                            login = it
+                        })
+                    TextInput(
+                        password,
+                        MR.strings.auth_password.desc(),
+                        layoutModifier = LayoutModifier.padding(Padding(horizontal = 24, vertical = 12)),
+                        onChange = {
+                            password = it
+                        },
+                        inputType = InputType.Password
+                    )
+                    Button(
+                        "Войти".desc(),
+                        width = Size.Fill,
+                        buttonType = ButtonType.Primary,
+                        enabled = login.isNotEmpty() && password.isNotEmpty(),
+                        onClick = {
+                            navigator.navigate(Screens.MAIN)
+                        },
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(24)
+                        )
+                    )
+                }
+            })
     }
 }

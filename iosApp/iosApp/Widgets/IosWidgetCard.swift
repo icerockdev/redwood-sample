@@ -38,17 +38,7 @@ class IosWidgetCard :  WidgetCard{
     func myInsert(view: UIView,index: KotlinInt){
         view.translatesAutoresizingMaskIntoConstraints = true
         root.insertArrangedSubview(view, at: 0)
-        view.leadingAnchor.constraint(equalTo:
-                root.leadingAnchor
-              ).isActive = true
-        view.topAnchor.constraint(equalTo:
-                root.topAnchor).isActive = true
-        view.leftAnchor.constraint(equalTo:
-                root.leftAnchor).isActive = true
-        view.widthAnchor.constraint(equalTo:
-                root.widthAnchor).isActive = true
-        root.heightAnchor.constraint(equalTo:
-                view.heightAnchor).isActive = true
+  
     }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
@@ -58,7 +48,7 @@ class IosWidgetCard :  WidgetCard{
 
 class MyCardView: UIStackView{
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let childSize = subviews.first?.sizeThatFits(CGSize(width: size.width, height: size.width))
+        let childSize = subviews.first?.sizeThatFits(CGSize(width: size.width, height: size.height))
         return CGSize(width: size.width, height: childSize?.height ?? 32)
     }
 }

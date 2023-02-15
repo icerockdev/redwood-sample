@@ -6,9 +6,10 @@
     <string name="auth.password">Password</string>
     <string name="auth.button">Login</string>
     <!-- Navigation-->
-    <string name="tab.list">Tests</string>
-    <string name="tab.toggle">Toggle</string>
-    <string name="tab.settings">Profile</string>
+    <string name="tab.list">Тесты</string>
+    <string name="tab.hr">HR-услуги</string>
+    <string name="tab.toggle">Главная</string>
+    <string name="tab.settings">Профиль</string>
     <!-- Profile-->
     <string name="profile.logout">Logout</string>
   </resources>

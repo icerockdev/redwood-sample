@@ -29,7 +29,9 @@ import dev.icerock.moko.resources.desc.StringDesc
         CounterButton::class,
         Switch::class,
         ListItem::class,
-        Divider::class
+        Divider::class,
+        Onboarding::class,
+        FooterColumn::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -67,10 +69,17 @@ data class Text(
 
 @Widget(3)
 data class Image(
-    @Property(1) val width: Int?,
-    @Property(2) val height: Int?,
+    @Property(1)
+    @Default("null")
+    val width: Size?,
+    @Property(2)
+    @Default("null")
+    val height: Size?,
     @Property(3) val url: String?,
     @Property(4) val placeholder: ImageResource?,
+    @Property(5)
+    @Default("null")
+    val aspectRatio: Float?,
 )
 
 @Widget(4)
@@ -226,4 +235,20 @@ data class Divider(
     @Property(1)
     @Default("true")
     val isVertical: Boolean
+)
+
+@Widget(17)
+data class Onboarding(
+    @Property(1)
+    val onFinishClick: () -> Unit,
+    @Children(1)
+    val childs: () -> Unit,
+)
+
+@Widget(18)
+data class FooterColumn(
+    @Children(1)
+    val child: () -> Unit,
+    @Children(2)
+    val footer: () -> Unit,
 )

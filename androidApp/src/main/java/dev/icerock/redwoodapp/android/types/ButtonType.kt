@@ -18,6 +18,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -46,7 +47,7 @@ fun PrimaryButton(
         onClick = onClick,
         enabled = enabled,
         interactionSource = interactionSource,
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else
@@ -69,6 +70,7 @@ fun PrimaryButton(
                 )
             }
             Text(
+                modifier = Modifier.align(Alignment.CenterVertically),
                 text = text,
             )
         }
@@ -90,7 +92,7 @@ fun SecondaryButton(
             .height(48.dp),
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else Color.Transparent,
@@ -113,6 +115,7 @@ fun SecondaryButton(
                 )
             }
             Text(
+                modifier = Modifier.align(Alignment.CenterVertically),
                 text = text,
             )
         }
@@ -177,7 +180,7 @@ fun ActionButton(
             .height(48.dp),
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(10.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else Color.Transparent,
@@ -199,6 +202,7 @@ fun ActionButton(
                 )
             }
             Text(
+                modifier = Modifier.align(Alignment.CenterVertically),
                 text = text,
             )
         }

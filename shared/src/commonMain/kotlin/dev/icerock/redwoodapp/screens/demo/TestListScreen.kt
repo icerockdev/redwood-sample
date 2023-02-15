@@ -17,6 +17,7 @@ import dev.icerock.redwood.navigation.navbar.NavBarController
 import dev.icerock.redwood.navigation.navbar.rememberNavBarController
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.viewmodel.getViewModel
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Image
@@ -49,8 +50,8 @@ fun TestListScreen(
                 child = {
                     Row(width = Constraint.Fill, verticalAlignment = CrossAxisAlignment.Center) {
                         Image(
-                            32,
-                            32,
+                           width =  Size.Const(32),
+                            height =  Size.Const(32),
                             null,
                             if (it.isFinished) MR.images.check else MR.images.error,
                             layoutModifier = LayoutModifier.padding(Padding(8)),

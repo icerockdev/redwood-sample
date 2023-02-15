@@ -16,14 +16,21 @@ import dev.icerock.redwood.schema.widget.Card
 
 class ComposeCard : Card<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
-    private var _onClick: () -> Unit by mutableStateOf({})
+    private var _onClick: (() -> Unit)? by mutableStateOf(null)
 
     override val value = @Composable {
         Card(
-            modifier = Modifier.clickable {
-                _onClick()
+            modifier = Modifier.let {
+                val onCLick = _onClick
+                if (onCLick != null) {
+                    it.clickable {
+                        onCLick()
+                    }
+                } else {
+                    it
+                }
             },
-            backgroundColor = Color(0xFFF2F2F2),
+            backgroundColor = Color.White,
             shape = RoundedCornerShape(8.dp),
             elevation = 0.dp
         ) {
@@ -33,6 +40,6 @@ class ComposeCard : Card<@Composable () -> Unit> {
 
     override val child = ComposeWidgetChildren()
     override fun onClick(onClick: (() -> Unit)?) {
-        _onClick = onClick ?: {}
+        _onClick = onClick
     }
 }

@@ -33,7 +33,7 @@ class ComposeDivider : Divider<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         Spacer(modifier = Modifier
-            .background(Colors.gray60).let {
+            .background(Colors.gray70).let {
                 if (_isVertical) {
                     it
                         .height(1.dp)

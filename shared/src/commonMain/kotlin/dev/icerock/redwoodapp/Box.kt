@@ -10,9 +10,10 @@ import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
+import app.cash.redwood.layout.compose.RowScope
 
 @Composable
-fun Box(content: @Composable () -> Unit) {
+fun Box(content: @Composable RowScope.() -> Unit) {
     Column(
         horizontalAlignment = CrossAxisAlignment.Center,
         verticalAlignment = MainAxisAlignment.Center,

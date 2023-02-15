@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.cash.redwood.LayoutModifier
+import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
@@ -14,9 +15,9 @@ import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
+import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.Box
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,51 +30,70 @@ import org.example.library.MR
 fun ToogleScreen() {
     val viewModel: ToggleViewModel = getViewModel { ToggleViewModel() }
 
-    Box {
-        Column(horizontalAlignment = CrossAxisAlignment.Center) {
-            val isStarted by viewModel.isToggleStart.collectAsState()
+    Column(horizontalAlignment = CrossAxisAlignment.Start, height = Constraint.Fill) {
+        val isStarted by viewModel.isToggleStart.collectAsState()
 
-            Image(
-                120,
-                120,
-                placeholder = if (isStarted) MR.images.on else MR.images.of,
-                layoutModifier = LayoutModifier.padding(Padding(bottom = 25)),
-                url = null
-            )
-            val currentTime by viewModel.currentTime.collectAsState()
-            if (isStarted) {
-                Text(currentTime ?: "00:00:00", textType = TextType.Header)
-            } else {
-                Text(
-                    "Запустите таймер для начала",
-                    textType = TextType.Primary,
-                    layoutModifier = LayoutModifier.padding(Padding(horizontal = 16))
-                )
-                Text(
-                    "отслеживания рабочего времени",
-                    textType = TextType.Primary,
-                    layoutModifier = LayoutModifier.padding(Padding(horizontal = 16, vertical = 2))
-                )
-            }
-
-
-            Button(
-                layoutModifier = LayoutModifier.padding(
-                    Padding(
-                        top = 25,
-                        start = 16, end = 16
+        Card(layoutModifier = LayoutModifier.padding(Padding(16)),
+            child = {
+                Column(horizontalAlignment = CrossAxisAlignment.Center) {
+                    Text(
+                        "Сегодня, 19 Февраля", textType = TextType.H2, width = Size.Fill,
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                start = 16,
+                                end = 16,
+                                top = 16
+                            )
+                        ).horizontalAlignment(CrossAxisAlignment.Start)
                     )
-                ),
-                text = if (isStarted.not()) "Запустить таймер".desc()
-                else "Остановить таймер".desc(),
-                buttonType = if (isStarted) ButtonType.Secondary else ButtonType.Primary,
-                width = Size.Fill,
-                onClick = {
-                    viewModel.startOrStopTimer()
+                    Image(
+                        Size.Const(196),
+                        Size.Const(196),
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                48
+                            )
+                        ),
+                        placeholder = MR.images.time_placeholder,
+                        url = null
+                    )
+
+                    Button(
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                start = 16, end = 16
+                            )
+                        ),
+                        text = if (isStarted.not()) "Начать день".desc()
+                        else "Закончить рабочий день".desc(),
+                        buttonType = if (isStarted) ButtonType.Secondary else ButtonType.Primary,
+                        icon = if(isStarted.not()) MR.images.play else MR.images.pause_fill,
+                        width = Size.Fill,
+                        onClick = {
+                            viewModel.startOrStopTimer()
+                        }
+                    )
+
+                    Button(
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                start = 16, end = 16,
+                                bottom = 16, top = 8
+                            )
+                        ),
+                        text = "История работы".desc(),
+                        buttonType = ButtonType.Text,
+                        width = Size.Fill,
+                        onClick = {
+                            // do nothing
+                        },
+                        icon = MR.images.clock
+                    )
                 }
-            )
-        }
+            }
+        )
     }
+
 }
 
 class ToggleViewModel() : ViewModel() {

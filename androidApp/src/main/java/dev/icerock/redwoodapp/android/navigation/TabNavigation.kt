@@ -37,6 +37,7 @@ import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.redwood.navigation.NavigationHost
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationTabsScope
+import dev.icerock.redwoodapp.android.theme.Colors
 
 data class TabRouteData(
     val title: StringDesc?,
@@ -75,7 +76,8 @@ data class TabNavigation(
                             BottomBarNavigation(navController)
                         },
                         content = { innerPadding ->
-                            Box(modifier = Modifier.padding(innerPadding)) {
+                            Box(modifier = Modifier.padding(innerPadding)
+                                .background(Colors.gray60)) {
                                 item.value.render(provider, nav)
                             }
                         }

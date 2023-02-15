@@ -28,6 +28,9 @@
 		44556F39299B5711009D161B /* IosWidgetSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44556F38299B5711009D161B /* IosWidgetSwitch.swift */; };
 		44556F3B299B5DF8009D161B /* IosWidgetListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44556F3A299B5DF8009D161B /* IosWidgetListItem.swift */; };
 		449B364B2983D6960008710D /* IosWidgetSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B364A2983D6960008710D /* IosWidgetSpace.swift */; };
+		44A79E21299CE3F600D32B5A /* IosWidgetOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A79E20299CE3F600D32B5A /* IosWidgetOnboarding.swift */; };
+		44A79E23299CE43300D32B5A /* IosWidgetFooterColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A79E22299CE43300D32B5A /* IosWidgetFooterColumn.swift */; };
+		44A79E25299CEC8400D32B5A /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A79E24299CEC8400D32B5A /* OnboardingViewController.swift */; };
 		44E470FF299692D700C9B488 /* IosWidgetCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E470FE299692D700C9B488 /* IosWidgetCounter.swift */; };
 		44E47101299692E700C9B488 /* IosWidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E47100299692E700C9B488 /* IosWidgetController.swift */; };
 		44F037942993586200AC965C /* IosShortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F037932993586200AC965C /* IosShortButton.swift */; };
@@ -61,6 +64,9 @@
 		44556F38299B5711009D161B /* IosWidgetSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSwitch.swift; sourceTree = "<group>"; };
 		44556F3A299B5DF8009D161B /* IosWidgetListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetListItem.swift; sourceTree = "<group>"; };
 		449B364A2983D6960008710D /* IosWidgetSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSpace.swift; sourceTree = "<group>"; };
+		44A79E20299CE3F600D32B5A /* IosWidgetOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetOnboarding.swift; sourceTree = "<group>"; };
+		44A79E22299CE43300D32B5A /* IosWidgetFooterColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetFooterColumn.swift; sourceTree = "<group>"; };
+		44A79E24299CEC8400D32B5A /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		44E470FE299692D700C9B488 /* IosWidgetCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetCounter.swift; sourceTree = "<group>"; };
 		44E47100299692E700C9B488 /* IosWidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetController.swift; sourceTree = "<group>"; };
 		44F037932993586200AC965C /* IosShortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosShortButton.swift; sourceTree = "<group>"; };
@@ -95,6 +101,9 @@
 		225D67D82971B5DC00A27CD1 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				44A79E26299CFB8700D32B5A /* Image */,
+				44A79E1F299CE3D100D32B5A /* Onboarding */,
+				44A79E1E299CE3C300D32B5A /* FooterColumn */,
 				4418267F299BA0DA00403061 /* WidgetTextInput */,
 				44E470FD299656E800C9B488 /* Banners */,
 				44E470FC299656D500C9B488 /* CounterButton */,
@@ -105,7 +114,6 @@
 				44556F38299B5711009D161B /* IosWidgetSwitch.swift */,
 				44556F3A299B5DF8009D161B /* IosWidgetListItem.swift */,
 				225D67DD2971B65D00A27CD1 /* IosWidgetText.swift */,
-				225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */,
 				225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */,
 				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
 				225D67E72971B74100A27CD1 /* IosStack.swift */,
@@ -163,6 +171,31 @@
 				443F5E50298B9E100079910A /* NavBarFactory.swift */,
 			);
 			path = NavBar;
+			sourceTree = "<group>";
+		};
+		44A79E1E299CE3C300D32B5A /* FooterColumn */ = {
+			isa = PBXGroup;
+			children = (
+				44A79E22299CE43300D32B5A /* IosWidgetFooterColumn.swift */,
+			);
+			path = FooterColumn;
+			sourceTree = "<group>";
+		};
+		44A79E1F299CE3D100D32B5A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				44A79E20299CE3F600D32B5A /* IosWidgetOnboarding.swift */,
+				44A79E24299CEC8400D32B5A /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		44A79E26299CFB8700D32B5A /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				225D67DF2971B69200A27CD1 /* IosWidgetImage.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		44E470FC299656D500C9B488 /* CounterButton */ = {
@@ -336,11 +369,14 @@
 				225D67DA2971B5F000A27CD1 /* IosWidgetFactory.swift in Sources */,
 				225D67E02971B69200A27CD1 /* IosWidgetImage.swift in Sources */,
 				44E47101299692E700C9B488 /* IosWidgetController.swift in Sources */,
+				44A79E23299CE43300D32B5A /* IosWidgetFooterColumn.swift in Sources */,
 				44F037942993586200AC965C /* IosShortButton.swift in Sources */,
 				443EFE632990D88C001C3B2A /* Colors.swift in Sources */,
 				44556F37299B5652009D161B /* IosDivider.swift in Sources */,
 				44F0379829937CBC00AC965C /* IosWidgetProductCard.swift in Sources */,
+				44A79E21299CE3F600D32B5A /* IosWidgetOnboarding.swift in Sources */,
 				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
+				44A79E25299CEC8400D32B5A /* OnboardingViewController.swift in Sources */,
 				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
 				443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */,
 				44F03796299358F600AC965C /* IosRowWithWeight.swift in Sources */,
@@ -392,6 +428,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -423,6 +460,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

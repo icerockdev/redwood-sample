@@ -108,42 +108,42 @@ class ComposeBanners : Banners<() -> Unit> {
         }
 
     }
+}
 
-    @Composable
-    fun DotsIndicator(
-        totalDots: Int,
-        selectedIndex: Int,
-        selectedColor: Color,
-        unSelectedColor: Color,
+@Composable
+fun DotsIndicator(
+    totalDots: Int,
+    selectedIndex: Int,
+    selectedColor: Color,
+    unSelectedColor: Color,
+) {
+
+    LazyRow(
+        modifier = Modifier
+            .wrapContentWidth()
+            .wrapContentHeight()
+
     ) {
 
-        LazyRow(
-            modifier = Modifier
-                .wrapContentWidth()
-                .wrapContentHeight()
+        items(totalDots) { index ->
+            if (index == selectedIndex) {
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .clip(CircleShape)
+                        .background(color = selectedColor)
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .size(8.dp)
+                        .clip(CircleShape)
+                        .background(unSelectedColor)
+                )
+            }
 
-        ) {
-
-            items(totalDots) { index ->
-                if (index == selectedIndex) {
-                    Box(
-                        modifier = Modifier
-                            .size(8.dp)
-                            .clip(CircleShape)
-                            .background(color = selectedColor)
-                    )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(8.dp)
-                            .clip(CircleShape)
-                            .background(unSelectedColor)
-                    )
-                }
-
-                if (index != totalDots - 1) {
-                    Spacer(modifier = Modifier.padding(horizontal = 4.dp))
-                }
+            if (index != totalDots - 1) {
+                Spacer(modifier = Modifier.padding(horizontal = 4.dp))
             }
         }
     }

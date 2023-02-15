@@ -33,8 +33,8 @@ fun TestCompleteScreen(
     Box {
         Column(horizontalAlignment = CrossAxisAlignment.Center) {
             Image(
-                width = 120,
-                height = 120,
+                width = Size.Const(120),
+                height = Size.Const(120),
                 placeholder = MR.images.checked_big,
                 layoutModifier = LayoutModifier.padding(Padding(bottom = 50)),
                 url = null

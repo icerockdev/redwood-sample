@@ -22,7 +22,7 @@ class IosWidgetSpace: Space {
         root.backgroundColor = UIColor.clear
     }
     
-    func height(height_ height: Int32) {
+    func height(height__ height: Int32) {
         root.widgetHeight = EntitySize.Const(value: height)
     }
     

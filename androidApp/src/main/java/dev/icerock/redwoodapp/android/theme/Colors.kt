@@ -17,8 +17,9 @@ object Colors {
     val gray90 = Color(0xFF605D62)
     val gray80 = Color(0xFF939094)
     val gray70 = Color(0xFFA59FA6)
-    val gray60 = Color(0xFFEFECEF)
+    val gray60 = Color(0xFFF2F3F8)
     val gray50 = Color(0xFFFFFBFE)
     val black33 = Color(0x54313033)
     val black18 = Color(0x2C313033)
+
 }

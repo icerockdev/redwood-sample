@@ -1,4 +1,4 @@
-package dev.icerock.redwoodapp
+package dev.icerock.redwoodapp.screens.demo
 
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.navigation.NavigationFactory
@@ -7,12 +7,9 @@ import dev.icerock.redwood.navigation.NavigationRoot
 import dev.icerock.redwood.navigation.navigation
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationFactoryScope
-import dev.icerock.redwoodapp.screens.demo.LoginScreen
-import dev.icerock.redwoodapp.screens.demo.ProfileScreen
-import dev.icerock.redwoodapp.screens.demo.TestCompleteScreen
-import dev.icerock.redwoodapp.screens.demo.TestListScreen
-import dev.icerock.redwoodapp.screens.demo.TestStepScreen
-import dev.icerock.redwoodapp.screens.demo.ToogleScreen
+import dev.icerock.redwood.schema.TextType
+import dev.icerock.redwood.schema.compose.Text
+import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 import org.example.library.MR
 
@@ -20,8 +17,14 @@ fun mainApp(
     navigationFactory: NavigationFactory
 ): NavigationRoot = navigation(
     navigationFactory = navigationFactory,
-    startDestination = Screens.LOGIN
+    startDestination = Screens.ONBOARDING
 ) {
+
+    registerScreen(uri = Screens.ONBOARDING) { navigator, _ ->
+        OnboardingScreen {
+            navigator.navigate(Screens.LOGIN)
+        }
+    }
     registerScreen(uri = Screens.LOGIN) { navigator, _ ->
         LoginScreen(navigator)
     }
@@ -33,22 +36,30 @@ fun mainApp(
 
 private fun NavigationFactoryScope.mainScreenNavigation(
     rootNavigator: Navigator
-): NavigationHost = navigationTabs(startDestination = Screens.TEST_LIST) {
+): NavigationHost = navigationTabs(startDestination = Screens.TOGGLE) {
+    registerScreen(
+        Screens.TOGGLE,
+        title = MR.strings.tab_toggle.desc(),
+        icon = MR.images.home,
+    ) { _ ->
+        ToogleScreen()
+    }
+    registerScreen(
+        uri = Screens.HR,
+        title = MR.strings.tab_hr.desc(),
+        icon = MR.images.mail,
+        screen =  { _ ->
+            HRScreen()
+        }
+    )
     registerNavigation(
         uri = Screens.TEST_LIST,
         title = MR.strings.tab_list.desc(),
-        icon = MR.images.list,
+        icon = MR.images.test,
         childNavigation = { _ ->
             secondTabNavigation()
         }
     )
-    registerScreen(
-        Screens.TOGGLE,
-        title = MR.strings.tab_toggle.desc(),
-        icon = MR.images.toggl,
-    ) { _ ->
-        ToogleScreen()
-    }
     registerScreen(
         uri = Screens.PROFILE,
         title = MR.strings.tab_settings.desc(),

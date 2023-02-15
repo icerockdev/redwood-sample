@@ -10,6 +10,14 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func FooterColumn() -> FooterColumn {
+        IosWidgetFooterColumn()
+    }
+    
+    func Onboarding() -> Onboarding {
+        IosWidgetOnboarding()
+    }
+    
     func Divider() -> Divider {
         IosWidgetDivider()
     }

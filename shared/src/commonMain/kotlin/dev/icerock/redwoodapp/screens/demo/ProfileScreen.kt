@@ -33,74 +33,61 @@ import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 @Composable
 fun ProfileScreen(navigator: Navigator) {
-    Box {
-        Row(
-            verticalAlignment = CrossAxisAlignment.Start,
-            horizontalAlignment = MainAxisAlignment.Center,
-            width = Constraint.Fill
+
+    Column(
+        horizontalAlignment = CrossAxisAlignment.Start,
+        verticalAlignment = MainAxisAlignment.Start,
+        height = Constraint.Fill
+    ) {
+        Text(
+            "Здравствуйте, \n" +
+                    "Григорий",
+            layoutModifier = LayoutModifier.padding(Padding(horizontal = 16,
+            vertical = 24)),
+            textType = TextType.Header
+        )
+        ListItem(
+            title = "Электронная почта".desc(),
+            subtitle = "example@gmail.com".desc(),
+            onClick = null,
+            child = {},
+            icon = null
+        )
+        Divider()
+        var switchActive by remember { mutableStateOf(false) }
+
+        ListItem(
+            title = "Получать уведомления".desc(),
+            subtitle = "На электронную почту".desc(),
+            onClick = { switchActive = switchActive.not() },
+            icon = null
         ) {
-            Column(
-                horizontalAlignment = CrossAxisAlignment.Center,
-                verticalAlignment = MainAxisAlignment.Start,
-                height = Constraint.Fill
-            ) {
-                Image(
-                    width = 120,
-                    height = 120,
-                    url = USER_AVATAR,
-                    placeholder = MR.images.ava_preview,
-                    layoutModifier = LayoutModifier.padding(Padding(top = 120))
-                )
-                Text(
-                    USR_NAME,
-                    layoutModifier = LayoutModifier.padding(Padding(top = 12)),
-                    textType = TextType.Header
-                )
-                ListItem(
-                    layoutModifier = LayoutModifier.padding(padding = Padding(top = 16)),
-                    title = "Электронная почта".desc(),
-                    subtitle = "example@gmail.com".desc(),
-                    onClick = null,
-                    child = {},
-                    icon = null
-                )
-                Divider()
-                var switchActive by remember { mutableStateOf(false) }
-                
-                ListItem(
-                    title = "Получать уведомления".desc(),
-                    subtitle = "На электронную почту".desc(),
-                    onClick = {switchActive = switchActive.not()},
-                    icon = null
-                ) {
-                    Switch(isActive = switchActive,
-                        isEnabled = true,
-                        onChangeState = { switchActive = it })
-                }
-                Divider()
-                ListItem(
-                    title = "Получать уведомления".desc(),
-                    subtitle = "В приложении".desc(),
-                    onClick = null,
-                    icon = null
-                ) {
-                    Switch(isActive = false,
-                        isEnabled = false,
-                        onChangeState = { switchActive = it })
-                }
-                Divider()
-                ListItem(
-                    title = "Выход".desc(),
-                    subtitle = null,
-                    onClick = {
-                              navigator.navigate(Screens.LOGIN)
-                    },
-                    icon = null,
-                    tintColor = Color(0xFFC02828)
-                ) {
-                }
-                Divider()
-            }
+            Switch(isActive = switchActive,
+                isEnabled = true,
+                onChangeState = { switchActive = it })
         }
+        Divider()
+        ListItem(
+            title = "Получать уведомления".desc(),
+            subtitle = "В приложении".desc(),
+            onClick = null,
+            icon = null
+        ) {
+            Switch(isActive = false,
+                isEnabled = false,
+                onChangeState = { switchActive = it })
+        }
+        Divider()
+        ListItem(
+            title = "Выход".desc(),
+            subtitle = null,
+            onClick = {
+                navigator.navigate(Screens.LOGIN)
+            },
+            icon = MR.images.exit,
+            tintColor = Color(0xFFC02828)
+        ) {
+        }
+        Divider()
     }
 }

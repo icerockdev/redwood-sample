@@ -1,5 +1,6 @@
 package dev.icerock.redwoodapp.android.widgets
 
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -15,36 +16,35 @@ import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
 import com.skydoves.landscapist.coil.CoilImage
 import dev.icerock.moko.resources.ImageResource
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.widget.Image
 
 class ComposeImage : Image<@Composable () -> Unit> {
     private var _urlState: String? by mutableStateOf("")
-    private var _width: Int? by mutableStateOf(null)
-    private var _height: Int? by mutableStateOf(null)
+    private var _width: Size? by mutableStateOf(null)
+    private var _height: Size? by mutableStateOf(null)
     private var _placeholder: Int? by mutableStateOf(null)
+    private var _aspectRatio: Float? by mutableStateOf(null)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
     override val value = @Composable {
         CoilImage(
-            modifier = if (_height != null && _width != null)
-                Modifier
-                    .height(_height!!.dp)
-                    .width(_width!!.dp)
-                    .clip(CircleShape)
-            else
-                Modifier.clip(CircleShape),
+            modifier = Modifier
+                .width(_width)
+                .height(_height)
+                .aspectRatio(_aspectRatio),
             imageModel = _urlState,
             placeHolder = _placeholder?.let { painterResource(it) },
             error = _placeholder?.let { painterResource(it) }
         )
     }
 
-    override fun width(width: Int?) {
+    override fun width(width: Size?) {
         _width = width
     }
 
-    override fun height(height: Int?) {
+    override fun height(height: Size?) {
         _height = height
     }
 
@@ -54,5 +54,9 @@ class ComposeImage : Image<@Composable () -> Unit> {
 
     override fun placeholder(placeholder: ImageResource?) {
         _placeholder = placeholder?.drawableResId
+    }
+
+    override fun aspectRatio(aspectRatio: Float?) {
+        _aspectRatio = aspectRatio
     }
 }

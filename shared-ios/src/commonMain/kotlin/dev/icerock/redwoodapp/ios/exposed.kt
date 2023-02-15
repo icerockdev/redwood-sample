@@ -24,7 +24,7 @@ fun createViewChildrenListener(
 ): UIViewChildren = UIViewChildren(parent, insert = insert)
 
 fun mainApp(navigationFactory: NavigationFactory) =
-    dev.icerock.redwoodapp.mainApp(navigationFactory)
+    dev.icerock.redwoodapp.screens.demo.mainApp(navigationFactory)
 
 //interface IosFlatNavigationFactory : FlatNavigationFactory<ToolbarArgs>
 

@@ -1,6 +1,9 @@
 package dev.icerock.redwoodapp.android.widgets
 
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -89,10 +92,28 @@ class ComposeButton : Button<@Composable () -> Unit> {
 }
 
 
-fun Modifier.width(width: Size): Modifier = this.let {
-    when(width){
+fun Modifier.width(width: Size?): Modifier = this.let {
+    when (width) {
         is Size.Wrap -> it
         is Size.Fill -> it.fillMaxWidth()
         is Size.Const -> it.width(width.value.dp)
+        else -> it
+    }
+}
+
+fun Modifier.height(height: Size?): Modifier = this.let {
+    when (height) {
+        is Size.Wrap -> it
+        is Size.Fill -> it.fillMaxHeight()
+        is Size.Const -> it.height(height.value.dp)
+        else -> it
+    }
+}
+
+fun Modifier.aspectRatio(ratio: Float?): Modifier = this.let {
+    return@let if (ratio == null) {
+        it
+    } else {
+        it.aspectRatio(ratio)
     }
 }

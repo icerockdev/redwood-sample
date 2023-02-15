@@ -10,8 +10,9 @@ import androidx.compose.ui.Modifier
 import app.cash.redwood.layout.composeui.ComposeUiRedwoodLayoutWidgetFactory
 import dev.icerock.redwood.navigation.NavigationHost
 import dev.icerock.redwoodapp.android.navigation.AndroidNavigationFactory
+import dev.icerock.redwoodapp.android.theme.Colors
 import dev.icerock.redwoodapp.android.widgets.ComposeWidgetFactory
-import dev.icerock.redwoodapp.mainApp
+import dev.icerock.redwoodapp.screens.demo.mainApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Colors.gray60
                 ) {
                     app.Render(factories)
                 }

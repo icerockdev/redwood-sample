@@ -2,9 +2,9 @@ package dev.icerock.redwoodapp.screens.demo
 
 object Mock {
     val TEST_LIST = listOf(
-        Test(1, false, "Тесты по технике безопасности"),
-        Test(2, true, "Old Test"),
-        Test(3, true, "Second Old Test")
+        Test(1, false, "Тесты по технике безопасности", "18 вопросов"),
+        Test(2, true, "Old Test", "18 вопросов"),
+        Test(3, true, "Second Old Test", "18 вопросов")
     )
 
     val FIRT_TEST = TestDetails(

@@ -31,6 +31,7 @@ import dev.icerock.redwood.navigation.navbar.NavBarFactory
 import dev.icerock.redwood.navigation.navigator.HistoryNavigator
 import dev.icerock.redwood.navigation.scope.NavigationFlatScope
 import dev.icerock.redwoodapp.android.navigation.navbar.AndroidNavBarFactory
+import dev.icerock.redwoodapp.android.theme.Colors
 import kotlinx.coroutines.flow.MutableStateFlow
 
 private typealias FlatRouteData = @Composable (Widget.Provider<() -> Unit>, HistoryNavigator, Map<String, String>) -> Unit
@@ -79,6 +80,7 @@ data class FlatNavigation(
 
                     CompositionLocalProvider(LocalNavBarController provides navBarController) {
                         Scaffold(
+                            backgroundColor = Colors.gray60,
                             topBar = {
                                 if (navBarController.isNavigationBarVisible.not()) return@Scaffold
 

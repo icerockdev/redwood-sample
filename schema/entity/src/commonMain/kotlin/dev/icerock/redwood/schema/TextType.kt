@@ -6,4 +6,6 @@ enum class TextType {
     Bold,
     Secondary,
     H2,
+    H3,
+    Accent
 }

@@ -16,9 +16,12 @@ class IosWidgetText: WidgetText {
     private let root: FillLabel = {
         let view = FillLabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.numberOfLines = 2
+        view.numberOfLines = 0
         return view
     }()
+    
+    var textFont : UIFont = .systemFont(ofSize: 12)
+    var originalText : String = ""
     
     func isSingleLine(isSingleLine: Bool) {
         if(isSingleLine){
@@ -34,26 +37,27 @@ class IosWidgetText: WidgetText {
     }
 
     func text(text_ text: String) {
-       
-        root.attributedText = text.colorSubstringsBetweenTags(start: "<b>", end: "</b>", color: .red, font: .boldSystemFont(ofSize: 15))
+        originalText = text
+        root.attributedText = text.colorSubstringsBetweenTags(start: "<b>", end: "</b>", font: textFont)
     }
 
     
     func textType(textType: EntityTextType?) {
         if(textType == EntityTextType.header){
-            root.font = .boldSystemFont(ofSize: 25)
+            textFont = .boldSystemFont(ofSize: 25)
         }
         if(textType == EntityTextType.primary){
-            root.font = .systemFont(ofSize: 14)
+            textFont = .systemFont(ofSize: 14)
             root.textColor = black
         }
         if(textType == EntityTextType.secondary){
-            root.font = .systemFont(ofSize: 12)
+            textFont = .systemFont(ofSize: 12)
             root.textColor = black70
         }
         if(textType == EntityTextType.bold){
-            root.font = .boldSystemFont(ofSize: 22)
+            textFont = .boldSystemFont(ofSize: 22)
         }
+        text(text_: originalText)
     }
     
     
@@ -99,17 +103,19 @@ class IosWidgetText: WidgetText {
 }
 
 extension String {
-    func colorSubstringsBetweenTags(start: String, end: String, color: UIColor, font: UIFont? = nil) -> NSAttributedString {
+    func colorSubstringsBetweenTags(start: String, end: String, font: UIFont? = nil) -> NSAttributedString {
         var string = self
         let attribute = NSMutableAttributedString(string: string)
+        let boldFont: UIFont = .boldSystemFont(ofSize: font?.pointSize ?? 15)
+        attribute.addAttributes([.font: font], range: NSMakeRange(0, string.count))
         
         while let openedEm = string.range(of: start, range: string.startIndex..<string.endIndex) {
             let substringFrom = openedEm.upperBound
             guard let closedEm = string.range(of: end, range: openedEm.upperBound..<string.endIndex) else { return attribute }
             let substringTo = closedEm.lowerBound
             let nsrange = NSRange(substringFrom..<substringTo, in: string)
-            if let font = font { attribute.addAttributes([.font: font], range: nsrange) }
-            attribute.addAttribute(.foregroundColor, value: color, range: nsrange)
+        
+            if let font = font { attribute.addAttributes([.font: boldFont], range: nsrange) }
             attribute.mutableString.replaceCharacters(in: NSRange(closedEm, in: string), with: "")
             attribute.mutableString.replaceCharacters(in: NSRange(openedEm, in: string), with: "")
             string = attribute.mutableString as String

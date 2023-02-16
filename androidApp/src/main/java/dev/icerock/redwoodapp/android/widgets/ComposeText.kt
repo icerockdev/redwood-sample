@@ -41,7 +41,17 @@ class ComposeText : Text<@Composable () -> Unit> {
             TextType.H2 -> PrimaryText(
                 text = _textState,
                 isSingleLine = _isSingleLine,
+                textStyle = TextStyles.header2
+            )
+            TextType.H3 -> PrimaryText(
+                text = _textState,
+                isSingleLine = _isSingleLine,
                 textStyle = TextStyles.header3
+            )
+            TextType.Accent -> PrimaryText(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.bodyAccent
             )
         }
     }

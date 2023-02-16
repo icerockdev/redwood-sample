@@ -120,7 +120,7 @@ class OnboardingViewController: UIViewController {
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         let nextButtonSize = nextButton.sizeThatFits(view.frame.size)
         pageControll.frame = CGRect(x: 0, y: view.frame.height - 48 - nextButtonSize.height, width: view.frame.width, height: 16)
-        scrollView.frame = CGRect(x: 16, y: 16, width: view.frame.width-32, height: view.frame.height - 48 - nextButtonSize.height)
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - 48 - nextButtonSize.height)
         nextButton.frame = CGRect(x: 16, y: view.frame.height - nextButtonSize.height - 16,
                                   width: view.frame.width-32, height: nextButtonSize.height)
         closeButton.frame = CGRect(x: view.frame.width-56, y: 16, width: 40, height: 40)

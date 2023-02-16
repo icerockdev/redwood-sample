@@ -76,7 +76,7 @@ fun TestStepScreen(
                 Row {
                     Text(
                         qustionTite,
-                        textType = TextType.Primary, layoutModifier = LayoutModifier.padding(
+                        textType = TextType.H3, layoutModifier = LayoutModifier.padding(
                             Padding(
                                 start = 16,
                                 end = 16,
@@ -91,7 +91,7 @@ fun TestStepScreen(
                     Row {
                         Text(
                             question.qustion,
-                            textType = TextType.Bold, layoutModifier = LayoutModifier.padding(
+                            textType = TextType.H3, layoutModifier = LayoutModifier.padding(
                                 Padding(
                                     start = 16,
                                     end = 16,
@@ -105,13 +105,35 @@ fun TestStepScreen(
                     question.answers.forEachIndexed { answerIndex, answer ->
 
 
-                        ListItem(
-                            title = answer.desc(),
-                            subtitle = null,
-                            icon = if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio,
-                            onClick = { viewModel.setAnswer(answerIndex) }
-                        ) {}
-                        Divider(layoutModifier = LayoutModifier.padding(Padding(start = 64)))
+                        Card(
+                            layoutModifier = LayoutModifier.padding(
+                                Padding(
+                                    horizontal = 16,
+                                    vertical = 8
+                                )
+                            ),
+                            onClick = { viewModel.setAnswer(answerIndex) },
+                            child = {
+                                Row(
+                                    width = Constraint.Fill,
+                                    verticalAlignment = CrossAxisAlignment.Center
+                                ) {
+                                    Image(
+                                        layoutModifier = LayoutModifier.padding(
+                                            Padding(
+                                                end = 32,
+                                                start = 32
+                                            )
+                                        ),
+                                        width = Size.Const(24),
+                                        height = Size.Const(24),
+                                        url = null,
+                                        placeholder =
+                                        if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio
+                                    )
+                                }
+                            }
+                        )
 
                     }
                 }

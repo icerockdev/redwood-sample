@@ -70,6 +70,9 @@ fun SmsCodeScreen(
                                 hint = "Формат кода: 9186".desc(),
                                 onChange = {
                                     smsCode = it
+                                    if (it.length == 4) {
+                                        navigator.navigate(Screens.FIRST_INFO)
+                                    }
                                 },
                                 inputType = InputType.Text,
                                 layoutModifier = LayoutModifier.padding(Padding(top = 32))

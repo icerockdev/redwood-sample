@@ -22,8 +22,15 @@ fun mainApp(
             navigator.navigate(Screens.SMS_CODE)
         }
     }
+
     registerScreen(uri = Screens.SMS_CODE) { navigator, _ ->
         SmsCodeScreen(navigator)
+    }
+
+    registerScreen(uri = Screens.FIRST_INFO) { navigator, _ ->
+        FirstInfoScreen {
+
+        }
     }
 
     /*registerNavigation(uri = Screens.MAIN) { navigator, _ ->

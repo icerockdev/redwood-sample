@@ -39,15 +39,17 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
         ) {
             Row {
                 Icon(
-                    modifier = Modifier.padding(end = 8.dp),
                     painter = painterResource(_icon),
                     tint = Color.Unspecified,
                     contentDescription = null
                 )
-                Text(
-                    text = _text.toString(LocalContext.current),
-                    color = if (_isClicked) Color(0xFF0C7BC7) else Color(0xFFA9A9A9)
-                )
+                if (_text.toString() != "") {
+                    Text(
+                        modifier = Modifier.padding(start = 8.dp),
+                        text = _text.toString(LocalContext.current),
+                        //color = if (_isClicked) Color(0xFF0C7BC7) else Color(0xFFA9A9A9)
+                    )
+                }
             }
         }
     }

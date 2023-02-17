@@ -265,6 +265,11 @@ data class Chip(
     val backgroundColor: Color?,
     @Property(4)
     val textColor: Color?,
+    @Property(5)
+    @Default("null")
+    val border: Int?,
+    @Property(6)
+    val onClick: () -> Unit,
 )
 
 @Widget(20)

@@ -21,5 +21,6 @@ object Colors {
     val gray50 = Color(0xFFFFFBFE)
     val black33 = Color(0x54313033)
     val black18 = Color(0x2C313033)
+    val white = Color(0xFFFFFFFF)
 
 }

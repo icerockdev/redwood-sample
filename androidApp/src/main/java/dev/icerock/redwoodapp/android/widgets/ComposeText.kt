@@ -64,6 +64,11 @@ class ComposeText : Text<@Composable () -> Unit> {
                 isSingleLine = _isSingleLine,
                 textStyle = TextStyles.link
             )
+            TextType.PrimaryRed -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.primaryRed
+            )
         }
     }
 

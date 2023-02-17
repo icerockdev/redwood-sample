@@ -37,21 +37,25 @@ class ComposeTabs : Tabs<@Composable () -> Unit> {
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        TabRow(selectedTabIndex = _selectedIndex,
-        backgroundColor = Colors.gray60,
-        contentColor = Colors.primary) {
-           _texts.forEachIndexed{ index, tab ->
-               Tab(
-                   modifier = Modifier.height(48.dp),
-                   selected = index == _selectedIndex,
-                   onClick = _onClick.getOrNull(index)?:{},
-                   selectedContentColor = Colors.primary,
-                   unselectedContentColor = Colors.black
-               ){
-                   Text(text = tab.toString(LocalContext.current),
-                   style = TextStyles.secondarySmall)
-               }
-           }
+        TabRow(
+            selectedTabIndex = _selectedIndex,
+            backgroundColor = Colors.gray60,
+            contentColor = Colors.primary
+        ) {
+            _texts.forEachIndexed { index, tab ->
+                Tab(
+                    modifier = Modifier.height(48.dp),
+                    selected = index == _selectedIndex,
+                    onClick = _onClick.getOrNull(index) ?: {},
+                    selectedContentColor = Colors.primary,
+                    unselectedContentColor = Colors.black
+                ) {
+                    Text(
+                        text = tab.toString(LocalContext.current),
+                        style = TextStyles.secondarySmall
+                    )
+                }
+            }
         }
     }
 }

@@ -115,7 +115,7 @@ data class TabNavigation(
                 Text(text = title.toString(context))
             },
             selected = currentRoute == key,
-            selectedContentColor = Color.Black,
+            selectedContentColor = Color(0xFF684CDC),
             unselectedContentColor = Color.Gray,
             onClick = {
                 navController.navigate(key) {

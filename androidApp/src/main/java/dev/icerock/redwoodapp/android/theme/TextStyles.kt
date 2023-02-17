@@ -68,4 +68,11 @@ object TextStyles {
         fontWeight = FontWeight(500),
         lineHeight = 20.sp
     )
+
+    val primaryRed: TextStyle = TextStyle(
+        color = Colors.error,
+        fontSize = 20.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 24.sp
+    )
 }

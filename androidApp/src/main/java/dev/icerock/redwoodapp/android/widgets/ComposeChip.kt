@@ -3,6 +3,8 @@ package dev.icerock.redwoodapp.android.widgets
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -37,6 +39,9 @@ class ComposeChip : Chip<@Composable () -> Unit> {
     private var _icon by mutableStateOf<ImageResource?>(null)
     private var _backgroundColor by mutableStateOf<Color?>(null)
     private var _textColor by mutableStateOf<Color?>(null)
+    private var _onClick by mutableStateOf<() -> Unit>({  })
+    private var _border by mutableStateOf<Int?>(null)
+
     override fun text(text: StringDesc) {
         _text = text
     }
@@ -53,17 +58,32 @@ class ComposeChip : Chip<@Composable () -> Unit> {
         _textColor = textColor
     }
 
+    override fun border(border: Int?) {
+        _border = border
+    }
+
+    override fun onClick(onClick: (() -> Unit)?) {
+        _onClick = onClick ?: {}
+    }
+
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         Row(modifier = Modifier
-            .clip(RoundedCornerShape(20))
+            .clip(RoundedCornerShape(30))
+            .clickable { _onClick }
+            .border(
+                width = _border?.dp ?: 0.dp,
+                color = Colors.gray90,
+                shape = RoundedCornerShape(30)
+            )
             .background(_backgroundColor?.let { androidx.compose.ui.graphics.Color(it.colorInt()) }
                 ?: androidx.compose.ui.graphics.Color.Transparent)
-            .padding(horizontal = 12.dp), verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 12.dp, vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            val textColor = _textColor?.let { androidx.compose.ui.graphics.Color(it.colorInt()) }
+                ?: Colors.black
             _icon?.let {
-                val textColor = _textColor?.let { androidx.compose.ui.graphics.Color(it.colorInt()) }
-                    ?: Colors.black
                 Image(
                     modifier = Modifier
                         .padding(end = 8.dp, top = 4.dp, bottom = 4.dp)
@@ -73,12 +93,12 @@ class ComposeChip : Chip<@Composable () -> Unit> {
                     contentDescription = "",
                     colorFilter = ColorFilter.tint(textColor)
                 )
-                Text(
-                    text = _text?.toString(LocalContext.current).orEmpty(),
-                    color = textColor,
-                    style = TextStyles.secondarySmall
-                )
             }
+            Text(
+                text = _text?.toString(LocalContext.current).orEmpty(),
+                color = textColor,
+                style = TextStyles.secondarySmall
+            )
         }
 
     }

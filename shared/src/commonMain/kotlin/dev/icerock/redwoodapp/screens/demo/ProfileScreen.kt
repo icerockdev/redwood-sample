@@ -1,25 +1,22 @@
 package dev.icerock.redwoodapp.screens.demo
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
-import dev.icerock.moko.graphics.Color
-import dev.icerock.moko.resources.desc.desc
+import app.cash.redwood.layout.compose.Row
 import dev.icerock.redwood.navigation.navigator.Navigator
+import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
+import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Divider
-import dev.icerock.redwood.schema.compose.ListItem
-import dev.icerock.redwood.schema.compose.Switch
+import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.screens.demo.navigation.Screens
+import dev.icerock.redwoodapp.USER_AVATAR
+import org.example.library.MR
 
 @Composable
 fun ProfileScreen(navigator: Navigator) {
@@ -27,57 +24,164 @@ fun ProfileScreen(navigator: Navigator) {
     Column(
         horizontalAlignment = CrossAxisAlignment.Start,
         verticalAlignment = MainAxisAlignment.Start,
-        height = Constraint.Fill
+        height = Constraint.Fill,
+        padding = Padding(start = 16, top = 24, end = 16)
     ) {
-        Text(
-            "Здравствуйте, \n" +
-                    "Григорий",
-            layoutModifier = LayoutModifier.padding(Padding(horizontal = 16,
-            vertical = 24)),
-            textType = TextType.Header
+        Card(
+            onClick = {},
+            child = {
+                Row(
+                    verticalAlignment = CrossAxisAlignment.Center,
+                    padding = Padding(16),
+                    width = Constraint.Fill
+                ) {
+                    Image(
+                        width = Size.Const(50),
+                        height = Size.Const(50),
+                        url = USER_AVATAR,
+                        placeholder = MR.images.tab_profile
+                    )
+                    Column(
+                        padding = Padding(start = 8)
+                    ) {
+                        Text(
+                            text = "Иван иванович",
+                            textType = TextType.PrimaryBold
+                        )
+                        Text(
+                            text = "+ 7 900 000 00 00",
+                            textType = TextType.Secondary
+                        )
+                    }
+                }
+            }
         )
-        ListItem(
-            title = "Электронная почта".desc(),
-            subtitle = "example@gmail.com".desc(),
+        Card(
+            layoutModifier = LayoutModifier.padding(Padding(top = 20)),
             onClick = null,
-            child = {},
-            icon = null
+            child = {
+                Column {
+                    Card(
+                        onClick = {},
+                        child = {
+                            Column(
+                                padding = Padding(
+                                    horizontal = 16,
+                                    vertical = 16
+                                ),
+                                width = Constraint.Fill
+                            ) {
+                                Text(
+                                    text = "Сертификаты",
+                                    textType = TextType.Primary
+                                )
+                            }
+                        }
+                    )
+                    Divider(
+                        isVertical = true,
+                        layoutModifier = LayoutModifier.padding(Padding(start = 16))
+                    )
+                    Card(
+                        onClick = {},
+                        child = {
+                            Column(
+                                padding = Padding(
+                                    horizontal = 16,
+                                    vertical = 16
+                                ),
+                                width = Constraint.Fill
+                            ) {
+                                Text(
+                                    text = "Абонементы",
+                                    textType = TextType.Primary
+                                )
+                            }
+                        }
+                    )
+                    Divider(
+                        isVertical = true,
+                        layoutModifier = LayoutModifier.padding(Padding(start = 16))
+                    )
+                    Card(
+                        onClick = {},
+                        child = {
+                            Column(
+                                padding = Padding(
+                                    horizontal = 16,
+                                    vertical = 16
+                                ),
+                                width = Constraint.Fill
+                            ) {
+                                Text(
+                                    text = "История посещений",
+                                    textType = TextType.Primary
+                                )
+                            }
+                        }
+                    )
+                    Divider(
+                        isVertical = true,
+                        layoutModifier = LayoutModifier.padding(Padding(start = 16))
+                    )
+                    Card(
+                        onClick = {},
+                        child = {
+                            Column(
+                                padding = Padding(
+                                    horizontal = 16,
+                                    vertical = 16
+                                ),
+                                width = Constraint.Fill
+                            ) {
+                                Text(
+                                    text = "Способы оплаты",
+                                    textType = TextType.Primary
+                                )
+                            }
+                        }
+                    )
+                    Divider(
+                        isVertical = true,
+                        layoutModifier = LayoutModifier.padding(Padding(start = 16))
+                    )
+                    Card(
+                        onClick = {},
+                        child = {
+                            Column(
+                                padding = Padding(
+                                    horizontal = 16,
+                                    vertical = 16
+                                ),
+                                width = Constraint.Fill
+                            ) {
+                                Text(
+                                    text = "Поддержка",
+                                    textType = TextType.Primary
+                                )
+                            }
+                        }
+                    )
+                }
+            }
         )
-        Divider()
-        var switchActive by remember { mutableStateOf(false) }
-
-        ListItem(
-            title = "Получать уведомления".desc(),
-            subtitle = "На электронную почту".desc(),
-            onClick = { switchActive = switchActive.not() },
-            icon = null
-        ) {
-            Switch(isActive = switchActive,
-                isEnabled = true,
-                onChangeState = { switchActive = it })
-        }
-        Divider()
-        ListItem(
-            title = "Получать уведомления".desc(),
-            subtitle = "В приложении".desc(),
-            onClick = null,
-            icon = null
-        ) {
-            Switch(isActive = false,
-                isEnabled = false,
-                onChangeState = { switchActive = it })
-        }
-        Divider()
-        ListItem(
-            title = "Выход".desc(),
-            subtitle = null,
-            onClick = {
-                navigator.navigate(Screens.PROFILE)
-            },
-            icon = null, //MR.images.exit,
-            tintColor = Color(0xFFC02828)
-        ) {
-        }
-        Divider()
+        Card(
+            layoutModifier = LayoutModifier.padding(Padding(top = 20)),
+            onClick = {},
+            child = {
+                Column(
+                    padding = Padding(
+                        horizontal = 16,
+                        vertical = 16
+                    ),
+                    width = Constraint.Fill
+                ) {
+                    Text(
+                        text = "Выйти из приложения",
+                        textType = TextType.PrimaryRed
+                    )
+                }
+            }
+        )
     }
 }

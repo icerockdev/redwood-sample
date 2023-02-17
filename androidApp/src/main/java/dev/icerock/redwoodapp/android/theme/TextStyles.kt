@@ -6,17 +6,59 @@ import androidx.compose.ui.unit.sp
 
 object TextStyles {
 
-    val header3 : TextStyle = TextStyle(
+    val h1: TextStyle = TextStyle(
         color = Colors.black,
-        fontSize = 17.sp,
-        fontWeight = FontWeight(400),
-        lineHeight = 22.sp
+        fontSize = 28.sp,
+        fontWeight = FontWeight(600),
+        lineHeight = 36.sp
     )
 
-    val body : TextStyle = TextStyle(
+    val h2: TextStyle = TextStyle(
         color = Colors.black,
+        fontSize = 20.sp,
+        fontWeight = FontWeight(600),
+        lineHeight = 28.sp
+    )
+
+    val primary: TextStyle = TextStyle(
+        color = Colors.black,
+        fontSize = 20.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 24.sp
+    )
+
+    val primaryBold: TextStyle = TextStyle(
+        color = Colors.black,
+        fontSize = 20.sp,
+        fontWeight = FontWeight(600),
+        lineHeight = 24.sp
+    )
+
+    val primarySmall: TextStyle = TextStyle(
+        color = Colors.black,
+        fontSize = 15.sp,
+        fontWeight = FontWeight(500),
+        lineHeight = 20.sp
+    )
+
+    val secondary: TextStyle = TextStyle(
+        color = Colors.gray90,
         fontSize = 15.sp,
         fontWeight = FontWeight(400),
         lineHeight = 20.sp
+    )
+
+    val secondarySmall: TextStyle = TextStyle(
+        color = Colors.black,
+        fontSize = 13.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 17.sp
+    )
+
+    val caption: TextStyle = TextStyle(
+        color = Colors.gray70,
+        fontSize = 12.sp,
+        fontWeight = FontWeight(400),
+        lineHeight = 16.sp
     )
 }

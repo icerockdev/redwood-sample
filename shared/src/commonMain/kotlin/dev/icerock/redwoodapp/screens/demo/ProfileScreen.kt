@@ -25,10 +25,6 @@ import dev.icerock.redwood.schema.compose.ListItem
 import dev.icerock.redwood.schema.compose.Stack
 import dev.icerock.redwood.schema.compose.Switch
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.Box
-import org.example.library.MR
-import dev.icerock.redwoodapp.USER_AVATAR
-import dev.icerock.redwoodapp.USR_NAME
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 
 @Composable
@@ -82,9 +78,9 @@ fun ProfileScreen(navigator: Navigator) {
             title = "Выход".desc(),
             subtitle = null,
             onClick = {
-                navigator.navigate(Screens.LOGIN)
+                navigator.navigate(Screens.PROFILE)
             },
-            icon = MR.images.exit,
+            icon = null, //MR.images.exit,
             tintColor = Color(0xFFC02828)
         ) {
         }

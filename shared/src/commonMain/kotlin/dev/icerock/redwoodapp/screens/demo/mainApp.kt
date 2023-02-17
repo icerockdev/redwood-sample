@@ -7,9 +7,6 @@ import dev.icerock.redwood.navigation.NavigationRoot
 import dev.icerock.redwood.navigation.navigation
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationFactoryScope
-import dev.icerock.redwood.schema.TextType
-import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 import org.example.library.MR
 
@@ -17,24 +14,24 @@ fun mainApp(
     navigationFactory: NavigationFactory
 ): NavigationRoot = navigation(
     navigationFactory = navigationFactory,
-    startDestination = Screens.ONBOARDING
+    startDestination = Screens.PHONE_NUMBER_LOGIN
 ) {
 
-    registerScreen(uri = Screens.ONBOARDING) { navigator, _ ->
-        OnboardingScreen {
-            navigator.navigate(Screens.LOGIN)
+    registerScreen(uri = Screens.PHONE_NUMBER_LOGIN) { navigator, _ ->
+        PhoneNumberLoginScreen {
+            navigator.navigate(Screens.SMS_CODE)
         }
     }
-    registerScreen(uri = Screens.LOGIN) { navigator, _ ->
-        LoginScreen(navigator)
+    registerScreen(uri = Screens.SMS_CODE) { navigator, _ ->
+        SmsCodeScreen(navigator)
     }
 
-    registerNavigation(uri = Screens.MAIN) { navigator, _ ->
+    /*registerNavigation(uri = Screens.MAIN) { navigator, _ ->
         mainScreenNavigation(navigator)
-    }
+    }*/
 }
 
-private fun NavigationFactoryScope.mainScreenNavigation(
+/*private fun NavigationFactoryScope.mainScreenNavigation(
     rootNavigator: Navigator
 ): NavigationHost = navigationTabs(startDestination = Screens.TOGGLE) {
     registerScreen(
@@ -84,4 +81,4 @@ private fun NavigationFactoryScope.secondTabNavigation(
     registerScreen(Screens.TEST_FINAL) { navController, _ ->
         TestCompleteScreen(navController)
     }
-}
+}*/

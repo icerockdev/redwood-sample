@@ -116,7 +116,7 @@ fun FirstInfoScreen(
                     Text(
                         text = "Ознакомлен(-а) с Регламентом о защите и обработке персональных данных",
                         textType = TextType.SecondarySmall,
-                        layoutModifier = LayoutModifier.padding(Padding(start = 16, end = 16))
+                        //layoutModifier = LayoutModifier.padding(Padding(start = 16, end = 16))
                     )
                 }
                 Button(

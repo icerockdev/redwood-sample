@@ -8,5 +8,6 @@ enum class TextType {
     PrimarySmall,
     Secondary,
     SecondarySmall,
-    Caption
+    Caption,
+    Link
 }

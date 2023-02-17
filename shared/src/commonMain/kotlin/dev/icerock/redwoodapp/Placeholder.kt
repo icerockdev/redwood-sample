@@ -50,3 +50,37 @@ const val BANNER =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/2560px-Cat_August_2010-4.jpg"
 const val BANNER_2 =
     "https://www.humanesociety.org/sites/default/files/styles/2000x850/public/2022-08/hl-yp-cats-579652.jpg?h=a0b0b8d2&itok=Ha4SyumM"
+
+data class Promotion(
+    val image: String,
+    val labile: String,
+    val description: String,
+    val address: String
+)
+
+val PROMOTION_LIST = listOf<Promotion>(
+    Promotion(
+        image = BANNER,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
+    ),
+    Promotion(
+        image = BANNER_2,
+        labile = "Название",
+        description = "Описание",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
+    ),
+    Promotion(
+        image = BANNER,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
+    ),
+    Promotion(
+        image = BANNER_2,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
+    )
+)

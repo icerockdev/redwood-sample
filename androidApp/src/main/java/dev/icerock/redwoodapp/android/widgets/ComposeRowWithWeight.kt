@@ -1,15 +1,15 @@
 package dev.icerock.redwoodapp.android.widgets
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
+import app.cash.redwood.layout.Padding
 import app.cash.redwood.widget.compose.ComposeWidgetChildren
 import dev.icerock.redwood.schema.widget.RowWithWeight
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.unit.dp
-import app.cash.redwood.layout.Padding
 
 class ComposeRowWithWeight : RowWithWeight<@Composable () -> Unit> {
     override val childs = ComposeWidgetChildren()

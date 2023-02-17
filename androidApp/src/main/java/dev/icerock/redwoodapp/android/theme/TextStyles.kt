@@ -36,7 +36,7 @@ object TextStyles {
 
     val primarySmall: TextStyle = TextStyle(
         color = Colors.black,
-        fontSize = 15.sp,
+        fontSize = 16.sp,
         fontWeight = FontWeight(500),
         lineHeight = 20.sp
     )
@@ -60,5 +60,12 @@ object TextStyles {
         fontSize = 12.sp,
         fontWeight = FontWeight(400),
         lineHeight = 16.sp
+    )
+
+    val link: TextStyle = TextStyle(
+        color = Colors.primary,
+        fontSize = 14.sp,
+        fontWeight = FontWeight(500),
+        lineHeight = 20.sp
     )
 }

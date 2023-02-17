@@ -29,52 +29,60 @@ fun mainApp(
 
     registerScreen(uri = Screens.FIRST_INFO) { navigator, _ ->
         FirstInfoScreen {
-
+            navigator.navigate(Screens.MAIN_NAVIGATION)
         }
     }
 
-    /*registerNavigation(uri = Screens.MAIN) { navigator, _ ->
+    registerNavigation(uri = Screens.MAIN_NAVIGATION) { navigator, _ ->
         mainScreenNavigation(navigator)
-    }*/
+    }
 }
 
-/*private fun NavigationFactoryScope.mainScreenNavigation(
+private fun NavigationFactoryScope.mainScreenNavigation(
     rootNavigator: Navigator
-): NavigationHost = navigationTabs(startDestination = Screens.TOGGLE) {
+): NavigationHost = navigationTabs(startDestination = Screens.MAIN) {
     registerScreen(
-        Screens.TOGGLE,
-        title = MR.strings.tab_toggle.desc(),
-        icon = MR.images.home,
+        Screens.MAIN,
+        title = MR.strings.tab_main.desc(),
+        icon = MR.images.tab_main_color,
     ) { _ ->
-        ToogleScreen()
+        MainScreen()
     }
     registerScreen(
-        uri = Screens.HR,
-        title = MR.strings.tab_hr.desc(),
-        icon = MR.images.mail,
+        uri = Screens.CATALOG,
+        title = MR.strings.tab_catalog.desc(),
+        icon = MR.images.tab_catalog,
         screen =  { _ ->
-            HRScreen()
+            CatalogScreen()
         }
     )
-    registerNavigation(
+    registerScreen(
+        uri = Screens.SERVICE,
+        title = MR.strings.tab_service.desc(),
+        icon = MR.images.tab_service,
+        screen =  { _ ->
+            ServiceScreen()
+        }
+    )
+    /*registerNavigation(
         uri = Screens.TEST_LIST,
         title = MR.strings.tab_list.desc(),
         icon = MR.images.test,
         childNavigation = { _ ->
             secondTabNavigation()
         }
-    )
+    )*/
     registerScreen(
         uri = Screens.PROFILE,
-        title = MR.strings.tab_settings.desc(),
-        icon = MR.images.profile,
+        title = MR.strings.tab_profile.desc(),
+        icon = MR.images.tab_profile,
         screen = {
             ProfileScreen(rootNavigator)
         }
     )
 }
 
-private fun NavigationFactoryScope.secondTabNavigation(
+/*private fun NavigationFactoryScope.secondTabNavigation(
 ): NavigationHost = navigationFlat(startDestination = Screens.TEST_LIST) {
     registerScreen(Screens.TEST_LIST) { navigator, _ ->
         TestListScreen(navigator)

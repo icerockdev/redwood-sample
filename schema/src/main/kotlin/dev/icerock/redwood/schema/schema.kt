@@ -31,7 +31,9 @@ import dev.icerock.moko.resources.desc.StringDesc
         ListItem::class,
         Divider::class,
         Onboarding::class,
-        FooterColumn::class
+        FooterColumn::class,
+        Chip::class,
+        Tabs::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -252,3 +254,26 @@ data class FooterColumn(
     @Children(2)
     val footer: () -> Unit,
 )
+
+@Widget(19)
+data class Chip(
+    @Property(1)
+    val text: StringDesc,
+    @Property(2)
+    val icon: ImageResource?,
+    @Property(3)
+    val backgroundColor: Color?,
+    @Property(4)
+    val textColor: Color?,
+)
+
+@Widget(20)
+data class Tabs(
+    @Property(1)
+    val texts: List<StringDesc>,
+    @Property(2)
+    val onClick: List<()->Unit>,
+    @Property(3)
+    val selectedTab: Int
+)
+

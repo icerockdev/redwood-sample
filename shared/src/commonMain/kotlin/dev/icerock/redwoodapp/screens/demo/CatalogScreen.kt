@@ -19,15 +19,19 @@ import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Chip
 import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
+import dev.icerock.redwood.schema.compose.ImageCardWithText
+import dev.icerock.redwood.schema.compose.RowWithWeight
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
+import dev.icerock.redwoodapp.BANNER
+import dev.icerock.redwoodapp.BANNER_2
 import dev.icerock.redwoodapp.CATEGORIES
 import org.example.library.MR
 
 @Composable
 fun CatalogScreen() {
     Column(
-        height = Constraint.Fill,
+        height = Constraint.Wrap,
         width = Constraint.Wrap
     ) {
         Column(
@@ -50,6 +54,9 @@ fun CatalogScreen() {
             TextInput(
                 state = search,
                 hint = "Здесь будет поиск".desc(),
+                onChange = {
+                    search = it
+                },
                 layoutModifier = LayoutModifier.padding(Padding(top = 16))
             )
 
@@ -60,16 +67,18 @@ fun CatalogScreen() {
         Column(
             overflow = Overflow.Scroll,
             padding = Padding(start = 16, top = 20),
-            width = Constraint.Wrap
+            width = Constraint.Fill
         ) {
             Row(
-                width = Constraint.Wrap
+                width = Constraint.Fill
             ) {
-                /*var isCategoryClicked by remember { mutableStateOf(false) }
+                var isCategoryClicked by remember { mutableStateOf(false) }
                 Chip(
                     text = CATEGORIES.get(0).desc(),
                     backgroundColor = if (isCategoryClicked) Color.parseColor("#FF684CDC") else null,
-                    textColor = if (isCategoryClicked) Color.parseColor("#FFFFFFFF") else Color.parseColor("#FF605D62"),
+                    textColor = if (isCategoryClicked) Color.parseColor("#FFFFFFFF") else Color.parseColor(
+                        "#FF605D62"
+                    ),
                     border = if (isCategoryClicked) 0 else 1,
                     icon = null,
                     onClick = {
@@ -81,7 +90,9 @@ fun CatalogScreen() {
                 Chip(
                     text = CATEGORIES.get(1).desc(),
                     backgroundColor = if (isCategoryClicked2) Color.parseColor("#FF684CDC") else null,
-                    textColor = if (isCategoryClicked2) Color.parseColor("#FFFFFFFF") else Color.parseColor("#FF605D62"),
+                    textColor = if (isCategoryClicked2) Color.parseColor("#FFFFFFFF") else Color.parseColor(
+                        "#FF605D62"
+                    ),
                     border = if (isCategoryClicked2) 0 else 1,
                     icon = null,
                     onClick = {
@@ -93,7 +104,9 @@ fun CatalogScreen() {
                 Chip(
                     text = CATEGORIES.get(2).desc(),
                     backgroundColor = if (isCategoryClicked3) Color.parseColor("#FF684CDC") else null,
-                    textColor = if (isCategoryClicked3) Color.parseColor("#FFFFFFFF") else Color.parseColor("#FF605D62"),
+                    textColor = if (isCategoryClicked3) Color.parseColor("#FFFFFFFF") else Color.parseColor(
+                        "#FF605D62"
+                    ),
                     border = if (isCategoryClicked3) 0 else 1,
                     icon = null,
                     onClick = {
@@ -105,15 +118,17 @@ fun CatalogScreen() {
                 Chip(
                     text = CATEGORIES.get(3).desc(),
                     backgroundColor = if (isCategoryClicked4) Color.parseColor("#FF684CDC") else null,
-                    textColor = if (isCategoryClicked4) Color.parseColor("#FFFFFFFF") else Color.parseColor("#FF605D62"),
+                    textColor = if (isCategoryClicked4) Color.parseColor("#FFFFFFFF") else Color.parseColor(
+                        "#FF605D62"
+                    ),
                     border = if (isCategoryClicked4) 0 else 1,
                     icon = null,
                     onClick = {
                         isCategoryClicked4 = !isCategoryClicked4
                     },
                     layoutModifier = LayoutModifier.padding(Padding(end = 8))
-                )*/
-                CATEGORIES.forEach {
+                )
+                /*CATEGORIES.forEach {
                     var isCategoryClicked by remember { mutableStateOf(false) }
                     Chip(
                         text = it.desc(),
@@ -126,8 +141,40 @@ fun CatalogScreen() {
                         },
                         layoutModifier = LayoutModifier.padding(Padding(end = 8))
                     )
-                }
+                }*/
             }
+            RowWithWeight {
+                ImageCardWithText(
+                    height = Size.Const(100),
+                    text = "Тайский массаж".desc(),
+                    textBackgroundColor = Color.parseColor("#CC313033"),
+                    textColor = Color.parseColor("#FFFFFFFF"),
+                    url = BANNER,
+                    placeholder = MR.images.ava_preview,
+                    onClick = {},
+                    layoutModifier = LayoutModifier.padding(Padding(end = 4))
+                )
+                ImageCardWithText(
+                    height = Size.Const(100),
+                    text = "СПА программы".desc(),
+                    textBackgroundColor = Color.parseColor("#CC313033"),
+                    textColor = Color.parseColor("#FFFFFFFF"),
+                    url = BANNER_2,
+                    placeholder = MR.images.ava_preview,
+                    onClick = {},
+                    layoutModifier = LayoutModifier.padding(Padding(start = 4))
+                )
+            }
+            ImageCardWithText(
+                height = Size.Const(100),
+                text = "Коррекция фигуры".desc(),
+                textBackgroundColor = Color.parseColor("#CC313033"),
+                textColor = Color.parseColor("#FFFFFFFF"),
+                url = BANNER_2,
+                placeholder = MR.images.ava_preview,
+                onClick = {},
+                layoutModifier = LayoutModifier.padding(Padding(top = 12))
+            )
         }
     }
 }

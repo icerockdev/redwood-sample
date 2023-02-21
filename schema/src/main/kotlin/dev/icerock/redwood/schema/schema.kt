@@ -33,7 +33,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         Onboarding::class,
         FooterColumn::class,
         Chip::class,
-        Tabs::class
+        Tabs::class,
+        ImageCardWithText::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -280,5 +281,27 @@ data class Tabs(
     val onClick: List<()->Unit>,
     @Property(3)
     val selectedTab: Int
+)
+
+@Widget(21)
+data class ImageCardWithText(
+    @Default("null")
+    @Property(1)
+    val width: Size?,
+    @Default("null")
+    @Property(2)
+    val height: Size?,
+    @Property(3)
+    val text: StringDesc,
+    @Property(4)
+    val textBackgroundColor: Color?,
+    @Property(5)
+    val textColor: Color?,
+    @Property(6)
+    val url: String?,
+    @Property(7)
+    val placeholder: ImageResource?,
+    @Property(8)
+    val onClick: (()->Unit)?,
 )
 

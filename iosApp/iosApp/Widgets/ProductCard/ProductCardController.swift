@@ -84,7 +84,15 @@ class ProductCardController : UIViewController{
     
     private let container : ProductCardView = {
         let container = ProductCardView()
-        container.translatesAutoresizingMaskIntoConstraints = true
+        container.translatesAutoresizingMaskIntoConstraints = false
+        return container
+    }()
+    
+    let actionContainer : UIStackView = {
+        let container = UIStackView()
+        container.alignment = .fill
+        container.contentMode = .scaleAspectFill
+        container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
     
@@ -102,46 +110,63 @@ class ProductCardController : UIViewController{
         container.addSubview(titleView)
         container.addSubview(subtitleView)
         container.addSubview(fotterView)
+        container.addSubview(actionContainer)
         
     }
     
     var flag = true
-    override func viewDidLayoutSubviews() {
+    var flag2 = true
+  override func viewDidLayoutSubviews() {
         image.frame = CGRect(x: 19, y: 8, width: view.frame.width - 38, height:
                                 view.frame.width - 38)
         image.layer.zPosition = 1.0
         likeView.frame = CGRect(x: view.frame.width - 44, y: 12, width: 32, height: 32)
         let badgeSize = badge.sizeThatFits(CGSize(width: 200, height: 200))
         badge.frame = CGRect(x: 12, y: view.frame.width - 52, width: badgeSize.width, height: badgeSize.height)
-        let costViewSize = costView.sizeThatFits(view.frame.size)
-     
-        costView.widthAnchor.constraint(equalToConstant: CGFloat(costViewSize.width)).isActive = true
-        costView.heightAnchor.constraint(equalToConstant: CGFloat(costViewSize.height)).isActive = true
-        costView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        costView.topAnchor.constraint(equalTo: container.topAnchor, constant: image.frame.width + 16).isActive = true
-        let oldCostViewSize  = oldCostView.sizeThatFits(view.frame.size)
-        oldCostView.widthAnchor.constraint(equalToConstant: CGFloat(oldCostViewSize.width)).isActive = true
-        oldCostView.heightAnchor.constraint(equalToConstant: CGFloat(oldCostViewSize.height)).isActive = true
-        oldCostView.leftAnchor.constraint(equalTo: costView.rightAnchor, constant: 4).isActive = true
-        oldCostView.centerYAnchor.constraint(equalTo: costView.centerYAnchor).isActive = true
-        
-        let titleViewSize  = titleView.sizeThatFits(view.frame.size)
-        titleView.widthAnchor.constraint(equalToConstant: CGFloat(titleViewSize.width)).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: CGFloat(titleViewSize.height)).isActive = true
-        titleView.topAnchor.constraint(equalTo: costView.bottomAnchor, constant: 4).isActive = true
-        titleView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        let subtitleViewSize  = subtitleView.sizeThatFits(view.frame.size)
-        subtitleView.widthAnchor.constraint(equalToConstant: CGFloat(subtitleViewSize.width)).isActive = true
-        subtitleView.heightAnchor.constraint(equalToConstant: CGFloat(subtitleViewSize.height)).isActive = true
-        subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 4).isActive = true
-        subtitleView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        
-        let fotterViewSize  = fotterView.sizeThatFits(view.frame.size)
-        fotterView.widthAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.width)).isActive = true
-        fotterView.heightAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.height)).isActive = true
-        fotterView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        fotterView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 56).isActive = true
+        if(view.frame.width != 0 && flag2){
+            flag2 = false
+            costView.topAnchor.constraint(equalTo: container.topAnchor, constant: (view.frame.width - 19)).isActive = true
+        }
+        if(flag){
+            flag = false
+            let costViewSize = costView.sizeThatFits(view.frame.size)
+            costView.widthAnchor.constraint(equalToConstant: CGFloat(costViewSize.width)).isActive = true
+            costView.heightAnchor.constraint(equalToConstant: CGFloat(costViewSize.height)).isActive = true
+            costView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
+            
+            let oldCostViewSize  = oldCostView.sizeThatFits(view.frame.size)
+            oldCostView.widthAnchor.constraint(equalToConstant: CGFloat(oldCostViewSize.width)).isActive = true
+            oldCostView.heightAnchor.constraint(equalToConstant: CGFloat(oldCostViewSize.height)).isActive = true
+            oldCostView.leftAnchor.constraint(equalTo: costView.rightAnchor, constant: 4).isActive = true
+            oldCostView.centerYAnchor.constraint(equalTo: costView.centerYAnchor).isActive = true
+            
+            let titleViewSize  = titleView.sizeThatFits(view.frame.size)
+            titleView.widthAnchor.constraint(equalToConstant: CGFloat(titleViewSize.width)).isActive = true
+            titleView.heightAnchor.constraint(equalToConstant: CGFloat(titleViewSize.height)).isActive = true
+            titleView.topAnchor.constraint(equalTo: costView.bottomAnchor, constant: 4).isActive = true
+            titleView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
+            let subtitleViewSize  = subtitleView.sizeThatFits(view.frame.size)
+            subtitleView.widthAnchor.constraint(equalToConstant: CGFloat(subtitleViewSize.width)).isActive = true
+            subtitleView.heightAnchor.constraint(equalToConstant: CGFloat(subtitleViewSize.height)).isActive = true
+            subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 4).isActive = true
+            subtitleView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
+            
+            let actionController  = actionContainer.sizeThatFits(view.frame.size)
+            actionContainer.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+            actionContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+            actionContainer.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 4).isActive = true
+            actionContainer.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
+            
+            let fotterViewSize  = fotterView.sizeThatFits(view.frame.size)
+            fotterView.widthAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.width)).isActive = true
+            fotterView.heightAnchor.constraint(equalToConstant: CGFloat(fotterViewSize.height)).isActive = true
+            fotterView.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
+            fotterView.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 56).isActive = true
+        }
+       actionView?.sizeThatFits(CGSize(width: view.frame.size.width-24, height: view.frame.size.height))
         super.viewDidLayoutSubviews()
+        
+       
     }
     
     func setIsLeked(value:Bool){
@@ -197,20 +222,34 @@ class ProductCardController : UIViewController{
         }
     }
     
-    func addAction(view:UIView){
-        container.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 12).isActive = true
-        view.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -12).isActive = true
-        view.topAnchor.constraint(equalTo: subtitleView.bottomAnchor, constant: 4).isActive = true
+    var actionView: UIView? = nil
+    func addAction(subView:UIView,index: KotlinInt){
+        actionContainer.insertSubview(subView, at: index.intValue)
+        actionView = subView
     }
     
     class ProductCardView: UIView{
+        
+        var contentSize : CGSize = CGSize(width: 48, height: 48)
+        
+        override var intrinsicContentSize: CGSize {
+           return contentSize
+        }
+        
+        var actionView : UIView? = nil {
+            didSet {
+                setNeedsLayout()
+            }
+        }
+        
         override func sizeThatFits(_ size: CGSize) -> CGSize {
             var chilsdsHeightMax = subviews.max { a, b in
                 a.frame.maxY < b.frame.maxY
-            }?.frame.maxY
-            return CGSize(width: size.width, height:  (chilsdsHeightMax ?? 344) + 12)
+            }?.frame.maxY ?? 10
+          
+            actionView?.sizeThatFits(CGSize(width: size.width - 32, height: size.height))
+            contentSize = CGSize(width: size.width, height: chilsdsHeightMax)
+            return contentSize
         }
     }
     

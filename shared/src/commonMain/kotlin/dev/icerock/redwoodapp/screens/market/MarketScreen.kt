@@ -1,20 +1,19 @@
 package dev.icerock.redwoodapp.screens.market
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
+import app.cash.redwood.layout.compose.Row
 import app.cash.redwood.protocol.Event
 import app.cash.redwood.treehouse.DiffSinkService
 import app.cash.redwood.treehouse.FlowWithInitialValue
 import app.cash.redwood.treehouse.HostConfiguration
 import app.cash.redwood.treehouse.ZiplineTreehouseUi
 import app.cash.redwood.treehouse.lazylayout.api.LazyListIntervalContent
-import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.resources.desc.image.ImageDescUrl
 import dev.icerock.redwood.navigation.navbar.NavBarController
@@ -38,115 +37,73 @@ import dev.icerock.redwoodapp.ToolbarAction
 import dev.icerock.redwoodapp.ToolbarArgs
 import dev.icerock.redwoodapp.ToolbarButton
 import dev.icerock.redwoodapp.USER_AVATAR
+import dev.icerock.redwoodapp.ext.weight
 import org.example.library.MR
 
 @Composable
-fun MarketScreen(
-    navigator: Navigator
-) {
+fun MarketScreen() {
     val viewModel: MarketViewModel = getViewModel { MarketViewModel() }
-    val navBarController: NavBarController = rememberNavBarController()
+    // val navBarController: NavBarController = rememberNavBarController()
 
-    val badgeCount: StringDesc? by viewModel.badge.collectAsState()
+    //  val badgeCount: StringDesc? by viewModel.badge.collectAsState()
 
-    LaunchedEffect(navBarController, badgeCount) {
-        navBarController.navBarData = ToolbarArgs.Search(
-            search = viewModel.searchField,
-            placeholder = "Placeholder".desc(),
-            action = ToolbarAction(
-                icon = MR.images.icon,
-                badge = badgeCount,
-                onClick = viewModel::onNootificationClick
-            ),
-            leftButton = ToolbarButton(
-                title = "left button".desc(),
-                icon = MR.images.icon,
-                onClick = {}
-            ),
-            rightButton = ToolbarButton(
-                title = "right button".desc(),
-                icon = MR.images.icon,
-                onClick = {}
-            )
-        )
-    }
+    /* LaunchedEffect(navBarController, badgeCount) {
+          navBarController.navBarData = ToolbarArgs.Search(
+              search = viewModel.searchField,
+              placeholder = "Placeholder".desc(),
+              action = ToolbarAction(
+                  icon = MR.images.icon,
+                  badge = badgeCount,
+                  onClick = viewModel::onNootificationClick
+              ),
+              leftButton = ToolbarButton(
+                  title = "left button".desc(),
+                  icon = MR.images.icon, onClick = {}
+              ),
+              rightButton = ToolbarButton(
+                  title = "right button".desc(),
+                  icon = MR.images.icon,
+                  onClick = {}
+              )
+          )
+      }*/
 
     Column(overflow = Overflow.Scroll) {
-        val isBannersVisible by viewModel.isBannerVisible.collectAsState()
-        if (isBannersVisible)
-            Banners(
-                layoutModifier = LayoutModifier.padding(Padding(top = 16)),
-                bannersList = listOf(
-                    BannerData(
-                        text = " ".desc(),
-                        placeholder = null,
-                        image = ImageDescUrl(BANNER)
-                    ) {
-                        navigator.navigate("login")
-                    },
-                    BannerData(
-                        text = " ".desc(),
-                        placeholder = null,
-                        image = ImageDescUrl(BANNER_2)
-                    ) {
-                        navigator.navigate("login")
-                    },
-                    BannerData(
-                        text = " ".desc(),
-                        placeholder = null,
-                        image = ImageDescUrl(USER_AVATAR)
-                    ) {
-                        navigator.navigate("login")
-                    }
-                )
-            )
 
-        Text(
-            text = "Products",
-            textType = TextType.Header,
-            layoutModifier = LayoutModifier.padding(Padding(horizontal = 16)),
-        )
 
         val productlList by viewModel.productList.collectAsState(listOf())
-        productlList.firstOrNull()?.render(viewModel)
-        Card(child = {
-            productlList.firstOrNull()?.render(viewModel)
-        })
-        RowWithWeight {
-            productlList.firstOrNull()?.render(viewModel)
-
-        }
         productlList.forEachIndexed { index, product ->
             if (index % 2 != 0) return@forEachIndexed
-            RowWithWeight {
-                product.render(viewModel)
-                val secondProduct = productlList.getOrNull(index + 1)
-                if (secondProduct == null) {
-                    // todo fix
-                    Text("")
-                } else {
-                    secondProduct.render(viewModel)
+            Row {
+                RowWithWeight {
+                    product.render(viewModel)
+                    val secondProduct = productlList.getOrNull(index + 1)
+                    if (secondProduct == null) {
+                        // todo fix
+                        Text("")
+                    } else {
+                        secondProduct.render(viewModel)
+                    }
                 }
             }
         }
     }
-
-
-    // LazyColumn(
-    //     intervals = listOf<LazyListIntervalContent>(
-    //         LazyListIntervalContent(
-    //             count = 10,
-    //             itemProvider = LazyColumnContent()
-    //         )
-    //     )
-    // )
-
-
 }
+
+
+// LazyColumn(
+//     intervals = listOf<LazyListIntervalContent>(
+//         LazyListIntervalContent(
+//             count = 10,
+//             itemProvider = LazyColumnContent()
+//         )
+//     )
+// )
 
 @Composable
 fun Product.render(viewModel: MarketViewModel) {
     ProductCard(
+        layoutModifier = LayoutModifier.weight(1f),
         title = title.desc(),
         image = imageUrl,
         isLiked = isFavorite,

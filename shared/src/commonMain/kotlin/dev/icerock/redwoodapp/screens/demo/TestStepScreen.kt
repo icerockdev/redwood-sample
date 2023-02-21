@@ -118,19 +118,30 @@ fun TestStepScreen(
                                     width = Constraint.Fill,
                                     verticalAlignment = CrossAxisAlignment.Center
                                 ) {
-                                    Image(
+
+                                    ListItem(answer.desc(),
                                         layoutModifier = LayoutModifier.padding(
                                             Padding(
-                                                end = 32,
-                                                start = 32
+                                                top = 16,
+                                                bottom = 16
                                             )
                                         ),
-                                        width = Size.Const(24),
-                                        height = Size.Const(24),
-                                        url = null,
-                                        placeholder =
-                                        if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio
-                                    )
+                                    onClick = null,
+                                    child = {
+                                        Image(
+                                            layoutModifier = LayoutModifier.padding(
+                                                Padding(
+                                                    end = 16,
+                                                    start = 16
+                                                )
+                                            ),
+                                            width = Size.Const(24),
+                                            height = Size.Const(24),
+                                            url = null,
+                                            placeholder =
+                                            if (qurrentQuestionAnswer == answerIndex) MR.images.radioClicked else MR.images.radio
+                                        )
+                                    })
                                 }
                             }
                         )

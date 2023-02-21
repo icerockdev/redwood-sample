@@ -11,6 +11,7 @@ import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
+import dev.icerock.redwoodapp.screens.market.MarketScreen
 import org.example.library.MR
 
 fun mainApp(
@@ -21,9 +22,7 @@ fun mainApp(
 ) {
 
     registerScreen(uri = Screens.ONBOARDING) { navigator, _ ->
-        OnboardingScreen {
-            navigator.navigate(Screens.LOGIN)
-        }
+        MarketScreen()
     }
     registerScreen(uri = Screens.LOGIN) { navigator, _ ->
         LoginScreen(navigator)

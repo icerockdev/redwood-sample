@@ -53,11 +53,11 @@ class IosWidgetProductCard:  ProductCard{
     }
     
     var action: Redwood_widgetWidgetChildren {
-        ExposedKt.createViewChildrenListener(parent: root.view, insert: myInsert)
+        ExposedKt.createViewChildrenListener(parent: root.actionContainer, insert: myInsert)
     }
 
     func myInsert(view: UIView,index: KotlinInt){
-        root.addAction(view: view)
+        root.addAction(subView: view,index: index)
     }
    
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()

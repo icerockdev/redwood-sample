@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
 
-        val app: NavigationHost = amwayApp(AndroidNavigationFactory())
+        val app: NavigationHost = mainApp(AndroidNavigationFactory())
 
         setContent {
             MaterialTheme {

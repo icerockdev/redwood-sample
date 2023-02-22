@@ -5,6 +5,7 @@ import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.Constraint
 import app.cash.redwood.layout.api.CrossAxisAlignment
 import app.cash.redwood.layout.api.MainAxisAlignment
+import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
@@ -20,15 +21,13 @@ import org.example.library.MR
 
 @Composable
 fun ProfileScreen(navigator: Navigator) {
-
     Column(
-        horizontalAlignment = CrossAxisAlignment.Start,
-        verticalAlignment = MainAxisAlignment.Start,
         height = Constraint.Fill,
-        padding = Padding(start = 16, top = 24, end = 16)
+        overflow = Overflow.Scroll,
+        padding = Padding(start = 16, top = 24, end = 16, bottom = 24)
     ) {
         Card(
-            onClick = {},
+            onClick = null,
             child = {
                 Row(
                     verticalAlignment = CrossAxisAlignment.Center,
@@ -39,7 +38,8 @@ fun ProfileScreen(navigator: Navigator) {
                         width = Size.Const(50),
                         height = Size.Const(50),
                         url = USER_AVATAR,
-                        placeholder = MR.images.tab_profile
+                        placeholder = MR.images.tab_profile,
+                        isCircleClip = true
                     )
                     Column(
                         padding = Padding(start = 8)

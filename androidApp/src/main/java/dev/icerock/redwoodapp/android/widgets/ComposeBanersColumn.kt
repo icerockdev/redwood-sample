@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import app.cash.redwood.LayoutModifier
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -74,8 +75,8 @@ class ComposeBannersColumn: BannersColumn<() -> Unit> {
                             }
                             CoilImage(
                                 modifier = Modifier
-                                    .width(Size.Const(110))
-                                    .height(Size.Const(110))
+                                    .width(Size.Const(116))
+                                    .height(Size.Const(116))
                                     .clip(RoundedCornerShape(8.dp))
                                     .background(color = Colors.white)
                                     .clickable {
@@ -90,18 +91,23 @@ class ComposeBannersColumn: BannersColumn<() -> Unit> {
                             ) {
                                 Text(
                                     text = data.textTitle,
-                                    style = TextStyles.primary
+                                    style = TextStyles.primary,
+                                    fontSize = 15.sp,
+                                    lineHeight = 16.sp,
+                                    maxLines = 2
                                 )
                                 Text(
                                     modifier = Modifier.padding(top = 4.dp),
                                     color = Colors.gray90,
                                     text = data.textDescription,
-                                    style = TextStyles.secondarySmall
+                                    style = TextStyles.secondarySmall,
+                                    fontSize = 13.sp
                                 )
                                 Text(
                                     modifier = Modifier.padding(top = 4.dp),
                                     text = data.data,
-                                    style = TextStyles.caption
+                                    style = TextStyles.caption,
+                                    fontSize = 12.sp
                                 )
                             }
                         }

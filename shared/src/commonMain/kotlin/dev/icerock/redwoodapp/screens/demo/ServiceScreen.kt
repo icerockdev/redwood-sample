@@ -54,7 +54,7 @@ fun ServiceScreen() {
             list.forEach { item ->
                 Image(
                     width = Size.Fill,
-                    height = Size.Const(166),
+                    aspectRatio = 2.14f,
                     url = "",
                     placeholder = item,
                     layoutModifier = LayoutModifier.padding(Padding(top = 16)),

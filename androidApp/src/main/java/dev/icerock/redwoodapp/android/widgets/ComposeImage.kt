@@ -25,6 +25,7 @@ class ComposeImage : Image<@Composable () -> Unit> {
     private var _height: Size? by mutableStateOf(null)
     private var _placeholder: Int? by mutableStateOf(null)
     private var _aspectRatio: Float? by mutableStateOf(null)
+    private var _isCircleClip: Boolean by mutableStateOf(false)
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
@@ -33,7 +34,14 @@ class ComposeImage : Image<@Composable () -> Unit> {
             modifier = Modifier
                 .width(_width)
                 .height(_height)
-                .aspectRatio(_aspectRatio),
+                .aspectRatio(_aspectRatio)
+                .let {
+                    if (_isCircleClip) {
+                        it.clip(CircleShape)
+                    } else {
+                        it
+                    }
+                },
             imageModel = _urlState,
             placeHolder = _placeholder?.let { painterResource(it) },
             error = _placeholder?.let { painterResource(it) }
@@ -58,5 +66,9 @@ class ComposeImage : Image<@Composable () -> Unit> {
 
     override fun aspectRatio(aspectRatio: Float?) {
         _aspectRatio = aspectRatio
+    }
+
+    override fun isCircleClip(isCircleClip: Boolean) {
+        _isCircleClip = isCircleClip
     }
 }

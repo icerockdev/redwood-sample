@@ -7,7 +7,7 @@
         android:allowBackup="false"
         android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Med365"
+        android:label="Вай Тай"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,9 @@
 package dev.icerock.redwoodapp.screens.demo
 
+import app.cash.redwood.LayoutModifier
+import app.cash.redwood.layout.api.Overflow
+import app.cash.redwood.layout.api.Padding
+import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.redwood.navigation.NavigationFactory
 import dev.icerock.redwood.navigation.NavigationHost
@@ -7,6 +11,8 @@ import dev.icerock.redwood.navigation.NavigationRoot
 import dev.icerock.redwood.navigation.navigation
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationFactoryScope
+import dev.icerock.redwood.schema.compose.Chip
+import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
 import org.example.library.MR
 
@@ -18,9 +24,9 @@ fun mainApp(
 ) {
 
     registerScreen(uri = Screens.PHONE_NUMBER_LOGIN) { navigator, _ ->
-        PhoneNumberLoginScreen {
-            navigator.navigate(Screens.SMS_CODE)
-        }
+          PhoneNumberLoginScreen {
+              navigator.navigate(Screens.SMS_CODE)
+          }
     }
 
     registerScreen(uri = Screens.SMS_CODE) { navigator, _ ->
@@ -52,7 +58,7 @@ private fun NavigationFactoryScope.mainScreenNavigation(
         uri = Screens.CATALOG,
         title = MR.strings.tab_catalog.desc(),
         icon = MR.images.tab_catalog,
-        screen =  { _ ->
+        screen = { _ ->
             CatalogScreen()
         }
     )
@@ -60,7 +66,7 @@ private fun NavigationFactoryScope.mainScreenNavigation(
         uri = Screens.SERVICE,
         title = MR.strings.tab_service.desc(),
         icon = MR.images.tab_service,
-        screen =  { _ ->
+        screen = { _ ->
             ServiceScreen()
         }
     )

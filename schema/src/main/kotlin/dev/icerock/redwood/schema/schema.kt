@@ -86,6 +86,9 @@ data class Image(
     @Property(5)
     @Default("null")
     val aspectRatio: Float?,
+    @Property(6)
+    @Default("false")
+    val isCircleClip: Boolean,
 )
 
 @Widget(4)

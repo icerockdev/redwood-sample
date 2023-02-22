@@ -67,8 +67,8 @@ class ComposeChip : Chip<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         Row(modifier = Modifier
-            .height(36.dp)
-            .clip(RoundedCornerShape(50))
+            .height(32.dp)
+            .clip(RoundedCornerShape(25))
             .clickable {
                 _onClick()
             }
@@ -77,7 +77,7 @@ class ComposeChip : Chip<@Composable () -> Unit> {
                     it.border(
                         width = _border?.dp ?: 0.dp,
                         color = Colors.gray90,
-                        shape = RoundedCornerShape(50)
+                        shape = RoundedCornerShape(25)
                     )
                 } else {
                     it

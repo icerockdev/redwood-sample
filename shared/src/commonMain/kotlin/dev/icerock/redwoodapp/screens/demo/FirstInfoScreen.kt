@@ -18,10 +18,16 @@ import dev.icerock.redwood.schema.InputType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
+import dev.icerock.redwood.schema.compose.Chip
+import dev.icerock.redwood.schema.compose.FooterColumn
 import dev.icerock.redwood.schema.compose.ImageButton
+import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Stack
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
+import dev.icerock.redwoodapp.Box
+import dev.icerock.redwoodapp.ext.weight
 import org.example.library.MR
 
 @Composable
@@ -31,8 +37,8 @@ fun FirstInfoScreen(
     var fio: String by remember { mutableStateOf("") }
     var email: String by remember { mutableStateOf("") }
     var isPolicyClicked by remember { mutableStateOf(false) }
-    Stack(
-        child1 = {
+    FooterColumn(
+        child = {
             Column(
                 overflow = Overflow.Scroll,
                 padding = Padding(start = 16, top = 24, end = 16)
@@ -65,25 +71,32 @@ fun FirstInfoScreen(
                     textType = TextType.Primary,
                     layoutModifier = LayoutModifier.padding(Padding(top = 24))
                 )
+                var gender: Int? by remember { mutableStateOf(null) }
                 Row(
-                    padding = Padding(top = 24)
+                    padding = Padding(top = 16)
                 ) {
-                    Button(
+                    Chip(
                         text = "Мужской".desc(),
-                        buttonType = ButtonType.Secondary,
-                        onClick = {}
+                        onClick = { gender = 0 },
+                        icon = null,
+                        border = if(gender == 0) null else 1,
+                        backgroundColor = (if (gender == 0) MR.colors.primary else MR.colors.unselected).color,
+                        textColor = (if (gender == 0) MR.colors.white else MR.colors.black).color,
                     )
-                    Button(
+                    Chip(
                         text = "Женский".desc(),
-                        buttonType = ButtonType.Secondary,
-                        onClick = {},
+                        onClick = { gender = 1 },
+                        icon = null,
+                        border = if(gender == 1) null else 1,
+                        backgroundColor = (if (gender == 1) MR.colors.primary else MR.colors.unselected).color,
+                        textColor = (if (gender == 1) MR.colors.white else MR.colors.black).color,
                         layoutModifier = LayoutModifier.padding(Padding(start = 8))
                     )
                 }
                 Text(
                     text = "Электронная почта",
                     textType = TextType.Primary,
-                    layoutModifier = LayoutModifier.padding(Padding(top = 24))
+                    layoutModifier = LayoutModifier.padding(Padding(top = 16))
                 )
                 Text(
                     text = "Вместо звонков отправим письмо с выгодными предложениями",
@@ -99,38 +112,39 @@ fun FirstInfoScreen(
                     inputType = InputType.Text,
                     layoutModifier = LayoutModifier.padding(Padding(top = 16))
                 )
+                Space(MR.colors.white.color,
+                0, 16)
             }
         },
-        child2 = {
-            Column(
-                horizontalAlignment = CrossAxisAlignment.End,
-                padding = Padding(start = 16, top = 8, end = 16, bottom = 24)
-            ) {
-                Row(
-                    horizontalAlignment = MainAxisAlignment.Center
+        footer = {
+                Column(
+                    horizontalAlignment = CrossAxisAlignment.End,
+                    padding = Padding(start = 16, top = 8, end = 16, bottom = 24)
                 ) {
-                    ImageButton(
-                        text = "".desc(),
-                        icon = if (isPolicyClicked) MR.images.check_box_clicked else MR.images.check_box_unclicked,
+                    RowWithWeight {
+                        ImageButton(
+                            text = "".desc(),
+                            icon = if (isPolicyClicked) MR.images.check_box_clicked else MR.images.check_box_unclicked,
+                            onClick = {
+                                isPolicyClicked = !isPolicyClicked
+                            }
+                        )
+                        Text(
+                            text = "Ознакомлен(-а) с Регламентом о защите и обработке персональных данных",
+                            textType = TextType.SecondarySmall,
+                            layoutModifier = LayoutModifier.weight(1f)
+                        )
+                    }
+                    Button(
+                        text = "В приложение".desc(),
+                        buttonType = ButtonType.Primary,
+                        width = Size.Fill,
                         onClick = {
-                            isPolicyClicked = !isPolicyClicked
-                        }
-                    )
-                    Text(
-                        text = "Ознакомлен(-а) с Регламентом о защите и            \nобработке персональных данных",
-                        textType = TextType.SecondarySmall
+                            toMainScreen()
+                        },
+                        layoutModifier = LayoutModifier.padding(Padding(top = 16))
                     )
                 }
-                Button(
-                    text = "В приложение".desc(),
-                    buttonType = ButtonType.Primary,
-                    width = Size.Fill,
-                    onClick = {
-                        toMainScreen()
-                    },
-                    layoutModifier = LayoutModifier.padding(Padding(top = 16))
-                )
-            }
         }
     )
 }

@@ -70,11 +70,13 @@ fun CatalogScreen() {
         )
         Column(
             overflow = Overflow.Scroll,
-            padding = Padding(start = 16, top = 20),
+            padding = Padding(top = 20),
             width = Constraint.Fill
         ) {
             Row(
-                width = Constraint.Fill
+                width = Constraint.Fill,
+                overflow = Overflow.Scroll,
+                padding = Padding(horizontal = 16)
             ) {
                 var isCategoryClicked by remember { mutableStateOf(false) }
                 Chip(
@@ -88,7 +90,7 @@ fun CatalogScreen() {
                     onClick = {
                         isCategoryClicked = !isCategoryClicked
                     },
-                    layoutModifier = LayoutModifier.padding(Padding(end = 8))
+                    layoutModifier = LayoutModifier.padding(Padding(end = 68))
                 )
                 var isCategoryClicked2 by remember { mutableStateOf(false) }
                 Chip(
@@ -102,7 +104,7 @@ fun CatalogScreen() {
                     onClick = {
                         isCategoryClicked2 = !isCategoryClicked2
                     },
-                    layoutModifier = LayoutModifier.padding(Padding(end = 8))
+                    layoutModifier = LayoutModifier.padding(Padding(end = 75))
                 )
                 var isCategoryClicked3 by remember { mutableStateOf(false) }
                 Chip(
@@ -116,7 +118,7 @@ fun CatalogScreen() {
                     onClick = {
                         isCategoryClicked3 = !isCategoryClicked3
                     },
-                    layoutModifier = LayoutModifier.padding(Padding(end = 8))
+                    layoutModifier = LayoutModifier.padding(Padding(end = 102))
                 )
                 var isCategoryClicked4 by remember { mutableStateOf(false) }
                 Chip(
@@ -130,7 +132,7 @@ fun CatalogScreen() {
                     onClick = {
                         isCategoryClicked4 = !isCategoryClicked4
                     },
-                    layoutModifier = LayoutModifier.padding(Padding(end = 8))
+                    layoutModifier = LayoutModifier.padding(Padding(end = 102))
                 )
                 /*CATEGORIES.forEach {
                     var isCategoryClicked by remember { mutableStateOf(false) }
@@ -149,7 +151,15 @@ fun CatalogScreen() {
             }
             SERVICES.forEachIndexed { index, item ->
                 if ((index + 1) % 3 == 0) {
-                    RowWithWeight(layoutModifier = LayoutModifier.padding(Padding(top = 16))) {
+                    RowWithWeight(
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                start = 16,
+                                end = 16,
+                                top = 16
+                            )
+                        )
+                    ) {
                         ImageCardWithText(
                             height = Size.Const(100),
                             text = SERVICES.get(index - 2).name.desc(),
@@ -158,7 +168,7 @@ fun CatalogScreen() {
                             url = SERVICES.get(index - 2).image,
                             placeholder = MR.images.ava_preview,
                             onClick = SERVICES.get(index - 2).onClick,
-                            layoutModifier = LayoutModifier.padding(Padding(end = 4)).weight(1f)
+                            layoutModifier = LayoutModifier.padding(Padding(end = 6)).weight(1f)
                         )
                         ImageCardWithText(
                             height = Size.Const(100),
@@ -168,7 +178,7 @@ fun CatalogScreen() {
                             url = SERVICES.get(index - 1).image,
                             placeholder = MR.images.ava_preview,
                             onClick = SERVICES.get(index - 1).onClick,
-                            layoutModifier = LayoutModifier.padding(Padding(start = 4)).weight(1f)
+                            layoutModifier = LayoutModifier.padding(Padding(start = 6)).weight(1f)
                         )
                     }
                     ImageCardWithText(
@@ -179,7 +189,13 @@ fun CatalogScreen() {
                         url = item.image,
                         placeholder = MR.images.ava_preview,
                         onClick = item.onClick,
-                        layoutModifier = LayoutModifier.padding(Padding(top = 12))
+                        layoutModifier = LayoutModifier.padding(
+                            Padding(
+                                start = 16,
+                                end = 16,
+                                top = 12
+                            )
+                        )
                     )
                 }
             }

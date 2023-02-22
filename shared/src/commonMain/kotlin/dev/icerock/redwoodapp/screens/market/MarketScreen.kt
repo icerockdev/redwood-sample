@@ -30,6 +30,7 @@ import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.CounterButton
 import dev.icerock.redwood.schema.compose.ProductCard
 import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.Tabs
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwoodapp.BANNER
 import dev.icerock.redwoodapp.BANNER_2
@@ -44,7 +45,9 @@ import org.example.library.MR
 fun MarketScreen() {
     val viewModel: MarketViewModel = getViewModel { MarketViewModel() }
     // val navBarController: NavBarController = rememberNavBarController()
-
+    Tabs(listOf("tabd".desc(),"tabs".desc())
+    ,{}, 0
+    )
     //  val badgeCount: StringDesc? by viewModel.badge.collectAsState()
 
     /* LaunchedEffect(navBarController, badgeCount) {

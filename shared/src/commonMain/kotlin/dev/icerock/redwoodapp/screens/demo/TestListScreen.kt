@@ -50,7 +50,7 @@ fun TestListScreen(
         val selectedTab by viewModel.selectedTab.collectAsState()
         Tabs(
             listOf("Нужно пройти".desc(), "Пройденные".desc()),
-            listOf({ viewModel.onTabClick(0) }, { viewModel.onTabClick(1) }),
+            { viewModel.onTabClick(it) },
             selectedTab
         )
 

@@ -32,7 +32,7 @@ class IosWidgetTextInput: NSObject, WidgetTextInput {
         textView.placeholder = hint.localized()
     }
 
-    func onChange(onChange: ((String) -> Void)? = nil) {
+    func onChange(onChange_ onChange: ((String) -> Void)? = nil) {
         let identifier = UIAction.Identifier("TextInputBinding.onTextChanged")
         let action = UIAction(
             identifier: identifier,

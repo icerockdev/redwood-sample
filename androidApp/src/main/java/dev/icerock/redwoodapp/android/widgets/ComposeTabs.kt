@@ -21,14 +21,14 @@ import dev.icerock.redwoodapp.android.theme.TextStyles
 
 class ComposeTabs : Tabs<@Composable () -> Unit> {
     private var _texts: List<StringDesc> by mutableStateOf(listOf())
-    private var _onClick: List<() -> Unit> by mutableStateOf(listOf())
+    private var _onClick: ((Int) -> Unit)? by mutableStateOf({})
     private var _selectedIndex: Int by mutableStateOf(0)
     override fun texts(texts: List<StringDesc>) {
         _texts = texts
     }
 
-    override fun onClick(onClick: List<() -> Unit>) {
-        _onClick = onClick
+    override fun onChange(onChange: ((Int) -> Unit)?) {
+        _onClick = onChange
     }
 
     override fun selectedTab(selectedTab: Int) {
@@ -37,25 +37,21 @@ class ComposeTabs : Tabs<@Composable () -> Unit> {
 
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
-        TabRow(
-            selectedTabIndex = _selectedIndex,
-            backgroundColor = Colors.gray60,
-            contentColor = Colors.primary
-        ) {
-            _texts.forEachIndexed { index, tab ->
-                Tab(
-                    modifier = Modifier.height(48.dp),
-                    selected = index == _selectedIndex,
-                    onClick = _onClick.getOrNull(index) ?: {},
-                    selectedContentColor = Colors.primary,
-                    unselectedContentColor = Colors.black
-                ) {
-                    Text(
-                        text = tab.toString(LocalContext.current),
-                        style = TextStyles.secondarySmall
-                    )
-                }
-            }
+        TabRow(selectedTabIndex = _selectedIndex,
+        backgroundColor = Colors.gray60,
+        contentColor = Colors.primary) {
+           _texts.forEachIndexed{ index, tab ->
+               Tab(
+                   modifier = Modifier.height(48.dp),
+                   selected = index == _selectedIndex,
+                   onClick = {_onClick?.invoke(index)},
+                   selectedContentColor = Colors.primary,
+                   unselectedContentColor = Colors.black
+               ){
+                   Text(text = tab.toString(LocalContext.current),
+                   style = TextStyles.primary)
+               }
+           }
         }
     }
 }

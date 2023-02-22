@@ -279,7 +279,7 @@ data class Tabs(
     @Property(1)
     val texts: List<StringDesc>,
     @Property(2)
-    val onClick: List<()->Unit>,
+    val onChange: (Int)->Unit,
     @Property(3)
     val selectedTab: Int
 )

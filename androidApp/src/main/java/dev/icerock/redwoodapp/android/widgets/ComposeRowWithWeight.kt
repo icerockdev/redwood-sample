@@ -1,15 +1,16 @@
 package dev.icerock.redwoodapp.android.widgets
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.redwood.LayoutModifier
-import app.cash.redwood.layout.Padding
 import app.cash.redwood.widget.compose.ComposeWidgetChildren
 import dev.icerock.redwood.schema.widget.RowWithWeight
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
+import app.cash.redwood.layout.Padding
+import dev.icerock.redwoodapp.ext.Weight
 
 class ComposeRowWithWeight : RowWithWeight<@Composable () -> Unit> {
     override val childs = ComposeWidgetChildren()
@@ -20,12 +21,17 @@ class ComposeRowWithWeight : RowWithWeight<@Composable () -> Unit> {
 
             childs.widgets.forEach {
                 var padding: Padding? = null
+                var weight :Float? = null
                 it.layoutModifiers.forEach { element ->
                     (element as? Padding)?.let {
                         padding = it
                     }
+                    (element as? Weight)?.let {
+                        weight = it.weight
+                    }
                 }
-                Box(modifier = Modifier.weight(1f).let {
+
+                Box(modifier = Modifier.let {
                     val padding = padding?.padding
                     if (padding != null) {
                         it.padding(
@@ -36,6 +42,13 @@ class ComposeRowWithWeight : RowWithWeight<@Composable () -> Unit> {
                         )
                     } else {
                         it
+                    }.let {
+                        val constWeight = weight
+                        if(constWeight!=null){
+                            it.weight(constWeight)
+                        }else{
+                            it
+                        }
                     }
                 }) {
                     it.value.invoke()

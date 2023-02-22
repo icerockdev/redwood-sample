@@ -145,7 +145,7 @@ class IosWidgetButton: WidgetButton {
 
 class FillButton : UIButton{
     
-    var widgetWidth : EntitySize = EntitySize.Wrap() {
+    var widgetWidth : EntitySize = EntitySize.Fill() {
         didSet {
             setNeedsLayout()
         }
@@ -160,17 +160,17 @@ class FillButton : UIButton{
         override func sizeThatFits(_ size: CGSize) -> CGSize {
             if(widgetWidth is EntitySize.Wrap){
                 let originalSize = super.sizeThatFits(size)
-                contentSize = CGSize(width: originalSize.width, height: originalSize.height)
+                contentSize = CGSize(width: originalSize.width, height: 40)
                 return contentSize
             }
             if(widgetWidth is EntitySize.Const){
                 let originalSize = super.sizeThatFits(CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: size.height))
-                contentSize = CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: originalSize.height)
+                contentSize = CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: 40)
                 return contentSize
             }
             let originalSize = super.sizeThatFits(
                 CGSize(width: size.width, height: size.height))
-            contentSize =  CGSize(width:  size.width, height: originalSize.height)
+            contentSize =  CGSize(width:  size.width, height: 40)
             return contentSize
       
         }

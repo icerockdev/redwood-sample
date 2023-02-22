@@ -24,8 +24,11 @@ import dev.icerock.redwood.schema.compose.RowWithWeight
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
+import dev.icerock.redwoodapp.BANNER
+import dev.icerock.redwoodapp.BANNER_2
 import dev.icerock.redwoodapp.CATEGORIES
 import dev.icerock.redwoodapp.SERVICES
+import dev.icerock.redwoodapp.ext.weight
 import org.example.library.MR
 
 @Composable
@@ -145,9 +148,7 @@ fun CatalogScreen() {
             }
             SERVICES.forEachIndexed { index, item ->
                 if ((index + 1) % 3 == 0) {
-                    RowWithWeight(
-                        layoutModifier = LayoutModifier.padding(Padding(top = 16, end = 16))
-                    ) {
+                    RowWithWeight(layoutModifier = LayoutModifier.padding(Padding(top = 16))) {
                         ImageCardWithText(
                             height = Size.Const(100),
                             text = SERVICES.get(index - 2).name.desc(),
@@ -156,7 +157,7 @@ fun CatalogScreen() {
                             url = SERVICES.get(index - 2).image,
                             placeholder = MR.images.ava_preview,
                             onClick = SERVICES.get(index - 2).onClick,
-                            layoutModifier = LayoutModifier.padding(Padding(end = 4))
+                            layoutModifier = LayoutModifier.padding(Padding(end = 4)).weight(1f)
                         )
                         ImageCardWithText(
                             height = Size.Const(100),
@@ -166,7 +167,7 @@ fun CatalogScreen() {
                             url = SERVICES.get(index - 1).image,
                             placeholder = MR.images.ava_preview,
                             onClick = SERVICES.get(index - 1).onClick,
-                            layoutModifier = LayoutModifier.padding(Padding(start = 4))
+                            layoutModifier = LayoutModifier.padding(Padding(start = 4)).weight(1f)
                         )
                     }
                     ImageCardWithText(

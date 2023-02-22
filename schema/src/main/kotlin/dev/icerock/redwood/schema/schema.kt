@@ -34,7 +34,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         FooterColumn::class,
         Chip::class,
         Tabs::class,
-        ImageCardWithText::class
+        ImageCardWithText::class,
+        BannersColumn::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -303,5 +304,10 @@ data class ImageCardWithText(
     val placeholder: ImageResource?,
     @Property(8)
     val onClick: (()->Unit)?,
+)
+
+@Widget(22)
+data class BannersColumn(
+    @Property(1) val bannersList: List<BannerColumnData>
 )
 

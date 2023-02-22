@@ -10,3 +10,12 @@ data class BannerData(
     val text: StringDesc,
     val onClick: () -> Unit
 )
+
+data class BannerColumnData(
+    val placeholder: ImageResource?,
+    val image: ImageDesc?,
+    val textTitle: String,
+    val data: String,
+    val textDescription: String,
+    val onClick: () -> Unit
+)

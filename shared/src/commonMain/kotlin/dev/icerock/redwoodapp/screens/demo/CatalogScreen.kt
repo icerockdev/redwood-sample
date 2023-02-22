@@ -21,11 +21,11 @@ import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.ImageCardWithText
 import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
-import dev.icerock.redwoodapp.BANNER
-import dev.icerock.redwoodapp.BANNER_2
 import dev.icerock.redwoodapp.CATEGORIES
+import dev.icerock.redwoodapp.SERVICES
 import org.example.library.MR
 
 @Composable
@@ -143,37 +143,48 @@ fun CatalogScreen() {
                     )
                 }*/
             }
-            RowWithWeight {
-                ImageCardWithText(
-                    height = Size.Const(100),
-                    text = "Тайский массаж".desc(),
-                    textBackgroundColor = Color.parseColor("#CC313033"),
-                    textColor = Color.parseColor("#FFFFFFFF"),
-                    url = BANNER,
-                    placeholder = MR.images.ava_preview,
-                    onClick = {},
-                    layoutModifier = LayoutModifier.padding(Padding(end = 4))
-                )
-                ImageCardWithText(
-                    height = Size.Const(100),
-                    text = "СПА программы".desc(),
-                    textBackgroundColor = Color.parseColor("#CC313033"),
-                    textColor = Color.parseColor("#FFFFFFFF"),
-                    url = BANNER_2,
-                    placeholder = MR.images.ava_preview,
-                    onClick = {},
-                    layoutModifier = LayoutModifier.padding(Padding(start = 4))
-                )
+            SERVICES.forEachIndexed { index, item ->
+                if ((index + 1) % 3 == 0) {
+                    RowWithWeight(
+                        layoutModifier = LayoutModifier.padding(Padding(top = 16, end = 16))
+                    ) {
+                        ImageCardWithText(
+                            height = Size.Const(100),
+                            text = SERVICES.get(index - 2).name.desc(),
+                            textBackgroundColor = Color.parseColor("#CC313033"),
+                            textColor = Color.parseColor("#FFFFFFFF"),
+                            url = SERVICES.get(index - 2).image,
+                            placeholder = MR.images.ava_preview,
+                            onClick = SERVICES.get(index - 2).onClick,
+                            layoutModifier = LayoutModifier.padding(Padding(end = 4))
+                        )
+                        ImageCardWithText(
+                            height = Size.Const(100),
+                            text = SERVICES.get(index - 1).name.desc(),
+                            textBackgroundColor = Color.parseColor("#CC313033"),
+                            textColor = Color.parseColor("#FFFFFFFF"),
+                            url = SERVICES.get(index - 1).image,
+                            placeholder = MR.images.ava_preview,
+                            onClick = SERVICES.get(index - 1).onClick,
+                            layoutModifier = LayoutModifier.padding(Padding(start = 4))
+                        )
+                    }
+                    ImageCardWithText(
+                        height = Size.Const(100),
+                        text = item.name.desc(),
+                        textBackgroundColor = Color.parseColor("#CC313033"),
+                        textColor = Color.parseColor("#FFFFFFFF"),
+                        url = item.image,
+                        placeholder = MR.images.ava_preview,
+                        onClick = item.onClick,
+                        layoutModifier = LayoutModifier.padding(Padding(top = 12))
+                    )
+                }
             }
-            ImageCardWithText(
-                height = Size.Const(100),
-                text = "Коррекция фигуры".desc(),
-                textBackgroundColor = Color.parseColor("#CC313033"),
-                textColor = Color.parseColor("#FFFFFFFF"),
-                url = BANNER_2,
-                placeholder = MR.images.ava_preview,
-                onClick = {},
-                layoutModifier = LayoutModifier.padding(Padding(top = 12))
+            Space(
+                height = 150,
+                width = -1,
+                background = Color(0x0)
             )
         }
     }

@@ -95,3 +95,24 @@ val CATEGORIES = listOf(
     "Абонементы",
     "Сертификаты"
 )
+
+data class Service(
+    val name: String,
+    val image: String,
+    val onClick: () -> Unit
+)
+
+val SERVICES = listOf(
+    Service("Тайский массаж", BANNER, {}),
+    Service("СПА программы", BANNER_2, {}),
+    Service("Коррекция фигуры", BANNER, {}),
+    Service("СПА для двоих", BANNER_2, {}),
+    Service("Вай тай сити", BANNER, {}),
+    Service("Массажи категории СПА", BANNER_2, {}),
+    Service("Тайский массаж", BANNER, {}),
+    Service("СПА программы", BANNER_2, {}),
+    Service("Коррекция фигуры", BANNER, {}),
+    Service("СПА для двоих", BANNER_2, {}),
+    Service("Вай тай сити", BANNER, {}),
+    Service("Массажи категории СПА", BANNER_2, {})
+)

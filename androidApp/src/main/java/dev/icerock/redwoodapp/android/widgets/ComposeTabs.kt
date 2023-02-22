@@ -31,8 +31,6 @@ class ComposeTabs : Tabs<@Composable () -> Unit> {
         _onClick = onChange
     }
 
-
-
     override fun selectedTab(selectedTab: Int) {
         _selectedIndex = selectedTab
     }
@@ -51,7 +49,7 @@ class ComposeTabs : Tabs<@Composable () -> Unit> {
                    unselectedContentColor = Colors.black
                ){
                    Text(text = tab.toString(LocalContext.current),
-                   style = TextStyles.body)
+                   style = TextStyles.primary)
                }
            }
         }

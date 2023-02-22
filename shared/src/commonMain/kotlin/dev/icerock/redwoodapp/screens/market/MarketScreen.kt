@@ -41,13 +41,15 @@ import dev.icerock.redwoodapp.USER_AVATAR
 import dev.icerock.redwoodapp.ext.weight
 import org.example.library.MR
 
+
+/*
 @Composable
 fun MarketScreen() {
-    val viewModel: MarketViewModel = getViewModel { MarketViewModel() }
+  //  val viewModel: MarketViewModel = getViewModel { MarketViewModel() }
     // val navBarController: NavBarController = rememberNavBarController()
-    Tabs(listOf("tabd".desc(),"tabs".desc())
-    ,{}, 0
-    )
+ //   Tabs(listOf("tabd".desc(),"tabs".desc())
+ //   ,{}, 0
+ //   )
     //  val badgeCount: StringDesc? by viewModel.badge.collectAsState()
 
     /* LaunchedEffect(navBarController, badgeCount) {
@@ -162,3 +164,4 @@ class LazyColumnContent : LazyListIntervalContent.Item {
     }
 }
 
+*/

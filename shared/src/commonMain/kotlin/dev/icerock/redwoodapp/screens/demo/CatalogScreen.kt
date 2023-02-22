@@ -26,6 +26,7 @@ import dev.icerock.redwood.schema.compose.TextInput
 import dev.icerock.redwoodapp.BANNER
 import dev.icerock.redwoodapp.BANNER_2
 import dev.icerock.redwoodapp.CATEGORIES
+import dev.icerock.redwoodapp.ext.weight
 import org.example.library.MR
 
 @Composable
@@ -143,7 +144,7 @@ fun CatalogScreen() {
                     )
                 }*/
             }
-            RowWithWeight {
+            RowWithWeight(layoutModifier = LayoutModifier.padding(Padding(top = 16))) {
                 ImageCardWithText(
                     height = Size.Const(100),
                     text = "Тайский массаж".desc(),
@@ -152,7 +153,7 @@ fun CatalogScreen() {
                     url = BANNER,
                     placeholder = MR.images.ava_preview,
                     onClick = {},
-                    layoutModifier = LayoutModifier.padding(Padding(end = 4))
+                    layoutModifier = LayoutModifier.padding(Padding(end = 4)).weight(1f)
                 )
                 ImageCardWithText(
                     height = Size.Const(100),
@@ -162,7 +163,7 @@ fun CatalogScreen() {
                     url = BANNER_2,
                     placeholder = MR.images.ava_preview,
                     onClick = {},
-                    layoutModifier = LayoutModifier.padding(Padding(start = 4))
+                    layoutModifier = LayoutModifier.padding(Padding(start = 4)).weight(1f)
                 )
             }
             ImageCardWithText(

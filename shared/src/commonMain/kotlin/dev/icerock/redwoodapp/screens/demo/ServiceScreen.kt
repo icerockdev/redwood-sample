@@ -27,16 +27,11 @@ fun ServiceScreen() {
                 "Активные".desc(),
                 "Архив".desc()
             ),
-            onClick = listOf(
-                {
-                    selectedTab = 0
-                    title = "Активные заказы"
+            onChange ={
+                    selectedTab = it
+                    title = if(it == 0) "Активные заказы" else
+                        "Заказы в архиве"
                 },
-                {
-                    selectedTab = 1
-                    title = "Заказы в архиве"
-                }
-            ),
             selectedTab = selectedTab
         )
 

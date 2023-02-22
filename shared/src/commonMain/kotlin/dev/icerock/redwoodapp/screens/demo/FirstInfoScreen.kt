@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import app.cash.redwood.LayoutModifier
 import app.cash.redwood.layout.api.CrossAxisAlignment
+import app.cash.redwood.layout.api.MainAxisAlignment
 import app.cash.redwood.layout.api.Overflow
 import app.cash.redwood.layout.api.Padding
 import app.cash.redwood.layout.compose.Column
@@ -105,7 +106,9 @@ fun FirstInfoScreen(
                 horizontalAlignment = CrossAxisAlignment.End,
                 padding = Padding(start = 16, top = 8, end = 16, bottom = 24)
             ) {
-                Row {
+                Row(
+                    horizontalAlignment = MainAxisAlignment.Center
+                ) {
                     ImageButton(
                         text = "".desc(),
                         icon = if (isPolicyClicked) MR.images.check_box_clicked else MR.images.check_box_unclicked,
@@ -114,9 +117,8 @@ fun FirstInfoScreen(
                         }
                     )
                     Text(
-                        text = "Ознакомлен(-а) с Регламентом о защите и обработке персональных данных",
-                        textType = TextType.SecondarySmall,
-                        //layoutModifier = LayoutModifier.padding(Padding(start = 16, end = 16))
+                        text = "Ознакомлен(-а) с Регламентом о защите и            \nобработке персональных данных",
+                        textType = TextType.SecondarySmall
                     )
                 }
                 Button(

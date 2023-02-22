@@ -3,6 +3,7 @@ package dev.icerock.redwoodapp.android.widgets
 import androidx.compose.runtime.Composable
 import dev.icerock.redwood.schema.widget.Banners
 import dev.icerock.redwood.schema.widget.Box
+import dev.icerock.redwood.schema.widget.BannersColumn
 import dev.icerock.redwood.schema.widget.CounterButton
 import dev.icerock.redwood.schema.widget.Divider
 import dev.icerock.redwood.schema.widget.FooterColumn
@@ -15,6 +16,7 @@ import dev.icerock.redwood.schema.widget.ShortButton
 import dev.icerock.redwood.schema.widget.Switch
 import dev.icerock.redwood.schema.widget.Chip
 import dev.icerock.redwood.schema.widget.ImageCardWithText
+import dev.icerock.redwood.schema.widget.SearchRow
 import dev.icerock.redwood.schema.widget.Tabs
 
 object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit> {
@@ -23,6 +25,8 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun ImageCardWithText(): ImageCardWithText<() -> Unit> = ComposeImageCardWithText()
     override fun Box(): Box<() -> Unit> =
         ComposeBox()
+    override fun BannersColumn(): BannersColumn<() -> Unit> = ComposeBannersColumn()
+    override fun SearchRow(): SearchRow<() -> Unit>  = ComposeSearchRow()
 
     override fun Chip(): Chip<() -> Unit> = ComposeChip()
     override fun Divider(): Divider<() -> Unit> = ComposeDivider()

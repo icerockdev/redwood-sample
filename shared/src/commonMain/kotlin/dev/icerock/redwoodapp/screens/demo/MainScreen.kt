@@ -14,20 +14,24 @@ import app.cash.redwood.layout.compose.Column
 import app.cash.redwood.layout.compose.Row
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.resources.desc.desc
-import dev.icerock.redwood.schema.BannerData
+import dev.icerock.moko.resources.desc.image.ImageDesc
+import dev.icerock.moko.resources.desc.image.Url
+import dev.icerock.redwood.schema.BannerColumnData
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
-import dev.icerock.redwood.schema.compose.Banners
+import dev.icerock.redwood.schema.compose.BannersColumn
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.SearchRow
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
 import dev.icerock.redwoodapp.PROMOTION_LIST
+import dev.icerock.redwoodapp.USER_AVATAR
 import org.example.library.MR
 
 @Composable
@@ -53,21 +57,28 @@ fun MainScreen() {
                     layoutModifier = LayoutModifier.padding(Padding(start = 8))
                 )
             }
-            TextInput(
+            SearchRow(
                 state = search,
-                hint = "Здесь будет поиск".desc(),
+                hint = "Салон, название услуги".desc(),
+                onChange = {
+                    search = it
+                },
+                showMic = true,
+                onMicClick = {
+
+                },
                 layoutModifier = LayoutModifier.padding(Padding(top = 16))
             )
-
         }
         Divider(
             layoutModifier = LayoutModifier.padding(Padding(top = 20))
         )
         Column(
-            padding = Padding(start = 16, top = 20, end = 16),
             overflow = Overflow.Scroll
         ) {
-            RowWithWeight {
+            RowWithWeight(
+                layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 20, end = 16))
+            ) {
                 Text(
                     text = "Новости",
                     textType = TextType.PrimaryBold,
@@ -86,18 +97,43 @@ fun MainScreen() {
                     )
                 }
             }
-            Banners(
-                bannersList = listOf<BannerData>()
+            BannersColumn(
+                bannersList = listOf(
+                    BannerColumnData(
+                        placeholder = MR.images.ava_preview,
+                        image = ImageDesc.Url(USER_AVATAR),
+                        textTitle = "Дарим сертификаты к праздникам!",
+                        data = "15.02.2023 ",
+                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                        onClick = {}
+                    ),
+                    BannerColumnData(
+                        placeholder = MR.images.ava_preview,
+                        image = ImageDesc.Url(USER_AVATAR),
+                        textTitle = "Дарим сертификаты к праздникам!",
+                        data = "15.02.2023 ",
+                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                        onClick = {}
+                    ),
+                    BannerColumnData(
+                        placeholder = MR.images.ava_preview,
+                        image = ImageDesc.Url(USER_AVATAR),
+                        textTitle = "Дарим сертификаты к праздникам!",
+                        data = "15.02.2023 ",
+                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                        onClick = {}
+                    )
+                )
             )
             Text(
                 text = "Акции",
                 textType = TextType.PrimaryBold,
-                layoutModifier = LayoutModifier.padding(Padding(top = 16))
+                layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 16, end = 16))
             )
 
             PROMOTION_LIST.forEach { promotion ->
                 Card(
-                    layoutModifier = LayoutModifier.padding(Padding(top = 8)),
+                    layoutModifier = LayoutModifier.padding(Padding(start = 16, top = 8, end = 16)),
                     onClick = {},
                     child = {
                         Column(

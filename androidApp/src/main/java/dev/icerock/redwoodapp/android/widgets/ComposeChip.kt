@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,7 +37,7 @@ class ComposeChip : Chip<@Composable () -> Unit> {
     private var _icon by mutableStateOf<ImageResource?>(null)
     private var _backgroundColor by mutableStateOf<Color?>(null)
     private var _textColor by mutableStateOf<Color?>(null)
-    private var _onClick: () -> Unit by mutableStateOf({  })
+    private var _onClick: () -> Unit by mutableStateOf({ })
     private var _border by mutableStateOf<Int?>(null)
 
     override fun text(text: StringDesc) {
@@ -66,15 +67,22 @@ class ComposeChip : Chip<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         Row(modifier = Modifier
-            .clip(RoundedCornerShape(30))
-            .clickable{
+            .height(36.dp)
+            .clip(RoundedCornerShape(50))
+            .clickable {
                 _onClick()
             }
-            .border(
-                width = _border?.dp ?: 0.dp,
-                color = Colors.gray90,
-                shape = RoundedCornerShape(30)
-            )
+            .let {
+                if (_border != null) {
+                    it.border(
+                        width = _border?.dp ?: 0.dp,
+                        color = Colors.gray90,
+                        shape = RoundedCornerShape(50)
+                    )
+                } else {
+                    it
+                }
+            }
             .background(_backgroundColor?.let { androidx.compose.ui.graphics.Color(it.colorInt()) }
                 ?: androidx.compose.ui.graphics.Color.Transparent)
             .padding(horizontal = 12.dp, vertical = 4.dp),

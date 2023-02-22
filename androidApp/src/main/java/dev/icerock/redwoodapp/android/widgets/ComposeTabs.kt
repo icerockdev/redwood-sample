@@ -38,7 +38,7 @@ class ComposeTabs : Tabs<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         TabRow(selectedTabIndex = _selectedIndex,
-        backgroundColor = Colors.gray60,
+        backgroundColor = Colors.white,
         contentColor = Colors.primary) {
            _texts.forEachIndexed{ index, tab ->
                Tab(

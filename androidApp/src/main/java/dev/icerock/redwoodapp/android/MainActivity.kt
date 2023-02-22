@@ -13,6 +13,7 @@ import dev.icerock.redwoodapp.android.navigation.AndroidNavigationFactory
 import dev.icerock.redwoodapp.android.theme.Colors
 import dev.icerock.redwoodapp.android.widgets.ComposeWidgetFactory
 import dev.icerock.redwoodapp.screens.demo.mainApp
+import dev.icerock.redwoodapp.screens.demo_amway.amwayApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
             RedwoodLayout = ComposeUiRedwoodLayoutWidgetFactory(),
         )
 
-        val app: NavigationHost = mainApp(AndroidNavigationFactory())
+        val app: NavigationHost = amwayApp(AndroidNavigationFactory())
 
         setContent {
             MaterialTheme {

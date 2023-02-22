@@ -11,9 +11,7 @@ import shared_ios
 
 
 class IosWidgetChip: Chip {
- 
-    
-
+  
     private let root: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +36,14 @@ class IosWidgetChip: Chip {
     
     func textColor(textColor: GraphicsColor?) {
         
+    }
+    
+    func border(border: KotlinInt?) {
+    
+    }
+    
+    func onClick(onClick: (() -> Void)? = nil) {
+    
     }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()

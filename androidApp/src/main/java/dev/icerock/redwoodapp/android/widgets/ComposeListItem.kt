@@ -63,12 +63,13 @@ class ComposeListItem : ListItem<@Composable () -> Unit> {
             text = {
                 Text(
                     text = _title?.toString(LocalContext.current) ?: "",
-                    style = TextStyles.h2,
+                    style = TextStyles.primary,
                     color = _tintColor?.let { color ->
                         androidx.compose.ui.graphics.Color(
                             color.rgba
                         )
-                    } ?: Colors.black
+                    } ?: Colors.black,
+                    maxLines = 1,
                 )
             },
             icon = _icon?.let {
@@ -91,7 +92,7 @@ class ComposeListItem : ListItem<@Composable () -> Unit> {
                 {
                     Text(
                         text = it.toString(LocalContext.current),
-                        style = TextStyles.primary,
+                        style = TextStyles.secondarySmall,
                         color = _tintColor?.let { color ->
                             androidx.compose.ui.graphics.Color(
                                 color.rgba

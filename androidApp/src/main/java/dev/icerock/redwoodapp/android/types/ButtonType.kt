@@ -48,7 +48,7 @@ fun PrimaryButton(
         onClick = onClick,
         enabled = enabled,
         interactionSource = interactionSource,
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(24.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else
@@ -93,7 +93,7 @@ fun SecondaryButton(
             .height(48.dp),
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(24.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else Color.Transparent,
@@ -181,7 +181,7 @@ fun ActionButton(
             .height(48.dp),
         onClick = onClick,
         enabled = enabled,
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(24.dp),
         elevation = ButtonDefaults.elevation(0.dp, 0.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isPressed) Colors.primary88 else Color.Transparent,

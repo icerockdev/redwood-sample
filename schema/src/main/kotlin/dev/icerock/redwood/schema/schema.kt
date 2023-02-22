@@ -34,7 +34,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         FooterColumn::class,
         Chip::class,
         Tabs::class,
-        ImageCardWithText::class
+        ImageCardWithText::class,
+        Box::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -305,3 +306,9 @@ data class ImageCardWithText(
     val onClick: (()->Unit)?,
 )
 
+@Widget(22)
+data class Box(
+    @Children(1) val child: @Composable () -> Unit,
+    @Property(2)
+    val background: Color
+)

@@ -10,6 +10,10 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func ImageCardWithText() -> ImageCardWithText {
+        IosWidgetImageCardWithText()
+    }
+    
     func Chip() -> Chip {
         IosWidgetChip()
     }

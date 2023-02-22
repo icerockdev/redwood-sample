@@ -43,7 +43,7 @@ class ComposeImageButton : ImageButton<@Composable () -> Unit> {
                     tint = Color.Unspecified,
                     contentDescription = null
                 )
-                if (_text.toString() != "") {
+                if (_text.toString(LocalContext.current).isNotEmpty()) {
                     Text(
                         modifier = Modifier.padding(start = 8.dp),
                         text = _text.toString(LocalContext.current),

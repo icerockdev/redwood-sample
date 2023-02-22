@@ -2,10 +2,13 @@ package dev.icerock.redwood.schema
 
 enum class TextType {
     Header,
-    Primary,
-    Bold,
-    Secondary,
     H2,
-    H3,
-    Accent
+    Primary,
+    PrimaryBold,
+    PrimarySmall,
+    Secondary,
+    SecondarySmall,
+    Caption,
+    Link,
+    PrimaryRed
 }

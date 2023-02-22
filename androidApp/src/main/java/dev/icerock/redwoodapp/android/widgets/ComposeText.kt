@@ -9,10 +9,7 @@ import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.widget.Text
 import dev.icerock.redwoodapp.android.theme.TextStyles
-import dev.icerock.redwoodapp.android.types.BoldText
-import dev.icerock.redwoodapp.android.types.HeaderText
-import dev.icerock.redwoodapp.android.types.PrimaryText
-import dev.icerock.redwoodapp.android.types.SecondaryText
+import dev.icerock.redwoodapp.android.types.TextWithStyle
 
 class ComposeText : Text<@Composable () -> Unit> {
     private var _textState: String by mutableStateOf("")
@@ -22,36 +19,55 @@ class ComposeText : Text<@Composable () -> Unit> {
     override var layoutModifiers: LayoutModifier = LayoutModifier
     override val value = @Composable {
         when (_textType) {
-            TextType.Primary -> PrimaryText(
-                text = _textState,
-                isSingleLine = _isSingleLine
-            )
-            TextType.Secondary -> SecondaryText(
-                text = _textState,
-                isSingleLine = _isSingleLine
-            )
-            TextType.Header -> HeaderText(
-                text = _textState,
-                isSingleLine = _isSingleLine
-            )
-            TextType.Bold -> BoldText(
-                text = _textState,
-                isSingleLine = _isSingleLine
-            )
-            TextType.H2 -> PrimaryText(
+            TextType.Header -> TextWithStyle(
                 text = _textState,
                 isSingleLine = _isSingleLine,
-                textStyle = TextStyles.header2
+                textStyle = TextStyles.h1
             )
-            TextType.H3 -> PrimaryText(
+            TextType.H2 -> TextWithStyle(
                 text = _textState,
                 isSingleLine = _isSingleLine,
-                textStyle = TextStyles.header3
+                textStyle = TextStyles.h2
             )
-            TextType.Accent -> PrimaryText(
+            TextType.Primary -> TextWithStyle(
                 text = _textState,
                 isSingleLine = _isSingleLine,
-                textStyle = TextStyles.bodyAccent
+                textStyle = TextStyles.primary
+            )
+            TextType.PrimaryBold -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.primaryBold
+            )
+            TextType.PrimarySmall -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.primarySmall
+            )
+            TextType.Secondary -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.secondary
+            )
+            TextType.SecondarySmall -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.secondarySmall
+            )
+            TextType.Caption -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.caption
+            )
+            TextType.Link -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.link
+            )
+            TextType.PrimaryRed -> TextWithStyle(
+                text = _textState,
+                isSingleLine = _isSingleLine,
+                textStyle = TextStyles.primaryRed
             )
         }
     }

@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.icerock.moko.resources.ImageResource
+import dev.icerock.redwoodapp.android.R
 import dev.icerock.redwoodapp.android.theme.Colors
 import okhttp3.internal.wait
 
@@ -219,5 +220,6 @@ fun PreviewButton() {
     ) {
         PrimaryButton(text = "Text", enabled = true, icon = null) {}
         SecondaryButton(text = "text", enabled = true, icon = null) {}
+        TonnalButton(text = "cdc", enabled = true, icon = null) {}
     }
 }

@@ -21,9 +21,9 @@ class SimpleLoginViewModel() : ViewModel() {
         .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     val likeFlow = MutableStateFlow(false)
-    val likeResource: StateFlow<ImageResource> = likeFlow.map {
+    /*val likeResource: StateFlow<ImageResource> = likeFlow.map {
         if (it) MR.images.like_cliked else MR.images.like
-    }.stateIn(viewModelScope, SharingStarted.Lazily, MR.images.like)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, MR.images.like)*/
 
     fun setText(text: String) {
         _textFlow.value = text.desc()

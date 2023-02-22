@@ -63,7 +63,7 @@ class ComposeListItem : ListItem<@Composable () -> Unit> {
             text = {
                 Text(
                     text = _title?.toString(LocalContext.current) ?: "",
-                    style = TextStyles.header3,
+                    style = TextStyles.h2,
                     color = _tintColor?.let { color ->
                         androidx.compose.ui.graphics.Color(
                             color.rgba
@@ -91,7 +91,7 @@ class ComposeListItem : ListItem<@Composable () -> Unit> {
                 {
                     Text(
                         text = it.toString(LocalContext.current),
-                        style = TextStyles.body,
+                        style = TextStyles.primary,
                         color = _tintColor?.let { color ->
                             androidx.compose.ui.graphics.Color(
                                 color.rgba

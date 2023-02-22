@@ -13,11 +13,14 @@ import dev.icerock.redwood.schema.widget.RowWithWeight
 import dev.icerock.redwood.schema.widget.ShortButton
 import dev.icerock.redwood.schema.widget.Switch
 import dev.icerock.redwood.schema.widget.Chip
+import dev.icerock.redwood.schema.widget.ImageCardWithText
 import dev.icerock.redwood.schema.widget.Tabs
 
 object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Unit> {
 
     override fun Tabs(): Tabs<() -> Unit> = ComposeTabs()
+    override fun ImageCardWithText(): ImageCardWithText<() -> Unit> = ComposeImageCardWithText()
+
     override fun Chip(): Chip<() -> Unit> = ComposeChip()
     override fun Divider(): Divider<() -> Unit> = ComposeDivider()
     override fun Onboarding(): Onboarding<() -> Unit> = ComposeOnboarding()

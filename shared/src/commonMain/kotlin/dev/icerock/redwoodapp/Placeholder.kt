@@ -1,8 +1,5 @@
 package dev.icerock.redwoodapp
 
-import dev.icerock.redwoodapp.screens.market.Product
-
-
 const val LONG_TEXT: String =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultrices eros in cursus turpis massa tincidunt dui. Venenatis cras sed felis eget velit. Tincidunt praesent semper feugiat nibh sed pulvinar proin gravida hendrerit. Arcu bibendum at varius vel pharetra. Imperdiet sed euismod nisi porta lorem mollis. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Interdum varius sit amet mattis vulputate enim nulla aliquet. Amet massa vitae tortor condimentum lacinia. Quam id leo in vitae turpis massa sed elementum. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio.\n" +
             "\n" +
@@ -54,75 +51,47 @@ const val BANNER =
 const val BANNER_2 =
     "https://www.humanesociety.org/sites/default/files/styles/2000x850/public/2022-08/hl-yp-cats-579652.jpg?h=a0b0b8d2&itok=Ha4SyumM"
 
-val PRODUCTS_MOCK = listOf<Product>(
-    Product(
-        id = "product1",
-        title = "cat food 1",
-        cost = "$8000",
-        oldCost = "$16000",
-        subtitle = "В наличии",
-        date = "Доставка 14.12.23",
-        badge = "50%",
-        imageUrl = USER_AVATAR
+data class Promotion(
+    val image: String,
+    val labile: String,
+    val description: String,
+    val address: String
+)
+
+val PROMOTION_LIST = listOf<Promotion>(
+    Promotion(
+        image = BANNER,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
     ),
-    Product(
-        id = "product2",
-        title = "cat food 2",
-        cost = "$8000",
-        oldCost = null,
-        subtitle = null,
-        date = "Доставка 14.12.23",
-        badge = null,
-        imageUrl = BANNER
+    Promotion(
+        image = BANNER_2,
+        labile = "Название",
+        description = "Описание",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
     ),
-    Product(
-        id = "product3",
-        title = "cat food 3",
-        cost = "$8000",
-        oldCost = null,
-        subtitle = null,
-        date = null,
-        badge =  null,
-        imageUrl = BANNER_2
+    Promotion(
+        image = BANNER,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
     ),
-    Product(
-        id = "product4",
-        title = "cat food 4",
-        cost = "$8000",
-        oldCost = "$16000",
-        subtitle = null,
-        date = null,
-        badge = "50%",
-        imageUrl = USER_AVATAR
-    ),
-    Product(
-        id = "product5",
-        title = "dog food 1",
-        cost = "$8000",
-        oldCost = null,
-        subtitle = "В наличии",
-        date = null,
-        badge = null,
-        imageUrl = BANNER
-    ),
-    Product(
-        id = "product6",
-        title = "dog food 2",
-        cost = "$8000",
-        oldCost = "$16000",
-        subtitle = "В наличии",
-        date = "Доставка 14.12.23",
-        badge = "50%",
-        imageUrl = BANNER_2
-    ),
-    Product(
-        id = "product7",
-        title = "dog food 3",
-        cost = "$8000",
-        oldCost = "$16000",
-        subtitle = "В наличии",
-        date = "Доставка 14.12.23",
-        badge = "50%",
-        imageUrl = USER_AVATAR
-    ),
+    Promotion(
+        image = BANNER_2,
+        labile = "\"Энергия жизни\" 90 минут - 20%",
+        description = "Тайский массаж подарит вашему телу чувство расслабленности и легкости...",
+        address = "Вай Тай Анохина, ул. Академика Анохина, 6к1",
+    )
+)
+
+val CATEGORIES = listOf(
+    "Услуги",
+    "Салоны",
+    "Абонементы",
+    "Сертификаты",
+    "Услуги",
+    "Салоны",
+    "Абонементы",
+    "Сертификаты"
 )

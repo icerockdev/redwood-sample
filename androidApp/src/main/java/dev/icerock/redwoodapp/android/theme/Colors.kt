@@ -7,8 +7,7 @@ object Colors {
     val secondary = Color(0xFFF6A947)
     val error = Color(0xFFC02828)
     val success = Color(0xFF12A354)
-    val accent = Color(0xFF2F80ED)
-
+    val transparent = Color(0xCC313033)
 
 
     val primary88 = Color(0xFF7662D9)
@@ -22,5 +21,6 @@ object Colors {
     val gray50 = Color(0xFFFFFBFE)
     val black33 = Color(0x54313033)
     val black18 = Color(0x2C313033)
+    val white = Color(0xFFFFFFFF)
 
 }

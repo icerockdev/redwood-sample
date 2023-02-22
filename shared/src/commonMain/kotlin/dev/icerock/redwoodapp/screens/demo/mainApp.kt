@@ -7,69 +7,82 @@ import dev.icerock.redwood.navigation.NavigationRoot
 import dev.icerock.redwood.navigation.navigation
 import dev.icerock.redwood.navigation.navigator.Navigator
 import dev.icerock.redwood.navigation.scope.NavigationFactoryScope
-import dev.icerock.redwood.schema.TextType
-import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwoodapp.Box
 import dev.icerock.redwoodapp.screens.demo.navigation.Screens
-import dev.icerock.redwoodapp.screens.market.MarketScreen
 import org.example.library.MR
 
 fun mainApp(
     navigationFactory: NavigationFactory
 ): NavigationRoot = navigation(
     navigationFactory = navigationFactory,
-    startDestination = Screens.ONBOARDING
+    startDestination = Screens.PHONE_NUMBER_LOGIN
 ) {
 
-    registerScreen(uri = Screens.ONBOARDING) { navigator, _ ->
-        MarketScreen()
-    }
-    registerScreen(uri = Screens.LOGIN) { navigator, _ ->
-        LoginScreen(navigator)
+    registerScreen(uri = Screens.PHONE_NUMBER_LOGIN) { navigator, _ ->
+        PhoneNumberLoginScreen {
+            navigator.navigate(Screens.SMS_CODE)
+        }
     }
 
-    registerNavigation(uri = Screens.MAIN) { navigator, _ ->
+    registerScreen(uri = Screens.SMS_CODE) { navigator, _ ->
+        SmsCodeScreen(navigator)
+    }
+
+    registerScreen(uri = Screens.FIRST_INFO) { navigator, _ ->
+        FirstInfoScreen {
+            navigator.navigate(Screens.MAIN_NAVIGATION)
+        }
+    }
+
+    registerNavigation(uri = Screens.MAIN_NAVIGATION) { navigator, _ ->
         mainScreenNavigation(navigator)
     }
 }
 
 private fun NavigationFactoryScope.mainScreenNavigation(
     rootNavigator: Navigator
-): NavigationHost = navigationTabs(startDestination = Screens.TOGGLE) {
+): NavigationHost = navigationTabs(startDestination = Screens.MAIN) {
     registerScreen(
-        Screens.TOGGLE,
-        title = MR.strings.tab_toggle.desc(),
-        icon = MR.images.home,
+        Screens.MAIN,
+        title = MR.strings.tab_main.desc(),
+        icon = MR.images.tab_main_color,
     ) { _ ->
-        ToogleScreen()
+        MainScreen()
     }
     registerScreen(
-        uri = Screens.HR,
-        title = MR.strings.tab_hr.desc(),
-        icon = MR.images.mail,
+        uri = Screens.CATALOG,
+        title = MR.strings.tab_catalog.desc(),
+        icon = MR.images.tab_catalog,
         screen =  { _ ->
-            HRScreen()
+            CatalogScreen()
         }
     )
-    registerNavigation(
+    registerScreen(
+        uri = Screens.SERVICE,
+        title = MR.strings.tab_service.desc(),
+        icon = MR.images.tab_service,
+        screen =  { _ ->
+            ServiceScreen()
+        }
+    )
+    /*registerNavigation(
         uri = Screens.TEST_LIST,
         title = MR.strings.tab_list.desc(),
         icon = MR.images.test,
         childNavigation = { _ ->
             secondTabNavigation()
         }
-    )
+    )*/
     registerScreen(
         uri = Screens.PROFILE,
-        title = MR.strings.tab_settings.desc(),
-        icon = MR.images.profile,
+        title = MR.strings.tab_profile.desc(),
+        icon = MR.images.tab_profile,
         screen = {
             ProfileScreen(rootNavigator)
         }
     )
 }
 
-private fun NavigationFactoryScope.secondTabNavigation(
+/*private fun NavigationFactoryScope.secondTabNavigation(
 ): NavigationHost = navigationFlat(startDestination = Screens.TEST_LIST) {
     registerScreen(Screens.TEST_LIST) { navigator, _ ->
         TestListScreen(navigator)
@@ -83,4 +96,4 @@ private fun NavigationFactoryScope.secondTabNavigation(
     registerScreen(Screens.TEST_FINAL) { navController, _ ->
         TestCompleteScreen(navController)
     }
-}
+}*/

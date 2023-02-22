@@ -23,4 +23,6 @@ object Colors {
     val black18 = Color(0x2C313033)
     val white = Color(0xFFFFFFFF)
 
+    val searchBackground = Color(0x1F767680)
+
 }

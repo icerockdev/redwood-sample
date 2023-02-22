@@ -35,7 +35,8 @@ import dev.icerock.moko.resources.desc.StringDesc
         Chip::class,
         Tabs::class,
         ImageCardWithText::class,
-        BannersColumn::class
+        BannersColumn::class,
+        SearchRow::class
     ],
     dependencies = [
         Dependency(1, RedwoodLayout::class),
@@ -309,5 +310,20 @@ data class ImageCardWithText(
 @Widget(22)
 data class BannersColumn(
     @Property(1) val bannersList: List<BannerColumnData>
+)
+
+@Widget(23)
+data class SearchRow(
+    @Property(1)
+    val state: String,
+    @Property(2)
+    val hint: StringDesc,
+    @Property(3)
+    @Default("null")
+    val onChange: (String) -> Unit,
+    @Property(4)
+    val showMic: Boolean,
+    @Property(5)
+    val onMicClick: () -> Unit
 )
 

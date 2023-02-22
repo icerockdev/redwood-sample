@@ -25,7 +25,7 @@ fun PhoneNumberLoginScreen(sendPhoneClick: () -> Unit) {
         Card(
             layoutModifier = LayoutModifier
                 .padding(Padding(horizontal = 16)),
-            onClick = {},
+            onClick = null,
             child = {
                 var phoneNumber by remember { mutableStateOf("") }
                 Column(padding = Padding(24)) {

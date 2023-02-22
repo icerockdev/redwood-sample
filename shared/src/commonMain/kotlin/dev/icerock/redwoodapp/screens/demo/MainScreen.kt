@@ -26,6 +26,7 @@ import dev.icerock.redwood.schema.compose.Card
 import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.SearchRow
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
 import dev.icerock.redwood.schema.compose.TextInput
@@ -56,12 +57,18 @@ fun MainScreen() {
                     layoutModifier = LayoutModifier.padding(Padding(start = 8))
                 )
             }
-            TextInput(
+            SearchRow(
                 state = search,
-                hint = "Здесь будет поиск".desc(),
+                hint = "Салон, название услуги".desc(),
+                onChange = {
+                    search = it
+                },
+                showMic = true,
+                onMicClick = {
+
+                },
                 layoutModifier = LayoutModifier.padding(Padding(top = 16))
             )
-
         }
         Divider(
             layoutModifier = LayoutModifier.padding(Padding(top = 20))

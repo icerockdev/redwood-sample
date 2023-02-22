@@ -21,11 +21,9 @@ import dev.icerock.redwood.schema.compose.Divider
 import dev.icerock.redwood.schema.compose.Image
 import dev.icerock.redwood.schema.compose.ImageCardWithText
 import dev.icerock.redwood.schema.compose.RowWithWeight
+import dev.icerock.redwood.schema.compose.SearchRow
 import dev.icerock.redwood.schema.compose.Space
 import dev.icerock.redwood.schema.compose.Text
-import dev.icerock.redwood.schema.compose.TextInput
-import dev.icerock.redwoodapp.BANNER
-import dev.icerock.redwoodapp.BANNER_2
 import dev.icerock.redwoodapp.CATEGORIES
 import dev.icerock.redwoodapp.SERVICES
 import dev.icerock.redwoodapp.ext.weight
@@ -54,15 +52,18 @@ fun CatalogScreen() {
                     layoutModifier = LayoutModifier.padding(Padding(start = 8))
                 )
             }
-            TextInput(
+            SearchRow(
                 state = search,
-                hint = "Здесь будет поиск".desc(),
+                hint = "Салон, название услуги".desc(),
                 onChange = {
                     search = it
                 },
+                showMic = true,
+                onMicClick = {
+
+                },
                 layoutModifier = LayoutModifier.padding(Padding(top = 16))
             )
-
         }
         Divider(
             layoutModifier = LayoutModifier.padding(Padding(top = 20))

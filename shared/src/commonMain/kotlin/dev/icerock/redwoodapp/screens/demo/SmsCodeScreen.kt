@@ -47,7 +47,7 @@ fun SmsCodeScreen(
             Box {
                 Card(
                     layoutModifier = LayoutModifier.padding(Padding(horizontal = 16)),
-                    onClick = {},
+                    onClick = null,
                     child = {
                         var smsCode by remember { mutableStateOf("") }
                         Column(padding = Padding(24)) {

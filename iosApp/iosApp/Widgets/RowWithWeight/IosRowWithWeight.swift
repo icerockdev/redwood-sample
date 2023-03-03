@@ -10,6 +10,11 @@ import UIKit
 import shared_ios
 
 class IosRowWithWeight :  RowWithWeight {
+   
+    func weight(weight: [KotlinInt]?) {
+        // do thomesing
+    }
+    
     
     private let root: RowWithWeightViewController = {
         let container = RowWithWeightViewController()
@@ -17,13 +22,15 @@ class IosRowWithWeight :  RowWithWeight {
     }()
 
     var childs: Redwood_widgetWidgetChildren {
-        ExposedKt.createViewChildrenListener(parent: root.view, insert: myInsert)
+        ExposedKt.createViewChildrenModifierListener(parent: root.view, insert: myInsert)
     }
 
     
-    func myInsert(view: UIView,index: KotlinInt){
-        root.addPage(subView: view, index: index, weight: 1)
-    }
+    func myInsert(
+        view: Redwood_widgetWidget,
+        index: KotlinInt){
+            root.addPage(subView: view, index: index)
+        }
 
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     

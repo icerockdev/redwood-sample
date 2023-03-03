@@ -26,8 +26,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api("app.cash.redwood:redwood-widget:0.2.0")
-                api("app.cash.redwood:redwood-compose:0.2.0")
+                api("app.cash.redwood:redwood-widget:0.2.1")
+                api("app.cash.redwood:redwood-compose:0.2.1")
                 api("dev.icerock.moko:resources:0.20.1")
                 api("dev.icerock.moko:mvvm-core:0.15.0")
             }

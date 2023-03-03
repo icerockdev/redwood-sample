@@ -19,7 +19,7 @@ import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
 import dev.icerock.redwood.schema.compose.Button
 import dev.icerock.redwood.schema.compose.Chip
-import dev.icerock.redwood.schema.compose.FooterColumn
+import dev.icerock.redwood.schema.compose.HeaderFooterContent
 import dev.icerock.redwood.schema.compose.ImageButton
 import dev.icerock.redwood.schema.compose.RowWithWeight
 import dev.icerock.redwood.schema.compose.Space
@@ -37,7 +37,7 @@ fun FirstInfoScreen(
     var fio: String by remember { mutableStateOf("") }
     var email: String by remember { mutableStateOf("") }
     var isPolicyClicked by remember { mutableStateOf(false) }
-    FooterColumn(
+    HeaderFooterContent(
         child = {
             Column(
                 overflow = Overflow.Scroll,
@@ -121,13 +121,14 @@ fun FirstInfoScreen(
                     horizontalAlignment = CrossAxisAlignment.End,
                     padding = Padding(start = 16, top = 8, end = 16, bottom = 24)
                 ) {
-                    RowWithWeight {
+                    RowWithWeight(childs = {
                         ImageButton(
                             text = "".desc(),
                             icon = if (isPolicyClicked) MR.images.check_box_clicked else MR.images.check_box_unclicked,
                             onClick = {
                                 isPolicyClicked = !isPolicyClicked
-                            }
+                            },
+                            layoutModifier = LayoutModifier.padding(Padding(16))
                         )
                         Text(
                             text = "Ознакомлен(-а) с Регламентом о защите и обработке персональных данных",
@@ -135,6 +136,7 @@ fun FirstInfoScreen(
                             layoutModifier = LayoutModifier.weight(1f)
                         )
                     }
+                    )
                     Button(
                         text = "В приложение".desc(),
                         buttonType = ButtonType.Primary,
@@ -146,5 +148,5 @@ fun FirstInfoScreen(
                     )
                 }
         }
-    )
+    , header = {})
 }

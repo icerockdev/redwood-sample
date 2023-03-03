@@ -31,7 +31,7 @@ import dev.icerock.moko.resources.desc.StringDesc
         ListItem::class,
         Divider::class,
         Onboarding::class,
-        FooterColumn::class,
+        HeaderFooterContent::class,
         Chip::class,
         Tabs::class,
         ImageCardWithText::class,
@@ -165,8 +165,11 @@ data class Banners(
 
 @Widget(11)
 data class RowWithWeight(
+    @Property(1)
+    @Default("null")
+    val weight: List<Int>?,
     @Children(1)
-    val childs: () -> Unit
+    val childs: () -> Unit,
 )
 
 @Widget(12)
@@ -255,11 +258,13 @@ data class Onboarding(
 )
 
 @Widget(18)
-data class FooterColumn(
+data class HeaderFooterContent(
     @Children(1)
     val child: () -> Unit,
     @Children(2)
     val footer: () -> Unit,
+    @Children(3)
+    val header: () -> Unit,
 )
 
 @Widget(19)

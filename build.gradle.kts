@@ -6,7 +6,7 @@ plugins {
     id("com.android.library").version(androidGradlePluginVersion).apply(false)
     kotlin("android").version(kotlinGradlePluginVersion).apply(false)
     kotlin("multiplatform").version(kotlinGradlePluginVersion).apply(false)
-    id("app.cash.redwood").version("0.2.0").apply(false)
+    id("app.cash.redwood").version("0.2.1").apply(false)
     id("org.jetbrains.compose").version("1.2.2").apply(false)
     id("dev.icerock.mobile.multiplatform-resources").version("0.20.1").apply(false)
 }

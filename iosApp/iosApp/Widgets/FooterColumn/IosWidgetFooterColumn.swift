@@ -9,28 +9,37 @@ import UIKit
 import shared_ios
 
 
-class IosWidgetFooterColumn: FooterColumn {
+class IosWidgetFooterColumn: HeaderFooterContent {
     var footer: Redwood_widgetWidgetChildren {
-        ExposedKt.createViewChildrenListener(parent: root, insert: myInsert)
+        ExposedKt.createViewChildrenListener(parent: root.view, insert: myInsertFooter)
     }
 
     var child: Redwood_widgetWidgetChildren {
-        ExposedKt.createViewChildrenListener(parent: root, insert: myInsert)
+        ExposedKt.createViewChildrenListener(parent: root.view, insert: myInsert)
+    }
+    
+    var header: Redwood_widgetWidgetChildren {
+        ExposedKt.createViewChildrenListener(parent: root.view, insert: myInsertHeader)
     }
 
     func myInsert(view: UIView,index: KotlinInt){
-        root.addSubview(view)
+        root.addContenet(value: view)
+    }
+    func myInsertFooter(view: UIView,index: KotlinInt){
+        root.addFooter(value: view)
+    }
+    func myInsertHeader(view: UIView,index: KotlinInt){
+        root.addHeader(value: view)
     }
 
-    private let root: DividerView = {
-        let view = DividerView()
-        view.backgroundColor = black60
+    private let root: FooterContainerController = {
+        let view = FooterContainerController()
         return view
 
     }()
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
-    var value: Any {root}
+    var value: Any {root.view}
 }
 

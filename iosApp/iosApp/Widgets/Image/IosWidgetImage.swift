@@ -10,13 +10,13 @@ import UIKit
 import shared_ios
 
 class IosWidgetImage: WidgetImage {
-  
+    
     
     
     private let root: FillImage = {
         let view = FillImage()
         view.translatesAutoresizingMaskIntoConstraints = true
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view
     }()
@@ -27,14 +27,22 @@ class IosWidgetImage: WidgetImage {
     var _aspectRation: Float? = nil
     
     func url(url: String?) {
-        if(url != nil){
+        if(url != nil && URL(string:url!) != nil){
             root.load(url: URL(string:url!)!)
+        }
+    }
+    
+    func isCircleClip(isCircleClip: Bool) {
+        if(isCircleClip){
+            root.layer.cornerRadius = root.frame.width/2
+        }else{
+            root.layer.cornerRadius = 0
         }
     }
     
     func placeholder(placeholder: ImageResource?) {
         var image = placeholder?.toUIImage()
-         _placeholder = image
+        _placeholder = image
         let constWidth : Int32? = (_width as? EntitySize.Const)?.value
         let constHeight = (_height as? EntitySize.Const)?.value
         if(constWidth != nil && constHeight != nil){
@@ -100,34 +108,41 @@ class IosWidgetImage: WidgetImage {
         var contentSize : CGSize = CGSize(width: 48, height: 48)
         
         override var intrinsicContentSize: CGSize {
-           return contentSize
+            return contentSize
         }
         
-            override func sizeThatFits(_ size: CGSize) -> CGSize {
-                if(widgetWidth is EntitySize.Wrap){
-                    let originalSize = super.sizeThatFits(size)
-                    contentSize = CGSize(width: originalSize.width, height: originalSize.height)
-                    return contentSize
-                }
-                if(widgetWidth is EntitySize.Const){
-                    let originalSize = super.sizeThatFits(CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: size.height))
-                    contentSize = CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: originalSize.height)
-                    return contentSize
-                }
-                let originalSize = super.sizeThatFits(
-                    CGSize(width: size.width, height: size.height))
-                if(aspectRatio == nil){
-                    contentSize =  CGSize(width:  size.width, height: originalSize.height)
-                }else{
-                    contentSize =  CGSize(width:  size.width, height: size.width*CGFloat(aspectRatio!))
-                }
+        override func sizeThatFits(_ size: CGSize) -> CGSize {
+            if(widgetWidth is EntitySize.Wrap){
+                let originalSize = super.sizeThatFits(size)
+                contentSize = CGSize(width: originalSize.width, height: originalSize.height)
                 return contentSize
-          
             }
+            if(widgetWidth is EntitySize.Const){
+                let originalSize = super.sizeThatFits(CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: size.height))
+                contentSize = CGSize(width: CGFloat((widgetWidth as! EntitySize.Const).value), height: originalSize.height)
+                return contentSize
+            }
+            let originalSize = super.sizeThatFits(
+                CGSize(width: size.width, height: size.height))
+            if(aspectRatio == nil){
+                if( widgetHeight is EntitySize.Wrap){
+                    contentSize =  CGSize(width:  size.width, height: originalSize.height)
+                }else {
+                    if(widgetHeight is EntitySize.Fill){
+                        contentSize = size
+                    }else{
+                        contentSize = CGSize(width: size.width, height:
+                                                CGFloat((widgetHeight as! EntitySize.Const).value))
+                    }
+                }
+            }else{
+                contentSize =  CGSize(width:  size.width, height: size.width*CGFloat(aspectRatio!))
+                
+            }
+            return contentSize
+            
+        }
     }
-
-
-
 }
 
 extension UIImageView {

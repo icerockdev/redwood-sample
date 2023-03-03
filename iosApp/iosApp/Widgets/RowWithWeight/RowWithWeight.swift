@@ -18,18 +18,21 @@ class RowWithWeightViewController: UIViewController {
     }
     
     
-    var childs:[UIView] = []
-    var weights:[Float?] = []
+    var childs:[Redwood_widgetWidget] = []
     
     override func loadView() {
         self.view = container
       
     }
     
-    func addPage(subView: UIView,index: KotlinInt, weight: Float?){
-        childs.append(subView)
-        weights.append(weight)
-        view.addSubview(subView)
+    func addPage(subView: Redwood_widgetWidget,index: KotlinInt){
+        childs.append( subView)
+        view.addSubview(subView.value as! UIView)
+    }
+    
+    var widgets: [Redwood_widgetWidget] = []
+    func setWidgets(widgets: [Redwood_widgetWidget]){
+        self.widgets = widgets
     }
 
     override func viewDidLayoutSubviews() {
@@ -37,17 +40,37 @@ class RowWithWeightViewController: UIViewController {
         //todo fix
         view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
-        var fullWeight : CGFloat = 0
-        for i in 0..<weights.count{
-            fullWeight += CGFloat(weights[i] ?? 0)
+        var fullWeight : Float = 0
+        for i in 0..<childs.count{
+            fullWeight += childs[i].layoutModifiers.getWeight() ?? 0
         }
+        var fullConstSize : CGFloat = 0
         var left = CGFloat(0)
         for i in 0..<childs.count{
-            let childWidth = view.frame.width * CGFloat(weights[i] ?? 0) / fullWeight
-            let childSize = childs[i].sizeThatFits(CGSize(width: childWidth, height: view.frame.height))
-            
-            childs[i].frame = CGRect(x: left, y: 0, width: childWidth, height: childSize.height)
-            left += childWidth
+            if(childs[i].layoutModifiers.getWeight() == nil){
+                let view = childs[i].value as! UIView
+                let padding = childs[i].layoutModifiers.getPadding()
+                fullConstSize += CGFloat(view.sizeThatFits(view.frame.size).width)
+                fullConstSize += CGFloat(padding?.start ?? 0)
+                fullConstSize += CGFloat(padding?.end ?? 0)
+            }
+        }
+        let fullWeightSize = view.frame.size.width - fullConstSize
+        left = CGFloat(0)
+        for i in 0..<childs.count{
+            let weight = childs[i].layoutModifiers.getWeight()
+            let view = childs[i].value as! UIView
+            let padding = childs[i].layoutModifiers.getPadding()
+            if(weight != nil){
+                let childWidth = fullWeightSize * CGFloat((weight ?? 0) / fullWeight)
+                let childSize = view.sizeThatFits(CGSize(width: childWidth, height: view.frame.height))
+                view.frame = CGRect(x: left+CGFloat(padding?.start ?? 0), y: CGFloat(padding?.top ?? 0), width: childWidth - CGFloat(padding?.start ?? 0) - CGFloat(padding?.end ?? 0), height: childSize.height)
+                left += childWidth
+            }else{
+                let childSize = view.sizeThatFits(view.frame.size)
+                view.frame = CGRect(x: left+CGFloat(padding?.start ?? 0), y: +CGFloat(padding?.top ?? 0), width: childSize.width, height: childSize.height)
+                left += childSize.width + CGFloat(padding?.start ?? 0) + CGFloat(padding?.end ?? 0)
+            }
         }
     }
     
@@ -75,3 +98,44 @@ class RowWithWeightViewController: UIViewController {
     
 }
 
+class RowItem{
+    let child: UIView
+    let weight: Float?
+    let padding: Redwood_layout_layoutmodifiersPadding?
+    let layoutModifier: Redwood_runtimeLayoutModifier
+
+    init(
+        child: UIView,
+        weight: Float?,
+        padding: Redwood_layout_layoutmodifiersPadding?,
+        layoutModifier: Redwood_runtimeLayoutModifier
+    ) {
+        self.child = child
+        self.weight = layoutModifier.getWeight()
+        self.padding = padding
+        self.layoutModifier = layoutModifier
+    }
+    
+}
+
+extension Redwood_runtimeLayoutModifier{
+    func getWeight() -> Float?{
+        var result: Float? = nil
+        self.forEach { element in
+            if(element is SharedWeight){
+                result = (element as! SharedWeight).weight
+            }
+        }
+        return result
+    }
+    
+    func getPadding() -> Redwood_layout_apiPadding?{
+        var result: Redwood_layout_apiPadding? = nil
+        self.forEach { element in
+            if(element is Redwood_layout_layoutmodifiersPadding){
+                result = (element as! Redwood_layout_layoutmodifiersPadding).padding
+            }
+        }
+        return result
+    }
+}

@@ -34,8 +34,8 @@ kotlin {
                 api("dev.icerock.moko:mvvm-core:0.15.0")
                 api("dev.icerock.moko:fields-core:0.11.0")
                 api("dev.icerock.moko:fields-flow:0.11.0")
-                api("app.cash.redwood:redwood-treehouse:0.2.0")
-                api("app.cash.redwood:redwood-treehouse-lazylayout-compose:0.2.0")
+                api("app.cash.redwood:redwood-treehouse:0.2.1")
+                api("app.cash.redwood:redwood-treehouse-lazylayout-compose:0.2.1")
                 api("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 api("com.russhwolf:multiplatform-settings:0.9")
             }
@@ -44,7 +44,7 @@ kotlin {
         val iosMain by creating {
             dependsOn(commonMain)
             dependencies {
-                implementation("app.cash.redwood:redwood-layout-uiview:0.2.0")
+                implementation("app.cash.redwood:redwood-layout-uiview:0.2.1")
             }
         }
 

@@ -20,7 +20,14 @@
 		227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227ECA262957564C00A4CBC8 /* SceneDelegate.swift */; };
 		227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2D2957564D00A4CBC8 /* Assets.xcassets */; };
 		227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 227ECA2F2957564D00A4CBC8 /* LaunchScreen.storyboard */; };
+		4407C5EA29AE124600E5F072 /* IosStackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407C5E929AE124600E5F072 /* IosStackController.swift */; };
 		440C362929A39801003A2790 /* RowWithWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C362829A39801003A2790 /* RowWithWeight.swift */; };
+		44152EBC29AB596700D18AEB /* IosWidgetBannerColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44152EBB29AB596700D18AEB /* IosWidgetBannerColumn.swift */; };
+		44152EBE29AB5B0B00D18AEB /* IosBoxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44152EBD29AB5B0B00D18AEB /* IosBoxWidget.swift */; };
+		44152EC129AB5D6400D18AEB /* IosWidgetSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44152EC029AB5D6400D18AEB /* IosWidgetSearch.swift */; };
+		44152EC329AB62A700D18AEB /* FooterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44152EC229AB62A700D18AEB /* FooterContainer.swift */; };
+		44152ECA29AC586400D18AEB /* CardWithTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44152EC929AC586400D18AEB /* CardWithTextView.xib */; };
+		44152ECC29AC5ECD00D18AEB /* IosWidgetCardStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44152ECB29AC5ECD00D18AEB /* IosWidgetCardStoryboard.storyboard */; };
 		44182681299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44182680299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift */; };
 		443770B329A48C9C003D9183 /* IosRowWithWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443770B229A48C9C003D9183 /* IosRowWithWeight.swift */; };
 		443EFE5C2990D061001C3B2A /* IosWidgetBanners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */; };
@@ -60,7 +67,14 @@
 		227ECA2D2957564D00A4CBC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		227ECA302957564D00A4CBC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		227ECA322957564D00A4CBC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4407C5E929AE124600E5F072 /* IosStackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosStackController.swift; sourceTree = "<group>"; };
 		440C362829A39801003A2790 /* RowWithWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowWithWeight.swift; sourceTree = "<group>"; };
+		44152EBB29AB596700D18AEB /* IosWidgetBannerColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetBannerColumn.swift; sourceTree = "<group>"; };
+		44152EBD29AB5B0B00D18AEB /* IosBoxWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosBoxWidget.swift; sourceTree = "<group>"; };
+		44152EC029AB5D6400D18AEB /* IosWidgetSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetSearch.swift; sourceTree = "<group>"; };
+		44152EC229AB62A700D18AEB /* FooterContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterContainer.swift; sourceTree = "<group>"; };
+		44152EC929AC586400D18AEB /* CardWithTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardWithTextView.xib; sourceTree = "<group>"; };
+		44152ECB29AC5ECD00D18AEB /* IosWidgetCardStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IosWidgetCardStoryboard.storyboard; sourceTree = "<group>"; };
 		44182680299BA0FC00403061 /* KeyboardAwareAnimatedConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareAnimatedConstraint.swift; sourceTree = "<group>"; };
 		443770B229A48C9C003D9183 /* IosRowWithWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosRowWithWeight.swift; sourceTree = "<group>"; };
 		443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosWidgetBanners.swift; sourceTree = "<group>"; };
@@ -109,6 +123,10 @@
 		225D67D82971B5DC00A27CD1 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				4407C5EB29AE263B00E5F072 /* Box */,
+				4407C5E829AE122E00E5F072 /* Stack */,
+				44152EC429AC57DE00D18AEB /* CardWithText */,
+				44152EBF29AB5C6E00D18AEB /* Search */,
 				440C362729A397DB003A2790 /* RowWithWeight */,
 				44A79E26299CFB8700D32B5A /* Image */,
 				44A79E1F299CE3D100D32B5A /* Onboarding */,
@@ -127,10 +145,8 @@
 				44A79E29299E153800D32B5A /* IosWidgetChip.swift */,
 				225D67E32971B6E500A27CD1 /* IosWidgetCard.swift */,
 				225D67E52971B71100A27CD1 /* IosImageButton.swift */,
-				225D67E72971B74100A27CD1 /* IosStack.swift */,
 				449B364A2983D6960008710D /* IosWidgetSpace.swift */,
 				44F037932993586200AC965C /* IosShortButton.swift */,
-				4488258D29A5CA1A00EB016B /* IosWidgetImageCartWithText.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -159,6 +175,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4407C5E829AE122E00E5F072 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				225D67E72971B74100A27CD1 /* IosStack.swift */,
+				4407C5E929AE124600E5F072 /* IosStackController.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		4407C5EB29AE263B00E5F072 /* Box */ = {
+			isa = PBXGroup;
+			children = (
+				44152EBD29AB5B0B00D18AEB /* IosBoxWidget.swift */,
+			);
+			path = Box;
+			sourceTree = "<group>";
+		};
 		440C362729A397DB003A2790 /* RowWithWeight */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +199,24 @@
 				443770B229A48C9C003D9183 /* IosRowWithWeight.swift */,
 			);
 			path = RowWithWeight;
+			sourceTree = "<group>";
+		};
+		44152EBF29AB5C6E00D18AEB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				44152EC029AB5D6400D18AEB /* IosWidgetSearch.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		44152EC429AC57DE00D18AEB /* CardWithText */ = {
+			isa = PBXGroup;
+			children = (
+				4488258D29A5CA1A00EB016B /* IosWidgetImageCartWithText.swift */,
+				44152EC929AC586400D18AEB /* CardWithTextView.xib */,
+				44152ECB29AC5ECD00D18AEB /* IosWidgetCardStoryboard.storyboard */,
+			);
+			path = CardWithText;
 			sourceTree = "<group>";
 		};
 		4418267F299BA0DA00403061 /* WidgetTextInput */ = {
@@ -197,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				44A79E22299CE43300D32B5A /* IosWidgetFooterColumn.swift */,
+				44152EC229AB62A700D18AEB /* FooterContainer.swift */,
 			);
 			path = FooterColumn;
 			sourceTree = "<group>";
@@ -231,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				443EFE5B2990D061001C3B2A /* IosWidgetBanners.swift */,
+				44152EBB29AB596700D18AEB /* IosWidgetBannerColumn.swift */,
 			);
 			path = Banners;
 			sourceTree = "<group>";
@@ -331,8 +384,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44152ECA29AC586400D18AEB /* CardWithTextView.xib in Resources */,
 				227ECA312957564D00A4CBC8 /* LaunchScreen.storyboard in Resources */,
 				227ECA2E2957564D00A4CBC8 /* Assets.xcassets in Resources */,
+				44152ECC29AC5ECD00D18AEB /* IosWidgetCardStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,9 +449,13 @@
 				443EFE632990D88C001C3B2A /* Colors.swift in Sources */,
 				44556F37299B5652009D161B /* IosDivider.swift in Sources */,
 				443770B329A48C9C003D9183 /* IosRowWithWeight.swift in Sources */,
+				44152EBE29AB5B0B00D18AEB /* IosBoxWidget.swift in Sources */,
+				44152EC329AB62A700D18AEB /* FooterContainer.swift in Sources */,
 				44F0379829937CBC00AC965C /* IosWidgetProductCard.swift in Sources */,
 				44A79E21299CE3F600D32B5A /* IosWidgetOnboarding.swift in Sources */,
 				225D67DE2971B65D00A27CD1 /* IosWidgetText.swift in Sources */,
+				44152EC129AB5D6400D18AEB /* IosWidgetSearch.swift in Sources */,
+				4407C5EA29AE124600E5F072 /* IosStackController.swift in Sources */,
 				44A79E25299CEC8400D32B5A /* OnboardingViewController.swift in Sources */,
 				225D67E42971B6E500A27CD1 /* IosWidgetCard.swift in Sources */,
 				443F5E51298B9E100079910A /* NavBarFactory.swift in Sources */,
@@ -409,6 +468,7 @@
 				225D67DC2971B63000A27CD1 /* IosWidgetButton.swift in Sources */,
 				44E470FF299692D700C9B488 /* IosWidgetCounter.swift in Sources */,
 				224842B6299A7FD7008EC82D /* RedwoodViewController.swift in Sources */,
+				44152EBC29AB596700D18AEB /* IosWidgetBannerColumn.swift in Sources */,
 				227ECA252957564C00A4CBC8 /* AppDelegate.swift in Sources */,
 				227ECA272957564C00A4CBC8 /* SceneDelegate.swift in Sources */,
 				225D67E22971B6B400A27CD1 /* IosWidgetTextInput.swift in Sources */,

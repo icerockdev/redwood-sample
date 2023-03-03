@@ -159,7 +159,7 @@ fun CatalogScreen() {
                                 top = 16
                             )
                         )
-                    ) {
+                            , childs =  {
                         ImageCardWithText(
                             height = Size.Const(100),
                             text = SERVICES.get(index - 2).name.desc(),
@@ -181,6 +181,7 @@ fun CatalogScreen() {
                             layoutModifier = LayoutModifier.padding(Padding(start = 6)).weight(1f)
                         )
                     }
+                    )
                     ImageCardWithText(
                         height = Size.Const(100),
                         text = item.name.desc(),

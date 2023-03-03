@@ -10,6 +10,18 @@ import UIKit
 import shared_ios
 
 class IosWidgetFactory: WidgetFactory {
+    func BannersColumn() -> BannersColumn {
+        IosWidgetBannersColumn()
+    }
+    
+    func Box() -> Box {
+        IosWidgetBox()
+    }
+    
+    func SearchRow() -> SearchRow {
+        IosWidgetSearch()
+    }
+    
     func ImageCardWithText() -> ImageCardWithText {
         IosWidgetImageCardWithText()
     }
@@ -22,7 +34,7 @@ class IosWidgetFactory: WidgetFactory {
         IosWidgetTabs()
     }
     
-    func FooterColumn() -> FooterColumn {
+    func HeaderFooterContent() -> HeaderFooterContent {
         IosWidgetFooterColumn()
     }
     

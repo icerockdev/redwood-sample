@@ -10,19 +10,35 @@ import UIKit
 import shared_ios
 
 
-class IosWidgetImageCardWithText: ImageCardWithText {
+class IosWidgetImageCardWithText: UIViewController, ImageCardWithText {
 
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var image: UIImageView!
     
-
-    private let root: DividerView = {
-        let view = DividerView()
-        view.backgroundColor = black60
-        return view
-
+    private let textView : UILabel =  {
+        let text = UILabel()
+        text.translatesAutoresizingMaskIntoConstraints = false
+        return text
     }()
+    
+    override func loadView() {
+        self.view = textView
+    }
+    
+    override func viewDidLoad() {
+    //    container.addSubview(image)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
     
     func height(height: EntitySize?) {
   
+    }
+    
+    func width(width_ width: EntitySize?) {
+        
     }
     
     func onClick(onClick: (() -> Void)? = nil) {
@@ -34,7 +50,7 @@ class IosWidgetImageCardWithText: ImageCardWithText {
     }
     
     func text(text: StringDesc) {
-        
+       textView.text = text.localized()
     }
     
     func textBackgroundColor(textBackgroundColor: GraphicsColor?) {
@@ -49,11 +65,8 @@ class IosWidgetImageCardWithText: ImageCardWithText {
         
     }
     
-    func width(width_ width: EntitySize?) {
-        
-    }
     
     var layoutModifiers: Redwood_runtimeLayoutModifier = ExposedKt.layoutModifier()
     
-    var value: Any {root}
+    var value: Any {view}
 }

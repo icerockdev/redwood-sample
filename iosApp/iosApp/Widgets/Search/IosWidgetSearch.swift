@@ -1,15 +1,23 @@
 //
-//  IosWidgetTextInput.swift
+//  IosWidgetSearch.swift
 //  iosApp
 //
-//  Created by Aleksey Mikhailov on 13.01.2023.
+//  Created by alobynya on 26.02.2023.
 //  Copyright © 2023 IceRock Development. All rights reserved.
 //
 
 import UIKit
 import shared_ios
 
-class IosWidgetTextInput: NSObject, WidgetTextInput {
+class IosWidgetSearch: NSObject, SearchRow {
+    func onMicClick(onMicClick: (() -> Void)? = nil) {
+        //do nothing
+    }
+    
+    func showMic(showMic: Bool) {
+        // do nothing
+    }
+    
     
     private let textView: UITextField = {
         let view = FillUITextField()
@@ -54,16 +62,10 @@ class IosWidgetTextInput: NSObject, WidgetTextInput {
     var value: Any { textView }
 }
 
-extension IosWidgetTextInput: UITextFieldDelegate {
+extension IosWidgetSearch: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
         return false
     }
 }
 
-class FillUITextField : UITextField{
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let originalSize = super.sizeThatFits(size)
-        return CGSize(width: size.width, height: originalSize.height)
-    }
-}

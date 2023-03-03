@@ -16,8 +16,8 @@ class IosWidgetCard :  WidgetCard{
         let container = MyCardView()
         container.translatesAutoresizingMaskIntoConstraints = true
         container.layer.cornerRadius = 16
-        container.backgroundColor =  UIColor(red:242.0/255.0, green:242.0/255.0, blue:242.0/255.0, alpha:1.0)
-
+       // container.backgroundColor =  UIColor(red:242.0/255.0, green:242.0/255.0, blue:242.0/255.0, alpha:1.0)
+        container.backgroundColor = .white
         container.clipsToBounds = true
        return container;
     }()

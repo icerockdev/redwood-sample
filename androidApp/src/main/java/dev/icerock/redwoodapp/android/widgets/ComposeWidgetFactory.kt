@@ -6,7 +6,7 @@ import dev.icerock.redwood.schema.widget.Box
 import dev.icerock.redwood.schema.widget.BannersColumn
 import dev.icerock.redwood.schema.widget.CounterButton
 import dev.icerock.redwood.schema.widget.Divider
-import dev.icerock.redwood.schema.widget.FooterColumn
+import dev.icerock.redwood.schema.widget.HeaderFooterContent
 import dev.icerock.redwood.schema.widget.ListItem
 import dev.icerock.redwood.schema.widget.Onboarding
 import dev.icerock.redwood.schema.widget.ProductCard
@@ -32,7 +32,7 @@ object ComposeWidgetFactory : RedwoodAppSchemaWidgetFactory<@Composable () -> Un
     override fun Divider(): Divider<() -> Unit> = ComposeDivider()
     override fun Onboarding(): Onboarding<() -> Unit> = ComposeOnboarding()
 
-    override fun FooterColumn(): FooterColumn<() -> Unit> =
+    override fun HeaderFooterContent(): HeaderFooterContent<() -> Unit> =
         ComposeFooterColumn()
 
     override fun ListItem(): ListItem<() -> Unit> =

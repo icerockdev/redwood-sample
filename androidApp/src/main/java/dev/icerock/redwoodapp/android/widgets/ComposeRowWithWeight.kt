@@ -14,6 +14,10 @@ import dev.icerock.redwoodapp.ext.Weight
 
 class ComposeRowWithWeight : RowWithWeight<@Composable () -> Unit> {
     override val childs = ComposeWidgetChildren()
+    override fun weight(weight: List<Int>?) {
+        //
+    }
+
     override var layoutModifiers: LayoutModifier = LayoutModifier
 
     override val value = @Composable {

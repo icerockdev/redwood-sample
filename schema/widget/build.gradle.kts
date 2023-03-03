@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api("app.cash.redwood:redwood-layout-widget:0.2.0")
+                api("app.cash.redwood:redwood-layout-widget:0.2.1")
                 api(project(":schema:entity"))
             }
         }

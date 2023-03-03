@@ -20,7 +20,7 @@ class IosWidgetTabs: Tabs {
         return control
     }()
  
-    func onChange(onChange: ((KotlinInt) -> Void)? = nil) {
+    func onChange(onChange_ onChange: ((KotlinInt) -> Void)? = nil) {
         root.onChange = onChange
     }
     

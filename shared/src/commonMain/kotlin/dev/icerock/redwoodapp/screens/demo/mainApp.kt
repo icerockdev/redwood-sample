@@ -20,7 +20,7 @@ fun mainApp(
     navigationFactory: NavigationFactory
 ): NavigationRoot = navigation(
     navigationFactory = navigationFactory,
-    startDestination = Screens.PHONE_NUMBER_LOGIN
+    startDestination = Screens.MAIN_NAVIGATION
 ) {
 
     registerScreen(uri = Screens.PHONE_NUMBER_LOGIN) { navigator, _ ->

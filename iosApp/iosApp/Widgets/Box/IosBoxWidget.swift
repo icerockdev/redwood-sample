@@ -34,3 +34,9 @@ class IosWidgetBox: Box {
     var value: Any { root.view }
 }
 
+
+extension GraphicsColor{
+    func toColor() -> UIColor {
+        return UIColor(red: CGFloat(self.red)/256, green: CGFloat(self.green)/256, blue: CGFloat(self.blue)/256, alpha: CGFloat(self.alpha)/256)
+    }
+}

@@ -36,9 +36,10 @@ class IosWidgetButton: WidgetButton {
             root.layer.cornerRadius = 10
             root.configuration?.baseBackgroundColor = UIColor.clear
             root.isHighlighted = false
+            root.tintColor = .white
             root.setTitleColor(.white, for: UIControl.State.normal)
             root.setTitleColor(.white, for: UIControl.State.disabled)
-            root.tintColor = .white
+      
            }
         if(buttonType == EntityButtonType.secondary){
             root.setTitleColor(primaryColor, for: UIControl.State.normal)

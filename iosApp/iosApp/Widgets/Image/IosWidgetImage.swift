@@ -136,7 +136,7 @@ class IosWidgetImage: WidgetImage {
                     }
                 }
             }else{
-                contentSize =  CGSize(width:  size.width, height: size.width*CGFloat(aspectRatio!))
+                contentSize =  CGSize(width:  size.width, height: size.width/CGFloat(aspectRatio!))
                 
             }
             return contentSize

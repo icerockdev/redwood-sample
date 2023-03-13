@@ -13,7 +13,6 @@ class RowWithWeightViewController: UIViewController {
     
     var container: FillUiView {
         let view = FillUiView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }
     
@@ -37,8 +36,6 @@ class RowWithWeightViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        //todo fix
-        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         var fullWeight : Float = 0
         for i in 0..<childs.count{
@@ -73,29 +70,28 @@ class RowWithWeightViewController: UIViewController {
             }
         }
     }
-    
-    class FillUiView: UIView{
-    
-        var contentSize : CGSize = CGSize(width: 48, height: 48)
-       
-        override var intrinsicContentSize: CGSize {
-           return contentSize
-        }
-        
-        override func sizeThatFits(_ size: CGSize) -> CGSize {
-            var  subviewsHeight = CGFloat(0)
-            subviews.forEach{ view in
-                let height =  view.sizeThatFits(size).height
-                if(subviewsHeight < height) {
-                    subviewsHeight = height
-                }
-            }
-            contentSize =  CGSize(width:  size.width, height: subviewsHeight)
-            return contentSize
-            
-        }
+}
+
+class FillUiView: UIView{
+
+    var contentSize : CGSize = CGSize(width: 48, height: 48)
+   
+    override var intrinsicContentSize: CGSize {
+       return contentSize
     }
     
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var  subviewsHeight = CGFloat(0)
+        subviews.forEach{ view in
+            let height =  view.sizeThatFits(size).height
+            if(subviewsHeight < height) {
+                subviewsHeight = height
+            }
+        }
+        contentSize =  CGSize(width:  size.width, height: subviewsHeight)
+        return contentSize
+        
+    }
 }
 
 class RowItem{
@@ -139,3 +135,85 @@ extension Redwood_runtimeLayoutModifier{
         return result
     }
 }
+
+
+class RowWithWeightViewContainer: FillUiView {
+    
+    var childs:[Redwood_widgetWidget] = []
+
+    
+    func addPage(subView: Redwood_widgetWidget,index: KotlinInt){
+        childs.append( subView)
+        self.addSubview(subView.value as! UIView)
+    }
+    
+    var widgets: [Redwood_widgetWidget] = []
+    func setWidgets(widgets: [Redwood_widgetWidget]){
+        self.widgets = widgets
+    }
+
+    /*
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //todo fix
+        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        var fullWeight : Float = 0
+        for i in 0..<childs.count{
+            fullWeight += childs[i].layoutModifiers.getWeight() ?? 0
+        }
+        var fullConstSize : CGFloat = 0
+        var left = CGFloat(0)
+        for i in 0..<childs.count{
+            if(childs[i].layoutModifiers.getWeight() == nil){
+                let view = childs[i].value as! UIView
+                let padding = childs[i].layoutModifiers.getPadding()
+                fullConstSize += CGFloat(view.sizeThatFits(view.frame.size).width)
+                fullConstSize += CGFloat(padding?.start ?? 0)
+                fullConstSize += CGFloat(padding?.end ?? 0)
+            }
+        }
+        let fullWeightSize = view.frame.size.width - fullConstSize
+        left = CGFloat(0)
+        for i in 0..<childs.count{
+            let weight = childs[i].layoutModifiers.getWeight()
+            let view = childs[i].value as! UIView
+            let padding = childs[i].layoutModifiers.getPadding()
+            if(weight != nil){
+                let childWidth = fullWeightSize * CGFloat((weight ?? 0) / fullWeight)
+                let childSize = view.sizeThatFits(CGSize(width: childWidth, height: view.frame.height))
+                view.frame = CGRect(x: left+CGFloat(padding?.start ?? 0), y: CGFloat(padding?.top ?? 0), width: childWidth - CGFloat(padding?.start ?? 0) - CGFloat(padding?.end ?? 0), height: childSize.height)
+                left += childWidth
+            }else{
+                let childSize = view.sizeThatFits(view.frame.size)
+                view.frame = CGRect(x: left+CGFloat(padding?.start ?? 0), y: +CGFloat(padding?.top ?? 0), width: childSize.width, height: childSize.height)
+                left += childSize.width + CGFloat(padding?.start ?? 0) + CGFloat(padding?.end ?? 0)
+            }
+        }
+    }
+     */
+    
+    class FillUiView: UIView{
+    
+        var contentSize : CGSize = CGSize(width: 48, height: 48)
+       
+        override var intrinsicContentSize: CGSize {
+           return contentSize
+        }
+        
+        override func sizeThatFits(_ size: CGSize) -> CGSize {
+            var  subviewsHeight = CGFloat(0)
+            subviews.forEach{ view in
+                let height =  view.sizeThatFits(size).height
+                if(subviewsHeight < height) {
+                    subviewsHeight = height
+                }
+            }
+            contentSize =  CGSize(width:  size.width, height: subviewsHeight)
+            return contentSize
+            
+        }
+    }
+    
+}
+

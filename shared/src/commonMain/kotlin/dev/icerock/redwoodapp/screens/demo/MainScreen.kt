@@ -17,9 +17,11 @@ import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.resources.desc.image.ImageDesc
 import dev.icerock.moko.resources.desc.image.Url
 import dev.icerock.redwood.schema.BannerColumnData
+import dev.icerock.redwood.schema.BannerData
 import dev.icerock.redwood.schema.ButtonType
 import dev.icerock.redwood.schema.Size
 import dev.icerock.redwood.schema.TextType
+import dev.icerock.redwood.schema.compose.Banners
 import dev.icerock.redwood.schema.compose.BannersColumn
 import dev.icerock.redwood.schema.compose.Box
 import dev.icerock.redwood.schema.compose.Button
@@ -103,30 +105,24 @@ fun MainScreen() {
                             )
                         }
                         Row {
-                            BannersColumn(
+                            Banners(
                                 bannersList = listOf(
-                                    BannerColumnData(
+                                    BannerData(
                                         placeholder = MR.images.ava_preview,
                                         image = ImageDesc.Url(USER_AVATAR),
-                                        textTitle = "Дарим сертификаты к праздникам!",
-                                        data = "15.02.2023 ",
-                                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                                        text = "".desc(),
                                         onClick = {}
                                     ),
-                                    BannerColumnData(
+                                    BannerData(
                                         placeholder = MR.images.ava_preview,
                                         image = ImageDesc.Url(USER_AVATAR),
-                                        textTitle = "Дарим сертификаты к праздникам!",
-                                        data = "15.02.2023 ",
-                                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                                        text = "".desc(),
                                         onClick = {}
                                     ),
-                                    BannerColumnData(
+                                    BannerData(
                                         placeholder = MR.images.ava_preview,
                                         image = ImageDesc.Url(USER_AVATAR),
-                                        textTitle = "Дарим сертификаты к праздникам!",
-                                        data = "15.02.2023 ",
-                                        textDescription = "Удивите близких отдыхом в спа и получите массаж в подарок",
+                                        text = "".desc(),
                                         onClick = {}
                                     )
                                 )

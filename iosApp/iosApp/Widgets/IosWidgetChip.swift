@@ -22,15 +22,21 @@ class IosWidgetChip: Chip {
         view.clipsToBounds = true
         view.titleLabel?.numberOfLines = 0
         view.widgetWidth = EntitySize.Wrap()
+        view.setTitleColor(.black, for: .normal)
         return view
-
     }()
     
     func backgroundColor(backgroundColor: GraphicsColor?) {
         root.backgroundColor = backgroundColor?.toColor()
         root.configuration?.baseBackgroundColor = UIColor.clear
         root.isHighlighted = false
-        root.tintColor = .white
+        root.tintColor = .clear
+        if(backgroundColor == nil){
+            root.titleLabel?.textColor = .black
+        }else{
+            root.titleLabel?.textColor = .white
+        }
+        root.titleLabel?.setNeedsLayout()
     }
     
     func icon(icon: ImageResource?) {
@@ -46,16 +52,14 @@ class IosWidgetChip: Chip {
     }
     
     func textColor(textColor: GraphicsColor?) {
-        root.setTitleColor(textColor?.toColor(), for: .normal)
-        root.setTitleColor(textColor?.toColor(), for: .disabled)
-        root.setTitleColor(textColor?.toColor(), for: UIControl.State.focused)
-        root.setTitleColor(textColor?.toColor(), for: UIControl.State.selected)
+     //   root.setTitleColor(textColor?.toColor(), for: .normal)
     }
     
     func border(border: KotlinInt?) {
         root.layer.borderColor = black.cgColor
         root.layer.borderWidth = CGFloat(border?.intValue ?? 0)
-    
+  
+       
     }
     
     func onClick(onClick: (() -> Void)? = nil) {
